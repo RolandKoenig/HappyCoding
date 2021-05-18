@@ -1,0 +1,16 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HappyCoding.AvaloniaWindowFrame.App">
+    <Application.Styles>
+        <FluentTheme Mode="Light"/>
+
+        <!-- Main menu -->
+        <Style Selector="Menu.MainMenu">
+            <Setter Property="Background" Value="LightGray" />
+        </Style>
+        <Style Selector="Grid.Footer">
+            <Setter Property="Background" Value="LightGray" />
+        </Style>
+
+    </Application.Styles>
+</Application>
