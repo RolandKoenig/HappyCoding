@@ -7,10 +7,13 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaWindowFrame.MainWindow"
         Title="HappyCoding.AvaloniaWindowFrame">
-    <local:MainWindowFrame TryExtendClientAreaToDecoration="True">
+    <local:MainWindowFrame TryExtendClientAreaToDecoration="False">
 
         <local:MainWindowFrame.CustomTitleContent>
-            <TextBlock Text="{Binding ElementName=MainWindow, Path=Title}" />
+            <Button Content="Custom Title Button" />
+            <TextBlock Text="{Binding ElementName=MainWindow, Path=Title}"
+                       VerticalAlignment="Center"
+                       IsHitTestVisible="False" />
         </local:MainWindowFrame.CustomTitleContent>
 
         <local:MainWindowFrame.HeaderContent>

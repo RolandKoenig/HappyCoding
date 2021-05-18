@@ -67,7 +67,10 @@ namespace HappyCoding.AvaloniaWindowFrame
             {
                 case WindowState.Maximized:
                 case WindowState.FullScreen:
-                    _ctrlMainGrid.Margin = new Thickness(FULL_SCREEN_WINDOW_PADDING);
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        _ctrlMainGrid.Margin = new Thickness(FULL_SCREEN_WINDOW_PADDING);
+                    }
                     break;
 
                 default:
@@ -75,7 +78,7 @@ namespace HappyCoding.AvaloniaWindowFrame
                     break;
             }
 
-            if (_mainWindow.IsExtendedIntoWindowDecorations)
+            if (_mainWindow.IsExtendedIntoWindowDecorations || (_mainWindow.WindowState == WindowState.FullScreen))
             {
                 _ctrlMainGrid.RowDefinitions[0].Height = new GridLength(30.0);
                 _ctrlTitlePanel.IsVisible = true;
