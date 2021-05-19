@@ -3,20 +3,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HappyCoding.AvaloniaWindowFrame"
-        x:Name="MainWindow"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Name="MainWindow"
         x:Class="HappyCoding.AvaloniaWindowFrame.MainWindow"
+        ExtendClientAreaToDecorationsHint="True"
         Title="HappyCoding.AvaloniaWindowFrame">
-    <local:MainWindowFrame TryExtendClientAreaToDecoration="False">
+    <local:MainWindowFrame>
 
-        <local:MainWindowFrame.CustomTitleContent>
+        <local:MainWindowFrame.CustomTitleArea>
             <Button Content="Custom Title Button" />
             <TextBlock Text="{Binding ElementName=MainWindow, Path=Title}"
                        VerticalAlignment="Center"
                        IsHitTestVisible="False" />
-        </local:MainWindowFrame.CustomTitleContent>
+        </local:MainWindowFrame.CustomTitleArea>
 
-        <local:MainWindowFrame.HeaderContent>
+        <local:MainWindowFrame.HeaderArea>
             <Menu Classes="MainMenu">
                 <MenuItem Header="File">
                     <MenuItem Header="New" />
@@ -28,24 +29,24 @@
                     <MenuItem Header="About" />
                 </MenuItem>
             </Menu>
-        </local:MainWindowFrame.HeaderContent>
+        </local:MainWindowFrame.HeaderArea>
 
-        <local:MainWindowFrame.MainContent>
+        <local:MainWindowFrame.MainContentArea>
             <StackPanel Orientation="Vertical">
                 <Button Content="Button 1" />
                 <Button Content="Button 2" />
                 <Button Content="Button 3" />
                 <Button Content="Button 4" />
             </StackPanel>
-        </local:MainWindowFrame.MainContent>
+        </local:MainWindowFrame.MainContentArea>
 
-        <local:MainWindowFrame.FooterContent>
+        <local:MainWindowFrame.FooterArea>
             <Grid Classes="Footer" Height="30">
                 <StackPanel Orientation="Vertical"
                             Margin="7,0,0,0" VerticalAlignment="Center">
                     <TextBlock Text="Dummy Footer..." />
                 </StackPanel>
             </Grid>
-        </local:MainWindowFrame.FooterContent>
+        </local:MainWindowFrame.FooterArea>
     </local:MainWindowFrame>
 </Window>

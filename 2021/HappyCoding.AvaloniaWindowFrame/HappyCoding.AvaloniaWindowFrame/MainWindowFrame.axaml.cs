@@ -14,36 +14,25 @@ namespace HappyCoding.AvaloniaWindowFrame
 
         private Window? _mainWindow;
         private Grid _ctrlMainGrid;
-        private StackPanel _ctrlTitlePanel;
-        private Panel _ctrlHeaderContent;
-        private Panel _ctrlMainContent;
-        private Panel _ctrlFooterContent;
+        private StackPanel _ctrlCustomTitleArea;
+        private Panel _ctrlHeaderArea;
+        private Panel _ctrlMainContentArea;
+        private Panel _ctrlFooterArea;
 
-        public Controls CustomTitleContent => _ctrlTitlePanel.Children;
-        public Controls HeaderContent => _ctrlHeaderContent.Children;
-        public Controls MainContent => _ctrlMainContent.Children;
-        public Controls FooterContent => _ctrlFooterContent.Children;
-
-        public bool TryExtendClientAreaToDecoration { get; set; } = true;
+        public Controls CustomTitleArea => _ctrlCustomTitleArea.Children;
+        public Controls HeaderArea => _ctrlHeaderArea.Children;
+        public Controls MainContentArea => _ctrlMainContentArea.Children;
+        public Controls FooterArea => _ctrlFooterArea.Children;
 
         public MainWindowFrame()
         {
             AvaloniaXamlLoader.Load(this);
-
+        
             _ctrlMainGrid = this.Find<Grid>("CtrlMainGrid");
-            _ctrlTitlePanel = this.Find<StackPanel>("CtrlTitlePanel");
-            _ctrlHeaderContent = this.Find<Panel>("CtrlHeader");
-            _ctrlMainContent = this.Find<Panel>("CtrlMainContent");
-            _ctrlFooterContent = this.Find<Panel>("CtrlFooter");
-        }
-
-        private void TryConfigureParentWindow()
-        {
-            if (_mainWindow == null) { return; }
-
-            _mainWindow.ExtendClientAreaToDecorationsHint = this.TryExtendClientAreaToDecoration;
-            _mainWindow.ExtendClientAreaTitleBarHeightHint = -1;
-            _mainWindow.TransparencyLevelHint = WindowTransparencyLevel.None;
+            _ctrlCustomTitleArea = this.Find<StackPanel>("CtrlCustomTitleArea");
+            _ctrlHeaderArea = this.Find<Panel>("CtrlHeaderArea");
+            _ctrlMainContentArea = this.Find<Panel>("CtrlMainContentArea");
+            _ctrlFooterArea = this.Find<Panel>("CtrlFooterArea");
         }
 
         private void UpdateMainWindowFrameState()
@@ -52,22 +41,23 @@ namespace HappyCoding.AvaloniaWindowFrame
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                _ctrlTitlePanel.Margin = new Thickness(0.0, 0.0);
-                _ctrlTitlePanel.HorizontalAlignment = HorizontalAlignment.Center;
-                _ctrlTitlePanel.VerticalAlignment = VerticalAlignment.Center;
+                _ctrlCustomTitleArea.Margin = new Thickness(0.0, 0.0);
+                _ctrlCustomTitleArea.HorizontalAlignment = HorizontalAlignment.Center;
+                _ctrlCustomTitleArea.VerticalAlignment = VerticalAlignment.Center;
             }
             else
             {
-                _ctrlTitlePanel.Margin = new Thickness(FULL_SCREEN_WINDOW_PADDING, 0.0);
-                _ctrlTitlePanel.HorizontalAlignment = HorizontalAlignment.Left;
-                _ctrlTitlePanel.VerticalAlignment = VerticalAlignment.Center;
+                _ctrlCustomTitleArea.Margin = new Thickness(FULL_SCREEN_WINDOW_PADDING, 0.0);
+                _ctrlCustomTitleArea.HorizontalAlignment = HorizontalAlignment.Left;
+                _ctrlCustomTitleArea.VerticalAlignment = VerticalAlignment.Center;
             }
 
             switch (_mainWindow.WindowState)
             {
                 case WindowState.Maximized:
                 case WindowState.FullScreen:
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
+                        _mainWindow.IsExtendedIntoWindowDecorations)
                     {
                         _ctrlMainGrid.Margin = new Thickness(FULL_SCREEN_WINDOW_PADDING);
                     }
@@ -81,11 +71,11 @@ namespace HappyCoding.AvaloniaWindowFrame
             if (_mainWindow.IsExtendedIntoWindowDecorations || (_mainWindow.WindowState == WindowState.FullScreen))
             {
                 _ctrlMainGrid.RowDefinitions[0].Height = new GridLength(30.0);
-                _ctrlTitlePanel.IsVisible = true;
+                _ctrlCustomTitleArea.IsVisible = true;
             }
             else
             {
-                _ctrlTitlePanel.IsVisible = false;
+                _ctrlCustomTitleArea.IsVisible = false;
                 _ctrlMainGrid.RowDefinitions[0].Height = new GridLength(0.0);
             }
         }
@@ -106,9 +96,6 @@ namespace HappyCoding.AvaloniaWindowFrame
                 if (_mainWindow != null)
                 {
                     _mainWindow.PropertyChanged += this.OnMainWindow_PropertyChanged;
-
-                    // Call TryConfigureParentWindow in a separate ui thread pass to insure that local properties are set by xaml
-                    Dispatcher.UIThread.Post(this.TryConfigureParentWindow);
                 }
             }
 

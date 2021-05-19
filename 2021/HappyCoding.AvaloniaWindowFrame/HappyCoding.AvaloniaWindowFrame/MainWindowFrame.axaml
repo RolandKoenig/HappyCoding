@@ -12,20 +12,20 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Title row -->
-        <StackPanel Grid.Row="0" x:Name="CtrlTitlePanel"
+        <!-- Title area -->
+        <StackPanel Grid.Row="0" x:Name="CtrlCustomTitleArea"
                     Orientation="Horizontal" >
 
         </StackPanel>
     
-        <!-- Header row (normally a menu) -->
-        <Panel Grid.Row="1" x:Name="CtrlHeader" />
+        <!-- Header area (normally a menu) -->
+        <Panel Grid.Row="1" x:Name="CtrlHeaderArea" />
 
-        <!-- Main content -->
-        <Panel Grid.Row="2" x:Name="CtrlMainContent"
+        <!-- MainContent area -->
+        <Panel Grid.Row="2" x:Name="CtrlMainContentArea"
                Margin="5" />
 
-        <!-- Footer panel-->
-        <Panel Grid.Row="3" x:Name="CtrlFooter" />
+        <!-- Footer area-->
+        <Panel Grid.Row="3" x:Name="CtrlFooterArea" />
     </Grid>
 </UserControl>
