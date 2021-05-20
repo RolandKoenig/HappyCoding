@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+        xmlns:local="clr-namespace:HappyCoding.AvaloniaMarkdownHelpBrowser"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaMarkdownHelpBrowser.MainWindow"
+        Title="HappyCoding.AvaloniaMarkdownHelpBrowser">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
+    <DockPanel LastChildFill="True">
+        <Grid DockPanel.Dock="Top"
+              Background="LightGray">
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="3">
+                <TextBlock Text="MarkDown Page: " 
+                           VerticalAlignment="Center"/>
+                <ComboBox DockPanel.Dock="Top" 
+                          Width="150"
+                          Items="{Binding Path=PossibleMarkDownNames}"
+                          SelectedItem="{Binding Path=SelectedMarkDownName, Mode=TwoWay}"/>
+            </StackPanel>
+        </Grid>
+
+
+        <md:MarkdownScrollViewer x:Name="CtrlMarkdownViewer"
+                                 Markdown="{Binding Path=SelectedMarkDownContent}" />
+    </DockPanel>
+</Window>
