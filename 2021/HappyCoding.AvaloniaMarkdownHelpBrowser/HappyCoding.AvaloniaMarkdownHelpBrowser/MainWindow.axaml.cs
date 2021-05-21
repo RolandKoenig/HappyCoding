@@ -1,22 +1,25 @@
+using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Markdown.Avalonia;
 
 namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 {
-    public partial class MainWindow : Window
+    public class MainWindow : Window
     {
         public MainWindow()
         {
-            InitializeComponent();
+            AvaloniaXamlLoader.Load(this);
 #if DEBUG
             this.AttachDevTools();
 #endif
-        }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
+            var ctrlMarkdownViewer = this.Find<MarkdownScrollViewer>("CtrlMarkdownViewer");
+            if(ctrlMarkdownViewer != null)
+            {
+                ctrlMarkdownViewer.Engine.BitmapLoader = new ResourceBitmapLoader(Assembly.GetExecutingAssembly());
+            }
         }
     }
 }
