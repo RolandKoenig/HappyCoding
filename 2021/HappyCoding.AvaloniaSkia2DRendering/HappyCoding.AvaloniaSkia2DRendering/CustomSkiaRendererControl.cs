@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
-using Avalonia.Threading;
 
 namespace HappyCoding.AvaloniaSkia2DRendering
 {
@@ -20,10 +20,10 @@ namespace HappyCoding.AvaloniaSkia2DRendering
 
             if (_skiaRenderer != null)
             {
-                _skiaRenderer.Bounds = new Avalonia.Rect(0, 0, this.Bounds.Width, this.Bounds.Height);
+                _skiaRenderer.Bounds = new Rect(
+                    new Point(0.0, 0.0),
+                    this.Bounds.Size);
                 context.Custom(_skiaRenderer);
-
-                //Dispatcher.UIThread.InvokeAsync(this.InvalidateVisual, DispatcherPriority.Background);
             }
         }
 

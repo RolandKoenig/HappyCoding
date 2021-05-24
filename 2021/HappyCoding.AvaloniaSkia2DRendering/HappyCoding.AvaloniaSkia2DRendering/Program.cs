@@ -1,6 +1,4 @@
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using System;
 
 namespace HappyCoding.AvaloniaSkia2DRendering
@@ -17,6 +15,7 @@ namespace HappyCoding.AvaloniaSkia2DRendering
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseSkia() // <-- Ensure that we use Skia for rendering
                 .LogToTrace();
     }
 }

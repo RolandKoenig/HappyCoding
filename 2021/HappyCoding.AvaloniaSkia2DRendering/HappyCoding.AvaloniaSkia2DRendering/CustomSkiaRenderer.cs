@@ -14,11 +14,25 @@ namespace HappyCoding.AvaloniaSkia2DRendering
     public class CustomSkiaRenderer : ICustomDrawOperation, IDisposable
     {
         private bool _disposed;
+        private Rect _bounds;
+        private bool _boundsChanged;
 
-        private SKPaint? _background;
+        private SKShader? _backgroundShader;
+        private SKPaint _background;
 
         /// <inheritdoc />
-        public Rect Bounds { get; set; }
+        public Rect Bounds
+        {
+            get => _bounds;
+            set
+            {
+                if (_bounds != value)
+                {
+                    _bounds = value;
+                    _boundsChanged = true;
+                }
+            }
+        }
 
         public CustomSkiaRenderer()
         {
@@ -26,17 +40,36 @@ namespace HappyCoding.AvaloniaSkia2DRendering
 
             _background = new SKPaint()
             {
-                Color = new SKColor(150, 200, 255),
-                Style = SKPaintStyle.Fill
+                Shader = _backgroundShader,
+                Style = SKPaintStyle.Fill,
+                IsAntialias = true
             };
+
+            this.RecreateSizeDependentResources();
+
             _disposed = false;
+        }
+
+        private void RecreateSizeDependentResources()
+        {
+            var height = (float)this.Bounds.Height;
+            if (height < 1f) { height = 1f;}
+
+            _backgroundShader?.Dispose();
+            _backgroundShader = SKShader.CreateLinearGradient(
+                new SKPoint(0, 0),
+                new SKPoint(0, height),
+                new SKColorF[] {SKColors.LightBlue, SKColors.SteelBlue},
+                null,
+                SKShaderTileMode.Repeat);
+            _background.Shader = _backgroundShader;
         }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            _background?.Dispose();
-            _background = null;
+            _background.Dispose();
+            _backgroundShader?.Dispose();
 
             _disposed = true;
         }
@@ -60,13 +93,22 @@ namespace HappyCoding.AvaloniaSkia2DRendering
                 return;
             }
 
+            if (_boundsChanged)
+            {
+                this.RecreateSizeDependentResources();
+                _boundsChanged = false;
+            }
+
             var skiaCanvas = skiaContext.SkCanvas;
             skiaCanvas.Save();
             try
             {
-                skiaCanvas.DrawRect(
-                    new SKRect(5f, 5f, (float)this.Bounds.Width - 10, (float)this.Bounds.Height - 10),
-                    _background);
+                var skiaBounds = new SKRect(
+                    (float)this.Bounds.X, (float)this.Bounds.Y,
+                    (float)this.Bounds.Width, (float)this.Bounds.Height);
+
+                // Draw background
+                skiaCanvas.DrawRect(skiaBounds, _background);
             }
             finally
             {

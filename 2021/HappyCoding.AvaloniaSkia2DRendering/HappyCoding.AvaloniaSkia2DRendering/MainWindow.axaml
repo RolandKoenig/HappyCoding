@@ -8,7 +8,9 @@
         Title="HappyCoding.AvaloniaSkia2DRendering">
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
-
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" />
+            </MenuItem>
         </Menu>
 
         <local:CustomSkiaRendererControl />

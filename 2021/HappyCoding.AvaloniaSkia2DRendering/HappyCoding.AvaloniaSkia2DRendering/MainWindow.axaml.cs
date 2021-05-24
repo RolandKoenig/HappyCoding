@@ -8,7 +8,7 @@ namespace HappyCoding.AvaloniaSkia2DRendering
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
