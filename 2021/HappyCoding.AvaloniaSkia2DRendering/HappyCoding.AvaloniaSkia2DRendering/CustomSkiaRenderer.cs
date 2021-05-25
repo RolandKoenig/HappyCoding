@@ -17,8 +17,12 @@ namespace HappyCoding.AvaloniaSkia2DRendering
         private Rect _bounds;
         private bool _boundsChanged;
 
+        // Size independent resources
+        private SKPaint _backgroundPaint;
+        private SKPaint _rectBorderPaint;
+
+        // Size dependent resources
         private SKShader? _backgroundShader;
-        private SKPaint _background;
 
         /// <inheritdoc />
         public Rect Bounds
@@ -38,11 +42,16 @@ namespace HappyCoding.AvaloniaSkia2DRendering
         {
             this.Bounds = Rect.Empty;
 
-            _background = new SKPaint()
+            _backgroundPaint = new SKPaint()
             {
                 Shader = _backgroundShader,
                 Style = SKPaintStyle.Fill,
                 IsAntialias = true
+            };
+            _rectBorderPaint = new SKPaint()
+            {
+                Color = SKColors.Black, 
+                Style = SKPaintStyle.Stroke
             };
 
             this.RecreateSizeDependentResources();
@@ -62,13 +71,13 @@ namespace HappyCoding.AvaloniaSkia2DRendering
                 new SKColorF[] {SKColors.LightBlue, SKColors.SteelBlue},
                 null,
                 SKShaderTileMode.Repeat);
-            _background.Shader = _backgroundShader;
+            _backgroundPaint.Shader = _backgroundShader;
         }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            _background.Dispose();
+            _backgroundPaint.Dispose();
             _backgroundShader?.Dispose();
 
             _disposed = true;
@@ -108,7 +117,17 @@ namespace HappyCoding.AvaloniaSkia2DRendering
                     (float)this.Bounds.Width, (float)this.Bounds.Height);
 
                 // Draw background
-                skiaCanvas.DrawRect(skiaBounds, _background);
+                skiaCanvas.DrawRect(skiaBounds, _backgroundPaint);
+
+                for(var actX = skiaBounds.Left + 5f; actX < this.Bounds.Width; actX += 30f)
+                {
+                    for(var actY = skiaBounds.Top + 5f; actY < this.Bounds.Height; actY += 30f)
+                    {
+                        skiaCanvas.DrawRect(
+                            actX, actY, 20f, 20f, 
+                            _rectBorderPaint);
+                    }
+                }
             }
             finally
             {
