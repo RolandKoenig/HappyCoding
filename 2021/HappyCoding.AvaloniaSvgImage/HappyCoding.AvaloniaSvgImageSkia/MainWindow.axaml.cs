@@ -1,9 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Svg;
 
-namespace HappyCoding.AvaloniaSvgImage
+namespace HappyCoding.AvaloniaSvgImageSkia
 {
     public partial class MainWindow : Window
     {
