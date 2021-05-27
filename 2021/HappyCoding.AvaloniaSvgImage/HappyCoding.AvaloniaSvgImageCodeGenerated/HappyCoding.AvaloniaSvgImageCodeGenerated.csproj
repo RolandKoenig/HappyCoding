@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Assets\AddPackage.svg" />
+    <None Remove="Assets\MessageCommunicator.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\AddPackage.svg" />
+    <AvaloniaResource Include="Assets\MessageCommunicator.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="Assets/AddPackage.svg" NamespaceName="HappyCoding.AvaloniaSvgImageCodeGenerated.Assets" ClassName="SvgAddPackage" />
+    <AdditionalFiles Include="Assets/MessageCommunicator.svg" NamespaceName="HappyCoding.AvaloniaSvgImageCodeGenerated.Assets" ClassName="SvgMessageCommunicator" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.5" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.5" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.5" />
+    <PackageReference Include="Avalonia.SKPictureImage" Version="0.10.5.1" />
+    <PackageReference Include="Svg.SourceGenerator.Skia" Version="0.5.5.1" />
+   </ItemGroup>
+</Project>

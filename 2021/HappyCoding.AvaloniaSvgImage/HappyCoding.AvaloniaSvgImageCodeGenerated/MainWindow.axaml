@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:skp="clr-namespace:Avalonia.SKPictureImage;assembly=Avalonia.SKPictureImage"
+        xmlns:assets="clr-namespace:HappyCoding.AvaloniaSvgImageCodeGenerated.Assets"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaSvgImageCodeGenerated.MainWindow"
+        Title="HappyCoding.AvaloniaSvgImageCodeGenerated">
+    <Window.Resources>
+        <skp:SKPictureImage x:Key="SvgAddPackage" Source="{x:Static assets:SvgAddPackage.Picture}" />
+        <skp:SKPictureImage x:Key="SvgMessageCommunicator" Source="{x:Static assets:SvgMessageCommunicator.Picture}" />
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Image">
+            <Setter Property="Width" Value="256" />
+            <Setter Property="Height" Value="256" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+    </Window.Styles>
+
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File" />
+        </Menu>
+
+        <Grid>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Image Source="{StaticResource SvgAddPackage}" />
+                <Image Source="{StaticResource SvgMessageCommunicator}" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

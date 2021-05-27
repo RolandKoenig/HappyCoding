@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.AvaloniaSvgImage", "HappyCoding.AvaloniaSvgImage\HappyCoding.AvaloniaSvgImage.csproj", "{3C8D0757-1500-4A46-941B-F01DC0E78C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaSvgImageSkia", "HappyCoding.AvaloniaSvgImageSkia\HappyCoding.AvaloniaSvgImageSkia.csproj", "{933E4DA8-DDA6-4F10-8298-FBA46E450B3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.AvaloniaSvgImageSkia", "HappyCoding.AvaloniaSvgImageSkia\HappyCoding.AvaloniaSvgImageSkia.csproj", "{933E4DA8-DDA6-4F10-8298-FBA46E450B3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaSvgImageCodeGenerated", "HappyCoding.AvaloniaSvgImageCodeGenerated\HappyCoding.AvaloniaSvgImageCodeGenerated.csproj", "{B42871DA-AFB2-4AB4-BB15-25C4E6FB6BE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{933E4DA8-DDA6-4F10-8298-FBA46E450B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{933E4DA8-DDA6-4F10-8298-FBA46E450B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{933E4DA8-DDA6-4F10-8298-FBA46E450B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B42871DA-AFB2-4AB4-BB15-25C4E6FB6BE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B42871DA-AFB2-4AB4-BB15-25C4E6FB6BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B42871DA-AFB2-4AB4-BB15-25C4E6FB6BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B42871DA-AFB2-4AB4-BB15-25C4E6FB6BE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
