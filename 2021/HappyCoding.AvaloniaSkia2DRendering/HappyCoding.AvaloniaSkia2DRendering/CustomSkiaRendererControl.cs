@@ -7,6 +7,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
+using Avalonia.Threading;
 
 namespace HappyCoding.AvaloniaSkia2DRendering
 {
@@ -20,11 +21,13 @@ namespace HappyCoding.AvaloniaSkia2DRendering
 
             if (_skiaRenderer != null)
             {
-                _skiaRenderer.Bounds = new Rect(
-                    new Point(0.0, 0.0),
-                    this.Bounds.Size);
+                _skiaRenderer.Bounds = this.Bounds;
                 context.Custom(_skiaRenderer);
             }
+
+            Dispatcher.UIThread.InvokeAsync(
+                this.InvalidateVisual,
+                DispatcherPriority.Normal);
         }
 
         /// <inheritdoc />

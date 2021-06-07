@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Platform;
@@ -16,6 +18,7 @@ namespace HappyCoding.AvaloniaSkia2DRendering
         private bool _disposed;
         private Rect _bounds;
         private bool _boundsChanged;
+        private object _renderDisposeLock;
 
         // Size independent resources
         private SKPaint _backgroundPaint;
@@ -57,11 +60,12 @@ namespace HappyCoding.AvaloniaSkia2DRendering
             this.RecreateSizeDependentResources();
 
             _disposed = false;
+            _renderDisposeLock = new object();
         }
 
         private void RecreateSizeDependentResources()
         {
-            var height = (float)this.Bounds.Height;
+            var height = (float)_bounds.Height;
             if (height < 1f) { height = 1f;}
 
             _backgroundShader?.Dispose();
@@ -77,61 +81,80 @@ namespace HappyCoding.AvaloniaSkia2DRendering
         /// <inheritdoc />
         public void Dispose()
         {
-            _backgroundPaint.Dispose();
-            _backgroundShader?.Dispose();
+            lock (_renderDisposeLock)
+            {
+                _disposed = true;
 
-            _disposed = true;
+                // Size independent resources
+                _backgroundPaint.Dispose();
+
+                // Size dependent resources
+                _backgroundShader?.Dispose();
+            }
         }
 
         /// <inheritdoc />
         public bool HitTest(Point p)
         {
+            if(_bounds.Contains(p))
+            {
+                Debug.WriteLine($"HitTest True: {p}");
+            }
+            else
+            {
+                Debug.WriteLine($"HitTest False: {p}");
+            }
+
+
             return false;
         }
 
         /// <inheritdoc />
         public void Render(IDrawingContextImpl context)
         {
-            if (_disposed){ return; }
-            if (this.Bounds == Rect.Empty) { return; }
-
-            if (!(context is ISkiaDrawingContextImpl skiaContext))
+            lock (_renderDisposeLock)
             {
-                // Cancel here...
-                // We do only support custom rendering with Skia
-                return;
-            }
+                if (_disposed){ return; }
+                if (_bounds == Rect.Empty) { return; }
 
-            if (_boundsChanged)
-            {
-                this.RecreateSizeDependentResources();
-                _boundsChanged = false;
-            }
-
-            var skiaCanvas = skiaContext.SkCanvas;
-            skiaCanvas.Save();
-            try
-            {
-                var skiaBounds = new SKRect(
-                    (float)this.Bounds.X, (float)this.Bounds.Y,
-                    (float)this.Bounds.Width, (float)this.Bounds.Height);
-
-                // Draw background
-                skiaCanvas.DrawRect(skiaBounds, _backgroundPaint);
-
-                for(var actX = skiaBounds.Left + 5f; actX < this.Bounds.Width; actX += 30f)
+                if (!(context is ISkiaDrawingContextImpl skiaContext))
                 {
-                    for(var actY = skiaBounds.Top + 5f; actY < this.Bounds.Height; actY += 30f)
+                    // Cancel here...
+                    // We do only support custom rendering with Skia
+                    return;
+                }
+
+                if (_boundsChanged)
+                {
+                    this.RecreateSizeDependentResources();
+                    _boundsChanged = false;
+                }
+
+                var skiaCanvas = skiaContext.SkCanvas;
+                skiaCanvas.Save();
+                try
+                {
+                    var skiaBounds = new SKRect(
+                        0f, 0f,
+                        (float)_bounds.Width, (float)_bounds.Height);
+
+                    // Draw background
+                    skiaCanvas.DrawRect(skiaBounds, _backgroundPaint);
+
+                    for (var actX = skiaBounds.Left + 5f; actX < skiaBounds.Width; actX += 30f)
                     {
-                        skiaCanvas.DrawRect(
-                            actX, actY, 20f, 20f, 
-                            _rectBorderPaint);
+                        for (var actY = skiaBounds.Top + 5f; actY < skiaBounds.Height; actY += 30f)
+                        {
+                            skiaCanvas.DrawRect(
+                                actX, actY, 20f, 20f,
+                                _rectBorderPaint);
+                        }
                     }
                 }
-            }
-            finally
-            {
-                skiaCanvas.Restore();
+                finally
+                {
+                    skiaCanvas.Restore();
+                }
             }
         }
 

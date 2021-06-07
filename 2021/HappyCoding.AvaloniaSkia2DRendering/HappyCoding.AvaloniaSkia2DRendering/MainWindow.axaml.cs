@@ -8,15 +8,10 @@ namespace HappyCoding.AvaloniaSkia2DRendering
     {
         public MainWindow()
         {
-            this.InitializeComponent();
+            AvaloniaXamlLoader.Load(this);
 #if DEBUG
             this.AttachDevTools();
 #endif
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
         }
     }
 }
