@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.SpecFlowProject", "HappyCoding.SpecFlowProject\HappyCoding.SpecFlowProject.csproj", "{10C29A5F-4BB3-45E8-BF53-61665D030C83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.SpecFlowProject.Specs", "HappyCoding.SpecFlowProject.Specs\HappyCoding.SpecFlowProject.Specs.csproj", "{9C0FBE40-4646-4E74-A046-F24667A27810}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10C29A5F-4BB3-45E8-BF53-61665D030C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C29A5F-4BB3-45E8-BF53-61665D030C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C29A5F-4BB3-45E8-BF53-61665D030C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C29A5F-4BB3-45E8-BF53-61665D030C83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C0FBE40-4646-4E74-A046-F24667A27810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0FBE40-4646-4E74-A046-F24667A27810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0FBE40-4646-4E74-A046-F24667A27810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0FBE40-4646-4E74-A046-F24667A27810}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DD83B7E-D477-40C4-BD32-32D74E01A08B}
+	EndGlobalSection
+EndGlobal
