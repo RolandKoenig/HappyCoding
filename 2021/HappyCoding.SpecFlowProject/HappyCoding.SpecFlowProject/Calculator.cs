@@ -11,5 +11,10 @@ namespace HappyCoding.SpecFlowProject
         {
             return this.FirstNumber + this.SecondNumber;
         }
+
+        public int Multiply()
+        {
+            return this.FirstNumber * this.SecondNumber;
+        }
     }
 }
