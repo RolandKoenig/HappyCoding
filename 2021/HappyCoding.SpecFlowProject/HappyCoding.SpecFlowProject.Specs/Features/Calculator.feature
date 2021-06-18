@@ -22,3 +22,10 @@ Scenario: Multiply two numbers
 	And the second number is 10
 	When the two numbers are multiplied
 	Then the result should be 100
+
+Scenario: Add Values from a table
+    Given the values from the following table
+	| Value1 | Value2 |
+	| 30     | 20     |
+	When the two numbers are added
+	Then the result should be 50

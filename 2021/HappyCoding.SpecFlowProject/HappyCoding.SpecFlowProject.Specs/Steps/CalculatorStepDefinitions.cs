@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace HappyCoding.SpecFlowProject.Specs.Steps
 {
@@ -28,6 +29,14 @@ namespace HappyCoding.SpecFlowProject.Specs.Steps
         {
             _calculator.FirstNumber = number;
         }
+
+        [Given(@"the values from the following table")]
+        public void GivenTheValuesFromTheFollowingTable(Table table)
+        {
+            _calculator.FirstNumber = table.Rows[0].GetInt32("Value1");
+            _calculator.SecondNumber = table.Rows[0].GetInt32("Value2");
+        }
+
 
         [Given("the second number is (.*)")]
         public void GivenTheSecondNumberIs(int number)
