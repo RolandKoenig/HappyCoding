@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -12,9 +13,9 @@ namespace HappyCoding.SpecFlowProject.Specs.Steps
         private readonly Calculator _calculator;
         private int _result;
 
-        public CalculatorStepDefinitions(ScenarioContext scenarioContext)
+        public CalculatorStepDefinitions(ScenarioContext scenarioContext, Calculator calculator)
         {
-            _calculator = new Calculator();
+            _calculator = calculator;
             _scenarioContext = scenarioContext;
         }
 

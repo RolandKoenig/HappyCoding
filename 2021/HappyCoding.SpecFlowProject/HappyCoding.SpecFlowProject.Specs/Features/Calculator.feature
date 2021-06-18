@@ -40,3 +40,9 @@ Scenario Outline: Some add examples
 		| 10     | 20     | 30     |
 		| 50     | 70     | 120    |
 		| 30     | 30     | 60     |
+
+Scenario: Add two numbers with step from other StepDefinitions file
+	Given the first number is again 50
+	And the second number is 120 from other StepDefinition file
+	When the two numbers are added
+	Then the result should be 170
