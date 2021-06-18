@@ -29,3 +29,14 @@ Scenario: Add Values from a table
 	| 30     | 20     |
 	When the two numbers are added
 	Then the result should be 50
+
+Scenario Outline: Some add examples
+	Given the first number is <Value1>
+	And the second number is <Value2>
+	When the two numbers are added
+	Then the result should be <Result>
+	Examples:
+		| Value1 | Value2 | Result |
+		| 10     | 20     | 30     |
+		| 50     | 70     | 120    |
+		| 30     | 30     | 60     |
