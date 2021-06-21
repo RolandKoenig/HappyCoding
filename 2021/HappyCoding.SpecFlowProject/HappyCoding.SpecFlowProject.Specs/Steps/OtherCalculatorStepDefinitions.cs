@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace HappyCoding.SpecFlowProject.Specs.Steps
 {
     [Binding]
-    public sealed class OtherCalculatorStepDefinitions
+    public sealed class OtherCalculatorStepDefinitions : TechTalk.SpecFlow.Steps
     {
         private Calculator _calculator;
 
