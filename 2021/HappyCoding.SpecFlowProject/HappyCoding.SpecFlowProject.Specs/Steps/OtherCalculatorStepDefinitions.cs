@@ -7,11 +7,11 @@ using TechTalk.SpecFlow;
 namespace HappyCoding.SpecFlowProject.Specs.Steps
 {
     [Binding]
-    public sealed class OtherCalculatorDefinitions
+    public sealed class OtherCalculatorStepDefinitions
     {
         private Calculator _calculator;
 
-        public OtherCalculatorDefinitions(Calculator calculator)
+        public OtherCalculatorStepDefinitions(Calculator calculator)
         {
             _calculator = calculator;
         }
