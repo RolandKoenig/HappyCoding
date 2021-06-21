@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.Tracing;
 
 namespace HappyCoding.SpecFlowProject.Specs.Steps
 {
     [Binding]
-    [Scope(Feature = "Calculator")]
-    public sealed class CalculatorStepDefinitions
+    [Scope(Feature = "Calculator2")]
+    public sealed class Calculator2StepDefinitions
     {
         private readonly ScenarioContext _scenarioContext;
         private readonly Calculator _calculator;
         private int _result;
 
-        public CalculatorStepDefinitions(ScenarioContext scenarioContext, Calculator calculator)
+        public Calculator2StepDefinitions(ScenarioContext scenarioContext, Calculator calculator)
         {
             _calculator = calculator;
             _scenarioContext = scenarioContext;
@@ -25,19 +25,6 @@ namespace HappyCoding.SpecFlowProject.Specs.Steps
         public void GivenTheFirstNumberIs(int number)
         {
             _calculator.FirstNumber = number;
-        }
-
-        [Given("the first number is again (.*)")]
-        public void GivenTheFirstNumberIsAgain(int number)
-        {
-            _calculator.FirstNumber = number;
-        }
-
-        [Given(@"the values from the following table")]
-        public void GivenTheValuesFromTheFollowingTable(Table table)
-        {
-            _calculator.FirstNumber = table.Rows[0].GetInt32("Value1");
-            _calculator.SecondNumber = table.Rows[0].GetInt32("Value2");
         }
 
         [Given("the second number is (.*)")]
@@ -50,12 +37,6 @@ namespace HappyCoding.SpecFlowProject.Specs.Steps
         public void WhenTheTwoNumbersAreAdded()
         {
             _result = _calculator.Add();
-        }
-
-        [When("the two numbers are multiplied")]
-        public void WhenTheTwoNumbersAreMultiplied()
-        {
-            _result = _calculator.Multiply();
         }
 
         [Then("the result should be (.*)")]
