@@ -17,10 +17,10 @@
     <AdditionalFiles Include="Assets/MessageCommunicator.svg" NamespaceName="HappyCoding.AvaloniaSvgImageCodeGenerated.Assets" ClassName="SvgMessageCommunicator" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.5" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.5" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.5" />
-    <PackageReference Include="Avalonia.SKPictureImage" Version="0.10.5.1" />
-    <PackageReference Include="Svg.SourceGenerator.Skia" Version="0.5.5.1" />
+    <PackageReference Include="Avalonia" Version="0.10.6" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.6" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.6" />
+    <PackageReference Include="Avalonia.SKPictureImage" Version="0.10.6.1" />
+    <PackageReference Include="Svg.SourceGenerator.Skia" Version="0.5.6.1" />
    </ItemGroup>
 </Project>
