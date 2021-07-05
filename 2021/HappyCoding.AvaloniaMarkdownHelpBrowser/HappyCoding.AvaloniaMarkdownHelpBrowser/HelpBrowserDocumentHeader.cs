@@ -8,7 +8,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 {
     public class HelpBrowserDocumentHeader
     {
-        public static readonly HelpBrowserDocumentHeader Empty = new HelpBrowserDocumentHeader();
+        public static readonly HelpBrowserDocumentHeader Empty = new();
 
         public string Title { get; set; } = string.Empty;
 

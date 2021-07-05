@@ -22,13 +22,11 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 
         public bool IsValid { get; } = true;
 
-        public string? ParseError { get; } = null;
+        public string? ParseError { get; }
 
-        public HelpBrowserDocument(string fileKey, string fileContent)
+        public HelpBrowserDocument(string fileKey, TextReader fileContentReader)
         {
             this.FileKey = fileKey;
-
-            using var fileContentReader = new StringReader(fileContent);
 
             // Read yaml header
             var firstLine = fileContentReader.ReadLine();

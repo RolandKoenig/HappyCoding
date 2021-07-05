@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 
         private string _selectedSelectedMarkDownContentContent;
         private string _selectedMarkDownName;
+        private IntegratedDocRepository _docRepository;
 
         public string SelectedMarkDownContent
         {
@@ -29,7 +31,8 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
             }
         }
 
-        public string[] PossibleMarkDownNames { get; private set; }
+        public IEnumerable<string> PossibleMarkDownNames =>
+            _docRepository.AllFiles.Select(actFile => actFile.YamlHeader.Title);
 
         public string SelectedMarkDownName
         {
@@ -48,38 +51,45 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 
         public MainWindowViewModel()
         {
-            _selectedSelectedMarkDownContentContent = string.Empty;
-            _selectedMarkDownName = "-";
-            this.PossibleMarkDownNames = new[]
+            _docRepository = new IntegratedDocRepository(
+                Assembly.GetExecutingAssembly());
+
+            var firstDocument = _docRepository.AllFiles.FirstOrDefault();
+            if (firstDocument != null)
             {
-                "-",
-                "Test 1",
-                "Test 2",
-                "Test 3"
-            };
+                _selectedSelectedMarkDownContentContent = firstDocument.MarkdownContentString;
+                _selectedMarkDownName = firstDocument.YamlHeader.Title;
+            }
+            else
+            {
+                _selectedSelectedMarkDownContentContent = string.Empty;
+                _selectedMarkDownName = string.Empty;
+            }
         }
 
         private void UpdateMarkdownContent(string markDownName)
         {
-            switch (markDownName)
-            {
-                case "":
-                case "-":
-                    this.SelectedMarkDownContent = string.Empty;
-                    break;
+            var selectedDocument = _docRepository.GetByTitle(markDownName);
+            this.SelectedMarkDownContent = selectedDocument.MarkdownContentString;
+            //switch (markDownName)
+            //{
+            //    case "":
+            //    case "-":
+            //        this.SelectedMarkDownContent = string.Empty;
+            //        break;
 
-                case "Test 1":
-                    this.SelectedMarkDownContent = Properties.Resources.Test1;
-                    break;
+            //    case "Test 1":
+            //        this.SelectedMarkDownContent = Properties.Resources.Test1;
+            //        break;
 
-                case "Test 2":
-                    this.SelectedMarkDownContent = Properties.Resources.Test2;
-                    break;
+            //    case "Test 2":
+            //        this.SelectedMarkDownContent = Properties.Resources.Test2;
+            //        break;
 
-                case "Test 3":
-                    this.SelectedMarkDownContent = Properties.Resources.Test3;
-                    break;
-            }
+            //    case "Test 3":
+            //        this.SelectedMarkDownContent = Properties.Resources.Test3;
+            //        break;
+            //}
         }
 
         private void RaisePropertyChanged([CallerMemberName] string propertyName = "")

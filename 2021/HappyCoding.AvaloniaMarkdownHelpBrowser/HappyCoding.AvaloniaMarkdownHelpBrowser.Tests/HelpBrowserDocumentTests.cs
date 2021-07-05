@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
@@ -9,7 +10,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         [TestMethod]
         public void EmptyFile()
         {
-            var document = new HelpBrowserDocument("Test", "");
+            var document = new HelpBrowserDocument(
+                "Test", 
+                new StringReader(""));
 
             Assert.IsFalse(document.IsValid, document.ParseError);
         }
@@ -19,9 +22,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         {
             var document = new HelpBrowserDocument(
                 "Test",
-                "# DummyTitle" + Environment.NewLine +
+                new StringReader("# DummyTitle" + Environment.NewLine +
                 "Test content test content" + Environment.NewLine +
-                "Test content test content");
+                "Test content test content"));
 
             Assert.IsTrue(document.IsValid);
             Assert.AreEqual(document.YamlHeader.Title, "DummyTitle");
@@ -32,12 +35,12 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         {
             var document = new HelpBrowserDocument(
                 "Test",
-                "---" + Environment.NewLine +
+                new StringReader("---" + Environment.NewLine +
                 "title: DummyTitle" + Environment.NewLine +
                 "author: RolandK" + Environment.NewLine + 
                 "---" + Environment.NewLine +
                 "Test content test content" + Environment.NewLine +
-                "Test content test content");
+                "Test content test content"));
 
             Assert.IsTrue(document.IsValid);
             Assert.AreEqual(document.YamlHeader.Title, "DummyTitle");
@@ -49,7 +52,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         {
             var document = new HelpBrowserDocument(
                 "Test",
-                "## DummyTitle");
+                new StringReader("## DummyTitle"));
 
             Assert.IsTrue(document.IsValid);
             Assert.AreEqual(document.YamlHeader.Title, "Test");
