@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
+using HappyCoding.AvaloniaMarkdownHelpBrowser.Util;
 using Markdown.Avalonia.Utils;
 
 namespace HappyCoding.AvaloniaMarkdownHelpBrowser
@@ -17,25 +15,16 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
     {
         /// <inheritdoc />
         public string? AssetPathRoot { get; set; }
-        
-        private ConcurrentDictionary<Uri, WeakReference<Bitmap>> _bitmapCache;
 
-        private IAssetLoader _assetLoader;
-        private string[] AssetAssemblyNames { get; }
+        private Assembly _assetAssembly;
+        private ConcurrentDictionary<string, WeakReference<Bitmap>> _bitmapCache;
 
         public ResourceBitmapLoader(Assembly assetAssembly)
         {
-            _assetLoader = AvaloniaLocator.Current.GetService<IAssetLoader>();
+            _assetAssembly = assetAssembly;
             this.AssetPathRoot = string.Empty;
 
-            var assetAssemblyName = assetAssembly.GetName().Name;
-            if (string.IsNullOrEmpty(assetAssemblyName))
-            {
-                throw new ArgumentException("Given assembly does not have a name!", nameof(assetAssembly));
-            }
-            this.AssetAssemblyNames = new[]{ assetAssemblyName };
-
-            this._bitmapCache = new ConcurrentDictionary<Uri, WeakReference<Bitmap>>();
+            this._bitmapCache = new ConcurrentDictionary<string, WeakReference<Bitmap>>();
         }
 
         private void Compact()
@@ -44,68 +33,82 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
             {
                 if (!entry.Value.TryGetTarget(out var dummy))
                 {
-                    ((IDictionary<Uri, WeakReference<Bitmap>>)_bitmapCache).Remove(entry.Key);
+                    ((IDictionary<string, WeakReference<Bitmap>>)_bitmapCache).Remove(entry.Key);
+                }
+            }
+        }
+
+        public static string BuildEmbeddedResourceName(string defaultNamespace, string assetPathRoot, string urlText)
+        {
+            var strBuilder = PooledStringBuilders.Current.TakeStringBuilder();
+            try
+            {
+                if (defaultNamespace.Length > 0)
+                {
+                    strBuilder.Append(defaultNamespace);
+                    strBuilder.Append('.');
+                }
+
+                if (assetPathRoot.Length > 0)
+                {
+                    ReplacePathCharactersForEmbeddedResource(assetPathRoot, strBuilder);
+                    strBuilder.Append('.');
+                }
+
+                ReplacePathCharactersForEmbeddedResource(urlText, strBuilder);
+
+                return strBuilder.ToString();
+            }
+            finally
+            {
+                PooledStringBuilders.Current.ReRegisterStringBuilder(strBuilder);
+            }
+        }
+
+        public static void ReplacePathCharactersForEmbeddedResource(string url, StringBuilder target)
+        {
+            for (var loop = 0; loop < url.Length; loop++)
+            {
+                var actChar = url[loop];
+                switch (actChar)
+                {
+                    case '\\':
+                    case '/':
+                        target.Append('.');
+                        break;
+
+                    default:
+                        target.Append(actChar);
+                        break;
                 }
             }
         }
 
         public Bitmap? Get(string urlTxt)
         {
-            Bitmap? imgSource = null;
+            var assetPathRoot = this.AssetPathRoot ?? string.Empty;
+            var embeddedResourceName = BuildEmbeddedResourceName(
+                _assetAssembly.GetName().Name ?? string.Empty,
+                assetPathRoot, 
+                urlTxt);
 
-            // check network
-            if (Uri.TryCreate(urlTxt, UriKind.Absolute, out var url))
+            if (_bitmapCache.TryGetValue(embeddedResourceName, out var reference))
             {
-                imgSource = this.Get(url);
-            }
-
-            // check resources
-            if (imgSource is null)
-            {
-                foreach (var asmNm in this.AssetAssemblyNames)
+                if (reference.TryGetTarget(out var cachedBitmap))
                 {
-                    var resourcePath = (!string.IsNullOrEmpty(this.AssetPathRoot)
-                        ? Path.Combine(this.AssetPathRoot, urlTxt)
-                        : urlTxt).TrimStart(new[]{ '/', '\\' });
-                    resourcePath = Path.Combine(asmNm, resourcePath).Replace('\\', '/');
-                    
-                    var assetUrl = new Uri($"avares://{resourcePath}");
-                    imgSource = this.Get(assetUrl);
-
-                    if (imgSource != null) break;
+                    return cachedBitmap;
                 }
             }
 
-            return imgSource;
-        }
-
-        private Bitmap? Get(Uri url)
-        {
-            if (_bitmapCache.TryGetValue(url, out var reference))
+            using var inStream = _assetAssembly.GetManifestResourceStream(embeddedResourceName);
+            if (inStream != null)
             {
-                if (reference.TryGetTarget(out var image))
-                {
-                    return image;
-                }
+                var newBitmap = new Bitmap(inStream);
+                _bitmapCache[embeddedResourceName] = new WeakReference<Bitmap>(newBitmap);
+                return newBitmap;
             }
 
-            this.Compact();
-
-            Bitmap? imgSource = null;
-            if (url.Scheme == "avares")
-            {
-                using (var resourceStream = _assetLoader.Open(url))
-                {
-                    imgSource = new Bitmap(resourceStream);
-                }
-            }
-
-            if (imgSource != null)
-            {
-                _bitmapCache[url] = new WeakReference<Bitmap>(imgSource);
-            }
-
-            return imgSource;
+            return null;
         }
     }
 }

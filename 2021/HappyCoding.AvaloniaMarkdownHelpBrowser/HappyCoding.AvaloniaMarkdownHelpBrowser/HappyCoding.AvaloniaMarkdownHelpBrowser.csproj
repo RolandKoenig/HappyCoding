@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,17 +6,21 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Fichtelgebirge.jpg" />
+    <None Remove="Assets\Docs\Subfolder\Fichtelgebirge.jpg" />
+    <None Remove="Assets\Docs\Subfolder\Test4.md" />
     <None Remove="Assets\Test1.md" />
     <None Remove="Assets\Test2.md" />
     <None Remove="Assets\Test3.md" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Include="Assets\Fichtelgebirge.jpg" />
+    <EmbeddedResource Include="Assets\Docs\Fichtelgebirge.jpg" />
+    <EmbeddedResource Include="Assets\Docs\Subfolder\Fichtelgebirge.jpg" />
+    <EmbeddedResource Include="Assets\Docs\Subfolder\Test4.md" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Test1.md" />
-    <EmbeddedResource Include="Assets\Test2.md" />
-    <EmbeddedResource Include="Assets\Test3.md" />
+    <EmbeddedResource Include="Assets\Docs\Test1.md" />
+    <EmbeddedResource Include="Assets\Docs\Test2.md" />
+    <EmbeddedResource Include="Assets\Docs\Test3.md" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.6" />

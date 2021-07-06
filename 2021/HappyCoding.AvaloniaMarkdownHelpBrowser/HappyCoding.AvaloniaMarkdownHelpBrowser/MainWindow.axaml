@@ -26,9 +26,8 @@
             </StackPanel>
         </Grid>
 
-
         <md:MarkdownScrollViewer x:Name="CtrlMarkdownViewer"
                                  Markdown="{Binding Path=SelectedMarkDownContent}"
-                                 AssetPathRoot="/Assets"/>
+                                 AssetPathRoot="Assets/Docs" />
     </DockPanel>
 </Window>
