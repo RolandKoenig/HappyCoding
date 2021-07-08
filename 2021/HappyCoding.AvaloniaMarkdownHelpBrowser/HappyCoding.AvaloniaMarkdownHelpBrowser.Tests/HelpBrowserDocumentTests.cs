@@ -10,9 +10,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         [TestMethod]
         public void EmptyFile()
         {
-            var document = new HelpBrowserDocument(
+            var document = new HelpBrowserDocument(new HelpBrowserDocumentPathMock(
                 "Test", 
-                new StringReader(""));
+                ""));
 
             Assert.IsFalse(document.IsValid, document.ParseError);
         }
@@ -20,9 +20,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         [TestMethod]
         public void TitleFromTitleMarkup()
         {
-            var document = new HelpBrowserDocument(
+            var document = new HelpBrowserDocument(new HelpBrowserDocumentPathMock(
                 "Test",
-                new StringReader("# DummyTitle" + Environment.NewLine +
+                "# DummyTitle" + Environment.NewLine +
                 "Test content test content" + Environment.NewLine +
                 "Test content test content"));
 
@@ -33,9 +33,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         [TestMethod]
         public void TitleAndAuthorFromYamlHeader()
         {
-            var document = new HelpBrowserDocument(
+            var document = new HelpBrowserDocument(new HelpBrowserDocumentPathMock(
                 "Test",
-                new StringReader("---" + Environment.NewLine +
+                "---" + Environment.NewLine +
                 "title: DummyTitle" + Environment.NewLine +
                 "author: RolandK" + Environment.NewLine + 
                 "---" + Environment.NewLine +
@@ -50,12 +50,32 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
         [TestMethod]
         public void TitleFromFileKey()
         {
-            var document = new HelpBrowserDocument(
+            var document = new HelpBrowserDocument(new HelpBrowserDocumentPathMock(
                 "Test",
-                new StringReader("## DummyTitle"));
+                "## DummyTitle"));
 
             Assert.IsTrue(document.IsValid);
             Assert.AreEqual(document.YamlHeader.Title, "Test");
+        }
+
+        //*********************************************************************
+        //*********************************************************************
+        //*********************************************************************
+        private record HelpBrowserDocumentPathMock(
+            string FileName,
+            string FileContent) : IHelpBrowserDocumentPath
+        {
+            /// <inheritdoc />
+            public override string ToString()
+            {
+                return this.FileName;
+            }
+
+            /// <inheritdoc />
+            public TextReader OpenRead()
+            {
+                return new StringReader(this.FileContent);
+            }
         }
     }
 }

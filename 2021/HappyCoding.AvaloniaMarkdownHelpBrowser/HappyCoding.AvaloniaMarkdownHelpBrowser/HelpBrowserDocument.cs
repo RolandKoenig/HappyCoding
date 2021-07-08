@@ -12,7 +12,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 {
     public class HelpBrowserDocument
     {
-        public string FileKey { get; }
+        public IHelpBrowserDocumentPath DocumentPath { get; }
+
+        public string Title => this.YamlHeader.Title;
 
         public string YamlHeaderString { get; } = string.Empty;
 
@@ -24,9 +26,12 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 
         public string? ParseError { get; }
 
-        public HelpBrowserDocument(string fileKey, TextReader fileContentReader)
+        public HelpBrowserDocument(IHelpBrowserDocumentPath documentPath)
         {
-            this.FileKey = fileKey;
+            this.DocumentPath = documentPath;
+
+            // Start reading the document
+            var fileContentReader = documentPath.OpenRead();
 
             // Read yaml header
             var firstLine = fileContentReader.ReadLine();
@@ -62,7 +67,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
             }
             else
             {
-                this.YamlHeaderString = $"title: {fileKey}";
+                this.YamlHeaderString = $"title: {documentPath}";
             }
 
             // Parse yaml header

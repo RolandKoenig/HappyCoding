@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -24,15 +25,8 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
             {
                 if(!actEmbeddedRes.EndsWith(".md", StringComparison.OrdinalIgnoreCase)){ continue; }
 
-                using var resourceStream = source.GetManifestResourceStream(actEmbeddedRes);
-                if (resourceStream == null)
-                {
-                    throw new ApplicationException(
-                        $"Unable to open stream to file {actEmbeddedRes} from assembly {source.FullName}!");
-                }
-                using var textReader = new StreamReader(resourceStream);
-
-                var docFile = new HelpBrowserDocument(actEmbeddedRes, textReader);
+                var documentPath = new HelpBrowserDocumentPath(source, actEmbeddedRes);
+                var docFile = new HelpBrowserDocument(documentPath);
                 if (docFile.IsValid)
                 {
                     if (_dictAllFiles.ContainsKey(docFile.YamlHeader.Title))
@@ -44,6 +38,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
                     _dictAllFiles.Add(docFile.YamlHeader.Title, docFile);
                 }
             }
+
+            _lstAllFiles.Sort(
+                (left, right) => string.Compare(left.Title, right.Title, StringComparison.Ordinal));
         }
 
         public HelpBrowserDocument GetByTitle(string title)

@@ -20,6 +20,8 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
             {
                 ctrlMarkdownViewer.Engine.BitmapLoader = new ResourceBitmapLoader(Assembly.GetExecutingAssembly());
             }
+
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }
