@@ -38,17 +38,11 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
             }
         }
 
-        public static string BuildEmbeddedResourceName(string defaultNamespace, string assetPathRoot, string urlText)
+        public static string BuildEmbeddedResourceName(string assetPathRoot, string urlText)
         {
             var strBuilder = PooledStringBuilders.Current.TakeStringBuilder();
             try
             {
-                if (defaultNamespace.Length > 0)
-                {
-                    strBuilder.Append(defaultNamespace);
-                    strBuilder.Append('.');
-                }
-
                 if (assetPathRoot.Length > 0)
                 {
                     ReplacePathCharactersForEmbeddedResource(assetPathRoot, strBuilder);
@@ -87,10 +81,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
         public Bitmap? Get(string urlTxt)
         {
             var assetPathRoot = this.AssetPathRoot ?? string.Empty;
-            var embeddedResourceName = BuildEmbeddedResourceName(
-                _assetAssembly.GetName().Name ?? string.Empty,
-                assetPathRoot, 
-                urlTxt);
+            var embeddedResourceName = BuildEmbeddedResourceName(assetPathRoot, urlTxt);
 
             if (_bitmapCache.TryGetValue(embeddedResourceName, out var reference))
             {

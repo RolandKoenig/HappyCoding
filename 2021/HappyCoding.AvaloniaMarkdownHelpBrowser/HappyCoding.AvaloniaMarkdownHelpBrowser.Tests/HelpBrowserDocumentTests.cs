@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
@@ -65,6 +66,10 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
             string FileName,
             string FileContent) : IHelpBrowserDocumentPath
         {
+            public string EmbeddedResourceDirectory => string.Empty;
+
+            public Assembly HostAssembly => Assembly.GetExecutingAssembly();
+
             /// <inheritdoc />
             public override string ToString()
             {

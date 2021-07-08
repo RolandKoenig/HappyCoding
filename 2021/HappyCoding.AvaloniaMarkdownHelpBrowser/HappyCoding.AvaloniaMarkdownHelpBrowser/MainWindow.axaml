@@ -21,13 +21,13 @@
                            VerticalAlignment="Center"/>
                 <ComboBox DockPanel.Dock="Top" 
                           Width="150"
-                          Items="{Binding Path=PossibleMarkDownNames}"
-                          SelectedItem="{Binding Path=SelectedMarkDownName, Mode=TwoWay}"/>
+                          Items="{Binding Path=AllDocuments}"
+                          SelectedItem="{Binding Path=SelectedDocument, Mode=TwoWay}"/>
             </StackPanel>
         </Grid>
 
         <md:MarkdownScrollViewer x:Name="CtrlMarkdownViewer"
-                                 Markdown="{Binding Path=SelectedMarkDownContent}"
-                                 AssetPathRoot="Assets/Docs" />
+                                 Markdown="{Binding Path=SelectedDocument.MarkdownContentString, FallbackValue={x:Null}}"
+                                 AssetPathRoot="{Binding Path=SelectedDocument.DocumentPath.EmbeddedResourceDirectory, FallbackValue={x:Null}}" />
     </DockPanel>
 </Window>

@@ -106,6 +106,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
             }
         }
 
+        /// <inheritdoc />
+        public override string ToString() => this.Title;
+
         public static bool IsYamlHeaderSeparator(string? strToCheck)
         {
             if (string.IsNullOrEmpty(strToCheck)) { return false; }

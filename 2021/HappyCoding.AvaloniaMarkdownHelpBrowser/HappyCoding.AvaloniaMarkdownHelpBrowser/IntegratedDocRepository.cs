@@ -11,15 +11,15 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 {
     public class IntegratedDocRepository
     {
-        private List<HelpBrowserDocument> _lstAllFiles;
-        private Dictionary<string, HelpBrowserDocument> _dictAllFiles;
+        private List<HelpBrowserDocument> _lstAllDocuments;
+        private Dictionary<IHelpBrowserDocumentPath, HelpBrowserDocument> _dictAllFiles;
 
-        public IEnumerable<HelpBrowserDocument> AllFiles => _lstAllFiles;
+        public IEnumerable<HelpBrowserDocument> AllDocuments => _lstAllDocuments;
 
         public IntegratedDocRepository(Assembly source)
         {
-            _lstAllFiles = new List<HelpBrowserDocument>(16);
-            _dictAllFiles = new Dictionary<string, HelpBrowserDocument>(16);
+            _lstAllDocuments = new List<HelpBrowserDocument>(16);
+            _dictAllFiles = new Dictionary<IHelpBrowserDocumentPath, HelpBrowserDocument>(16);
             
             foreach (var actEmbeddedRes in source.GetManifestResourceNames())
             {
@@ -29,27 +29,27 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
                 var docFile = new HelpBrowserDocument(documentPath);
                 if (docFile.IsValid)
                 {
-                    if (_dictAllFiles.ContainsKey(docFile.YamlHeader.Title))
+                    if (_dictAllFiles.ContainsKey(docFile.DocumentPath))
                     {
-                        throw new ApplicationException($"Duplicate documentation file title {docFile.YamlHeader.Title}!");
+                        throw new ApplicationException($"Duplicate documentation file: {docFile.DocumentPath}!");
                     }
                     
-                    _lstAllFiles.Add(docFile);
-                    _dictAllFiles.Add(docFile.YamlHeader.Title, docFile);
+                    _lstAllDocuments.Add(docFile);
+                    _dictAllFiles.Add(docFile.DocumentPath, docFile);
                 }
             }
 
-            _lstAllFiles.Sort(
+            _lstAllDocuments.Sort(
                 (left, right) => string.Compare(left.Title, right.Title, StringComparison.Ordinal));
         }
 
-        public HelpBrowserDocument GetByTitle(string title)
-        {
-            if (_dictAllFiles.TryGetValue(title, out var foundFile))
-            {
-                return foundFile;
-            }
-            throw new FileNotFoundException($"Unable to find documentation file by title '{title}'", title);
-        }
+        //public HelpBrowserDocument GetByPath(HelpBrowserDocumentPath path)
+        //{
+        //    if (_dictAllFiles.TryGetValue(path, out var foundFile))
+        //    {
+        //        return foundFile;
+        //    }
+        //    throw new FileNotFoundException($"Unable to find documentation file by title '{title}'", title);
+        //}
     }
 }
