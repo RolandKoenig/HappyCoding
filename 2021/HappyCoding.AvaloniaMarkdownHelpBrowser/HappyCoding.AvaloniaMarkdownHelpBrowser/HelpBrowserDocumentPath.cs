@@ -38,32 +38,37 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 
         public static string GetEmbeddedResourceFileNameWithoutExtension(string embeddedResourceName)
         {
-            var strBuilder = PooledStringBuilders.Current.TakeStringBuilder(64);
-            try
+            var lastDotIndex = -1;
+            var nextToLastDotIndex = -1;
+            for (var loop = embeddedResourceName.Length - 1; loop >= 0; loop--)
             {
-                var firstDotPassed = false;
-                for (var loop = embeddedResourceName.Length - 1; loop >= 0; loop--)
-                {
-                    if (embeddedResourceName[loop] == '.')
-                    {
-                        if (!firstDotPassed)
-                        {
-                            firstDotPassed = true;
-                            continue;
-                        }
-                        else { break; }
-                    }
+                if (embeddedResourceName[loop] != '.') { continue; }
 
-                    if (firstDotPassed)
-                    {
-                        strBuilder.Insert(0, embeddedResourceName[loop]);
-                    }
+                if (lastDotIndex == -1)
+                {
+                    lastDotIndex = loop;
                 }
-                return strBuilder.ToString();
+                else
+                {
+                    nextToLastDotIndex = loop;
+                    break;
+                }
             }
-            finally
+
+            if (nextToLastDotIndex > -1)
             {
-                PooledStringBuilders.Current.ReRegisterStringBuilder(strBuilder);
+                if (lastDotIndex == (nextToLastDotIndex + 1)) { return string.Empty; }
+                return embeddedResourceName.Substring(
+                    nextToLastDotIndex + 1, 
+                    (lastDotIndex - nextToLastDotIndex) - 1);
+            }
+            else if (lastDotIndex > -1)
+            {
+                return embeddedResourceName[..lastDotIndex];
+            }
+            else
+            {
+                return embeddedResourceName;
             }
         }
 
