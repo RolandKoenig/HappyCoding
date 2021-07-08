@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HappyCoding.AvaloniaMarkdownHelpBrowser
+namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 {
     public class IntegratedDocRepository
     {
@@ -43,13 +42,15 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
                 (left, right) => string.Compare(left.Title, right.Title, StringComparison.Ordinal));
         }
 
-        //public HelpBrowserDocument GetByPath(HelpBrowserDocumentPath path)
-        //{
-        //    if (_dictAllFiles.TryGetValue(path, out var foundFile))
-        //    {
-        //        return foundFile;
-        //    }
-        //    throw new FileNotFoundException($"Unable to find documentation file by title '{title}'", title);
-        //}
+        public HelpBrowserDocument GetByPath(IHelpBrowserDocumentPath path)
+        {
+            if (_dictAllFiles.TryGetValue(path, out var foundFile))
+            {
+                return foundFile;
+            }
+            throw new FileNotFoundException(
+                $"Unable to find documentation file by title '{path}'", 
+                path.ToString());
+        }
     }
 }

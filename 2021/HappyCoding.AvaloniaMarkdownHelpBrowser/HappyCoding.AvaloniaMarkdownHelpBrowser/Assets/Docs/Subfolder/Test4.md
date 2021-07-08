@@ -1,4 +1,7 @@
-﻿# Test 4
+﻿---
+title: Test 4 - Hirschstein
+---
+# Test 4
 ## Image
 
 ![ResourceImage](Hirschstein.jpg)

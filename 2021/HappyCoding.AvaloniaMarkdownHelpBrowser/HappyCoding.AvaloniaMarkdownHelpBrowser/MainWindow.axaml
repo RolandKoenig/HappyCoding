@@ -20,7 +20,7 @@
                 <TextBlock Text="MarkDown Page: " 
                            VerticalAlignment="Center"/>
                 <ComboBox DockPanel.Dock="Top" 
-                          Width="150"
+                          Width="250"
                           Items="{Binding Path=AllDocuments}"
                           SelectedItem="{Binding Path=SelectedDocument, Mode=TwoWay}"/>
             </StackPanel>

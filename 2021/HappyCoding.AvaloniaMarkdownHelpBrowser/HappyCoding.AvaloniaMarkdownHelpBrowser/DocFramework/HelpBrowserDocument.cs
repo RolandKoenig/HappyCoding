@@ -7,7 +7,7 @@ using HappyCoding.AvaloniaMarkdownHelpBrowser.Util;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace HappyCoding.AvaloniaMarkdownHelpBrowser
+namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 {
     public class HelpBrowserDocument
     {

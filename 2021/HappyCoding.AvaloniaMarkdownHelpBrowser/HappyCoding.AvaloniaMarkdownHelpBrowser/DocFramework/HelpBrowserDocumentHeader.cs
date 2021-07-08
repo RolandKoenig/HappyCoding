@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HappyCoding.AvaloniaMarkdownHelpBrowser
+namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 {
     public class HelpBrowserDocumentHeader
     {

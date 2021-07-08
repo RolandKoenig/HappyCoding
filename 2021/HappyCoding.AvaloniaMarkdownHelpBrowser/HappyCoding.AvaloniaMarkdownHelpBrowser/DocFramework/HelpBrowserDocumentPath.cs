@@ -5,9 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using HappyCoding.AvaloniaMarkdownHelpBrowser.Util;
 
-namespace HappyCoding.AvaloniaMarkdownHelpBrowser
+namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 {
     public record HelpBrowserDocumentPath(
         Assembly HostAssembly,

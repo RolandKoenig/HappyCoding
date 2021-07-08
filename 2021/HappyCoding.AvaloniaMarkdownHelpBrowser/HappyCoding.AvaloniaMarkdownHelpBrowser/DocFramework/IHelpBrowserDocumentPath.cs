@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HappyCoding.AvaloniaMarkdownHelpBrowser
+namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 {
     public interface IHelpBrowserDocumentPath
     {
