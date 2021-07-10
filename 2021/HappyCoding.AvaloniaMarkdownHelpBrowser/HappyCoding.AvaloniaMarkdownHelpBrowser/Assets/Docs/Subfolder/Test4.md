@@ -1,7 +1,7 @@
 ﻿---
-title: Test 4 - Hirschstein
+author: RolandK
 ---
-# Test 4
+# Hirschstein
 ## Image
 
 ![ResourceImage](Hirschstein.jpg)

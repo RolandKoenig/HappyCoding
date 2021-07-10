@@ -15,16 +15,36 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 
         public IEnumerable<HelpBrowserDocument> AllDocuments => _lstAllDocuments;
 
-        public IntegratedDocRepository(Assembly source)
+        public IntegratedDocRepository()
         {
             _lstAllDocuments = new List<HelpBrowserDocument>(16);
             _dictAllFiles = new Dictionary<IHelpBrowserDocumentPath, HelpBrowserDocument>(16);
-            
-            foreach (var actEmbeddedRes in source.GetManifestResourceNames())
+        }
+
+        public IntegratedDocRepository(Assembly source)
+            : this()
+        {
+            this.AddAssembly(source);
+        }
+
+        public void AddAssembly(Assembly assembly)
+        {
+            var manifestResourceNames = assembly.GetManifestResourceNames();
+
+            var countMarkdowns = 0;
+            foreach (var actEmbeddedRes in manifestResourceNames)
+            {
+                if (!actEmbeddedRes.EndsWith(".md", StringComparison.OrdinalIgnoreCase)) { continue; }
+                countMarkdowns++;
+            }
+            if (countMarkdowns == 0) { return; }
+
+            var foundDocuments = new List<HelpBrowserDocument>(countMarkdowns);
+            foreach (var actEmbeddedRes in manifestResourceNames)
             {
                 if(!actEmbeddedRes.EndsWith(".md", StringComparison.OrdinalIgnoreCase)){ continue; }
 
-                var documentPath = new HelpBrowserDocumentPath(source, actEmbeddedRes);
+                var documentPath = new HelpBrowserDocumentPath(assembly, actEmbeddedRes);
                 var docFile = new HelpBrowserDocument(documentPath);
                 if (docFile.IsValid)
                 {
@@ -33,13 +53,14 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
                         throw new ApplicationException($"Duplicate documentation file: {docFile.DocumentPath}!");
                     }
                     
-                    _lstAllDocuments.Add(docFile);
+                    foundDocuments.Add(docFile);
                     _dictAllFiles.Add(docFile.DocumentPath, docFile);
                 }
             }
-
-            _lstAllDocuments.Sort(
+            foundDocuments.Sort(
                 (left, right) => string.Compare(left.Title, right.Title, StringComparison.Ordinal));
+            
+            _lstAllDocuments.AddRange(foundDocuments);
         }
 
         public HelpBrowserDocument GetByPath(IHelpBrowserDocumentPath path)

@@ -19,7 +19,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 
         public string MarkdownContentString { get; } = string.Empty;
 
-        public HelpBrowserDocumentHeader YamlHeader { get; } = HelpBrowserDocumentHeader.Empty;
+        public HelpBrowserDocumentHeader YamlHeader { get; }
 
         public bool IsValid { get; } = true;
 
@@ -32,18 +32,18 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
             // Start reading the document
             var fileContentReader = documentPath.OpenRead();
 
-            // Read yaml header
+            // Check for content in the first line
             var firstLine = fileContentReader.ReadLine();
-            if (string.IsNullOrWhiteSpace(firstLine))
+            if (firstLine == null)
             {
                 this.IsValid = false;
                 this.ParseError = "File is empty";
                 return;
             }
-            else if (IsYamlHeaderSeparator(firstLine))
-            {
-                firstLine = null;
 
+            // Cut out the yaml header if present
+            if (IsYamlHeaderSeparator(firstLine))
+            {
                 var strBuilderHeader = PooledStringBuilders.Current.TakeStringBuilder(1024);
                 try
                 {
@@ -59,30 +59,46 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
                 {
                     PooledStringBuilders.Current.ReRegisterStringBuilder(strBuilderHeader);
                 }
+
+                firstLine = fileContentReader.ReadLine();
             }
-            else if (firstLine.StartsWith("# ") && (firstLine.Length > 2))
+
+            // Parse yaml header (if present)
+            if (!string.IsNullOrEmpty(this.YamlHeaderString))
             {
-                this.YamlHeaderString = $"title: {firstLine[2..]}";
+                var yamlDeserializer = new DeserializerBuilder()
+                    .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                    .IgnoreUnmatchedProperties()
+                    .Build();
+                try
+                {
+                    this.YamlHeader = yamlDeserializer.Deserialize<HelpBrowserDocumentHeader>(this.YamlHeaderString);
+                }
+                catch (Exception e)
+                {
+                    this.IsValid = false;
+                    this.ParseError = $"Unable to parse yaml header: {Environment.NewLine} {e}";
+                    return;
+                }
             }
             else
             {
-                this.YamlHeaderString = $"title: {documentPath}";
+                this.YamlHeader = new HelpBrowserDocumentHeader();
             }
 
-            // Parse yaml header
-            var yamlDeserializer = new DeserializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                .IgnoreUnmatchedProperties()
-                .Build();
-            try
+            // Ensure we have a title
+            if (string.IsNullOrEmpty(this.YamlHeader.Title))
             {
-                this.YamlHeader = yamlDeserializer.Deserialize<HelpBrowserDocumentHeader>(this.YamlHeaderString);
-            }
-            catch (Exception e)
-            {
-                this.IsValid = false;
-                this.ParseError = $"Unable to parse yaml header: {Environment.NewLine} {e}";
-                return;
+                if ((firstLine != null) &&
+                    (firstLine.StartsWith("# ")) && 
+                    (firstLine.Length > 2))
+                {
+                    this.YamlHeader.Title = firstLine[2..];
+                }
+                else
+                {
+                    this.YamlHeader.Title = documentPath.ToString() ?? string.Empty;
+                }
             }
 
             // Read markdown content

@@ -29,7 +29,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
                 "Test content test content"));
 
             Assert.IsTrue(document.IsValid);
-            Assert.AreEqual(document.YamlHeader.Title, "DummyTitle");
+            Assert.AreEqual("DummyTitle", document.YamlHeader.Title);
         }
 
         [TestMethod]
@@ -45,8 +45,25 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
                 "Test content test content"));
 
             Assert.IsTrue(document.IsValid);
-            Assert.AreEqual(document.YamlHeader.Title, "DummyTitle");
-            Assert.AreEqual(document.YamlHeader.Author, "RolandK");
+            Assert.AreEqual("DummyTitle", document.YamlHeader.Title);
+            Assert.AreEqual("RolandK", document.YamlHeader.Author);
+        }
+
+        [TestMethod]
+        public void TitleFromTitleMarkupAfterYamlHeader()
+        {
+            var document = new HelpBrowserDocument(new HelpBrowserDocumentPathMock(
+                "Test",
+                "---" + Environment.NewLine +
+                "author: RolandK" + Environment.NewLine + 
+                "---" + Environment.NewLine +
+                "# DummyTitle" + Environment.NewLine +
+                "Test content test content" + Environment.NewLine +
+                "Test content test content"));
+
+            Assert.IsTrue(document.IsValid);
+            Assert.AreEqual("DummyTitle", document.YamlHeader.Title);
+            Assert.AreEqual("RolandK", document.YamlHeader.Author);
         }
 
         [TestMethod]
@@ -57,7 +74,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
                 "## DummyTitle"));
 
             Assert.IsTrue(document.IsValid);
-            Assert.AreEqual(document.YamlHeader.Title, "Test");
+            Assert.AreEqual("Test", document.YamlHeader.Title);
         }
 
         //*********************************************************************
