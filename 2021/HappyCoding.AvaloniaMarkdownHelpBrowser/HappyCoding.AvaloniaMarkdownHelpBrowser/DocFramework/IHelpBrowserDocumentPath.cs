@@ -14,7 +14,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 
         string EmbeddedResourceDirectory { get; }
 
-        HelpBrowserDocumentPath FollowLocalPath(string localPath);
+        HelpBrowserDocumentPath FollowLocalPath(string localFileSystemPath);
 
         TextReader OpenRead();
     }

@@ -100,7 +100,7 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
                 return new StringReader(this.FileContent);
             }
 
-            public HelpBrowserDocumentPath FollowLocalPath(string localPath)
+            public HelpBrowserDocumentPath FollowLocalPath(string localFileSystemPath)
             {
                 throw new NotImplementedException();
             }

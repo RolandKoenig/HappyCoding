@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
+using HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework;
 using HappyCoding.AvaloniaMarkdownHelpBrowser.Util;
 using Markdown.Avalonia.Utils;
 
@@ -40,42 +41,9 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 
         public static string BuildEmbeddedResourceName(string assetPathRoot, string urlText)
         {
-            var strBuilder = PooledStringBuilders.Current.TakeStringBuilder();
-            try
-            {
-                if (assetPathRoot.Length > 0)
-                {
-                    ReplacePathCharactersForEmbeddedResource(assetPathRoot, strBuilder);
-                    strBuilder.Append('.');
-                }
-
-                ReplacePathCharactersForEmbeddedResource(urlText, strBuilder);
-
-                return strBuilder.ToString();
-            }
-            finally
-            {
-                PooledStringBuilders.Current.ReRegisterStringBuilder(strBuilder);
-            }
-        }
-
-        public static void ReplacePathCharactersForEmbeddedResource(string url, StringBuilder target)
-        {
-            for (var loop = 0; loop < url.Length; loop++)
-            {
-                var actChar = url[loop];
-                switch (actChar)
-                {
-                    case '\\':
-                    case '/':
-                        target.Append('.');
-                        break;
-
-                    default:
-                        target.Append(actChar);
-                        break;
-                }
-            }
+            return EmbeddedResourceHelper.FollowLocalPath(
+                assetPathRoot,
+                urlText);
         }
 
         public Bitmap? Get(string urlTxt)
