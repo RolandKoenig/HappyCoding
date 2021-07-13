@@ -65,13 +65,23 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 
         public HelpBrowserDocument GetByPath(IHelpBrowserDocumentPath path)
         {
+            var requestedDocument = this.TryGetByPath(path);
+            if (requestedDocument == null)
+            {
+                throw new FileNotFoundException(
+                    $"Unable to find documentation file by title '{path}'", 
+                    path.ToString());
+            }
+            return requestedDocument;
+        }
+
+        public HelpBrowserDocument? TryGetByPath(IHelpBrowserDocumentPath path)
+        {
             if (_dictAllFiles.TryGetValue(path, out var foundFile))
             {
                 return foundFile;
             }
-            throw new FileNotFoundException(
-                $"Unable to find documentation file by title '{path}'", 
-                path.ToString());
+            return null;
         }
     }
 }

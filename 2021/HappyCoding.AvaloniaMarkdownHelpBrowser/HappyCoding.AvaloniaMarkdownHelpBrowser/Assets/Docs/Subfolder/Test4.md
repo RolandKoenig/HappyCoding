@@ -2,6 +2,13 @@
 author: RolandK
 ---
 # Hirschstein
+## Links
+[Link to Test 1](../Test1.md)
+
+[Link to Test 2](../Test2.md)
+
+[Link to Test 3](../Test3.md)
+
 ## Image
 
 ![ResourceImage](Hirschstein.jpg)

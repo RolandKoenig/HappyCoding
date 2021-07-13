@@ -99,6 +99,11 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.Tests
             {
                 return new StringReader(this.FileContent);
             }
+
+            public HelpBrowserDocumentPath FollowLocalPath(string localPath)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using HappyCoding.AvaloniaMarkdownHelpBrowser.Util;
 
 namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
 {
@@ -15,6 +16,79 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
         public string EmbeddedResourceDirectory
         {
             get => GetEmbeddedResourceDirectory(this.EmbeddedResourceName);
+        }
+
+        /// <summary>
+        /// Follows a local path starting from this resource.
+        /// The local path may contain /, \ and ..
+        /// </summary>
+        public HelpBrowserDocumentPath FollowLocalPath(string localPath)
+        {
+            // Create a stack based on current directory
+            var currentDirectoryPath = this.EmbeddedResourceDirectory.Split('.', StringSplitOptions.RemoveEmptyEntries);
+            var directoryStack = new List<string>(currentDirectoryPath);
+
+            var strBuilder = PooledStringBuilders.Current.TakeStringBuilder(localPath.Length);
+            try
+            {
+                // Update the stack by given local path
+                for (var loop = 0; loop < localPath.Length; loop++)
+                {
+                    var actChar = localPath[loop];
+                    if ((actChar == Path.DirectorySeparatorChar) ||
+                        (actChar == Path.AltDirectorySeparatorChar))
+                    {
+                        if (strBuilder.Length > 0)
+                        {
+                            if(strBuilder.Equals(".")){ }
+                            else if (strBuilder.Equals(".."))
+                            {
+                                if (directoryStack.Count == 0)
+                                {
+                                    throw new ArgumentException(
+                                        $"Parameter {nameof(localPath)} would point beneath the root path!");
+                                }
+
+                                directoryStack.RemoveAt(
+                                    directoryStack.Count - 1);
+                            }
+                            else
+                            {
+                                directoryStack.Add(strBuilder.ToString());
+                            }
+                        }
+                        strBuilder.Clear();
+                    }
+                    else
+                    {
+                        strBuilder.Append(actChar);
+                    }
+                }
+
+                // Last content of StringBuilder is the filename
+                var newFileName = strBuilder.ToString();
+
+                // Build directory path
+                strBuilder.Clear();
+                foreach (var actDirectoryPart in directoryStack)
+                {
+                    if(actDirectoryPart.Length == 0) { continue; }
+
+                    if (strBuilder.Length > 0) { strBuilder.Append('.'); }
+                    strBuilder.Append(actDirectoryPart);
+                }
+                if (strBuilder.Length > 0) { strBuilder.Append('.'); }
+                strBuilder.Append(newFileName);
+
+                // Build result object
+                return new HelpBrowserDocumentPath(
+                    this.HostAssembly,
+                    strBuilder.ToString());
+            }
+            finally
+            {
+                PooledStringBuilders.Current.ReRegisterStringBuilder(strBuilder);
+            }
         }
 
         public static string GetEmbeddedResourceDirectory(string embeddedResourceName)

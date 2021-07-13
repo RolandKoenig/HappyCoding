@@ -1,4 +1,11 @@
 ﻿# Test 3
+## Links
+[Link to Test 1](Test1.md)
+
+[Link to Test 2](Test2.md)
+
+[Link to Hirschstein](Subfolder/Test4.md)
+
 ## Image
 
 ![ResourceImage](Fichtelgebirge.jpg)

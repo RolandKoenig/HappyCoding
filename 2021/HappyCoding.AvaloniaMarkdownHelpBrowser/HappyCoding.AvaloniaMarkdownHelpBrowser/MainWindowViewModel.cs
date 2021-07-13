@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework;
+using HappyCoding.AvaloniaMarkdownHelpBrowser.Util;
 
 namespace HappyCoding.AvaloniaMarkdownHelpBrowser
 {
@@ -18,6 +19,8 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
         private HelpBrowserDocument? _selectedDocument;
 
         public IEnumerable<HelpBrowserDocument> AllDocuments => _docRepository.AllDocuments;
+
+        public DelegateCommand<string> CommandNavigateTo { get; }
 
         public HelpBrowserDocument? SelectedDocument
         {
@@ -36,6 +39,19 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser
         {
             _docRepository = new IntegratedDocRepository(
                 Assembly.GetExecutingAssembly());
+
+            this.CommandNavigateTo = new DelegateCommand<string>((navTarget) =>
+            {
+                if (navTarget == null) { return; }
+                if (this.SelectedDocument == null) { return; }
+
+                var newPath = this.SelectedDocument.DocumentPath.FollowLocalPath(navTarget);
+                var targetDoc = _docRepository.TryGetByPath(newPath);
+                if (targetDoc != null)
+                {
+                    this.SelectedDocument = targetDoc;
+                }
+            });
         }
 
         private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
