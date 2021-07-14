@@ -14,9 +14,17 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
             string embeddedResourceDirectory,
             string localFileSystemPath)
         {
-            // Create a stack based on current directory
-            var currentDirectoryPath = embeddedResourceDirectory.Split('.', StringSplitOptions.RemoveEmptyEntries);
-            var directoryStack = new List<string>(currentDirectoryPath);
+            var countDots = 0;
+            for (var loop = 0; loop < embeddedResourceDirectory.Length; loop++)
+            {
+                if (embeddedResourceDirectory[loop] == '.') { countDots++; }
+            }
+
+            var directoryStack = new List<ReadOnlyMemory<char>>(countDots + 1);
+            foreach (var actSplitPart in embeddedResourceDirectory.SplitZeroAlloc('.'))
+            {
+                directoryStack.Add(actSplitPart);
+            }
 
             var strBuilder = PooledStringBuilders.Current.TakeStringBuilder(localFileSystemPath.Length);
             try
@@ -44,7 +52,8 @@ namespace HappyCoding.AvaloniaMarkdownHelpBrowser.DocFramework
                             }
                             else
                             {
-                                directoryStack.Add(strBuilder.ToString());
+                                directoryStack.Add(
+                                    strBuilder.ToString().AsMemory());
                             }
                         }
                         strBuilder.Clear();
