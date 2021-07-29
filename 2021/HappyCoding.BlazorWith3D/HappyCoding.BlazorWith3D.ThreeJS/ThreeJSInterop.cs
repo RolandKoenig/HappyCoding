@@ -14,7 +14,7 @@ namespace HappyCoding.BlazorWith3D.ThreeJS
         {
             _jsRuntime = jsRuntime;
             _loadBabylonTask = jsRuntime.InvokeVoidAsync(
-                "import", "./_content/HappyCoding.BlazorWith3D.ThreeJS/three.min.js");
+                "import", "./_content/HappyCoding.BlazorWith3D.ThreeJS/three.js");
 
             _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/HappyCoding.BlazorWith3D.ThreeJS/threeJSInterop.js"));
