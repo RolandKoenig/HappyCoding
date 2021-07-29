@@ -36,6 +36,14 @@ namespace HappyCoding.BlazorWith3D.ThreeJS
             return await module.InvokeAsync<string>("threeJSInterop.getVersion");
         }
 
+        public async ValueTask UnloadCanvasAsync()
+        {
+            await _loadBabylonTask;
+            var module = await _moduleTask.Value;
+
+            await module.InvokeVoidAsync("threeJSInterop.unloadCanvas");
+        }
+
         public async ValueTask DisposeAsync()
         {
             if (_moduleTask.IsValueCreated)

@@ -5,37 +5,57 @@
 
 class BabylonJSInterop {
 
+    constructor() {
+        this.babylonEngine = null;
+        this.scene = null;
+        this.camera = null;
+        this.light1 = null;
+        this.light2 = null;
+        this.sphere = null;
+    }
+
     /**
      * Initializes a 3d view for a canvas with the given id
      * @param {any} canvasId
      */
     initCanvas(canvasId) {
         const babylonCanvas = document.getElementById(canvasId);
-        const babylonEngine = new BABYLON.Engine(babylonCanvas, true);
-        const scene = this.createSceneWithSphere(babylonEngine, babylonCanvas);
 
-        babylonEngine.runRenderLoop(function () {
-            scene.render();
-        });
+        this.babylonEngine = new BABYLON.Engine(babylonCanvas, true);
+        this.scene = new BABYLON.Scene(this.babylonEngine);
+
+        this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0, 0, 5), this.scene);
+        this.camera.attachControl(babylonCanvas, true);
+ 
+        this.light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), this.scene);
+        this.light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), this.scene);
+ 
+        this.sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, this.scene);
+
+        this.babylonEngine.runRenderLoop(() => this.perFrameAnimation());
+    }
+
+    getVersion() {
+        return BABYLON.Engine.Version;
     }
 
     /**
-     * Creates the default scene
-     * @param {any} engine
-     * @param {any} canvas
-     */
-    createSceneWithSphere(engine, canvas) {
-        const scene = new BABYLON.Scene(engine);
+    * Gets called x times per second. It triggers animation calculation and rendering.
+    */
+    perFrameAnimation() {
+        this.scene.render();
+    }
 
-        const camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0, 0, 5), scene);
-        camera.attachControl(canvas, true);
- 
-        const light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
-        const light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
- 
-        const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene);
- 
-        return scene;
+    /**
+     * Disposes all resources allocated by babylon.js
+     */
+    unloadCanvas() {
+        this.sphere.dispose();
+
+        this.light2.dispose();
+        this.light1.dispose();
+
+        this.babylonEngine.dispose();
     }
 }
 

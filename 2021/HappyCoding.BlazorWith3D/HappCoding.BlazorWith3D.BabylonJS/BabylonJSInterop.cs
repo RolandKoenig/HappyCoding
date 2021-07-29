@@ -34,6 +34,22 @@ namespace HappyCoding.BlazorWith3D.BabylonJS
             await module.InvokeVoidAsync("babylonJSInterop.initCanvas", canvasID);
         }
 
+        public async ValueTask<string> GetVersionAsync()
+        {
+            await _loadBabylonTask;
+            var module = await _moduleTask.Value;
+
+            return await module.InvokeAsync<string>("babylonJSInterop.getVersion");
+        }
+
+        public async ValueTask UnloadCanvasAsync()
+        {
+            await _loadBabylonTask;
+            var module = await _moduleTask.Value;
+
+            await module.InvokeVoidAsync("babylonJSInterop.unloadCanvas");
+        }
+
         public async ValueTask DisposeAsync()
         {
             await _loadBabylonTask;

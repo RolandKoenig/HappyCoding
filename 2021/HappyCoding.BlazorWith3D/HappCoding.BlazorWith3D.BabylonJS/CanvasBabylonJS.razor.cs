@@ -8,9 +8,11 @@ using Microsoft.JSInterop;
 
 namespace HappyCoding.BlazorWith3D.BabylonJS
 {
-    public partial class CanvasBabylonJS
+    public partial class CanvasBabylonJS : IAsyncDisposable
     {
         public Guid CanvasGuid { get; } = Guid.NewGuid();
+
+        public string BabylonJSVersion { get; set; } = string.Empty;
 
         [Inject]
         public BabylonJSInterop BabylonJSInterop { get; set; }
@@ -20,9 +22,21 @@ namespace HappyCoding.BlazorWith3D.BabylonJS
             if (firstRender)
             {
                 await this.BabylonJSInterop.InitCanvasAsync(this.CanvasGuid.ToString());
+
+                this.BabylonJSVersion = await this.BabylonJSInterop.GetVersionAsync();
             }
 
             await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                this.StateHasChanged();
+            }
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return this.BabylonJSInterop.UnloadCanvasAsync();
         }
     }
 }

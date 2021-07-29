@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace HappyCoding.BlazorWith3D.ThreeJS
 {
-    public partial class CanvasThreeJS
+    public partial class CanvasThreeJS : IAsyncDisposable
     {
         public Guid CanvasGuid { get; } = Guid.NewGuid();
 
@@ -32,6 +32,11 @@ namespace HappyCoding.BlazorWith3D.ThreeJS
                 // Trigger rendering again because after initialization we know more about Three.js (like the version)
                 this.StateHasChanged();
             }
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return this.ThreeJSInterop.UnloadCanvasAsync();
         }
     }
 }

@@ -8,6 +8,8 @@ class ThreeJSInterop {
     constructor() {
         this.scene = null;
         this.camera = null;
+        this.geometry = null;
+        this.material = null;
         this.mesh = null;
         this.renderer = null;
     }
@@ -31,10 +33,10 @@ class ThreeJSInterop {
 
         this.scene = new THREE.Scene();
 
-        const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-        const material = new THREE.MeshNormalMaterial();
+        this.geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+        this.material = new THREE.MeshNormalMaterial();
 
-        this.mesh = new THREE.Mesh(geometry, material);
+        this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.scene.add(this.mesh);
 
         this.renderer = new THREE.WebGLRenderer({
@@ -54,6 +56,17 @@ class ThreeJSInterop {
         this.mesh.rotation.y = time / 1000;
 
         this.renderer.render(this.scene, this.camera);
+    }
+
+    /**
+     * Disposes all resources allocated by three.js
+     */
+    unloadCanvas() {
+        // Trigger dispose on all allocated objects when we've lost the canvas
+        // see https://threejs.org/docs/#manual/en/introduction/How-to-dispose-of-objects
+        this.geometry.dispose();
+        this.material.dispose();
+        this.renderer.dispose();
     }
 }
 
