@@ -8,7 +8,7 @@ using Microsoft.JSInterop;
 
 namespace HappyCoding.BlazorWith3D.BabylonJS
 {
-    public partial class CanvasBabylon
+    public partial class CanvasBabylonJS
     {
         public Guid CanvasGuid { get; } = Guid.NewGuid();
 

@@ -1,6 +1,11 @@
 ﻿.my-component {
     border: 2px dashed red;
-    padding: 1em;
+    padding: 3em;
     margin: 1em 0;
     background-image: url('background.png');
+}
+
+.canvas-babylonjs {
+    width: 500px;
+    height: 500px;
 }

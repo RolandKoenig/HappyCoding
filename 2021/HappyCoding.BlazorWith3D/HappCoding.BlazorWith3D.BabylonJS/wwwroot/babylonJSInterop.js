@@ -1,13 +1,10 @@
 /**
  * Interop code for BabylonJSInterop.cs
+ * Based on sample code from https://darnton.co.nz/2020/07/23/3d-blazor-with-babylon/
  */
 
 class BabylonJSInterop {
 
-    constructor() {
-
-    }
-    
     /**
      * Initializes a 3d view for a canvas with the given id
      * @param {any} canvasId
@@ -20,10 +17,6 @@ class BabylonJSInterop {
         babylonEngine.runRenderLoop(function () {
             scene.render();
         });
- 
-        window.addEventListener("resize", function () {
-            babylonEngine.resize();
-        });
     }
 
     /**
@@ -33,7 +26,7 @@ class BabylonJSInterop {
      */
     createSceneWithSphere(engine, canvas) {
         const scene = new BABYLON.Scene(engine);
- 
+
         const camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0, 0, 5), scene);
         camera.attachControl(canvas, true);
  
