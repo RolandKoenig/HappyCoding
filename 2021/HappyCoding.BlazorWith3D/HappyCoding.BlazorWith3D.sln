@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "HappyCoding.BlazorWith3D\Server\Server.csproj", "{F91CE2CE-A298-435A-86B6-805394BCD80F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "HappyCoding.BlazorWith3D\Client\Client.csproj", "{21A14A82-23B8-403F-893F-E849D706C4F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "HappyCoding.BlazorWith3D\Shared\Shared.csproj", "{FC16597A-43DA-46FB-B64F-85BFAE673B96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HappyCoding.BlazorWith3D", "HappyCoding.BlazorWith3D", "{1B2D2583-9359-49FE-916A-91977E85CC94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.BlazorWith3D.BabylonJS", "HappCoding.BlazorWith3D.BabylonJS\HappyCoding.BlazorWith3D.BabylonJS.csproj", "{C8A8E2D7-DA29-4F9A-9A47-C59FB43DF231}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F91CE2CE-A298-435A-86B6-805394BCD80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91CE2CE-A298-435A-86B6-805394BCD80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91CE2CE-A298-435A-86B6-805394BCD80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91CE2CE-A298-435A-86B6-805394BCD80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21A14A82-23B8-403F-893F-E849D706C4F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A14A82-23B8-403F-893F-E849D706C4F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A14A82-23B8-403F-893F-E849D706C4F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A14A82-23B8-403F-893F-E849D706C4F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC16597A-43DA-46FB-B64F-85BFAE673B96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC16597A-43DA-46FB-B64F-85BFAE673B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC16597A-43DA-46FB-B64F-85BFAE673B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC16597A-43DA-46FB-B64F-85BFAE673B96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8A8E2D7-DA29-4F9A-9A47-C59FB43DF231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A8E2D7-DA29-4F9A-9A47-C59FB43DF231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A8E2D7-DA29-4F9A-9A47-C59FB43DF231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A8E2D7-DA29-4F9A-9A47-C59FB43DF231}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F91CE2CE-A298-435A-86B6-805394BCD80F} = {1B2D2583-9359-49FE-916A-91977E85CC94}
+		{21A14A82-23B8-403F-893F-E849D706C4F7} = {1B2D2583-9359-49FE-916A-91977E85CC94}
+		{FC16597A-43DA-46FB-B64F-85BFAE673B96} = {1B2D2583-9359-49FE-916A-91977E85CC94}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43B1D712-82AF-4DF2-A90F-E00057C9FB3C}
+	EndGlobalSection
+EndGlobal
