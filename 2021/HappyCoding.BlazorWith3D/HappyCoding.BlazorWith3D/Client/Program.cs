@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using HappyCoding.BlazorWith3D.BabylonJS;
 
 namespace HappyCoding.BlazorWith3D.Client
 {
@@ -18,6 +19,9 @@ namespace HappyCoding.BlazorWith3D.Client
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            // Services for connection with 3D engines
+            builder.Services.AddBabylonJSServices();
 
             await builder.Build().RunAsync();
         }
