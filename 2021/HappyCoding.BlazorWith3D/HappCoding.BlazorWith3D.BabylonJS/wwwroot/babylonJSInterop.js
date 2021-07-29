@@ -13,7 +13,7 @@ class BabylonJSInterop {
         const babylonCanvas = document.getElementById(canvasId);
         const babylonEngine = new BABYLON.Engine(babylonCanvas, true);
         const scene = this.createSceneWithSphere(babylonEngine, babylonCanvas);
- 
+
         babylonEngine.runRenderLoop(function () {
             scene.render();
         });

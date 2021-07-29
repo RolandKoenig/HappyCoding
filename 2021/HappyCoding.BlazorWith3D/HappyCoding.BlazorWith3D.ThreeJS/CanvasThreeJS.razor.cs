@@ -11,6 +11,8 @@ namespace HappyCoding.BlazorWith3D.ThreeJS
     {
         public Guid CanvasGuid { get; } = Guid.NewGuid();
 
+        public string ThreeJSVersion { get; set; } = string.Empty;
+
         [Inject]
         public ThreeJSInterop ThreeJSInterop { get; set; }
 
@@ -19,9 +21,17 @@ namespace HappyCoding.BlazorWith3D.ThreeJS
             if (firstRender)
             {
                 await this.ThreeJSInterop.InitCanvasAsync(this.CanvasGuid.ToString());
+
+                this.ThreeJSVersion = await this.ThreeJSInterop.GetVersionAsync();
             }
 
             await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                // Trigger rendering again because after initialization we know more about Three.js (like the version)
+                this.StateHasChanged();
+            }
         }
     }
 }

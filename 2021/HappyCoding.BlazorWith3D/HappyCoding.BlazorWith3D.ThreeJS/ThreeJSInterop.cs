@@ -6,28 +6,41 @@ namespace HappyCoding.BlazorWith3D.ThreeJS
 {
     public class ThreeJSInterop : IAsyncDisposable
     {
-        private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+        private readonly IJSRuntime _jsRuntime;
+        private readonly ValueTask _loadBabylonTask;
+        private readonly Lazy<ValueTask<IJSObjectReference>> _moduleTask;
 
         public ThreeJSInterop(IJSRuntime jsRuntime)
         {
-            moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-               "import", "./_content/HappyCoding.BlazorWith3D.ThreeJS/exampleJsInterop.js").AsTask());
+            _jsRuntime = jsRuntime;
+            _loadBabylonTask = jsRuntime.InvokeVoidAsync(
+                "import", "./_content/HappyCoding.BlazorWith3D.ThreeJS/three.min.js");
+
+            _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/HappyCoding.BlazorWith3D.ThreeJS/threeJSInterop.js"));
         }
 
-        public ValueTask InitCanvasAsync(string canvasID)
+        public async ValueTask InitCanvasAsync(string canvasID)
         {
-            return ValueTask.CompletedTask;
-            //await _loadBabylonTask;
-            //var module = await _moduleTask.Value;
+            await _loadBabylonTask;
+            var module = await _moduleTask.Value;
 
-            //await module.InvokeVoidAsync("babylonJSInterop.initCanvas", canvasID);
+            await module.InvokeVoidAsync("threeJSInterop.initCanvas", canvasID);
+        }
+
+        public async Task<string> GetVersionAsync()
+        {
+            await _loadBabylonTask;
+            var module = await _moduleTask.Value;
+
+            return await module.InvokeAsync<string>("threeJSInterop.getVersion");
         }
 
         public async ValueTask DisposeAsync()
         {
-            if (moduleTask.IsValueCreated)
+            if (_moduleTask.IsValueCreated)
             {
-                var module = await moduleTask.Value;
+                var module = await _moduleTask.Value;
                 await module.DisposeAsync();
             }
         }

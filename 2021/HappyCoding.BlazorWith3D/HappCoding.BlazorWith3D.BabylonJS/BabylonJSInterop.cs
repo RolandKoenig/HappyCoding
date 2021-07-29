@@ -19,7 +19,8 @@ namespace HappyCoding.BlazorWith3D.BabylonJS
         public BabylonJSInterop(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
-            _loadBabylonTask = jsRuntime.InvokeVoidAsync("import", "https://cdn.babylonjs.com/babylon.js");
+            _loadBabylonTask = jsRuntime.InvokeVoidAsync(
+                "import", "./_content/HappyCoding.BlazorWith3D.BabylonJS/babylon.js");
 
             _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                "import", "./_content/HappyCoding.BlazorWith3D.BabylonJS/babylonJSInterop.js"));
