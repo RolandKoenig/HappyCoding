@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\HappCoding.BlazorWith3D.BabylonJS\HappyCoding.BlazorWith3D.BabylonJS.csproj" />
     <ProjectReference Include="..\..\HappyCoding.BlazorWith3D.ThreeJS\HappyCoding.BlazorWith3D.ThreeJS.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
