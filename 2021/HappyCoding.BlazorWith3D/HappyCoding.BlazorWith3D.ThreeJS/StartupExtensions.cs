@@ -11,7 +11,7 @@ namespace HappyCoding.BlazorWith3D.ThreeJS
     {
         public static void AddThreeJSServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ThreeJSInterop>();
+            serviceCollection.AddScoped<ThreeJSInterop>();
         }
     }
 }

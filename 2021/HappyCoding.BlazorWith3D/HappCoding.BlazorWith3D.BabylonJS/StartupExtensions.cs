@@ -11,7 +11,7 @@ namespace HappyCoding.BlazorWith3D.BabylonJS
     {
         public static void AddBabylonJSServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<BabylonJSInterop>();
+            serviceCollection.AddScoped<BabylonJSInterop>();
         }
     }
 }
