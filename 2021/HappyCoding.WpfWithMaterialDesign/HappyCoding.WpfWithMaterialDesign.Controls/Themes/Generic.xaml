@@ -4,7 +4,8 @@
     xmlns:local="clr-namespace:HappyCoding.WpfWithMaterialDesign.Controls">
 
     <Style x:Key="TitleBarButtonStyle" TargetType="Button">
-        <Setter Property="Foreground" Value="LightGray" />
+        <Setter Property="Foreground" 
+                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=TitleBarButtonForeground}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="IsTabStop" Value="False" />
@@ -26,10 +27,14 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="#0975C6" />
+                            <Setter TargetName="border" 
+                                    Property="Background" 
+                                    Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=TitleBarButtonBackgroundHover}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="#00CCFF" />
+                            <Setter TargetName="border" 
+                                    Property="Background" 
+                                    Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=TitleBarButtonBackgroundHit}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -40,9 +45,12 @@
     <Style TargetType="{x:Type local:CustomWindowBase}" 
            BasedOn="{StaticResource {x:Type Window}}">
         <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="TitleBarButtonForeground" Value="LightGray" />
+        <Setter Property="TitleBarButtonBackgroundHover" Value="#0975C6" />
+        <Setter Property="TitleBarButtonBackgroundHit" Value="#00CCFF" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=CustomTitleBarHeight}"
+                <WindowChrome CaptionHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=TitleBarHeight}"
                               ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
             </Setter.Value>
         </Setter>
@@ -62,7 +70,7 @@
     </Style>
 
     <Style TargetType="{x:Type local:CustomWindowTitleBar}">
-        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=CustomTitleBarHeight}" />
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=TitleBarHeight}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CustomWindowTitleBar}">

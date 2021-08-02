@@ -5,12 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace HappyCoding.WpfWithMaterialDesign.Controls
 {
     public partial class CustomWindowBase : Window
     {
-        public static readonly DependencyProperty CustomTitleBarHeightProperty;
+        public static readonly DependencyProperty TitleBarHeightProperty;
+        public static readonly DependencyProperty TitleBarButtonForegroundProperty;
+        public static readonly DependencyProperty TitleBarButtonBackgroundHoverProperty;
+        public static readonly DependencyProperty TitleBarButtonBackgroundHitProperty;
 
         public ICommand Command_Minimize { get; }
 
@@ -20,17 +24,40 @@ namespace HappyCoding.WpfWithMaterialDesign.Controls
 
         public ICommand Command_Close { get; }
 
-        public double CustomTitleBarHeight
+        public double TitleBarHeight
         {
-            get { return (double) GetValue(CustomTitleBarHeightProperty); }
-            set { SetValue(CustomTitleBarHeightProperty, value); }
+            get { return (double) GetValue(TitleBarHeightProperty); }
+            set { SetValue(TitleBarHeightProperty, value); }
+        }
+
+        public Brush TitleBarButtonForeground
+        {
+            get { return (Brush) GetValue(TitleBarButtonForegroundProperty); }
+            set { SetValue(TitleBarButtonForegroundProperty, value); }
+        }
+
+        public Brush TitleBarButtonBackgroundHit
+        {
+            get { return (Brush) GetValue(TitleBarButtonBackgroundHitProperty); }
+            set { SetValue(TitleBarButtonBackgroundHitProperty, value); }
+        }
+
+        public Brush TitleBarButtonBackgroundHover
+        {
+            get { return (Brush) GetValue(TitleBarButtonBackgroundHoverProperty); }
+            set { SetValue(TitleBarButtonBackgroundHoverProperty, value); }
         }
 
         static CustomWindowBase()
         {
-            CustomTitleBarHeightProperty = DependencyProperty.Register(
-                "CustomTitleBarHeight", typeof(double), typeof(CustomWindowBase), new PropertyMetadata(32.0));
-            ;
+            TitleBarHeightProperty = DependencyProperty.Register(
+                "TitleBarHeight", typeof(double), typeof(CustomWindowBase), new PropertyMetadata(32.0));
+            TitleBarButtonForegroundProperty = DependencyProperty.Register(
+                "TitleBarButtonForeground", typeof(Brush), typeof(CustomWindowBase), new PropertyMetadata(default(Brush)));
+            TitleBarButtonBackgroundHoverProperty = DependencyProperty.Register(
+                "TitleBarButtonBackgroundHover", typeof(Brush), typeof(CustomWindowBase), new PropertyMetadata(default(Brush)));
+            TitleBarButtonBackgroundHitProperty = DependencyProperty.Register(
+                "TitleBarButtonBackgroundHit", typeof(Brush), typeof(CustomWindowBase), new PropertyMetadata(default(Brush)));
 
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(CustomWindowBase), 
