@@ -37,24 +37,51 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:MainWindowTitleBar}">
-        <Setter Property="Height" Value="32" />
+    <Style TargetType="{x:Type local:CustomWindowBase}" 
+           BasedOn="{StaticResource {x:Type Window}}">
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CaptionHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=CustomTitleBarHeight}"
+                              ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:MainWindowTitleBar}">
+                <ControlTemplate TargetType="{x:Type local:CustomWindowBase}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <local:CustomWindowMainPanel>
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </local:CustomWindowMainPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:CustomWindowTitleBar}">
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=CustomTitleBarHeight}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CustomWindowTitleBar}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Title}" />
+                                <Image Source="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Icon}"
+                                       Margin="5" />
+                                <TextBlock VerticalAlignment="Center" 
+                                           Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Title}" />
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center"
                                         Orientation="Horizontal">
                                 <Button x:Name="CmdMinimize" 
                                         Style="{StaticResource TitleBarButtonStyle}"
-                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindowBase}}, Path=Command_Minimize}">
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=Command_Minimize}">
                                     <Path
                                         Width="46"
                                         Height="32"
@@ -65,7 +92,8 @@
                                 </Button>
                                 <Button x:Name="CmdMaximize" 
                                         Style="{StaticResource TitleBarButtonStyle}"
-                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindowBase}}, Path=Command_Maximize}">
+                                        Visibility="{TemplateBinding MaximizeButtonVisibility}"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=Command_Maximize}">
                                     <Path
                                         Width="46"
                                         Height="32"
@@ -76,7 +104,8 @@
                                 </Button>
                                 <Button x:Name="CmdRestore"
                                         Style="{StaticResource TitleBarButtonStyle}"
-                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindowBase}}, Path=Command_Restore}">
+                                        Visibility="{TemplateBinding RestoreButtonVisibility}"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=Command_Restore}">
                                     <Path
                                         Width="46"
                                         Height="32"
@@ -87,7 +116,7 @@
                                 </Button>
                                 <Button x:Name="CmdClose" 
                                         Style="{StaticResource TitleBarButtonStyle}"
-                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindowBase}}, Path=Command_Close}">
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CustomWindowBase}}, Path=Command_Close}">
                                     <Path
                                         Width="46"
                                         Height="32"
@@ -104,17 +133,18 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:MainWindowMainPanel}">
+    <Style TargetType="{x:Type local:CustomWindowMainPanel}">
         <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}" />
         <Setter Property="BorderThickness" Value="4" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:MainWindowMainPanel}">
+                <ControlTemplate TargetType="{x:Type local:CustomWindowMainPanel}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <DockPanel LastChildFill="True">
-                            <local:MainWindowTitleBar DockPanel.Dock="Top" />
+                            <local:CustomWindowTitleBar DockPanel.Dock="Top"
+                                                      IconSource="{TemplateBinding IconSource}"/>
                             <ContentPresenter Content="{TemplateBinding Content}" />
                         </DockPanel>
                     </Border>

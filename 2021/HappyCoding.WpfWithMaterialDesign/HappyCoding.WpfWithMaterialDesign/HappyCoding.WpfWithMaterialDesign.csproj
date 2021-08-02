@@ -7,12 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DummyIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
     <PackageReference Include="PropertyTools.Wpf" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HappyCoding.WpfWithMaterialDesign.Controls\HappyCoding.WpfWithMaterialDesign.Controls.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="DummyIcon.png" />
   </ItemGroup>
 
 </Project>

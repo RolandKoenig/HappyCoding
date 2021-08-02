@@ -16,9 +16,9 @@ using HappyCoding.WpfWithMaterialDesign.Controls;
 
 namespace HappyCoding.WpfWithMaterialDesign
 {
-    public partial class MainWindow : MainWindowBase
+    public partial class CustomWindow : CustomWindowBase
     {
-        public MainWindow()
+        public CustomWindow()
         {
             InitializeComponent();
         }

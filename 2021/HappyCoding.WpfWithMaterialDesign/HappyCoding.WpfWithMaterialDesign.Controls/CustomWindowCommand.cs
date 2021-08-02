@@ -7,14 +7,14 @@ using System.Windows.Input;
 
 namespace HappyCoding.WpfWithMaterialDesign.Controls
 {
-    internal class MainWindowCommand : ICommand
+    internal class CustomWindowCommand : ICommand
     {
         private readonly Action _execute;
         private readonly Func<bool>? _canExecute;
 
         public event EventHandler? CanExecuteChanged;
 
-        public MainWindowCommand(Action execute, Func<bool>? canExecute = null)
+        public CustomWindowCommand(Action execute, Func<bool>? canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -28,6 +28,11 @@ namespace HappyCoding.WpfWithMaterialDesign.Controls
         public void Execute(object? parameter)
         {
             _execute();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

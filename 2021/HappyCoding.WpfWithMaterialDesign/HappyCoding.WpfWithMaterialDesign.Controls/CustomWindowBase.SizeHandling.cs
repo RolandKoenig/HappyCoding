@@ -9,7 +9,7 @@ using System.Windows.Interop;
 
 namespace HappyCoding.WpfWithMaterialDesign.Controls
 {
-    public partial class MainWindowBase : Window
+    public partial class CustomWindowBase
     {
         protected override void OnSourceInitialized(EventArgs e)
         {
