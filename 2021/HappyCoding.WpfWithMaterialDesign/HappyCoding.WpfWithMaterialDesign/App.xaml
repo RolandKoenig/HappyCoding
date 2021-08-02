@@ -5,20 +5,29 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary x:Name="DictMainResources">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <Color x:Key="ColorPrimary">#0975C6</Color>
                     <Color x:Key="ColorSecondary">#00CCFF</Color>
                     <SolidColorBrush x:Key="BrushPrimary" Color="{StaticResource ColorPrimary}" />
                     <SolidColorBrush x:Key="BrushSecondary" Color="{StaticResource ColorSecondary}" />
+
+                    <ResourceDictionary x:Key="ResThemeDefault" 
+                                        Source="Assets/ThemeDefault.xaml" />
+                    <ResourceDictionary x:Key="ResThemeMaterialDark" 
+                                        Source="Assets/ThemeMaterialDark.xaml" />
+                    <ResourceDictionary x:Key="ResThemeMaterialLight" 
+                                        Source="Assets/ThemeMaterialLight.xaml" />
                 </ResourceDictionary>
 
-                <materialDesign:CustomColorTheme BaseTheme="Dark" 
-                                                 PrimaryColor="{StaticResource ColorPrimary}" 
-                                                 SecondaryColor="{StaticResource ColorSecondary}" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" /> 
+                <!-- Placeholder for theme -->
+                <ResourceDictionary />
 
+                <!-- Common styles -->
+                <ResourceDictionary>
+
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

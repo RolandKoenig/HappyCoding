@@ -16,11 +16,26 @@ using HappyCoding.WpfWithMaterialDesign.Controls;
 
 namespace HappyCoding.WpfWithMaterialDesign
 {
-    public partial class CustomWindow : CustomWindowBase
+    public partial class MainWindow : CustomWindowBase
     {
-        public CustomWindow()
+        public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OnMenuThemeDefault_Click(object sender, RoutedEventArgs e)
+        {
+            ((App) Application.Current).SwitchThemeTo(AppTheme.Default);
+        }
+
+        private void OnMenuThemeDark_Click(object sender, RoutedEventArgs e)
+        {
+            ((App) Application.Current).SwitchThemeTo(AppTheme.MaterialDark);
+        }
+
+        private void OnMenuThemeLight_Click(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).SwitchThemeTo(AppTheme.MaterialLight);
         }
     }
 }

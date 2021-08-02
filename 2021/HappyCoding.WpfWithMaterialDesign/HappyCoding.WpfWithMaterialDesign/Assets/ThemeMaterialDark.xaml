@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:controls="clr-namespace:HappyCoding.WpfWithMaterialDesign.Controls;assembly=HappyCoding.WpfWithMaterialDesign.Controls"
+                    xmlns:local="clr-namespace:HappyCoding.WpfWithMaterialDesign">
+    <ResourceDictionary.MergedDictionaries>
+        <materialDesign:CustomColorTheme BaseTheme="Dark" 
+                                         PrimaryColor="{StaticResource ColorPrimary}" 
+                                         SecondaryColor="{StaticResource ColorSecondary}" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+        <ResourceDictionary>
+            <Style TargetType="{x:Type local:MainWindow}">
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}" />
+            </Style>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
