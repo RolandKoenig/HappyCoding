@@ -14,7 +14,8 @@
     </controls:CustomWindowBase.DataContext>
 
     <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top"
+              Style="{DynamicResource MainMenuStyle}">
             <MenuItem Header="File">
                 <MenuItem Header="Exit" />
             </MenuItem>
@@ -37,6 +38,7 @@
             </Grid.ColumnDefinitions>
 
             <DataGrid Grid.Column="0" 
+
                       ItemsSource="{Binding Path=TestData}"
                       SelectedItem="{Binding Path=SelectedTestDataRow, Mode=TwoWay}"
                       AutoGenerateColumns="False">

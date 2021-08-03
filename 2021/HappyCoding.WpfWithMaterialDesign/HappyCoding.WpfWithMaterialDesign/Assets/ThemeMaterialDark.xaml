@@ -5,14 +5,18 @@
                     xmlns:local="clr-namespace:HappyCoding.WpfWithMaterialDesign">
     <ResourceDictionary.MergedDictionaries>
         <materialDesign:CustomColorTheme BaseTheme="Dark" 
-                                         PrimaryColor="{StaticResource ColorPrimary}" 
-                                         SecondaryColor="{StaticResource ColorSecondary}" />
+                                         PrimaryColor="#FF555555" 
+                                         SecondaryColor="LightBlue" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
         <ResourceDictionary>
             <Style TargetType="{x:Type local:MainWindow}">
                 <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
                 <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}" />
+            </Style>
+            <Style x:Key="MainMenuStyle" TargetType="{x:Type Menu}">
+                <Setter Property="Background" Value="{StaticResource BrushPrimary}" />
+                <Setter Property="Foreground" Value="White" />
             </Style>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
