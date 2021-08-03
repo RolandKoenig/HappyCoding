@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HappyCoding.WpfWithMaterialDesign.Controls
 {
@@ -29,20 +21,20 @@ namespace HappyCoding.WpfWithMaterialDesign.Controls
 
         public ImageSource IconSource
         {
-            get { return (ImageSource) GetValue(IconSourceProperty); }
-            set { SetValue(IconSourceProperty, value); }
+            get => (ImageSource) GetValue(IconSourceProperty);
+            set => SetValue(IconSourceProperty, value);
         }
 
         public Visibility MaximizeButtonVisibility
         {
-            get { return (Visibility) GetValue(MaximizeButtonVisibilityProperty); }
-            set { SetValue(MaximizeButtonVisibilityProperty, value); }
+            get => (Visibility) GetValue(MaximizeButtonVisibilityProperty);
+            set => SetValue(MaximizeButtonVisibilityProperty, value);
         }
 
         public Visibility RestoreButtonVisibility
         {
-            get { return (Visibility) GetValue(RestoreButtonVisibilityProperty); }
-            set { SetValue(RestoreButtonVisibilityProperty, value); }
+            get => (Visibility) GetValue(RestoreButtonVisibilityProperty);
+            set => SetValue(RestoreButtonVisibilityProperty, value);
         }
 
         static CustomWindowTitleBar()

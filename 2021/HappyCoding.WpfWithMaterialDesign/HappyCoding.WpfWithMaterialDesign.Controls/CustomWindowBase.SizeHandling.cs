@@ -11,6 +11,9 @@ namespace HappyCoding.WpfWithMaterialDesign.Controls
 {
     public partial class CustomWindowBase
     {
+        private const int WM_GETMINMAXINFO = 0x0024;
+        private const uint MONITOR_DEFAULTTONEAREST = 0x00000002;
+
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
@@ -46,10 +49,6 @@ namespace HappyCoding.WpfWithMaterialDesign.Controls
 
             return IntPtr.Zero;
         }
-
-        private const int WM_GETMINMAXINFO = 0x0024;
-
-        private const uint MONITOR_DEFAULTTONEAREST = 0x00000002;
 
         [DllImport("user32.dll")]
         private static extern IntPtr MonitorFromWindow(IntPtr handle, uint flags);

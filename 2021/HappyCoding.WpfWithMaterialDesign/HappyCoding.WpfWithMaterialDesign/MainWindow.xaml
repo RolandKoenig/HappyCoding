@@ -3,11 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prop="http://propertytools.org/wpf"
         xmlns:controls="clr-namespace:HappyCoding.WpfWithMaterialDesign.Controls;assembly=HappyCoding.WpfWithMaterialDesign.Controls"
         xmlns:local="clr-namespace:HappyCoding.WpfWithMaterialDesign"
         mc:Ignorable="d"
         Icon="/DummyIcon.png"
         Title="MainWindow" Height="450" Width="800">
+    <controls:CustomWindowBase.DataContext>
+        <local:MainWindowViewModel />
+    </controls:CustomWindowBase.DataContext>
+
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -25,10 +30,34 @@
         </Menu>
 
         <Grid>
-            <StackPanel Orientation="Vertical">
-                <Button>Test 1</Button>
-                <TextBox>Text 2</TextBox>
-            </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="0" 
+                      ItemsSource="{Binding Path=TestData}"
+                      SelectedItem="{Binding Path=SelectedTestDataRow, Mode=TwoWay}"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=ID}"
+                                        Header="ID" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Path=Name}"
+                                        Header="Name" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Path=Age}"
+                                        Header="Age" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GridSplitter Grid.Column="1"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <prop:PropertyGrid Grid.Column="2" Margin="3"
+                               TabVisibility="Collapsed"
+                               SelectedObject="{Binding Path=SelectedTestDataRow}">
+
+            </prop:PropertyGrid>
         </Grid>
     </DockPanel>
 </controls:CustomWindowBase>

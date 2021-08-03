@@ -5,14 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HappyCoding.WpfWithMaterialDesign.Controls
 {
@@ -20,19 +14,18 @@ namespace HappyCoding.WpfWithMaterialDesign.Controls
     public class CustomWindowMainPanel : Control
     {
         public static readonly DependencyProperty ContentProperty;
-
         public static readonly DependencyProperty IconSourceProperty;
 
         public object Content
         {
-            get { return (object) GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
+            get => GetValue(ContentProperty);
+            set => SetValue(ContentProperty, value);
         }
 
         public ImageSource IconSource
         {
-            get { return (ImageSource) GetValue(IconSourceProperty); }
-            set { SetValue(IconSourceProperty, value); }
+            get => (ImageSource) GetValue(IconSourceProperty);
+            set => SetValue(IconSourceProperty, value);
         }
 
         static CustomWindowMainPanel()
