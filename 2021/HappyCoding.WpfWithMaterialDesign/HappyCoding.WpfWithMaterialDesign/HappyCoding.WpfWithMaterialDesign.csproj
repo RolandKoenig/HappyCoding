@@ -5,10 +5,12 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>Assets\Icons\IconExperiment.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DummyIcon.png" />
+    <None Remove="Assets\IconExperiment.ico" />
+    <None Remove="Assets\IconExperiment.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DummyIcon.png" />
+    <Resource Include="Assets\Icons\IconExperiment.ico" />
   </ItemGroup>
 
 </Project>

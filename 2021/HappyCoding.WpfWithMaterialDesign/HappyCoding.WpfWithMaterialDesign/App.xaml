@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:HappyCoding.WpfWithMaterialDesign"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:HappyCoding.WpfWithMaterialDesign.Controls;assembly=HappyCoding.WpfWithMaterialDesign.Controls"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary x:Name="DictMainResources">
@@ -14,11 +15,11 @@
                     <SolidColorBrush x:Key="BrushSecondary" Color="{StaticResource ColorSecondary}" />
 
                     <ResourceDictionary x:Key="ResThemeDefault" 
-                                        Source="Assets/ThemeDefault.xaml" />
+                                        Source="Assets/Theme/ThemeDefault.xaml" />
                     <ResourceDictionary x:Key="ResThemeMaterialDark" 
-                                        Source="Assets/ThemeMaterialDark.xaml" />
+                                        Source="Assets/Theme/ThemeMaterialDark.xaml" />
                     <ResourceDictionary x:Key="ResThemeMaterialLight" 
-                                        Source="Assets/ThemeMaterialLight.xaml" />
+                                        Source="Assets/Theme/ThemeMaterialLight.xaml" />
                 </ResourceDictionary>
 
                 <!-- Placeholder for theme -->

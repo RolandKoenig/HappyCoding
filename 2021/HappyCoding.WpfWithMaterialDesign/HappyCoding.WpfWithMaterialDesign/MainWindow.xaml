@@ -7,17 +7,15 @@
         xmlns:controls="clr-namespace:HappyCoding.WpfWithMaterialDesign.Controls;assembly=HappyCoding.WpfWithMaterialDesign.Controls"
         xmlns:local="clr-namespace:HappyCoding.WpfWithMaterialDesign"
         mc:Ignorable="d"
-        Icon="/DummyIcon.png"
-        Title="MainWindow" Height="450" Width="800">
-    <controls:CustomWindowBase.DataContext>
-        <local:MainWindowViewModel />
-    </controls:CustomWindowBase.DataContext>
-
+        Icon="Assets/Icons/IconExperiment.ico"
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{x:Static local:DesignData.MainWindowVM}">
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top"
               Style="{DynamicResource MainMenuStyle}">
             <MenuItem Header="File">
-                <MenuItem Header="Exit" />
+                <MenuItem Header="Exit"
+                          Click="OnMenuExit_Click"/>
             </MenuItem>
             <MenuItem Header="Themes">
                 <MenuItem Header="Default"
@@ -38,10 +36,10 @@
             </Grid.ColumnDefinitions>
 
             <DataGrid Grid.Column="0" 
-
                       ItemsSource="{Binding Path=TestData}"
                       SelectedItem="{Binding Path=SelectedTestDataRow, Mode=TwoWay}"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False" CanUserSortColumns="False"
+                      ScrollViewer.CanContentScroll="True" EnableRowVirtualization="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=ID}"
                                         Header="ID" IsReadOnly="True"/>
@@ -55,11 +53,23 @@
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
-            <prop:PropertyGrid Grid.Column="2" Margin="3"
-                               TabVisibility="Collapsed"
-                               SelectedObject="{Binding Path=SelectedTestDataRow}">
+            <ScrollViewer Grid.Column="2"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical"
+                            Width="600" HorizontalAlignment="Left">
+                    <prop:PropertyGrid Margin="3"
+                                       TabVisibility="Collapsed"
+                                       SelectedObject="{Binding Path=SelectedTestDataRow}">
 
-            </prop:PropertyGrid>
+                    </prop:PropertyGrid>
+
+                    <Button HorizontalAlignment="Right"
+                            Content="Export"
+                            Width="150"/>
+                </StackPanel>
+
+            </ScrollViewer>
         </Grid>
     </DockPanel>
 </controls:CustomWindowBase>

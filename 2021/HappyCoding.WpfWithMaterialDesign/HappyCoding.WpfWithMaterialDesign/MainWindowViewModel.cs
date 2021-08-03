@@ -28,10 +28,14 @@ namespace HappyCoding.WpfWithMaterialDesign
             }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(int testDataRows)
         {
             this.TestData = new ObservableCollection<TestDataRow>(
-                TestDataRow.CreateTestData());
+                TestDataRow.CreateTestData(testDataRows));
+            if (this.TestData.Count > 0)
+            {
+                this.SelectedTestDataRow = this.TestData[0];
+            }
         }
     }
 }

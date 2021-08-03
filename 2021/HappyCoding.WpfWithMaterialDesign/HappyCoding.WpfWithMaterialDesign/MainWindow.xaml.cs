@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,15 @@ namespace HappyCoding.WpfWithMaterialDesign
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Loaded += this.OnMainWindow_Loaded;
+        }
+
+        private void OnMainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) { return; }
+
+            this.DataContext = new MainWindowViewModel(10000);
         }
 
         private void OnMenuThemeDefault_Click(object sender, RoutedEventArgs e)
@@ -36,6 +46,11 @@ namespace HappyCoding.WpfWithMaterialDesign
         private void OnMenuThemeLight_Click(object sender, RoutedEventArgs e)
         {
             ((App)Application.Current).SwitchThemeTo(AppTheme.MaterialLight);
+        }
+
+        private void OnMenuExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
