@@ -4,6 +4,13 @@
 This project shows how to integrate Three.js or Babylon.js inside ASP.Net Core Blazor. It is implemented for BlazorServer and BlazorClient model.
 
 ![ResourceImage](HappyCoding.BlazorWith3D/screenshot.png)
+
+## Wpf
+### [WpfWithMaterialDesign](HappyCoding.WpfWithMaterialDesign)
+This project shows how to use MaterialDesign in Wpf and implements theme switching during runtime.
+
+![ResourceImage](HappyCoding.WpfWithMaterialDesign/screenshot.png)
+
 ## Avalonia
 ### [AvaloniaMarkdownHelpBrowser](HappyCoding.AvaloniaMarkdownHelpBrowser)
 This project shows how to implement an integrated Help Browser based on Markdown documents for Avalonia. It offers features like displaying images or navigation by links.
