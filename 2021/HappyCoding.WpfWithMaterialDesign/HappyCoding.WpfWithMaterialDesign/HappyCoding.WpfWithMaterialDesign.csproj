@@ -27,4 +27,11 @@
     <Resource Include="Assets\Icons\IconExperiment.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Assets\EmptyResourceDictionary.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

@@ -1,34 +1,42 @@
 ﻿<Application x:Class="HappyCoding.WpfWithMaterialDesign.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:HappyCoding.WpfWithMaterialDesign"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:controls="clr-namespace:HappyCoding.WpfWithMaterialDesign.Controls;assembly=HappyCoding.WpfWithMaterialDesign.Controls"
+             xmlns:localUtil="clr-namespace:HappyCoding.WpfWithMaterialDesign.Util"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary x:Name="DictMainResources">
+
+        <!-- Resources are organized in a simple hierarchy with just one step down from App.xaml
+             See https://michaelscodingspot.com/wpf-complete-guide-themes-skins/ -->
+
+        <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+
+                <!-- Some global resources -->
                 <ResourceDictionary>
                     <Color x:Key="ColorPrimary">#0975C6</Color>
                     <Color x:Key="ColorSecondary">#00CCFF</Color>
                     <SolidColorBrush x:Key="BrushPrimary" Color="{StaticResource ColorPrimary}" />
                     <SolidColorBrush x:Key="BrushSecondary" Color="{StaticResource ColorSecondary}" />
-
-                    <ResourceDictionary x:Key="ResThemeDefault" 
-                                        Source="Assets/Theme/ThemeDefault.xaml" />
-                    <ResourceDictionary x:Key="ResThemeMaterialDark" 
-                                        Source="Assets/Theme/ThemeMaterialDark.xaml" />
-                    <ResourceDictionary x:Key="ResThemeMaterialLight" 
-                                        Source="Assets/Theme/ThemeMaterialLight.xaml" />
                 </ResourceDictionary>
 
-                <!-- Placeholder for theme -->
-                <ResourceDictionary />
+                <!-- Reference skins
+                     SkinResourceDictionary class allows to change skin at runtime -->
+                <localUtil:SkinResourceDictionary
+                    DefaultSource="Assets/EmptyResourceDictionary.xaml"
+                    DarkSource="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml"
+                    LightSource="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <localUtil:SkinResourceDictionary
+                    DefaultSource="Assets/EmptyResourceDictionary.xaml"
+                    DarkSource="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"
+                    LightSource="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <localUtil:SkinResourceDictionary
+                    DefaultSource="Assets/Skins/SkinDefault.xaml"
+                    DarkSource="Assets/Skins/SkinMaterialDark.xaml"
+                    LightSource="Assets/Skins/SkinMaterialLight.xaml" />
 
                 <!-- Common styles -->
-                <ResourceDictionary>
+                <ResourceDictionary Source="Assets/Skins/CommonStyles.xaml" />
 
-                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -33,19 +33,19 @@ namespace HappyCoding.WpfWithMaterialDesign
             this.DataContext = new MainWindowViewModel(10000);
         }
 
-        private void OnMenuThemeDefault_Click(object sender, RoutedEventArgs e)
+        private void OnMenuSkinsDefault_Click(object sender, RoutedEventArgs e)
         {
-            ((App) Application.Current).SwitchThemeTo(AppTheme.Default);
+            ((App) Application.Current).Skin = AppSkin.Default;
         }
 
-        private void OnMenuThemeDark_Click(object sender, RoutedEventArgs e)
+        private void OnMenuSkinsDark_Click(object sender, RoutedEventArgs e)
         {
-            ((App) Application.Current).SwitchThemeTo(AppTheme.MaterialDark);
+            ((App) Application.Current).Skin = AppSkin.MaterialDark;
         }
 
-        private void OnMenuThemeLight_Click(object sender, RoutedEventArgs e)
+        private void OnMenuSkinsLight_Click(object sender, RoutedEventArgs e)
         {
-            ((App)Application.Current).SwitchThemeTo(AppTheme.MaterialLight);
+            ((App)Application.Current).Skin = AppSkin.MaterialLight;
         }
 
         private void OnMenuExit_Click(object sender, RoutedEventArgs e)

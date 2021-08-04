@@ -17,14 +17,14 @@
                 <MenuItem Header="Exit"
                           Click="OnMenuExit_Click"/>
             </MenuItem>
-            <MenuItem Header="Themes">
+            <MenuItem Header="Skins">
                 <MenuItem Header="Default"
-                          Click="OnMenuThemeDefault_Click"/>
+                          Click="OnMenuSkinsDefault_Click"/>
                 <Separator />
                 <MenuItem Header="MaterialDark"
-                          Click="OnMenuThemeDark_Click"/>
+                          Click="OnMenuSkinsDark_Click"/>
                 <MenuItem Header="MaterialLight"
-                          Click="OnMenuThemeLight_Click"/>
+                          Click="OnMenuSkinsLight_Click"/>
             </MenuItem>
         </Menu>
 

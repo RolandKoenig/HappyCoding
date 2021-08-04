@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HappyCoding.WpfWithMaterialDesign
 {
-    public enum AppTheme
-    {
+    public enum AppSkin
+    {        
         Default,
 
         MaterialLight,
