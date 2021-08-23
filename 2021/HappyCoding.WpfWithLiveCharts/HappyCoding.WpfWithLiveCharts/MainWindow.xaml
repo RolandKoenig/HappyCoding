@@ -1,0 +1,26 @@
+﻿<Window x:Class="HappyCoding.WpfWithLiveCharts.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:HappyCoding.WpfWithLiveCharts"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <lvc:CartesianChart Series="{Binding SeriesCollection}">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Distance (km)"
+                          LabelFormatter="{Binding Path=LabelKmFormatter}"/>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Elevation (m)"
+                          LabelFormatter="{Binding Path=LabelMFormatter}"/>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+    </Grid>
+</Window>
