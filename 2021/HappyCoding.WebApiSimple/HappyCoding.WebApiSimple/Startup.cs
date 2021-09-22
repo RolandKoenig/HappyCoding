@@ -52,9 +52,7 @@ namespace HappyCoding.WebApiSimple
             }
             else
             {
-                // In production we are behind an apache host in the path /webapisimple
-                app.UsePathBase("/webapisimple");
-
+                // In production we are behind an apache host below the path /webapisimple
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/webapisimple/swagger/v1/swagger.json", "HappyCoding.WebApiSimple v1"));
             }
