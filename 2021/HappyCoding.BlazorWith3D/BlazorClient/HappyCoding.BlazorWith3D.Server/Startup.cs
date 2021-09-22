@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using HappyCoding.BlazorWith3D.Server.Util;
 
 namespace HappyCoding.BlazorWith3D.Server
 {
@@ -21,7 +22,6 @@ namespace HappyCoding.BlazorWith3D.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -29,6 +29,9 @@ namespace HappyCoding.BlazorWith3D.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<RequestLoggingMiddleware>();
+            app.UsePathBase("/blazorwith3d/");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
