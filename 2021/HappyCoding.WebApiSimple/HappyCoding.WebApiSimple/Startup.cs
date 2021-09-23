@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HappyCoding.WebApiSimple.Util;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace HappyCoding.WebApiSimple
 {
@@ -40,23 +41,31 @@ namespace HappyCoding.WebApiSimple
         /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // According to https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache?view=aspnetcore-5.0
+            // Se are located behind an apache in production
+            if (!env.IsDevelopment())
+            {
+                app.UseForwardedHeaders(new ForwardedHeadersOptions
+                {
+                    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                });
+            }
+
             // Log every incoming request
             app.UseMiddleware<RequestLoggingMiddleware>();
-            
+
+            // This application is below the path /webapisimple
+            app.UsePathBase("/webapisimple");
+
+            // Allways enable swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/webapisimple/swagger/v1/swagger.json", "HappyCoding.WebApiSimple v1"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
 
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HappyCoding.WebApiSimple v1"));
-            }
-            else
-            {
-                // In production we are behind an apache host below the path /webapisimple
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/webapisimple/swagger/v1/swagger.json", "HappyCoding.WebApiSimple v1"));
-            }
-            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
