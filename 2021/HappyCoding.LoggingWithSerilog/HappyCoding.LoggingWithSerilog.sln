@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.LoggingWithSerilog.Console", "HappyCoding.LoggingWithSerilog.Console\HappyCoding.LoggingWithSerilog.Console.csproj", "{10C013D0-C2A4-4C4F-B7FA-8531CBA82CDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.LoggingWithSerilog.AspNetCore", "HappyCoding.LoggingWithSerilog.AspNetCore\HappyCoding.LoggingWithSerilog.AspNetCore.csproj", "{4FB9B094-BA1C-433E-B0EB-E17BC9C24D39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10C013D0-C2A4-4C4F-B7FA-8531CBA82CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C013D0-C2A4-4C4F-B7FA-8531CBA82CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C013D0-C2A4-4C4F-B7FA-8531CBA82CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C013D0-C2A4-4C4F-B7FA-8531CBA82CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB9B094-BA1C-433E-B0EB-E17BC9C24D39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB9B094-BA1C-433E-B0EB-E17BC9C24D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB9B094-BA1C-433E-B0EB-E17BC9C24D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB9B094-BA1C-433E-B0EB-E17BC9C24D39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFC98ECD-8255-40C4-A0A3-EF9A45464BD6}
+	EndGlobalSection
+EndGlobal
