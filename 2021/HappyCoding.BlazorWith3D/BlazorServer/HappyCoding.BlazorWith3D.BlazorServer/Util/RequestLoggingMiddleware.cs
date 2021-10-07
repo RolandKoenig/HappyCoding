@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
-namespace HappyCoding.BlazorWith3D.Server.Util
+namespace HappyCoding.BlazorWith3D.BlazorServer.Util
 {
     public class RequestLoggingMiddleware
     {

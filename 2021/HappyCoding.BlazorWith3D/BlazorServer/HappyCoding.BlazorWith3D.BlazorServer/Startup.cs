@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HappyCoding.BlazorWith3D.BabylonJS;
+using HappyCoding.BlazorWith3D.BlazorServer.Util;
 using HappyCoding.BlazorWith3D.ThreeJS;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace HappyCoding.BlazorWith3D.BlazorServer
 {
@@ -37,6 +39,22 @@ namespace HappyCoding.BlazorWith3D.BlazorServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // According to https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache?view=aspnetcore-5.0
+            // Se are located behind an apache in production
+            if (!env.IsDevelopment())
+            {
+                app.UseForwardedHeaders(new ForwardedHeadersOptions
+                {
+                    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                });
+            }
+
+            // Log every incoming request
+            app.UseMiddleware<RequestLoggingMiddleware>();
+
+            // This application is below the path /blazorwith3d_serverside
+            app.UsePathBase("/blazorwith3d_serverside");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
