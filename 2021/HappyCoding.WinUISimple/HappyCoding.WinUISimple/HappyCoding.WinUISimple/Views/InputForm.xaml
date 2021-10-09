@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="HappyCoding.WinUISimple.Views.InputForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HappyCoding.WinUISimple.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="InputHeader">
+            <Setter Property="Width" Value="150" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="InputNormal">
+            <Setter Property="Width" Value="150" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="InputBig">
+            <Setter Property="Width" Value="250" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </Page.Resources>
+
+    <StackPanel Orientation="Vertical"
+                Margin="10">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="First Name:"
+                       Style="{StaticResource InputHeader}" />
+            <TextBox Text="{x:Bind ViewModel.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource InputNormal}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Last Name:"
+                       Style="{StaticResource InputHeader}" />
+            <TextBox Text="{x:Bind ViewModel.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource InputNormal}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Full Name:"
+                       Style="{StaticResource InputHeader}" />
+            <TextBox Text="{x:Bind ViewModel.FullName, Mode=OneWay}"
+                     Style="{StaticResource InputBig}"
+                     IsReadOnly="True" />
+        </StackPanel>
+    </StackPanel>
+</Page>

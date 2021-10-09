@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -24,9 +25,15 @@ namespace HappyCoding.WinUISimple
             this.InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void OnNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            myButton.Content = "Clicked";
+            if (args.InvokedItemContainer is not NavigationViewItem navItem) { return; }
+            if (navItem.Tag is not string navItemTag) { return; }
+
+            var targetType = Assembly.GetExecutingAssembly().GetType(navItemTag);
+            if (targetType == null) { return; }
+
+            this.CtrlContentFrame.Navigate(targetType);
         }
     }
 }

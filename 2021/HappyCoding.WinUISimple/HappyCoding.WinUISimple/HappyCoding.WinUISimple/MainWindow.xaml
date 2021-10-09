@@ -3,9 +3,25 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HappyCoding.WinUISimple"
+    xmlns:localViews="using:HappyCoding.WinUISimple.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="using:System"
     mc:Ignorable="d"
     Title="{x:Bind ViewModel.Title}">
+
+    <NavigationView IsBackButtonVisible="Collapsed"
+                    IsSettingsVisible="False"
+                    PaneDisplayMode="Top"
+                    ItemInvoked="OnNavigationView_ItemInvoked">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Home" Icon="Home" 
+                                Tag="HappyCoding.WinUISimple.Views.Home" />
+            <NavigationViewItem Content="InputForm" Icon="Edit" 
+                                Tag="HappyCoding.WinUISimple.Views.InputForm" />
+        </NavigationView.MenuItems>
+
+        <Frame x:Name="CtrlContentFrame" />
+    </NavigationView>
 
 </Window>
