@@ -5,9 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.7" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.7" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.7" />
+    <PackageReference Include="Avalonia" Version="0.10.8" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.8" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.8" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
    </ItemGroup>
 </Project>
