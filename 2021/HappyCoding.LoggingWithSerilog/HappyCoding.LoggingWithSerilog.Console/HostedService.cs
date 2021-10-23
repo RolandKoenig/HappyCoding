@@ -9,13 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace HappyCoding.LoggingWithSerilog.Console
 {
-    internal sealed class ConsoleHostedService : IHostedService
+    internal sealed class HostedService : IHostedService
     {
         private readonly ILogger _logger;
         private readonly IHostApplicationLifetime _appLifetime;
 
-        public ConsoleHostedService(
-            ILogger<ConsoleHostedService> logger,
+        public HostedService(
+            ILogger<HostedService> logger,
             IHostApplicationLifetime appLifetime)
         {
             _logger = logger;

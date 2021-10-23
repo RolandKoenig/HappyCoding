@@ -12,6 +12,9 @@ namespace HappyCoding.LoggingWithSerilog.Console
 {
     internal sealed class Program
     {
+        // Console app hosted using .Net Generic Host
+        // see https://dfederm.com/building-a-console-app-with-.net-generic-host/
+
         private static async Task Main(string[] args)
         {
             await Host.CreateDefaultBuilder(args)
@@ -22,7 +25,7 @@ namespace HappyCoding.LoggingWithSerilog.Console
                     .Enrich.FromLogContext())
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<ConsoleHostedService>();
+                    services.AddHostedService<HostedService>();
                 })
                 .RunConsoleAsync();
         }
