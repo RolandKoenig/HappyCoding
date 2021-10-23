@@ -21,7 +21,8 @@
                                 Tag="HappyCoding.WinUISimple.Views.InputForm" />
         </NavigationView.MenuItems>
 
-        <Frame x:Name="CtrlContentFrame" />
+        <Frame x:Name="CtrlContentFrame"
+               Margin="10"/>
     </NavigationView>
 
 </Window>

@@ -25,8 +25,7 @@
         </Style>
     </Page.Resources>
 
-    <StackPanel Orientation="Vertical"
-                Margin="10">
+    <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="First Name:"
                        Style="{StaticResource InputHeader}" />
