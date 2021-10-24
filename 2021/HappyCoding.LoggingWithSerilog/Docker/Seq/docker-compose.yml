@@ -1,0 +1,11 @@
+version: '3'
+services:
+  seq:
+    image: datalust/seq:2021.2
+    volumes:
+      - ./ignoreforgit/data:/data
+    ports:
+      - 5000:80
+      - 5341:5341
+    environment: 
+      ACCEPT_EULA: "Y"

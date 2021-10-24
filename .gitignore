@@ -204,3 +204,6 @@ BundleArtifacts/
 
 # Snaps
 *.snap
+
+# Custom rules
+ignoreforgit/
