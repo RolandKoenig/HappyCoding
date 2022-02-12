@@ -1,10 +1,11 @@
-﻿namespace HappyCoding.AspNetWithAurelia.Domain.Model
+﻿namespace HappyCoding.AspNetWithAurelia.Domain.Model;
+
+public class Book
 {
-    public class Book
+    private Book()
     {
-        private Book()
-        {
             
-        }
     }
+        
+    //public static Book CreateBook(string title, string author)
 }

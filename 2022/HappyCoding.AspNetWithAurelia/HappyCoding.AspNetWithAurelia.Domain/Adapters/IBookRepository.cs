@@ -1,7 +1,6 @@
-﻿namespace HappyCoding.AspNetWithAurelia.Domain.Adapters
+﻿namespace HappyCoding.AspNetWithAurelia.Domain.Adapters;
+
+public interface IBookRepository
 {
-    public interface IBookRepository
-    {
         
-    }
 }

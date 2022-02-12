@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetWithAurel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetWithAurelia.Application", "HappyCoding.AspNetWithAurelia.Application\HappyCoding.AspNetWithAurelia.Application.csproj", "{1A0C1F81-F7E8-429E-B0D7-BE374592C265}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetWithAurelia.Domain.Tests", "HappyCoding.AspNetWithAurelia.Domain.Tests\HappyCoding.AspNetWithAurelia.Domain.Tests.csproj", "{E7AB2944-EF92-4DEF-9E8B-39A8029684DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetWithAurelia.Application.Tests", "HappyCoding.AspNetWithAurelia.Application.Tests\HappyCoding.AspNetWithAurelia.Application.Tests.csproj", "{4A37D049-9B67-4BE8-AFE8-F89267EE93D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{1A0C1F81-F7E8-429E-B0D7-BE374592C265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A0C1F81-F7E8-429E-B0D7-BE374592C265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A0C1F81-F7E8-429E-B0D7-BE374592C265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7AB2944-EF92-4DEF-9E8B-39A8029684DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7AB2944-EF92-4DEF-9E8B-39A8029684DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7AB2944-EF92-4DEF-9E8B-39A8029684DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7AB2944-EF92-4DEF-9E8B-39A8029684DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A37D049-9B67-4BE8-AFE8-F89267EE93D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A37D049-9B67-4BE8-AFE8-F89267EE93D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A37D049-9B67-4BE8-AFE8-F89267EE93D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A37D049-9B67-4BE8-AFE8-F89267EE93D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
