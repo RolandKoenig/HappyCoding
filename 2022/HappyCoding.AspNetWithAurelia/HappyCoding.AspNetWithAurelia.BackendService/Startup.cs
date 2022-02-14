@@ -25,7 +25,11 @@ public class Startup
         services.AddControllers();
 
         services.AddMediatR(typeof(ApplicationAssemblyMarker));
-            
+        services.AddSpaStaticFiles(options =>
+        {
+            options.RootPath = "AureliaApp/dist";
+        });
+
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1",
@@ -48,6 +52,11 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseRouting();
+        
+        app.UseSpaStaticFiles();
+        app.UseSpa(_ => { });
+        
+        app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
