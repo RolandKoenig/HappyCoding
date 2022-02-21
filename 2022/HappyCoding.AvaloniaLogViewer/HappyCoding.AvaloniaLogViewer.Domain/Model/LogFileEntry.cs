@@ -9,4 +9,9 @@ public class LogFileEntry
     public string? Message { get; set; }
     
     public IDictionary<string, string>? MetaData { get; set; }
+
+    public LogFileEntry()
+    {
+        this.LogLevel = LogLevel.Information;
+    }
 }

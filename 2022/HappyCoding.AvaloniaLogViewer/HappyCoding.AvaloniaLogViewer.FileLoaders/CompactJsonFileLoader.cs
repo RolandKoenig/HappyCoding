@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using HappyCoding.AvaloniaLogViewer.Domain;
+using HappyCoding.AvaloniaLogViewer.Domain.Exceptions;
 using HappyCoding.AvaloniaLogViewer.Domain.Model;
 using Newtonsoft.Json;
 
@@ -47,11 +48,16 @@ public class CompactJsonFileLoader : ILogFileLoader
                     break;
                     
                 case JsonToken.String:
-                    break;
-                
                 case JsonToken.Boolean:
+                case JsonToken.Date:
+                case JsonToken.Float:
+                case JsonToken.Integer:
+                    if (currentProperty == null)
+                    {
+                        throw new LogFileParseException($"Unexpected json token {reader.TokenType} on position {reader.LinePosition} in compact json, line: {line}");
+                    }
+                    TrySetJsonValue(newLogEntry, currentProperty, reader.TokenType, reader.Value);
                     break;
-                    
             }
         }
 
@@ -76,18 +82,25 @@ public class CompactJsonFileLoader : ILogFileLoader
         switch (propertyName)
         {
             case "@t": // Timestamp
-                if (token != JsonToken.String)
+                switch (token)
                 {
-                    throw new FormatException($"Expected string value on token {propertyName}, got {token}");
+                    case JsonToken.Date:
+                        var valueDateTime = (DateTime)value;
+                        target.Timestamp = new DateTimeOffset(valueDateTime.ToUniversalTime(), TimeSpan.Zero);
+                        break;
+                    
+                    case JsonToken.String:
+                        var valueString = (string) value;
+                        if (!DateTimeOffset.TryParse(valueString, null, DateTimeStyles.RoundtripKind, out var parsedTimestamp))
+                        {
+                            throw new LogFileParseException($"Unable to parse timestamp from @t field, value={valueString}");
+                        }
+                        target.Timestamp = parsedTimestamp;
+                        break;
+                    
+                    default:
+                        throw new LogFileParseException($"Expected string value on token {propertyName}, got {token}, expected {JsonToken.Date} or {JsonToken.String}");
                 }
-                
-                var valueString = (string)value;
-                if (DateTimeOffset.TryParse(valueString, null, DateTimeStyles.RoundtripKind, out var parsedTimestamp))
-                {
-                    throw new FormatException("Unable to parse timestamp from @t field!");
-                }
-
-                target.Timestamp = parsedTimestamp;
                 break;
             
             case "@mt": // Message
