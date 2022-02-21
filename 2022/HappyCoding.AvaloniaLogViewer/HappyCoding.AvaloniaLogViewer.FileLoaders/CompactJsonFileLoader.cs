@@ -14,54 +14,71 @@ public class CompactJsonFileLoader : ILogFileLoader
 
     public IEnumerable<string> FileExtensions => FILE_EXTENSIONS;
     
-    public async Task<IAsyncEnumerable<LogFileEntry>> LoadFileAsync(string inputFile, CancellationToken cancellationToken)
+    public async IAsyncEnumerable<LogFileEntry> LoadFileAsync(string inputFile, CancellationToken cancellationToken)
     {
         await using var inStream = new FileStream(inputFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         using var inStreamReader = new StreamReader(inStream);
 
         var actLine = await inStreamReader.ReadLineAsync();
+        var lineNumber = 0;
         while ((actLine != null) &&
                (!cancellationToken.IsCancellationRequested))
         {
-            
+            lineNumber++;
 
+            var newLogFileEntry = TryParseLogFileEntryFromLine(actLine, lineNumber);
+            if (newLogFileEntry != null)
+            {
+                yield return newLogFileEntry;
+            }
+            
             actLine = await inStreamReader.ReadLineAsync();
         }
-        
-        throw new NotImplementedException();
     }
 
-    internal static LogFileEntry? TryParseLogFileEntryFromLine(string line)
+    internal static LogFileEntry? TryParseLogFileEntryFromLine(string line, int lineNumber)
     {
         if (string.IsNullOrEmpty(line)) { return null; }
-        
-        var newLogEntry = new LogFileEntry();
 
-        using var reader = new JsonTextReader(new StringReader(line));
-        var currentProperty = (string?)null;
-        while (reader.Read())
+        try
         {
-            switch (reader.TokenType)
-            {
-                case JsonToken.PropertyName:
-                    currentProperty = reader.Value as string;
-                    break;
-                    
-                case JsonToken.String:
-                case JsonToken.Boolean:
-                case JsonToken.Date:
-                case JsonToken.Float:
-                case JsonToken.Integer:
-                    if (currentProperty == null)
-                    {
-                        throw new LogFileParseException($"Unexpected json token {reader.TokenType} on position {reader.LinePosition} in compact json, line: {line}");
-                    }
-                    TrySetJsonValue(newLogEntry, currentProperty, reader.TokenType, reader.Value);
-                    break;
-            }
-        }
+            var newLogEntry = new LogFileEntry();
 
-        return newLogEntry;
+            using var reader = new JsonTextReader(new StringReader(line));
+            var currentProperty = (string?) null;
+            while (reader.Read())
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.PropertyName:
+                        currentProperty = reader.Value as string;
+                        break;
+
+                    case JsonToken.String:
+                    case JsonToken.Boolean:
+                    case JsonToken.Date:
+                    case JsonToken.Float:
+                    case JsonToken.Integer:
+                        if (currentProperty == null)
+                        {
+                            throw new LogFileParseException(
+                                $"Unexpected json token {reader.TokenType} on position {reader.LinePosition} in compact json, line: {line}");
+                        }
+                        TrySetJsonValue(newLogEntry, currentProperty, reader.TokenType, reader.Value, lineNumber);
+                        break;
+                }
+            }
+
+            return newLogEntry;
+        }
+        catch (LogFileParseException)
+        {
+            throw;
+        }
+        catch (Exception)
+        {
+            throw new LogFileParseException($"Unexpected error while parsing line number {lineNumber}. Line={line}");
+        }
     }
 
     /// <summary>
@@ -71,12 +88,13 @@ public class CompactJsonFileLoader : ILogFileLoader
     /// <param name="propertyName">The name of the property from compact json line.</param>
     /// <param name="token">The current <see cref="JsonToken"/></param>
     /// <param name="value">The current value.</param>
+    /// <param name="lineNumber">Current line number</param>
     /// <exception cref="FormatException"></exception>
-    internal static void TrySetJsonValue(LogFileEntry target, string propertyName, JsonToken token, object? value)
+    internal static void TrySetJsonValue(LogFileEntry target, string propertyName, JsonToken token, object? value, int lineNumber)
     {
         if (value == null)
         {
-            throw new FormatException($"Null value for property {propertyName}");
+            throw new FormatException($"Null value for property {propertyName}, line number={lineNumber}");
         }
         
         switch (propertyName)
@@ -93,20 +111,20 @@ public class CompactJsonFileLoader : ILogFileLoader
                         var valueString = (string) value;
                         if (!DateTimeOffset.TryParse(valueString, null, DateTimeStyles.RoundtripKind, out var parsedTimestamp))
                         {
-                            throw new LogFileParseException($"Unable to parse timestamp from @t field, value={valueString}");
+                            throw new LogFileParseException($"Unable to parse timestamp from @t field, line number={lineNumber}, value={valueString}");
                         }
                         target.Timestamp = parsedTimestamp;
                         break;
                     
                     default:
-                        throw new LogFileParseException($"Expected string value on token {propertyName}, got {token}, expected {JsonToken.Date} or {JsonToken.String}");
+                        throw new LogFileParseException($"Expected string value on token {propertyName}, got {token}, expected {JsonToken.Date} or {JsonToken.String}, line number={lineNumber}");
                 }
                 break;
             
             case "@mt": // Message
                 if (token != JsonToken.String)
                 {
-                    throw new FormatException($"Expected string value on token {propertyName}, got {token}");
+                    throw new FormatException($"Expected string value on token {propertyName}, got {token}, line number={lineNumber}");
                 }
                 break;
             

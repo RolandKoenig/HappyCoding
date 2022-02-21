@@ -20,5 +20,5 @@ public interface ILogFileLoader
     /// <param name="inputFile"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<IAsyncEnumerable<LogFileEntry>> LoadFileAsync(string inputFile, CancellationToken cancellationToken);
+    IAsyncEnumerable<LogFileEntry> LoadFileAsync(string inputFile, CancellationToken cancellationToken);
 }
