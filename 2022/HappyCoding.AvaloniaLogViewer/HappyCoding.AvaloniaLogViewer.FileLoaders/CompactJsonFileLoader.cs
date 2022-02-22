@@ -3,6 +3,7 @@ using HappyCoding.AvaloniaLogViewer.Domain;
 using HappyCoding.AvaloniaLogViewer.Domain.Exceptions;
 using HappyCoding.AvaloniaLogViewer.Domain.Model;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace HappyCoding.AvaloniaLogViewer.FileLoaders;
 
@@ -96,7 +97,7 @@ public class CompactJsonFileLoader : ILogFileLoader
         {
             throw new FormatException($"Null value for property {propertyName}, line number={lineNumber}");
         }
-        
+
         switch (propertyName)
         {
             case "@t": // Timestamp
@@ -121,16 +122,34 @@ public class CompactJsonFileLoader : ILogFileLoader
                 }
                 break;
             
-            case "@mt": // Message
+            case "@mt": // MessageTemplate
+            case "@m":  // Message
                 if (token != JsonToken.String)
                 {
                     throw new FormatException($"Expected string value on token {propertyName}, got {token}, line number={lineNumber}");
                 }
                 break;
             
+            case "@l": // LogLevel:
+                break;
+            
+            case "@x": // Exception:
+                break;
+            
+            case "@i": // EventID:
+                break;
+            
+            case "@r": // Renderings
+                break;
+            
             default:
+                var propertyKey = propertyName;
+                if (propertyName.StartsWith("@@"))
+                {
+                    propertyKey = propertyName.Substring(1);
+                }
                 target.MetaData ??= new Dictionary<string, string>(6);
-                target.MetaData[propertyName] = value.ToString() ?? string.Empty;
+                target.MetaData[propertyKey] = value.ToString() ?? string.Empty;
                 break;
         }
     }

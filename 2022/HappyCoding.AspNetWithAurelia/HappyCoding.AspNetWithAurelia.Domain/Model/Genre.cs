@@ -1,17 +1,17 @@
 ﻿namespace HappyCoding.AspNetWithAurelia.Domain.Model;
 
-public class Author
+public class Genre
 {
     public string Name { get; private set; } = string.Empty;
 
-    private Author()
+    private Genre()
     {
         
     }
 
-    public Author Create(string name)
+    public Genre Create(string name)
     {
-        var result = new Author();
+        var result = new Genre();
         result.Name = name;
         return result;
     }

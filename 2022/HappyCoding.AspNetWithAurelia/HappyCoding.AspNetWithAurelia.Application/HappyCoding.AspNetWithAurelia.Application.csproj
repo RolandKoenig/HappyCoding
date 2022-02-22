@@ -16,8 +16,6 @@
 
     <ItemGroup>
       <Folder Include="Books\Commands" />
-      <Folder Include="Books\Dtos" />
-      <Folder Include="Books\Queries" />
     </ItemGroup>
 
 </Project>
