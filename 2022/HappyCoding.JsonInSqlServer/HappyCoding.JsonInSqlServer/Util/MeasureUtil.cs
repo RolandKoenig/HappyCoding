@@ -24,6 +24,8 @@ namespace HappyCoding.JsonInSqlServer.Util
 
                 stopWatch.Stop();
                 durations.Add(stopWatch.Elapsed);
+
+                Console.WriteLine($" - cylce {loop + 1}: {stopWatch.ElapsedMilliseconds:F2} ms");
             }
 
             return TimeSpan.FromTicks(
