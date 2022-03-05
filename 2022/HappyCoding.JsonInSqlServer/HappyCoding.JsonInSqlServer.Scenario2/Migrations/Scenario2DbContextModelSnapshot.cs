@@ -19,7 +19,7 @@ namespace HappyCoding.JsonInSqlServer.Scenario2.Migrations
                 .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HappyCoding.JsonInSqlServer.Scenario2.ModelWithJsonData", b =>
+            modelBuilder.Entity("HappyCoding.JsonInSqlServer.Scenario2.ModelWithJsonData2", b =>
                 {
                     b.Property<string>("ID")
                         .HasMaxLength(30)
@@ -27,6 +27,9 @@ namespace HappyCoding.JsonInSqlServer.Scenario2.Migrations
 
                     b.Property<byte[]>("JsonData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("ReducedPropertySize")
+                        .HasColumnType("bit");
 
                     b.Property<DateTimeOffset>("Timestamp1")
                         .HasColumnType("datetimeoffset");

@@ -8,22 +8,31 @@ namespace HappyCoding.JsonInSqlServer.JsonModel
 {
     public class JsonChild
     {
+        [PropertyShortName("p1")]
         public string TestKey1 { get; set; }
 
-        public string TestKey2 { get; set; }
+        [PropertyShortName("p2")]
+        public string TestKeyWithLongerName2 { get; set; }
 
-        public string TestKey3 { get; set; }
+        [PropertyShortName("p3")]
+        public string TestKeyWithLongerName3 { get; set; }
 
+        [PropertyShortName("p4")]
         public string TestKey4 { get; set; }
 
+        [PropertyShortName("p5")]
         public string TestKey5 { get; set; }
 
+        [PropertyShortName("p6")]
         public string TestKey6 { get; set; }
 
-        public string TestKey7 { get; set; }
+        [PropertyShortName("p7")]
+        public string TestKeyWithLongerName7 { get; set; }
 
-        public string TestKey8 { get; set; }
+        [PropertyShortName("p8")]
+        public string TestKeyWithLongerName8 { get; set; }
 
-        public string TestKey9 { get; set; }
+        [PropertyShortName("p9")]
+        public string TestKeyWithLongerName9 { get; set; }
     }
 }

@@ -1,24 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HappyCoding.JsonInSqlServer.JsonModel;
+﻿using HappyCoding.JsonInSqlServer.JsonModel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace HappyCoding.JsonInSqlServer.Scenario1
 {
     public class JsonRootSerializer
     {
-        public static string SerializeToJson(JsonRoot rootObj)
+        private static IContractResolver s_contractResolver = new ReducePropertySizeContractResolver();
+        private static JsonSerializerSettings s_serializerSettings = new JsonSerializerSettings()
         {
-            return JsonConvert.SerializeObject(rootObj, Formatting.None);
+            ContractResolver = s_contractResolver
+        };
+
+        public static string SerializeToJson(JsonRoot rootObj, bool reducedPropertySize)
+        {
+            if (reducedPropertySize)
+            {
+                return JsonConvert.SerializeObject(rootObj, Formatting.None, s_serializerSettings);
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(rootObj, Formatting.None);
+            }
         }
 
-        public static JsonRoot DeserializeFromValue(string value)
+        public static JsonRoot DeserializeFromValue(string value, bool reducedPropertySize)
         {
-            return JsonConvert.DeserializeObject<JsonRoot>(value);
+            if (reducedPropertySize)
+            {
+                return JsonConvert.DeserializeObject<JsonRoot>(value, s_serializerSettings);
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<JsonRoot>(value);
+            }
         }
-
     }
 }

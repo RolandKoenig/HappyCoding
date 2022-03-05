@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HappyCoding.JsonInSqlServer.Scenario1.Migrations
+namespace HappyCoding.JsonInSqlServer.Scenario2.Migrations
 {
     public partial class initial : Migration
     {
@@ -11,10 +11,11 @@ namespace HappyCoding.JsonInSqlServer.Scenario1.Migrations
                 name: "TestingTable",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ID = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Timestamp1 = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Timestamp2 = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    JsonData = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ReducedPropertySize = table.Column<bool>(type: "bit", nullable: false),
+                    JsonData = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {

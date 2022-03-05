@@ -3,19 +3,40 @@ using System.IO.Compression;
 using System.Text;
 using HappyCoding.JsonInSqlServer.JsonModel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace HappyCoding.JsonInSqlServer.Scenario2
 {
     public class JsonRootSerializer
     {
-        public static byte[] SerializeToJson(JsonRoot rootObj)
+        private static IContractResolver s_contractResolver = new ReducePropertySizeContractResolver();
+        private static JsonSerializerSettings s_serializerSettings = new JsonSerializerSettings()
         {
-            return Zip(JsonConvert.SerializeObject(rootObj, Formatting.None));
+            ContractResolver = s_contractResolver
+        };
+
+        public static byte[] SerializeToJson(JsonRoot rootObj, bool reducedPropertySize)
+        {
+            if (reducedPropertySize)
+            {
+                return Zip(JsonConvert.SerializeObject(rootObj, Formatting.None, s_serializerSettings));
+            }
+            else
+            {
+                return Zip(JsonConvert.SerializeObject(rootObj, Formatting.None));
+            }
         }
 
-        public static JsonRoot DeserializeFromValue(byte[] value)
+        public static JsonRoot DeserializeFromValue(byte[] value, bool reducedPropertySize)
         {
-            return JsonConvert.DeserializeObject<JsonRoot>(UnZip(value));
+            if (reducedPropertySize)
+            {
+                return JsonConvert.DeserializeObject<JsonRoot>(UnZip(value), s_serializerSettings);
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<JsonRoot>(UnZip(value));
+            }
         }
 
         private static byte[] Zip(string value)

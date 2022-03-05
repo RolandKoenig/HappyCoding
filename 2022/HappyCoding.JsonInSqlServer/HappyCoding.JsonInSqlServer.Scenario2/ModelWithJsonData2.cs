@@ -13,6 +13,8 @@ namespace HappyCoding.JsonInSqlServer.Scenario2
 
         public DateTimeOffset Timestamp2 { get; private set; } = DateTimeOffset.Now;
 
+        public bool ReducedPropertySize { get; private set; }
+        
         public byte[] JsonData { get; private set; }
 
         private ModelWithJsonData2()
@@ -20,20 +22,22 @@ namespace HappyCoding.JsonInSqlServer.Scenario2
 
         }
 
-        public ModelWithJsonData2(string id, JsonRoot jsonRoot)
+        public ModelWithJsonData2(string id, JsonRoot jsonRoot, bool reducedPropertySize)
         {
             this.ID = id;
-            this.JsonData = JsonRootSerializer.SerializeToJson(jsonRoot);
+
+            this.ReducedPropertySize = reducedPropertySize;
+            this.JsonData = JsonRootSerializer.SerializeToJson(jsonRoot, this.ReducedPropertySize);
         }
 
         public JsonRoot GetJsonRoot()
         {
-            return JsonRootSerializer.DeserializeFromValue(this.JsonData);
+            return JsonRootSerializer.DeserializeFromValue(this.JsonData, this.ReducedPropertySize);
         }
 
         public void SetJsonRoot(JsonRoot jsonRoot)
         {
-            this.JsonData = JsonRootSerializer.SerializeToJson(jsonRoot);
+            this.JsonData = JsonRootSerializer.SerializeToJson(jsonRoot, this.ReducedPropertySize);
         }
     }
 }
