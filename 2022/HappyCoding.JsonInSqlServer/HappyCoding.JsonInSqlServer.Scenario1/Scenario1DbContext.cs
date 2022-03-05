@@ -6,7 +6,7 @@ namespace HappyCoding.JsonInSqlServer.Scenario1
     {
         private string _connectionString;
 
-        public DbSet<ModelWithJsonData> TestingTable { get; set; }
+        public DbSet<ModelWithJsonData1> TestingTable { get; set; }
 
         public Scenario1DbContext(DbContextOptions options)
             : base(options)

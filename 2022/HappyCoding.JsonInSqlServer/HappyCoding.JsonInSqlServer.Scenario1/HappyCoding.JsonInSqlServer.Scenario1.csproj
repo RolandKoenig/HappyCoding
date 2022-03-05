@@ -10,6 +10,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.14" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HappyCoding.JsonInSqlServer.JsonModel\HappyCoding.JsonInSqlServer.JsonModel.csproj" />
   </ItemGroup>
 
 </Project>
