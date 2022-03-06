@@ -15,7 +15,7 @@ namespace HappyCoding.NServiceBusWithSqlServer.SenderApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .EnsureNServiceBusQueuesCreated(Parameters.CONNECTION_STRING, Parameters.ENDPOINT_SENDER)
+                .EnsureNServiceBusQueuesCreated(Parameters.CONNECTION_STRING, Parameters.ENDPOINT_RECEIVER)
                 .UseNServiceBus(_ =>
                 {
                     var endpointConfiguration = new EndpointConfiguration(Parameters.ENDPOINT_SENDER);
