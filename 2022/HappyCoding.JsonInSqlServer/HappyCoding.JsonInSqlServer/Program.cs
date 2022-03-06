@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using HappyCoding.JsonInSqlServer.JsonModel;
 using HappyCoding.JsonInSqlServer.Scenario1;
 using HappyCoding.JsonInSqlServer.Scenario2;
-using HappyCoding.JsonInSqlServer.Scenario3;
 using HappyCoding.JsonInSqlServer.Util;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,10 +45,6 @@ namespace HappyCoding.JsonInSqlServer
             connectionStringBuilder.InitialCatalog = "JSON_IN_SQL__SCENARIO_2_B";
             await Scenario2Async(connectionStringBuilder.ConnectionString, true);
             Console.WriteLine();
-
-            connectionStringBuilder.InitialCatalog = "JSON_IN_SQL__SCENARIO_3";
-            await Scenario3Async(connectionStringBuilder.ConnectionString, false);
-            Console.WriteLine();
         }
 
         /// <summary>
@@ -74,7 +69,7 @@ namespace HappyCoding.JsonInSqlServer
             var idCounter = 0;
             var random = new Random(RANDOM_SEED);
             var charCount = (long) 0;
-            var elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT,  async () =>
+            var elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, true, async () =>
             {
                 for (var loopInner = 0; loopInner < NEW_ENTRIES_PER_CYCLE; loopInner++)
                 {
@@ -96,7 +91,7 @@ namespace HappyCoding.JsonInSqlServer
 
             // Read single row
             Console.WriteLine("Read single row");
-            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, async () =>
+            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, false, async () =>
             {
                 await using var dbContext = new Scenario1DbContext(optionsBuilder.Options);
 
@@ -107,12 +102,14 @@ namespace HappyCoding.JsonInSqlServer
                     .Where(row => row.ID == expectedKey)
                     .FirstAsync();
                 var json = row.GetJsonRoot();
+
+                GC.KeepAlive(json);
             });
             Console.WriteLine($" - Read single row with json ({elapsed.TotalMilliseconds:F2} ms)");
 
             // Update single row
             Console.WriteLine("Update single row");
-            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, async () =>
+            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, false, async () =>
             {
                 await using var dbContext = new Scenario1DbContext(optionsBuilder.Options);
 
@@ -124,6 +121,8 @@ namespace HappyCoding.JsonInSqlServer
                     .FirstAsync();
                 var json = row.GetJsonRoot();
                 row.SetJsonRoot(JsonRoot.CreateByRandom(random));
+
+                GC.KeepAlive(json);
             });
             Console.WriteLine($" - Update single row with json ({elapsed.TotalMilliseconds:F2} ms)");
         }
@@ -150,7 +149,7 @@ namespace HappyCoding.JsonInSqlServer
             var idCounter = 0;
             var random = new Random(RANDOM_SEED);
             var byteCount = (long) 0;
-            var elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT,  async () =>
+            var elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, true,  async () =>
             {
                 for (var loopInner = 0; loopInner < NEW_ENTRIES_PER_CYCLE; loopInner++)
                 {
@@ -172,7 +171,7 @@ namespace HappyCoding.JsonInSqlServer
 
             // Read single row
             Console.WriteLine("Read single row");
-            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, async () =>
+            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, false, async () =>
             {
                 await using var dbContext = new Scenario2DbContext(optionsBuilder.Options);
 
@@ -183,12 +182,14 @@ namespace HappyCoding.JsonInSqlServer
                     .Where(row => row.ID == expectedKey)
                     .FirstAsync();
                 var json = row.GetJsonRoot();
+
+                GC.KeepAlive(json);
             });
             Console.WriteLine($" - Read single row with json ({elapsed.TotalMilliseconds:F2} ms)");
 
             // Update single row
             Console.WriteLine("Update single row");
-            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, async () =>
+            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, false, async () =>
             {
                 await using var dbContext = new Scenario2DbContext(optionsBuilder.Options);
 
@@ -201,82 +202,8 @@ namespace HappyCoding.JsonInSqlServer
                 var json = row.GetJsonRoot();
                 row.SetJsonRoot(JsonRoot.CreateByRandom(random));
                 await dbContext.SaveChangesAsync();
-            });
-            Console.WriteLine($" - Update single row with json ({elapsed.TotalMilliseconds:F2} ms)");
-        }
 
-        /// <summary>
-        /// Scenario 31: Store data as plain json in NVARCHAR(MAX) field. Use System.Text.Json for serialization / deserialization.
-        /// </summary>
-        static async Task Scenario3Async(string connectionString, bool reducedPropertySize)
-        {
-            Console.WriteLine("####### Scenario 3 compressed, VARBINARY(MAX), System.Text.Json " + (reducedPropertySize ? "(reduced property size)" : ""));
-
-            await DBUtil.EnsureNewDBAsync(connectionString);
-
-            var optionsBuilder = new DbContextOptionsBuilder<Scenario3DbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
-            {
-                await using var migrationContext = new Scenario3DbContext(optionsBuilder.Options);
-                await migrationContext.Database.MigrateAsync();
-            }
-            Console.WriteLine("Database migrated");
-
-            // Populate DB
-            Console.WriteLine("Populate DB...");
-            var idCounter = 0;
-            var random = new Random(RANDOM_SEED);
-            var charCount = (long) 0;
-            var elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT,  async () =>
-            {
-                for (var loopInner = 0; loopInner < NEW_ENTRIES_PER_CYCLE; loopInner++)
-                {
-                    await using var dbContext = new Scenario3DbContext(optionsBuilder.Options);
-
-                    idCounter++;
-                    var testDataRow = new ModelWithJsonData3(
-                        $"ID-00000000000000000000{idCounter:D7}",
-                        JsonRoot.CreateByRandom(random),
-                        reducedPropertySize);
-                    charCount += testDataRow.JsonData.Length;
-
-                    await dbContext.TestingTable.AddAsync(testDataRow);
-                    await dbContext.SaveChangesAsync();
-                }
-            });
-            Console.WriteLine($" - Write {NEW_ENTRIES_PER_CYCLE} rows ({elapsed.TotalMilliseconds:F2} ms)");
-            Console.WriteLine($" - Average char count per json object: {charCount / idCounter} chars");
-
-            // Read single row
-            Console.WriteLine("Read single row");
-            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, async () =>
-            {
-                await using var dbContext = new Scenario3DbContext(optionsBuilder.Options);
-
-                var indexToReed = random.Next(0, NEW_ENTRIES_PER_CYCLE * TIME_MEASURE_CYCLE_COUNT);
-                var expectedKey = $"ID-00000000000000000000{indexToReed:D7}";
-
-                var row = await dbContext.TestingTable
-                    .Where(row => row.ID == expectedKey)
-                    .FirstAsync();
-                var json = row.GetJsonRoot();
-            });
-            Console.WriteLine($" - Read single row with json ({elapsed.TotalMilliseconds:F2} ms)");
-
-            // Update single row
-            Console.WriteLine("Update single row");
-            elapsed = await MeasureUtil.MeasureTimeAsync(TIME_MEASURE_CYCLE_COUNT, async () =>
-            {
-                await using var dbContext = new Scenario3DbContext(optionsBuilder.Options);
-
-                var indexToReed = random.Next(0, NEW_ENTRIES_PER_CYCLE * TIME_MEASURE_CYCLE_COUNT);
-                var expectedKey = $"ID-00000000000000000000{indexToReed:D7}";
-
-                var row = await dbContext.TestingTable
-                    .Where(row => row.ID == expectedKey)
-                    .FirstAsync();
-                var json = row.GetJsonRoot();
-                row.SetJsonRoot(JsonRoot.CreateByRandom(random));
+                GC.KeepAlive(json);
             });
             Console.WriteLine($" - Update single row with json ({elapsed.TotalMilliseconds:F2} ms)");
         }

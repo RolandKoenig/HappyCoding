@@ -8,7 +8,7 @@ namespace HappyCoding.JsonInSqlServer.Util
 {
     internal static class MeasureUtil
     {
-        public static async Task<TimeSpan> MeasureTimeAsync(int execCount, Func<Task> taskFactory)
+        public static async Task<TimeSpan> MeasureTimeAsync(int execCount, bool logPerCycle, Func<Task> taskFactory)
         {
             // Cold start
             await taskFactory();
@@ -25,7 +25,10 @@ namespace HappyCoding.JsonInSqlServer.Util
                 stopWatch.Stop();
                 durations.Add(stopWatch.Elapsed);
 
-                Console.WriteLine($" - cylce {loop + 1}: {stopWatch.ElapsedMilliseconds:F2} ms");
+                if (logPerCycle)
+                {
+                    Console.WriteLine($" - cylce {loop + 1}: {stopWatch.ElapsedMilliseconds:F2} ms");
+                }
             }
 
             return TimeSpan.FromTicks(

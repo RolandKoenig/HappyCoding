@@ -10,6 +10,8 @@ namespace HappyCoding.JsonInSqlServer.Scenario2
     public class JsonRootSerializer
     {
         private static readonly JsonSerializerSettings s_serializerSettings;
+        private static readonly JsonSerializer s_serializer;
+        private static readonly JsonSerializer s_serializerWithReduceProperties;
 
         static JsonRootSerializer()
         {
@@ -36,10 +38,12 @@ namespace HappyCoding.JsonInSqlServer.Scenario2
                 .MapPropertyName(x => x.TestKeyWithLongerName8, "p8")
                 .MapPropertyName(x => x.TestKeyWithLongerName9, "p9");
 
-            s_serializerSettings = new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            };
+            s_serializerSettings = new JsonSerializerSettings();
+            s_serializerSettings.ContractResolver = contractResolver;
+
+            s_serializer = new JsonSerializer();
+            s_serializerWithReduceProperties = new JsonSerializer();
+            s_serializerWithReduceProperties.ContractResolver = contractResolver;
         }
 
         public static byte[] SerializeToJson(JsonRoot rootObj, bool reducedPropertySize)
@@ -58,11 +62,13 @@ namespace HappyCoding.JsonInSqlServer.Scenario2
         {
             if (reducedPropertySize)
             {
-                return JsonConvert.DeserializeObject<JsonRoot>(UnZip(value), s_serializerSettings);
+                using var jsonReader = new JsonTextReader(UnZip(value));
+                return s_serializer.Deserialize<JsonRoot>(jsonReader);
             }
             else
             {
-                return JsonConvert.DeserializeObject<JsonRoot>(UnZip(value));
+                using var jsonReader = new JsonTextReader(UnZip(value));
+                return s_serializerWithReduceProperties.Deserialize<JsonRoot>(jsonReader);
             }
         }
 
@@ -72,7 +78,7 @@ namespace HappyCoding.JsonInSqlServer.Scenario2
             var byteArray = Encoding.UTF8.GetBytes(value);
 
             // Prepare for compress
-            using var ms = new MemoryStream();
+            using var ms = new MemoryStream((int)(byteArray.Length * 0.6));
             using var sw = new GZipStream(ms, CompressionLevel.Optimal);
 
             // Compress
@@ -83,16 +89,12 @@ namespace HappyCoding.JsonInSqlServer.Scenario2
             return ms.ToArray();
         }
 
-        private static string UnZip(byte[] value)
+        private static StreamReader UnZip(byte[] value)
         {
             // Prepare for decompress
-            using var ms = new MemoryStream(value);
-            using var sr = new GZipStream(ms, CompressionMode.Decompress);
-
-            // Decompress
-            var byteBuffer = new byte[50000];
-            var readLength = sr.Read(byteBuffer, 0, byteBuffer.Length);
-            return Encoding.UTF8.GetString(byteBuffer, 0, readLength);
+            var ms = new MemoryStream(value);
+            var sr = new GZipStream(ms, CompressionMode.Decompress);
+            return new StreamReader(sr);
         }
     }
 }

@@ -14,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\HappyCoding.JsonInSqlServer.Scenario1\HappyCoding.JsonInSqlServer.Scenario1.csproj" />
     <ProjectReference Include="..\HappyCoding.JsonInSqlServer.Scenario2\HappyCoding.JsonInSqlServer.Scenario2.csproj" />
-    <ProjectReference Include="..\HappyCoding.JsonInSqlServer.Scenario3\HappyCoding.JsonInSqlServer.Scenario3.csproj" />
   </ItemGroup>
 
 </Project>
