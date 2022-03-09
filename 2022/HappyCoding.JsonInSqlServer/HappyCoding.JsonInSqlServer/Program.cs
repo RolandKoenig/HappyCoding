@@ -121,6 +121,7 @@ namespace HappyCoding.JsonInSqlServer
                     .FirstAsync();
                 var json = row.GetJsonRoot();
                 row.SetJsonRoot(JsonRoot.CreateByRandom(random));
+                await dbContext.SaveChangesAsync();
 
                 GC.KeepAlive(json);
             });
