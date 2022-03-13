@@ -1,12 +1,11 @@
-﻿CREATE TABLE [Person] (
-  [Id] NVARCHAR(50) NOT NULL CONSTRAINT [PK_Person_Id] PRIMARY KEY CLUSTERED, 
+﻿CREATE TABLE [TestingDocuments] (
+  [Id] UNIQUEIDENTIFIER NOT NULL CONSTRAINT [PK_TestingDocument_Id] PRIMARY KEY CLUSTERED, 
 
-  -- These are columns we might need to query against
-  [FirstName] NVARCHAR(20) NOT NULL, 
-  [LastName] NVARCHAR(200) NULL, 
-  [Email] NVARCHAR(200) NOT NULL, 
+  -- Spalten für Queries
+  [Value1] NVARCHAR(30) NOT NULL, 
+  [Value2] NVARCHAR(30) NOT NULL, 
+  [Value3] INT NOT NULL,
 
-  -- This is where we store everything else
-  [JSON] NVARCHAR(MAX) NOT NULL
+  -- Spalte für die komprimierten Json-Dokumente
+  [JSONBlob] VARBINARY(MAX) NOT NULL
 )
-ALTER TABLE [Person] ADD CONSTRAINT [UQ_UniquePersonEmail] UNIQUE([Email])

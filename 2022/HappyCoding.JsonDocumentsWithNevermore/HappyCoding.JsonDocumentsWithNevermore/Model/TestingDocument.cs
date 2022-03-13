@@ -2,6 +2,8 @@
 
 public class TestingDocument
 {
+    public Guid ID { get; set; } = Guid.Empty;
+
     public string Value1 { get; set; } = string.Empty;
 
     public string Value2 { get; set; } = string.Empty;
@@ -21,6 +23,7 @@ public class TestingDocument
 
     public void FillWithRandomData(Random random)
     {
+        this.ID = Guid.NewGuid();
         this.Value1 = random.Next(0, int.MaxValue).ToString();
         this.Value2 = random.Next(0, int.MaxValue).ToString();
         this.Value3 = random.Next(0, int.MaxValue);
