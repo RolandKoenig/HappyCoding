@@ -30,19 +30,19 @@ namespace HappyCoding.JsonInSqlServer
                 "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Template;Integrated Security=SSPI";
             var connectionStringBuilder = new SqlConnectionStringBuilder(connectionStringTemplate);
 
-            connectionStringBuilder.InitialCatalog = "JSON_IN_SQL__SCENARIO_1_A";
+            connectionStringBuilder.InitialCatalog = "HappyCoding_2022_JsonInSql_Scenario1A";
             await Scenario1Async(connectionStringBuilder.ConnectionString, false);
             Console.WriteLine();
 
-            connectionStringBuilder.InitialCatalog = "JSON_IN_SQL__SCENARIO_1_B";
+            connectionStringBuilder.InitialCatalog = "HappyCoding_2022_JsonInSql_Scenario1B";
             await Scenario1Async(connectionStringBuilder.ConnectionString, true);
             Console.WriteLine();
 
-            connectionStringBuilder.InitialCatalog = "JSON_IN_SQL__SCENARIO_2_A";
+            connectionStringBuilder.InitialCatalog = "HappyCoding_2022_JsonInSql_Scenario2A";
             await Scenario2Async(connectionStringBuilder.ConnectionString, false);
             Console.WriteLine();
 
-            connectionStringBuilder.InitialCatalog = "JSON_IN_SQL__SCENARIO_2_B";
+            connectionStringBuilder.InitialCatalog = "HappyCoding_2022_JsonInSql_Scenario2B";
             await Scenario2Async(connectionStringBuilder.ConnectionString, true);
             Console.WriteLine();
         }
