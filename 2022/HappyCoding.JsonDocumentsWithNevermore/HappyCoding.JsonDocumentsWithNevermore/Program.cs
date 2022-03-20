@@ -53,7 +53,6 @@ internal static class Program
         using var transaction = await store.BeginWriteTransactionAsync();
         while (newDocuments.Count < DOCUMENT_COUNT)
         {
-            
             for (var loop = 0; loop < DOCUMENT_INSERT_BATCH_SIZE; loop++)
             {
                 newDocumentsBatch.Clear();
