@@ -9,7 +9,7 @@ public static class Program
     internal const int RANDOM_SEED = 100;
     internal const string CONNECTION_STRING =
         "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=HappyCoding_2022_SqlServerPartitioned;Integrated Security=SSPI";
-    internal const string START_TIMESTAMP = "2022-03-21T18:54:54.3281670+01:00";
+    internal const string START_TIMESTAMP = "2022-03-21T18:54:54.3281670+00:00";
 
     public static async Task Main()
     {
@@ -23,24 +23,22 @@ public static class Program
             await migrationContext.Database.MigrateAsync();
         }
 
+        Console.WriteLine("Adding values..");
         var random = new Random(RANDOM_SEED);
         var startTimestamp = DateTimeOffset.Parse(START_TIMESTAMP);
-        var singleStep = TimeSpan.FromSeconds(1.0);
-        for (var loop = 0; loop < 1000; loop++)
+        var singleStep = TimeSpan.FromMilliseconds(100);
+        for (var loop = 0; loop < 10000; loop++)
         {
             await using var dbContext = new SensorDataDbContext(optionsBuilder.Options);
 
             await dbContext.SensorData.AddAsync(new SensorData()
-                {
-                    ID = Guid.NewGuid(),
-                    Timestamp = startTimestamp + (loop * singleStep),
-                    SensorName = "TestSensor",
-                    SensorValue = random.NextSingle() * 1000f
-                },
+            {
+                Timestamp = startTimestamp + (loop * singleStep),
+                SensorName = "TestSensor",
+                SensorValue = random.NextSingle() * 1000f
+            },
                 CancellationToken.None);
             await dbContext.SaveChangesAsync(CancellationToken.None);
         }
-
-        Console.WriteLine("Hello, World!");
     }
 }
