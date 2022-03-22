@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HappyCoding.SqlServerPartitionedSensorDataTable.Migrations
 {
     [DbContext(typeof(SensorDataDbContext))]
-    [Migration("20220320180305_init")]
+    [Migration("20220322210401_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,13 @@ namespace HappyCoding.SqlServerPartitionedSensorDataTable.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("SensorData");
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("ID"), false);
+
+                    b.HasIndex(new[] { "Timestamp" }, "IX_TIMESTAMP");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex(new[] { "Timestamp" }, "IX_TIMESTAMP"));
+
+                    b.ToTable("SensorData", (string)null);
                 });
 #pragma warning restore 612, 618
         }

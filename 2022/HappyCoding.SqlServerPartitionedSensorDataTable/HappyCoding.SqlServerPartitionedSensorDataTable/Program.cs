@@ -33,6 +33,7 @@ public static class Program
 
             await dbContext.SensorData.AddAsync(new SensorData()
             {
+                ID = Guid.NewGuid(),
                 Timestamp = startTimestamp + (loop * singleStep),
                 SensorName = "TestSensor",
                 SensorValue = random.NextSingle() * 1000f
