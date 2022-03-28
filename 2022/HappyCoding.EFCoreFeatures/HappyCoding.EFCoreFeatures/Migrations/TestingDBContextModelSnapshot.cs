@@ -30,7 +30,22 @@ namespace HappyCoding.EFCoreFeatures.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<byte[]>("Model")
+                    b.Property<int>("CalculationA")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CalculationB")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CalculationResult")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<byte[]>("TagCollection")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 

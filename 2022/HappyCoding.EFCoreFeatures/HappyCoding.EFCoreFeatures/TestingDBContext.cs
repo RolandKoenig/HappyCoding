@@ -20,7 +20,7 @@ internal class TestingDBContext : DbContext
         base.ConfigureConventions(configurationBuilder);
 
         configurationBuilder
-            .Properties<JsonModel<TestingDocument>>()
-            .HaveConversion<JsonModelConverter<TestingDocument>, JsonModelComparer<TestingDocument>>();
+            .Properties<JsonModel<TestingTagCollection>>()
+            .HaveConversion<JsonModelConverter<TestingTagCollection>, JsonModelComparer<TestingTagCollection>>();
     }
 }

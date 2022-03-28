@@ -26,8 +26,4 @@
 	  <None Include="C:\Projekte\GitHub\HappyCoding\2022\HappyCoding.EFCoreFeatures\HappyCoding.EFCoreFeatures\.editorconfig" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Migrations\" />
-	</ItemGroup>
-
 </Project>

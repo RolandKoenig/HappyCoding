@@ -32,16 +32,23 @@ public static class Program
 
     private static async Task FillDatabaseAsync(DbContextOptions<TestingDBContext> dbContextOptions)
     {
+        var random = new Random(RANDOM_SEED);
+
         Console.WriteLine("Write values to database");
         await using var dbContext = new TestingDBContext(dbContextOptions);
         for (var loop = 0; loop < ROW_COUNT; loop++)
         {
-            var newDocument = new TestingDocument();
-            newDocument.Value1 = loop.ToString();
-            newDocument.Value2 = loop.ToString();
-            newDocument.Value3 = loop.ToString();
+            var newDocument = new TestingTagCollection();
+            newDocument.Tag1 = loop.ToString();
+            newDocument.Tag2 = loop.ToString();
+            newDocument.Tag3 = loop.ToString();
 
-            await dbContext.Testing.AddAsync(new TestingRow(newDocument));
+            var newRow = new TestingRow($"Name{loop}", newDocument);
+            newRow.SetCalculationValues(
+                random.Next(0, 100),
+                random.Next(0, 100));
+
+            await dbContext.Testing.AddAsync(newRow);
         }
         await dbContext.SaveChangesAsync();
     }

@@ -14,27 +14,37 @@ public class TestingRow
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ID { get; private set; }
 
-    public JsonModel<TestingDocument> Model { get; private set; }
+    [MaxLength(30)]
+    public string Name { get; private set; }
+
+    public int CalculationA { get; private set; }
+
+    public int CalculationB { get; private set; }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public int CalculationResult { get; private set; }
+
+    public JsonModel<TestingTagCollection> TagCollection { get; private set; }
 
     [NotMapped]
     public string Value1
     {
-        get => this.Model.ModelInstance.Value1;
-        set => this.Model.UpdateModel(model => model.Value1 = value);
+        get => this.TagCollection.ModelInstance.Tag1;
+        set => this.TagCollection.UpdateModel(model => model.Tag1 = value);
     }
 
     [NotMapped]
     public string Value2
     {
-        get => this.Model.ModelInstance.Value2;
-        set => this.Model.UpdateModel(model => model.Value2 = value);
+        get => this.TagCollection.ModelInstance.Tag2;
+        set => this.TagCollection.UpdateModel(model => model.Tag2 = value);
     }
 
     [NotMapped]
     public string Value3
     {
-        get => this.Model.ModelInstance.Value3;
-        set => this.Model.UpdateModel(model => model.Value3 = value);
+        get => this.TagCollection.ModelInstance.Tag3;
+        set => this.TagCollection.UpdateModel(model => model.Tag3 = value);
     }
 
     private TestingRow()
@@ -42,8 +52,15 @@ public class TestingRow
 
     }
 
-    public TestingRow(TestingDocument model)
+    public TestingRow(string name, TestingTagCollection model)
     {
-        Model = new JsonModel<TestingDocument>(model);
+        this.Name = name;
+        this.TagCollection = new JsonModel<TestingTagCollection>(model);
+    }
+
+    public void SetCalculationValues(int a, int b)
+    {
+        this.CalculationA = a;
+        this.CalculationB = b;
     }
 }
