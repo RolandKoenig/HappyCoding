@@ -7,13 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.CQSWithMediatR"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.CQSWithMediatR.Application", "HappyCoding.CQSWithMediatR.Application\HappyCoding.CQSWithMediatR.Application.csproj", "{3837EE20-CBA7-43EF-9040-75E16C872205}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.CQSWithMediatR.Domain", "HappyCoding.CQSWithMediatR.Domain\HappyCoding.CQSWithMediatR.Domain.csproj", "{7E2AC97C-6FB2-4BF1-817B-282CCB836CDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.CQSWithMediatR.Domain", "HappyCoding.CQSWithMediatR.Domain\HappyCoding.CQSWithMediatR.Domain.csproj", "{7E2AC97C-6FB2-4BF1-817B-282CCB836CDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.CQSWithMediatR.InMemoryRepositories", "HappyCoding.CQSWithMediatR.InMemoryRepositories\HappyCoding.CQSWithMediatR.InMemoryRepositories.csproj", "{D335AFFD-F47E-4A6D-848D-3B33D65F2176}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.CQSWithMediatR.InMemoryRepositories", "HappyCoding.CQSWithMediatR.InMemoryRepositories\HappyCoding.CQSWithMediatR.InMemoryRepositories.csproj", "{D335AFFD-F47E-4A6D-848D-3B33D65F2176}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapter", "Adapter", "{CF92DD8C-95EC-4F36-86BB-B090043753CA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F636CC98-17EE-4E26-B715-24209C7CA358}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,7 +40,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A17FC2A2-FB62-4B80-81B1-783A061A7C42} = {F636CC98-17EE-4E26-B715-24209C7CA358}
 		{D335AFFD-F47E-4A6D-848D-3B33D65F2176} = {CF92DD8C-95EC-4F36-86BB-B090043753CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
