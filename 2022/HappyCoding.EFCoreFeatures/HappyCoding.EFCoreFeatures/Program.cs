@@ -9,7 +9,8 @@ public static class Program
 {
     // Parameters
     private const string CONNECTION_STRING = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=HappyCoding_2022_EFCoreFeatures;Integrated Security=SSPI";
-    private const int ROW_COUNT = 1000;
+    private const int TESTING_ROW_COUNT = 1000;
+    private const int PARENT_ROW_COUNT = 100;
     private const int RANDOM_SEED = 100;
 
     public static async Task Main()
@@ -36,7 +37,7 @@ public static class Program
 
         Console.WriteLine("Write values to database");
         await using var dbContext = new TestingDBContext(dbContextOptions);
-        for (var loop = 0; loop < ROW_COUNT; loop++)
+        for (var loop = 0; loop < TESTING_ROW_COUNT; loop++)
         {
             var newDocument = new TestingTagCollection();
             newDocument.Tag1 = loop.ToString();
@@ -51,6 +52,20 @@ public static class Program
             await dbContext.Testing.AddAsync(newRow);
         }
         await dbContext.SaveChangesAsync();
+
+        for (var loop = 0; loop < PARENT_ROW_COUNT; loop++)
+        {
+            var newParentRow = new ParentRow("Parent" + loop);
+
+            for (var loopInner = 0; loopInner < 5; loopInner++)
+            {
+                var actChild = new ChildRow(new DateTimeOffset(2022, 3, 25, 3, loopInner, 1, TimeSpan.Zero));
+                newParentRow.Childs.Add(actChild);
+            }
+
+            await dbContext.Parents.AddAsync(newParentRow);
+        }
+        await dbContext.SaveChangesAsync();
     }
 
     private static async Task ManipulateSomeRowsAsync(DbContextOptions<TestingDBContext> dbContextOptions)
@@ -62,7 +77,7 @@ public static class Program
         {
             await using var dbContext = new TestingDBContext(dbContextOptions);
 
-            var idToFind = random.Next(0, ROW_COUNT - 1);
+            var idToFind = random.Next(0, TESTING_ROW_COUNT - 1);
             var rowToManipulate = await dbContext.Testing
                 .Where(x => x.ID == idToFind)
                 .FirstAsync();

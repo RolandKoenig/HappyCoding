@@ -1,4 +1,6 @@
-﻿namespace HappyCoding.CQSWithMediatR.Domain.Model;
+﻿using Light.GuardClauses;
+
+namespace HappyCoding.CQSWithMediatR.Domain.Model;
 
 public class Person
 {
@@ -8,6 +10,9 @@ public class Person
 
     public Person(string name, string address)
     {
+        name.MustNotBeNullOrWhiteSpace();
+        address.MustNotBeNullOrWhiteSpace();
+
         this.Name = name;
         this.Address = address;
     }

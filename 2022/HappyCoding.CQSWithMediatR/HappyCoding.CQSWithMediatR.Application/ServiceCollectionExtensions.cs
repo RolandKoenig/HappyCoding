@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         validators.ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
  
         // Add the custom pipeline validation to DI
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         return services;

@@ -5,9 +5,10 @@ using MediatR;
 namespace HappyCoding.CQSWithMediatR.Application.Infrastructure;
 
 // Automatic validation for MediatR pipeline
-// see https://timdows.com/projects/use-mediatr-with-fluentvalidation-in-the-asp-net-core-pipeline/
+// Based on https://timdows.com/projects/use-mediatr-with-fluentvalidation-in-the-asp-net-core-pipeline/
 
-public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+    where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator> _validators;
 

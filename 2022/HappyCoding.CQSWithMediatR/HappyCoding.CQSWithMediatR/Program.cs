@@ -1,6 +1,5 @@
-using FluentValidation;
+using HappyCoding.CQSWithMediatR;
 using HappyCoding.CQSWithMediatR.Application;
-using HappyCoding.CQSWithMediatR.Application.Infrastructure;
 using HappyCoding.CQSWithMediatR.InMemoryRepositories;
 using MediatR;
 
@@ -23,5 +22,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllers();
 app.Run();

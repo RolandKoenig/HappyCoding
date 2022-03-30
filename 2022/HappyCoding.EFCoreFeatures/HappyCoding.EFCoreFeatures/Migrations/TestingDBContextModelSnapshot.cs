@@ -22,6 +22,44 @@ namespace HappyCoding.EFCoreFeatures.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("HappyCoding.EFCoreFeatures.Data.ChildRow", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int>("ParentRowID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("Timestamp")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ParentRowID");
+
+                    b.ToTable("Childs");
+                });
+
+            modelBuilder.Entity("HappyCoding.EFCoreFeatures.Data.ParentRow", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Parents");
+                });
+
             modelBuilder.Entity("HappyCoding.EFCoreFeatures.Data.TestingRow", b =>
                 {
                     b.Property<int>("ID")
@@ -52,6 +90,20 @@ namespace HappyCoding.EFCoreFeatures.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Testing");
+                });
+
+            modelBuilder.Entity("HappyCoding.EFCoreFeatures.Data.ChildRow", b =>
+                {
+                    b.HasOne("HappyCoding.EFCoreFeatures.Data.ParentRow", null)
+                        .WithMany("Childs")
+                        .HasForeignKey("ParentRowID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HappyCoding.EFCoreFeatures.Data.ParentRow", b =>
+                {
+                    b.Navigation("Childs");
                 });
 #pragma warning restore 612, 618
         }

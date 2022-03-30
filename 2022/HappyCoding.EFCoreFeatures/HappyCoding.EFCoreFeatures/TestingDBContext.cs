@@ -7,7 +7,11 @@ namespace HappyCoding.EFCoreFeatures;
 internal class TestingDBContext : DbContext
 {
     public DbSet<TestingRow> Testing { get; set; } = null!;
-    
+
+    public DbSet<ParentRow> Parents { get; set; } = null!;
+
+    public DbSet<ChildRow> Childs { get; set; } = null!;
+
     public TestingDBContext(DbContextOptions options)
         : base(options)
     {
