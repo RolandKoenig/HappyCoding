@@ -12,6 +12,8 @@ namespace HappyCoding.EFIncludePerformance.Model
 
         public long ProcessActivityID { get; init; }
 
+        public DateTimeOffset ActivityTimetamp { get; init; }
+
         public int Field1 { get; init; }
 
         public int Field2 { get; init; }

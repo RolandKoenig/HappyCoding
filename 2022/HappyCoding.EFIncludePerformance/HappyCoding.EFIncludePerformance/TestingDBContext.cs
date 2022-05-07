@@ -50,6 +50,7 @@ namespace HappyCoding.EFIncludePerformance
             processActivityTable
                 .Property(x => x.ProcessID)
                 .HasMaxLength(30);
+            processActivityTable.Property(x => x.ActivityTimetamp);
             processActivityTable.Property(x => x.Field1);
             processActivityTable.Property(x => x.Field2);
             processActivityTable.Property(x => x.Field3);

@@ -60,6 +60,9 @@ namespace HappyCoding.EFIncludePerformance.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTimeOffset>("ActivityTimetamp")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("Field1")
                         .HasColumnType("int");
 

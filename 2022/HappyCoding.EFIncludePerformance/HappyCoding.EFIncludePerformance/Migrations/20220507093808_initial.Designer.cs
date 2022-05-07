@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HappyCoding.EFIncludePerformance.Migrations
 {
     [DbContext(typeof(TestingDBContext))]
-    [Migration("20220507075027_initial")]
+    [Migration("20220507093808_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,6 +61,9 @@ namespace HappyCoding.EFIncludePerformance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("ActivityTimetamp")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("Field1")
                         .HasColumnType("int");

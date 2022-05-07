@@ -32,6 +32,7 @@ namespace HappyCoding.EFIncludePerformance.Migrations
                     ProcessActivityID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProcessID = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    ActivityTimetamp = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Field1 = table.Column<int>(type: "int", nullable: false),
                     Field2 = table.Column<int>(type: "int", nullable: false),
                     Field3 = table.Column<int>(type: "int", nullable: false),

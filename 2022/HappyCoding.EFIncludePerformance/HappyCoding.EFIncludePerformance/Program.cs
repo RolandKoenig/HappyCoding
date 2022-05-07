@@ -15,7 +15,7 @@ namespace HappyCoding.EFIncludePerformance
         // Parameters
         private const string CONNECTION_STRING = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=HappyCoding_2022_EFIncludePerformance;Integrated Security=SSPI";
         private const int RANDOM_SEED = 100;
-        private const int COUNT_PROCESSES = 1000;
+        private const int COUNT_PROCESSES = 10000;
         private const int COUNT_ACTIVITIES_PER_PROCESS = 2;
         private const int COUNT_RUNS_PER_EXPERIMENT = 10;
 
@@ -30,6 +30,8 @@ namespace HappyCoding.EFIncludePerformance
             // Warmup
             await TestRandomGetByIncludeAsync(dbOptions, random, true);
             await TestRandomGetByIncludeAsSplitQueryAsync(dbOptions, random, true);
+            await TestRandomGetByIncludeWithOrderByAsync(dbOptions, random, true);
+            await TestRandomGetByIncludeWithOrderByAndTakeAsync(dbOptions, random, true);
             await TestRandomGetByLoadSeparatelyAsync(dbOptions, random, true);
 
             // Check include
@@ -43,6 +45,18 @@ namespace HappyCoding.EFIncludePerformance
             await TestRandomGetByIncludeAsSplitQueryAsync(dbOptions, random);
             await TestRandomGetByIncludeAsSplitQueryAsync(dbOptions, random);
             await TestRandomGetByIncludeAsSplitQueryAsync(dbOptions, random);
+
+            // Check include with OrderBy
+            await TestRandomGetByIncludeWithOrderByAsync(dbOptions, random);
+            await TestRandomGetByIncludeWithOrderByAsync(dbOptions, random);
+            await TestRandomGetByIncludeWithOrderByAsync(dbOptions, random);
+            await TestRandomGetByIncludeWithOrderByAsync(dbOptions, random);
+
+            // Check include with OrderBy and Take(1)
+            await TestRandomGetByIncludeWithOrderByAndTakeAsync(dbOptions, random);
+            await TestRandomGetByIncludeWithOrderByAndTakeAsync(dbOptions, random);
+            await TestRandomGetByIncludeWithOrderByAndTakeAsync(dbOptions, random);
+            await TestRandomGetByIncludeWithOrderByAndTakeAsync(dbOptions, random);
 
             // Check separate load call
             await TestRandomGetByLoadSeparatelyAsync(dbOptions, random);
@@ -95,6 +109,7 @@ namespace HappyCoding.EFIncludePerformance
                     newProcess.Activities.Add(new ProcessActivity()
                     {
                         ProcessID = processKey,
+                        ActivityTimetamp = DateTimeOffset.UtcNow,
                         Field1 = GetRandomInt(random),
                         Field2 = GetRandomInt(random),
                         Field3 = GetRandomInt(random),
@@ -172,6 +187,73 @@ namespace HappyCoding.EFIncludePerformance
                 var millisecondsPerRun = totalMilliseconds / COUNT_RUNS_PER_EXPERIMENT;
                 Console.WriteLine(
                     $"{nameof(TestRandomGetByIncludeAsSplitQueryAsync)}: " +
+                    $"{totalMilliseconds:N2} ms total, " +
+                    $"{millisecondsPerRun:N2} ms per run");
+            }
+        }
+
+        private static async Task TestRandomGetByIncludeWithOrderByAsync(
+            DbContextOptions<TestingDBContext> dbContextOptions,
+            Random random,
+            bool discardOutput = false)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            for (var loop = 0; loop < COUNT_RUNS_PER_EXPERIMENT; loop++)
+            {
+                var processNumber = random.Next(0, COUNT_PROCESSES);
+                var processKey = GetProcessKey(processNumber);
+
+                await using var dbContext = new TestingDBContext(dbContextOptions);
+
+                var process = await dbContext.Processes
+                    .Where(x => x.ID == processKey)
+                    .Include(x => x.Activities
+                        .OrderByDescending(y => y.Field7))
+                    .ToArrayAsync();
+            }
+            stopWatch.Stop();
+
+            if (!discardOutput)
+            {
+                var totalMilliseconds = stopWatch.Elapsed.TotalMilliseconds;
+                var millisecondsPerRun = totalMilliseconds / COUNT_RUNS_PER_EXPERIMENT;
+                Console.WriteLine(
+                    $"{nameof(TestRandomGetByIncludeWithOrderByAsync)}: " +
+                    $"{totalMilliseconds:N2} ms total, " +
+                    $"{millisecondsPerRun:N2} ms per run");
+            }
+        }
+
+        private static async Task TestRandomGetByIncludeWithOrderByAndTakeAsync(
+            DbContextOptions<TestingDBContext> dbContextOptions,
+            Random random,
+            bool discardOutput = false)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            for (var loop = 0; loop < COUNT_RUNS_PER_EXPERIMENT; loop++)
+            {
+                var processNumber = random.Next(0, COUNT_PROCESSES);
+                var processKey = GetProcessKey(processNumber);
+
+                await using var dbContext = new TestingDBContext(dbContextOptions);
+
+                var process = await dbContext.Processes
+                    .Where(x => x.ID == processKey)
+                    .Include(x => x.Activities
+                        .OrderByDescending(y => y.Field7)
+                        .Take(1))
+                    .ToArrayAsync();
+            }
+            stopWatch.Stop();
+
+            if (!discardOutput)
+            {
+                var totalMilliseconds = stopWatch.Elapsed.TotalMilliseconds;
+                var millisecondsPerRun = totalMilliseconds / COUNT_RUNS_PER_EXPERIMENT;
+                Console.WriteLine(
+                    $"{nameof(TestRandomGetByIncludeWithOrderByAndTakeAsync)}: " +
                     $"{totalMilliseconds:N2} ms total, " +
                     $"{millisecondsPerRun:N2} ms per run");
             }
