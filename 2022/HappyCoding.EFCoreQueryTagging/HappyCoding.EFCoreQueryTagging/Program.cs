@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using HappyCoding.EFCoreQueryTagging.Model;
+using HappyCoding.EFCoreQueryTagging.Util;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace HappyCoding.EFCoreQueryTagging;
 
@@ -32,7 +34,19 @@ public static class Program
         Console.WriteLine("Database created");
 
         var random = new Random(RANDOM_SEED);
+
         await PopulateDatabaseAsync(optionsBuilder.Options, random);
+            
+        optionsBuilder
+            .EnableSensitiveDataLogging()
+            .LogTo(
+                logLine =>
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(logLine);
+                }, 
+                new[]{ RelationalEventId.CommandExecuted });
+        await TestRandomGetByIncludeWithOrderByAndTakeOptimizedAsync(optionsBuilder.Options, random);
     }
 
     private static async Task PopulateDatabaseAsync(DbContextOptions<TestingDBContext> dbContextOptions, Random random)
@@ -77,6 +91,25 @@ public static class Program
         Console.WriteLine("DB populated");
 
         await dbContext.SaveChangesAsync();
+    }
+
+    private static async Task TestRandomGetByIncludeWithOrderByAndTakeOptimizedAsync(
+        DbContextOptions<TestingDBContext> dbContextOptions,
+        Random random)
+    {
+        var processNumber = random.Next(0, COUNT_PROCESSES);
+        var processKey = GetProcessKey(processNumber);
+
+        await using var dbContext = new TestingDBContext(dbContextOptions);
+
+        var procedure = await dbContext.Processes
+            .TagWithClassAndMethodName()
+            .Where(x => x.ID == processKey)
+            .Include(x => x.Activities
+                .Where(y => y.ProcessID == processKey)
+                .OrderByDescending(y => y.ActivityTimestampUtc)
+                .Take(1))
+            .ToArrayAsync();
     }
 
     private static string GetProcessKey(int processNumber)
