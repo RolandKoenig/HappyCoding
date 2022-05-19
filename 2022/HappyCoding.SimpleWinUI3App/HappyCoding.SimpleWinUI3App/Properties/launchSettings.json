@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "HappyCoding.SimpleWinUI3App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "HappyCoding.SimpleWinUI3App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

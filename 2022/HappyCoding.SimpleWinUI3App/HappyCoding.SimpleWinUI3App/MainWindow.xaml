@@ -1,0 +1,61 @@
+﻿<Window
+    x:Class="HappyCoding.SimpleWinUI3App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:HappyCoding.SimpleWinUI3App.Pages"
+    mc:Ignorable="d" >
+
+    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Custom title bar -->
+        <Grid Grid.Row="0" Background="#0975C6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <HyperlinkButton Grid.Column="0"
+                             IsEnabled="{Binding ElementName=CtrlMainFrame, Path=CanGoBack}"
+                             Click="{x:Bind NavigateBack}"
+                             IsHitTestVisible="True"
+                             HorizontalAlignment="Left">
+                <SymbolIcon Symbol="Back"
+                            Foreground="White"/>
+            </HyperlinkButton>
+
+            <Border Grid.Column="1" x:Name="CtrlAppTitleBar" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock  Text="{x:Bind Title}"
+                            Foreground="White"
+                            VerticalAlignment="Top" 
+                            Margin="8,8,0,0"/>
+            </Border>
+
+        </Grid>
+
+        <!-- Main content -->
+        <NavigationView Grid.Row="1" 
+                        x:Name="CtrlNavView"
+                        BackRequested="{x:Bind NavigateBack}"
+                        ItemInvoked="{x:Bind NavigateTo}"
+                        IsBackEnabled="{Binding ElementName=CtrlMainFrame, Path=CanGoBack}"
+                        IsBackButtonVisible="Collapsed"
+                        IsSettingsVisible="False">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="Home" Content="Home" Tag="{pages:NavigationTarget Target=Home}" />
+                <NavigationViewItem Icon="Edit" Content="Input Form" Tag="{pages:NavigationTarget Target=InputForm}" />
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="CtrlMainFrame"
+                   Navigated="CtrlMainFrame_OnNavigated"/>
+        
+        </NavigationView>
+    </Grid>
+
+</Window>
