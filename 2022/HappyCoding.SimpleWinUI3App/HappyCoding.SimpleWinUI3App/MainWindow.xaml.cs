@@ -23,6 +23,7 @@ public sealed partial class MainWindow : Window
 
         if (!DesignMode.DesignModeEnabled)
         {
+            CtrlNavView.SelectedItem = CtrlNavView.MenuItems.FirstOrDefault();
             CtrlMainFrame.Navigate(typeof(Home));
         }
     }
@@ -40,6 +41,7 @@ public sealed partial class MainWindow : Window
             return;
         }
 
+        CtrlNavView.Header = args.InvokedItemContainer.Content.ToString();
         CtrlMainFrame.Navigate(targetType);
     }
 
@@ -50,6 +52,7 @@ public sealed partial class MainWindow : Window
 
     private void CtrlMainFrame_OnNavigated(object sender, NavigationEventArgs e)
     {
+        // Apply selection (also on navigating back)
         var newSelection = CtrlNavView.MenuItems.FirstOrDefault(
             x =>
             {
@@ -63,6 +66,16 @@ public sealed partial class MainWindow : Window
         if (CtrlNavView.SelectedItem != newSelection)
         {
             CtrlNavView.SelectedItem = newSelection;
+        }
+
+        // Apply header
+        if (CtrlNavView.SelectedItem != null)
+        {
+            CtrlNavView.Header = ((NavigationViewItem) CtrlNavView.SelectedItem).Content.ToString();
+        }
+        else
+        {
+            CtrlNavView.Header = "";
         }
     }
 }

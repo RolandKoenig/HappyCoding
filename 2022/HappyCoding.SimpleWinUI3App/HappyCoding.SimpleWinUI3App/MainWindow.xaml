@@ -7,7 +7,7 @@
     xmlns:pages="using:HappyCoding.SimpleWinUI3App.Pages"
     mc:Ignorable="d" >
 
-    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -20,14 +20,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <HyperlinkButton Grid.Column="0"
-                             IsEnabled="{Binding ElementName=CtrlMainFrame, Path=CanGoBack}"
-                             Click="{x:Bind NavigateBack}"
-                             IsHitTestVisible="True"
-                             HorizontalAlignment="Left">
-                <SymbolIcon Symbol="Back"
-                            Foreground="White"/>
-            </HyperlinkButton>
+            <SymbolIcon Grid.Column="0" 
+                        Symbol="Library"
+                        Margin="7"
+                        Foreground="White"/>
 
             <Border Grid.Column="1" x:Name="CtrlAppTitleBar" 
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -42,10 +38,11 @@
         <!-- Main content -->
         <NavigationView Grid.Row="1" 
                         x:Name="CtrlNavView"
+                        Header="Dummy Header"
                         BackRequested="{x:Bind NavigateBack}"
-                        ItemInvoked="{x:Bind NavigateTo}"
+                        ItemInvoked="NavigateTo"
                         IsBackEnabled="{Binding ElementName=CtrlMainFrame, Path=CanGoBack}"
-                        IsBackButtonVisible="Collapsed"
+                        IsBackButtonVisible="Visible"
                         IsSettingsVisible="False">
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Home" Content="Home" Tag="{pages:NavigationTarget Target=Home}" />

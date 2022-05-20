@@ -10,7 +10,6 @@
 
     <Grid Style="{StaticResource PageGridStyle}">
         <StackPanel Orientation="Vertical">
-            <TextBlock Style="{ThemeResource HeaderTextBlockStyle}">Home</TextBlock>
             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Some testing with WinUI 3</TextBlock>
 
             <Button Click="{x:Bind SetDarkTheme}">Set dark theme</Button>
