@@ -13,6 +13,7 @@ internal class NavigationTargetExtension : MarkupExtension
         {
             NavigationTarget.Home => typeof(Home).FullName!,
             NavigationTarget.InputForm => typeof(InputForm).FullName!,
+            NavigationTarget.ValidatingInputForm => typeof(ValidatingInputForm).FullName!,
             _ => throw new InvalidOperationException($"Unknown member {Target}!")
         };
     }
