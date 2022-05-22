@@ -49,6 +49,7 @@
                 <NavigationViewItem Icon="Home" Content="Home" Tag="{pages:NavigationTarget Target=Home}" />
                 <NavigationViewItem Icon="Edit" Content="Input Form" Tag="{pages:NavigationTarget Target=InputForm}" />
                 <NavigationViewItem Icon="Find" Content="Search Grid" Tag="{pages:NavigationTarget Target=SearchGrid}" />
+                <NavigationViewItem Icon="World" Content="WebView2 Host" Tag="{pages:NavigationTarget Target=WebView2Host}" />
             </NavigationView.MenuItems>
 
             <Frame x:Name="CtrlMainFrame"

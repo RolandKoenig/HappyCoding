@@ -6,5 +6,7 @@ public enum NavigationTarget
 
     InputForm,
 
-    SearchGrid
+    SearchGrid,
+
+    WebView2Host
 }

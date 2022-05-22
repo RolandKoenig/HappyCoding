@@ -14,6 +14,7 @@ internal class NavigationTargetExtension : MarkupExtension
             NavigationTarget.Home => typeof(Home).FullName!,
             NavigationTarget.InputForm => typeof(InputForm).FullName!,
             NavigationTarget.SearchGrid => typeof(SearchGrid).FullName!,
+            NavigationTarget.WebView2Host => typeof(WebView2Host).FullName!,
             _ => throw new InvalidOperationException($"Unknown member {Target}!")
         };
     }
