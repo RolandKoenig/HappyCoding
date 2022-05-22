@@ -42,6 +42,7 @@
                         BackRequested="{x:Bind NavigateBack}"
                         ItemInvoked="NavigateTo"
                         IsBackEnabled="{Binding ElementName=CtrlMainFrame, Path=CanGoBack}"
+                        IsPaneOpen="False"
                         IsBackButtonVisible="Visible"
                         IsSettingsVisible="False">
             <NavigationView.MenuItems>

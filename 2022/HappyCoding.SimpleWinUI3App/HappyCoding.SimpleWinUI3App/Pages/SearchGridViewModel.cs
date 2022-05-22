@@ -55,6 +55,40 @@ public class SearchGridViewModel : ViewModelBase
             this.UserInfo.Clear();
 
             await Task.Delay(2000);
+
+            if (!string.IsNullOrEmpty(this.SearchString))
+            {
+                this.UserInfo.Add(new UserInfo()
+                {
+                    Name = "Manuela Diederich",
+                    Age = 33,
+                    HomeTown = "Landsberg"
+                });
+                this.UserInfo.Add(new UserInfo()
+                {
+                    Name = "Sarah Huber",
+                    Age = 20,
+                    HomeTown = "Völklingen"
+                });
+                this.UserInfo.Add(new UserInfo()
+                {
+                    Name = "Thorsten Cole",
+                    Age = 74,
+                    HomeTown = "Geilnau"
+                });
+                this.UserInfo.Add(new UserInfo()
+                {
+                    Name = "Bernd Holtzmann",
+                    Age = 26,
+                    HomeTown = "Westerland"
+                });
+                this.UserInfo.Add(new UserInfo()
+                {
+                    Name = "Roland König",
+                    Age = 34,
+                    HomeTown = "Erlangen"
+                });
+            }
         }
         finally
         {

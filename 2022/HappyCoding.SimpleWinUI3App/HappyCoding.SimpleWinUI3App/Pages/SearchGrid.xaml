@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utilConverters="using:HappyCoding.SimpleWinUI3App.Util.Converter"
+    xmlns:toolkitControls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -44,10 +45,17 @@
             </HyperlinkButton>
         </Grid>
 
+        <toolkitControls:DataGrid Grid.Row="1"
+                                  IsEnabled="{x:Bind ViewModel.IsInputPossible}"
+                                  IsReadOnly="True"
+                                  ItemsSource="{x:Bind ViewModel.UserInfo}"
+                                  SelectionMode="Single"
+                                  AutoGenerateColumns="True" />
+
         <Grid Grid.Row="1" 
               Visibility="{x:Bind ViewModel.IsSearching, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
               Background="#88888888">
-            <ProgressRing MaxWidth="300" MaxHeight="300"
+            <ProgressRing Width="300" Height="300"
                           IsActive="True" />
         </Grid>
     </Grid>
