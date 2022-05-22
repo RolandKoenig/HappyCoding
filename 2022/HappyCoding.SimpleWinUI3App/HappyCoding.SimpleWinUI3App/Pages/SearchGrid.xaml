@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="HappyCoding.SimpleWinUI3App.Pages.SearchGrid"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utilConverters="using:HappyCoding.SimpleWinUI3App.Util.Converter"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <utilConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <HyperlinkButton Grid.Column="0" 
+                             IsEnabled="{x:Bind ViewModel.IsInputPossible, Mode=OneWay}"
+                             Click="{x:Bind ViewModel.SearchAsync}">
+                <SymbolIcon Symbol="Find" />
+            </HyperlinkButton>
+
+            <TextBox Grid.Column="1"
+                     IsEnabled="{x:Bind ViewModel.IsInputPossible, Mode=OneWay}"
+                     Text="{x:Bind ViewModel.SearchString, Mode=TwoWay}" />
+
+            <HyperlinkButton Grid.Column="2" 
+                             IsEnabled="{x:Bind ViewModel.IsInputPossible, Mode=OneWay}"
+                             Click="{x:Bind ViewModel.ResetSearch}">
+                <SymbolIcon Foreground="Red"
+                            Symbol="Delete" />
+            </HyperlinkButton>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              Visibility="{x:Bind ViewModel.IsSearching, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+              Background="#88888888">
+            <ProgressRing MaxWidth="300" MaxHeight="300"
+                          IsActive="True" />
+        </Grid>
+    </Grid>
+</Page>

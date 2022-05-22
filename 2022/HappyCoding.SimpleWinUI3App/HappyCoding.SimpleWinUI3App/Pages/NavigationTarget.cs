@@ -6,5 +6,5 @@ public enum NavigationTarget
 
     InputForm,
 
-    ValidatingInputForm
+    SearchGrid
 }

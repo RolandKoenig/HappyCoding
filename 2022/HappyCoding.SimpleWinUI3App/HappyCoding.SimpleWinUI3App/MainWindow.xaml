@@ -47,7 +47,7 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Home" Content="Home" Tag="{pages:NavigationTarget Target=Home}" />
                 <NavigationViewItem Icon="Edit" Content="Input Form" Tag="{pages:NavigationTarget Target=InputForm}" />
-                <NavigationViewItem Icon="Edit" Content="Validating Input Form" Tag="{pages:NavigationTarget Target=ValidatingInputForm}" />
+                <NavigationViewItem Icon="Find" Content="Search Grid" Tag="{pages:NavigationTarget Target=SearchGrid}" />
             </NavigationView.MenuItems>
 
             <Frame x:Name="CtrlMainFrame"

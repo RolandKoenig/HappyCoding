@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Windows.ApplicationModel;
-using Windows.UI.Popups;
 using HappyCoding.SimpleWinUI3App.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -31,9 +30,8 @@ public sealed partial class MainWindow : Window
 
     public async void ShowUnhandledException(Exception ex)
     { 
-        ContentDialog dialog = new ContentDialog();
-
-        // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+        var dialog = new ContentDialog();
+        
         dialog.XamlRoot = CtrlNavView.XamlRoot;
         dialog.Title = "Unhandled Exception";
         dialog.PrimaryButtonText = "OK";
