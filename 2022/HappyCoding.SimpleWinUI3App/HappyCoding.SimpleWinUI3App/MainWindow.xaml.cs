@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Windows.ApplicationModel;
+using Windows.UI.Popups;
 using HappyCoding.SimpleWinUI3App.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -26,6 +27,20 @@ public sealed partial class MainWindow : Window
             CtrlNavView.SelectedItem = CtrlNavView.MenuItems.FirstOrDefault();
             CtrlMainFrame.Navigate(typeof(Home));
         }
+    }
+
+    public async void ShowUnhandledException(Exception ex)
+    { 
+        ContentDialog dialog = new ContentDialog();
+
+        // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+        dialog.XamlRoot = CtrlNavView.XamlRoot;
+        dialog.Title = "Unhandled Exception";
+        dialog.PrimaryButtonText = "OK";
+        dialog.DefaultButton = ContentDialogButton.Primary;
+        dialog.Content = ex.ToString();
+
+        await dialog.ShowAsync();
     }
 
     public void NavigateTo(object sender, NavigationViewItemInvokedEventArgs args)

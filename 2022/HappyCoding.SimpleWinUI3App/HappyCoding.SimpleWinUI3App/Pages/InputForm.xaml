@@ -9,6 +9,29 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Style="{StaticResource PageGridStyle}">
+        <StackPanel Orientation="Vertical">
+            
+            <TextBlock Text="String" />
+            <TextBox Text="{x:Bind ViewModel.StringInput, Mode=TwoWay}" />
 
+            <TextBlock Margin="0,15,0,0" 
+                       Text="Int" />
+            <TextBox Text="{x:Bind ViewModel.IntInput, Mode=TwoWay}" />
+
+            <TextBlock Margin="0,15,0,0" 
+                       Text="DateTimeOffset (Date / DatePicker)" />
+            <DatePicker Date="{x:Bind ViewModel.DateTimeInput, Mode=TwoWay}" />
+
+            <TextBlock Margin="0,15,0,0" 
+                       Text="DateTimeOffset (Date / CalendarPicker)" />
+            <CalendarDatePicker Date="{x:Bind ViewModel.DateTimeInput, Mode=TwoWay}" />
+
+            <TextBlock Margin="0,15,0,0" 
+                       Text="DateTimeOffset (Time)" />
+            <TimePicker Time="{x:Bind ViewModel.TimeInput, Mode=TwoWay}" />
+
+            <TextBlock Margin="0,15,0,0"
+                       Text="{x:Bind ViewModel.AllContent, Mode=TwoWay}" />
+        </StackPanel>
     </Grid>
 </Page>

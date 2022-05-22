@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <SymbolIcon Grid.Column="0" 
-                        Symbol="Library"
+                        Symbol="Emoji2"
                         Margin="7"
                         Foreground="White"/>
 
