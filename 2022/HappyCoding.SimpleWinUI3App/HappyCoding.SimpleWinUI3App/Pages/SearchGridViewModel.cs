@@ -1,12 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using HappyCoding.SimpleWinUI3App.Model;
+using HappyCoding.SimpleWinUI3App.Services;
 using HappyCoding.SimpleWinUI3App.Util;
 
 namespace HappyCoding.SimpleWinUI3App.Pages;
 
 public class SearchGridViewModel : ViewModelBase
 {
+    private readonly IUserRepository _repoUsers;
+
     private string _searchString = string.Empty;
     private bool _isSearching = false;
 
@@ -41,6 +44,11 @@ public class SearchGridViewModel : ViewModelBase
 
     public ObservableCollection<UserInfo> UserInfo { get; } = new ObservableCollection<UserInfo>();
 
+    public SearchGridViewModel(IUserRepository repoUsers)
+    {
+        _repoUsers = repoUsers;
+    }
+
     public void ResetSearch()
     {
         this.SearchString = string.Empty;
@@ -54,40 +62,9 @@ public class SearchGridViewModel : ViewModelBase
         {
             this.UserInfo.Clear();
 
-            await Task.Delay(2000);
-
-            if (!string.IsNullOrEmpty(this.SearchString))
+            foreach (var actUser in await _repoUsers.SearchUsersAsync(this.SearchString))
             {
-                this.UserInfo.Add(new UserInfo()
-                {
-                    Name = "Manuela Diederich",
-                    Age = 33,
-                    HomeTown = "Landsberg"
-                });
-                this.UserInfo.Add(new UserInfo()
-                {
-                    Name = "Sarah Huber",
-                    Age = 20,
-                    HomeTown = "Völklingen"
-                });
-                this.UserInfo.Add(new UserInfo()
-                {
-                    Name = "Thorsten Cole",
-                    Age = 74,
-                    HomeTown = "Geilnau"
-                });
-                this.UserInfo.Add(new UserInfo()
-                {
-                    Name = "Bernd Holtzmann",
-                    Age = 26,
-                    HomeTown = "Westerland"
-                });
-                this.UserInfo.Add(new UserInfo()
-                {
-                    Name = "Roland König",
-                    Age = 34,
-                    HomeTown = "Erlangen"
-                });
+                this.UserInfo.Add(actUser);
             }
         }
         finally

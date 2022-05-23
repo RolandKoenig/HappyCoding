@@ -9,26 +9,23 @@
 
     <Grid Style="{StaticResource PageGridStyle}">
         <ScrollViewer>
-            <StackPanel Orientation="Vertical">
-            
-                <TextBlock Text="String" />
-                <TextBox Text="{x:Bind ViewModel.StringInput, Mode=TwoWay}" />
+            <StackPanel Orientation="Vertical"
+                        Spacing="12">
 
-                <TextBlock Margin="0,15,0,0" 
-                           Text="Int" />
-                <TextBox Text="{x:Bind ViewModel.IntInput, Mode=TwoWay}" />
+                <TextBox Header="String"
+                         Text="{x:Bind ViewModel.StringInput, Mode=TwoWay}" />
 
-                <TextBlock Margin="0,15,0,0" 
-                           Text="DateTimeOffset (Date / DatePicker)" />
-                <DatePicker Date="{x:Bind ViewModel.DateTimeInput, Mode=TwoWay}" />
+                <TextBox Header="Int" 
+                         Text="{x:Bind ViewModel.IntInput, Mode=TwoWay}" />
 
-                <TextBlock Margin="0,15,0,0" 
-                           Text="DateTimeOffset (Date / CalendarPicker)" />
-                <CalendarDatePicker Date="{x:Bind ViewModel.DateTimeInput, Mode=TwoWay}" />
+                <DatePicker Header="DateTimeOffset (Date / DatePicker)" 
+                            Date="{x:Bind ViewModel.DateTimeInput, Mode=TwoWay}" />
 
-                <TextBlock Margin="0,15,0,0" 
-                           Text="DateTimeOffset (Time)" />
-                <TimePicker Time="{x:Bind ViewModel.TimeInput, Mode=TwoWay}" />
+                <CalendarDatePicker Header="DateTimeOffset (Date / CalendarPicker)" 
+                                    Date="{x:Bind ViewModel.DateTimeInput, Mode=TwoWay}" />
+
+                <TimePicker Header="DateTimeOffset (Time)" 
+                            Time="{x:Bind ViewModel.TimeInput, Mode=TwoWay}" />
 
                 <TextBlock Margin="0,15,0,0"
                            Text="{x:Bind ViewModel.AllContent, Mode=TwoWay}" />
