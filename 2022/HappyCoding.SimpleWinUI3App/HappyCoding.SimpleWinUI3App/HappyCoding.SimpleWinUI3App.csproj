@@ -16,6 +16,7 @@
     <None Remove="Pages\Home.xaml" />
     <None Remove="Pages\InputForm.xaml" />
     <None Remove="Pages\SearchGrid.xaml" />
+    <None Remove="Pages\TabControlPage.xaml" />
     <None Remove="Pages\WebView2Host.xaml" />
   </ItemGroup>
 
@@ -42,6 +43,11 @@
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\TabControlPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\WebView2Host.xaml">

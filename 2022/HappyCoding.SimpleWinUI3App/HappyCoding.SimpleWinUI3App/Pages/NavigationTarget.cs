@@ -8,5 +8,7 @@ public enum NavigationTarget
 
     SearchGrid,
 
-    WebView2Host
+    WebView2Host,
+
+    TabControlPage
 }

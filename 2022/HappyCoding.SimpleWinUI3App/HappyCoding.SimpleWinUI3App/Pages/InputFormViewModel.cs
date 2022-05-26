@@ -94,4 +94,14 @@ public class InputFormViewModel : ViewModelBase
         }
         set{ }
     }
+
+    public override void OnHostLoaded()
+    {
+        base.OnHostLoaded();
+    }
+
+    public override void OnHostUnloaded()
+    {
+        base.OnHostUnloaded();
+    }
 }

@@ -50,10 +50,12 @@
                 <NavigationViewItem Icon="Edit" Content="Input Form" Tag="{pages:NavigationTarget Target=InputForm}" />
                 <NavigationViewItem Icon="Find" Content="Search Grid" Tag="{pages:NavigationTarget Target=SearchGrid}" />
                 <NavigationViewItem Icon="World" Content="WebView2 Host" Tag="{pages:NavigationTarget Target=WebView2Host}" />
+                <NavigationViewItem Icon="Page2" Content="TabControl Page" Tag="{pages:NavigationTarget Target=TabControlPage}" />
             </NavigationView.MenuItems>
 
             <Frame x:Name="CtrlMainFrame"
-                   Navigated="CtrlMainFrame_OnNavigated"/>
+                   Navigated="CtrlMainFrame_OnNavigated">
+            </Frame>
         
         </NavigationView>
     </Grid>
