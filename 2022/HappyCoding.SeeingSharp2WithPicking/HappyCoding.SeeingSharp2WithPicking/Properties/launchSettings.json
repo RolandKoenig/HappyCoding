@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "HappyCoding.SeeingSharp2WithPicking (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "HappyCoding.SeeingSharp2WithPicking (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

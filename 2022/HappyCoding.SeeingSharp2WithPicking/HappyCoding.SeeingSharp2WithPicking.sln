@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.SeeingSharp2WithPicking", "HappyCoding.SeeingSharp2WithPicking\HappyCoding.SeeingSharp2WithPicking.csproj", "{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|arm64 = Debug|arm64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|arm64 = Release|arm64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|arm64.ActiveCfg = Debug|arm64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|arm64.Build.0 = Debug|arm64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|arm64.Deploy.0 = Debug|arm64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|x64.ActiveCfg = Debug|x64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|x64.Build.0 = Debug|x64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|x64.Deploy.0 = Debug|x64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|x86.ActiveCfg = Debug|x86
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|x86.Build.0 = Debug|x86
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Debug|x86.Deploy.0 = Debug|x86
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|arm64.ActiveCfg = Release|arm64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|arm64.Build.0 = Release|arm64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|arm64.Deploy.0 = Release|arm64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|x64.ActiveCfg = Release|x64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|x64.Build.0 = Release|x64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|x64.Deploy.0 = Release|x64
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|x86.ActiveCfg = Release|x86
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|x86.Build.0 = Release|x86
+		{43A87808-6B9F-4BD0-B5BD-ED023888D1E0}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D450903D-117C-44FE-AFA4-727FE5015509}
+	EndGlobalSection
+EndGlobal
