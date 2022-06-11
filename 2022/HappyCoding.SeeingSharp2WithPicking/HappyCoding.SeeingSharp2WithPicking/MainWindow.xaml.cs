@@ -1,9 +1,9 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
-using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Microsoft.UI.Xaml.Input;
 using SeeingSharp.Components.Input;
 using SeeingSharp.Core;
@@ -25,7 +25,7 @@ namespace HappyCoding.SeeingSharp2WithPicking
         private BrushResource? _textBrush;
 
         private bool _pointerInside;
-        private Point _currentPointerLocationPixel;
+        private Point _currentPointerLocation;
         private bool _sceneLoaded;
         private SceneObject? _pickedObject;
 
@@ -51,7 +51,7 @@ namespace HappyCoding.SeeingSharp2WithPicking
                 if (_pointerInside)
                 {
                     var objectsBelowCursor =
-                        await this.CtrlView3D.RenderLoop.PickObjectAsync(_currentPointerLocationPixel, new PickingOptions());
+                        await this.CtrlView3D.PickObjectAsync(_currentPointerLocation, new PickingOptions());
                     _pickedObject = objectsBelowCursor?.FirstOrDefault();
                 }
                 else
@@ -64,9 +64,7 @@ namespace HappyCoding.SeeingSharp2WithPicking
 
         private void OnCtrlView3D_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            var point = e.GetCurrentPoint(this.CtrlView3D);
-            _currentPointerLocationPixel = new Point(
-                (int)point.Position.X, (int)point.Position.Y);
+            _currentPointerLocation = e.GetCurrentPoint(this.CtrlView3D).Position;
         }
 
         private void OnCtrlView3D_PointerExited(object sender, PointerRoutedEventArgs e)
@@ -123,7 +121,7 @@ namespace HappyCoding.SeeingSharp2WithPicking
                 graphics.DrawText(
                     "Picked object: " + _pickedObject, 
                     textFormat,
-                    new RectangleF(10f, 10f, graphics.ScreenWidth - 20f, 30f),
+                    new System.Drawing.RectangleF(10f, 10f, graphics.ScreenWidth - 20f, 30f),
                     textBrush);
             });
 
