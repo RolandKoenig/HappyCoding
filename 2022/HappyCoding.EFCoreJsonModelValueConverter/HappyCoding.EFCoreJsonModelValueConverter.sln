@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.EFCoreJsonModelValueConverter", "HappyCoding.EFCoreJsonModelValueConverter\HappyCoding.EFCoreJsonModelValueConverter.csproj", "{03F05591-0428-4DEB-B746-71BD9564501A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03F05591-0428-4DEB-B746-71BD9564501A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F05591-0428-4DEB-B746-71BD9564501A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F05591-0428-4DEB-B746-71BD9564501A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F05591-0428-4DEB-B746-71BD9564501A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E966252-7DD4-41C3-BF22-0A98D71420B8}
+	EndGlobalSection
+EndGlobal
