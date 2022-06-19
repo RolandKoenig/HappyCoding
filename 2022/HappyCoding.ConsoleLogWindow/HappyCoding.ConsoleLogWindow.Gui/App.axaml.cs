@@ -1,12 +1,11 @@
 using System;
-using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HappyCoding.ConsoleLogWindow.Gui;
 
-public partial class App : Application
+public partial class App : Avalonia.Application
 {
     public IServiceProvider? Services { get; private set; }
 

@@ -5,5 +5,19 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.ConsoleLogWindow.Gui.MainWindow"
         Title="HappyCoding.ConsoleLogWindow">
-    Welcome to Avalonia!
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+
+            </MenuItem>
+            <MenuItem Header="Edit">
+
+            </MenuItem>
+        </Menu>
+
+        <Grid>
+
+        </Grid>
+
+    </DockPanel>
 </Window>

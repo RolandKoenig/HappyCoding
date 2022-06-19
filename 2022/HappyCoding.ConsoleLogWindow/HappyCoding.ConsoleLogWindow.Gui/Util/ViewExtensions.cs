@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using Avalonia;
 using Avalonia.Controls;
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Util;
@@ -15,7 +14,7 @@ internal static class ViewExtensions
             return;
         }
 
-        if (Application.Current is not App currentApp)
+        if (Avalonia.Application.Current is not App currentApp)
         {
             throw new InvalidOperationException("Application is not loaded correctly!");
         }

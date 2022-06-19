@@ -7,6 +7,6 @@ internal class MainWindowViewModel : ViewModelBase
 
     public void DoSomething()
     {
-        
+
     }
 }

@@ -30,4 +30,8 @@
     <Folder Include="Services\" />
     <Folder Include="Views\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Application\HappyCoding.ConsoleLogWindow.Application.csproj" />
+    <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Domain\HappyCoding.ConsoleLogWindow.Domain.csproj" />
+  </ItemGroup>
 </Project>
