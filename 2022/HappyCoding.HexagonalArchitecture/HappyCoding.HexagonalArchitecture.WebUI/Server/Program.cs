@@ -1,3 +1,4 @@
+using HappyCoding.HexagonalArchitecture.SQLiteAdapter;
 using Microsoft.AspNetCore.ResponseCompression;
 
 namespace HappyCoding.HexagonalArchitecture.WebUI
@@ -8,14 +9,22 @@ namespace HappyCoding.HexagonalArchitecture.WebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
+            //##########
+            // Configure services
+            
+            // Infrastructure
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
-            var app = builder.Build();
+            // Adapters
+            builder.Services.AddSQLiteAdapter(
+                builder.Configuration.GetConnectionString("WorkshopDB"));
 
-            // Configure the HTTP request pipeline.
+            //##########
+            // Configure request pipeline
+            
+            var app = builder.Build();
+            
             if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
@@ -23,7 +32,6 @@ namespace HappyCoding.HexagonalArchitecture.WebUI
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -33,8 +41,7 @@ namespace HappyCoding.HexagonalArchitecture.WebUI
             app.UseStaticFiles();
 
             app.UseRouting();
-
-
+            
             app.MapRazorPages();
             app.MapControllers();
             app.MapFallbackToFile("index.html");

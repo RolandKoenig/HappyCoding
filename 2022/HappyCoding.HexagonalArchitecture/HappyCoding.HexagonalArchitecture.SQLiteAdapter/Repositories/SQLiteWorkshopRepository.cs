@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using HappyCoding.HexagonalArchitecture.Domain.Model;
+using HappyCoding.HexagonalArchitecture.Domain.Model.Projections;
 using HappyCoding.HexagonalArchitecture.Domain.Ports;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,9 +28,36 @@ public class SQLiteWorkshopRepository : IWorkshopRepository
         }
     }
 
-    public Task DeleteWorkshopAsync(Workshop workshop, CancellationToken cancellationToken)
+    public Task<Workshop> GetWorkshopAsync(Guid workshopID, CancellationToken cancellationToken)
     {
+        return _dbWorkshops
+            .Where(x => x.ID == workshopID)
+            .FirstAsync(cancellationToken);
+    }
+
+    public async Task<ImmutableArray<WorkshopShortInfo>> SearchWorkshopsAsync(string queryString, CancellationToken cancellationToken)
+    {
+        var result = await _dbWorkshops
+            .Where(x =>
+                (x.Project == queryString) ||
+                (x.Title == queryString))
+            .Select(x => new WorkshopShortInfo()
+            {
+                ID = x.ID,
+                Duration = x.Duration,
+                Project = x.Project,
+                StartTimestamp = x.StartTimestamp,
+                Title = x.Title
+            })
+            .ToArrayAsync(cancellationToken);
+        return ImmutableArray.Create(result);
+    }
+
+    public async Task DeleteWorkshopAsync(Guid workshopID, CancellationToken cancellationToken)
+    {
+        var workshop = await _dbWorkshops
+            .Where(x => x.ID == workshopID)
+            .FirstAsync(cancellationToken);
         _dbWorkshops.Remove(workshop);
-        return Task.CompletedTask;
     }
 }

@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Search" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Light.GuardClauses" Version="10.0.0" />
   </ItemGroup>
 

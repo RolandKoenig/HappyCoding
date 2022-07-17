@@ -34,11 +34,25 @@ public class Workshop
         return new Workshop()
         {
             ID = Guid.NewGuid(),
+            Project = project,
             Title = title,
             StartTimestamp  = startTimestamp,
             Duration = duration,
             Participants = participants.ToArray(),
             Protocol = protocol.ToArray()
         };
+    }
+
+    public void Update(
+        string project, string title, DateTimeOffset startTimestamp, TimeSpan duration,
+        IEnumerable<string> participants,
+        IEnumerable<ProtocolEntry> protocol)
+    {
+        this.Project = project;
+        this.Title = title;
+        this.StartTimestamp = startTimestamp;
+        this.Duration = duration;
+        this.Participants = participants.ToArray();
+        this.Protocol = protocol.ToArray();
     }
 }

@@ -6,21 +6,23 @@ using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application;
 
-public class CreateWorkshopRequestHandler : IRequestHandler<CreateWorkshopRequest, WorkshopDto>
+public class UpdateWorkshopRequestHandler : IRequestHandler<UpdateWorkshopRequest, WorkshopDto>
 {
     private readonly IUnitOfWork _unitOfWork;
-    
-    public CreateWorkshopRequestHandler(
-        IUnitOfWork unitOfWork)
+
+    public UpdateWorkshopRequestHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
-
-    public async Task<WorkshopDto> Handle(CreateWorkshopRequest request, CancellationToken cancellationToken)
+    
+    public async Task<WorkshopDto> Handle(UpdateWorkshopRequest request, CancellationToken cancellationToken)
     {
         var workshopDto = request.Workshop;
+        
+        var workshop = await _unitOfWork.Workshops.GetWorkshopAsync(
+            request.Workshop.ID, cancellationToken);
 
-        var newWorkshop = Workshop.CreateNew(
+        workshop.Update(
             workshopDto.Project,
             workshopDto.Title,
             workshopDto.StartTimestamp,
@@ -33,10 +35,8 @@ public class CreateWorkshopRequestHandler : IRequestHandler<CreateWorkshopReques
                 x.Responsible,
                 x.ChangeDate)));
 
-        await _unitOfWork.Workshops.AddWorkshopAsync(newWorkshop, cancellationToken);
-
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return WorkshopMapper.WorkshopToDto(newWorkshop);
+        return WorkshopMapper.WorkshopToDto(workshop);
     }
 }
