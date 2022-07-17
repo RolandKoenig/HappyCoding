@@ -13,7 +13,7 @@ internal class AppDBContext : DbContext
     {
 
     }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -45,18 +45,17 @@ internal class AppDBContext : DbContext
             .Property(x => x.Text)
             .HasMaxLength(300);
         tableProtocolEntries.Property(x => x.EntryType);
-        tableProtocolEntries.Property(x => x.Priority);
+        tableProtocolEntries
+            .Property(x => x.Priority)
+            .HasConversion(new ProtocolEntryPriorityConverter());
+        tableProtocolEntries
+            .Property(x => x.Responsible)
+            .HasMaxLength(30);
+        tableProtocolEntries.Property(x => x.ChangeDate);
 
-        //public Guid ID { get; private set; }
-//
-        //public string Text { get; private set; }
-        //
-        //public ProtocolEntryType EntryType { get; private set; }
-        //
-        //public int Priority { get; private set; }
-        //
-        //public string Responsible { get; private set; }
-        //
-        //public DateTimeOffset ChangeDate { get; private set; }
+        tableWorkshops
+            .HasMany<ProtocolEntry>(nameof(Workshop.Protocol))
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

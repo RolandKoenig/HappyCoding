@@ -1,11 +1,9 @@
-using System.Linq.Expressions;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HappyCoding.HexagonalArchitecture.SQLiteAdapter.Converters;
 
-internal class ParticipantsConverter : ValueConverter<IReadOnlyCollection<string>, string>
+internal class ParticipantsConverter : ValueConverter<IReadOnlyList<string>, string>
 {
     public ParticipantsConverter()
         : base(appModel => ConvertCollectionToString(appModel),
@@ -15,7 +13,7 @@ internal class ParticipantsConverter : ValueConverter<IReadOnlyCollection<string
 
     }
 
-    private static string ConvertCollectionToString(IReadOnlyCollection<string> collection)
+    private static string ConvertCollectionToString(IReadOnlyList<string> collection)
     {
         if (collection.Count == 0)
         {
@@ -25,7 +23,7 @@ internal class ParticipantsConverter : ValueConverter<IReadOnlyCollection<string
         return JsonSerializer.Serialize(collection) ?? string.Empty;
     }
 
-    private static IReadOnlyCollection<string> ConvertStringToCollection(string str)
+    private static IReadOnlyList<string> ConvertStringToCollection(string str)
     {
         if (string.IsNullOrEmpty(str))
         {

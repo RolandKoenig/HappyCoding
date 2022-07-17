@@ -1,4 +1,5 @@
 using HappyCoding.HexagonalArchitecture.Domain.Ports;
+using HappyCoding.HexagonalArchitecture.SQLiteAdapter.Bootstrap;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter.Repositories;
 
 namespace HappyCoding.HexagonalArchitecture.SQLiteAdapter;
@@ -9,9 +10,15 @@ internal class SQLiteUnitOfWork : IUnitOfWork
     
     public IWorkshopRepository Workshops { get; }
 
-    public SQLiteUnitOfWork(AppDBContext dbContext)
+    public SQLiteUnitOfWork(AppDBContext dbContext, IDBBootstrap dbBootstrap)
     {
         _dbContext = dbContext;
+
+        // Trigger for initial migration
+        if (dbBootstrap.BootstrapExecuted)
+        {
+            dbBootstrap.Bootstrap(dbContext);
+        }
 
         this.Workshops = new SQLiteWorkshopRepository(_dbContext.Workshops);
     }

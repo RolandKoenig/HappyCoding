@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace HappyCoding.HexagonalArchitecture.Application.Dtos;
+namespace HappyCoding.HexagonalArchitecture.Application;
 
 public record DeleteWorkshopRequest : IRequest
 {

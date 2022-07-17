@@ -37,10 +37,16 @@ public class SQLiteWorkshopRepository : IWorkshopRepository
 
     public async Task<ImmutableArray<WorkshopShortInfo>> SearchWorkshopsAsync(string queryString, CancellationToken cancellationToken)
     {
-        var result = await _dbWorkshops
-            .Where(x =>
+        var queryable = (IQueryable<Workshop>)_dbWorkshops;
+
+        if (!string.IsNullOrEmpty(queryString))
+        {
+            queryable = queryable.Where(x =>
                 (x.Project == queryString) ||
-                (x.Title == queryString))
+                (x.Title == queryString));
+        }
+
+        var result = await queryable
             .Select(x => new WorkshopShortInfo()
             {
                 ID = x.ID,
