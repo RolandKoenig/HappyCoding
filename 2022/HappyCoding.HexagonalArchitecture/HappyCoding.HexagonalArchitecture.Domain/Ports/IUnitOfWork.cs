@@ -1,6 +1,8 @@
 ﻿namespace HappyCoding.HexagonalArchitecture.Domain.Ports;
 
-internal interface IUnitOfWork
+public interface IUnitOfWork
 {
-    Task SaveChangesAsync();
+    IWorkshopRepository Workshops { get; }
+    
+    Task SaveChangesAsync(CancellationToken cancellationToken);
 }

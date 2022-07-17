@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HappyCoding.HexagonalArchitecture.Application\HappyCoding.HexagonalArchitecture.Application.csproj" />
     <ProjectReference Include="..\Client\HappyCoding.HexagonalArchitecture.WebUI.Client.csproj" />
     <ProjectReference Include="..\Shared\HappyCoding.HexagonalArchitecture.WebUI.Shared.csproj" />
   </ItemGroup>
