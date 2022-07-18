@@ -1,10 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace HappyCoding.HexagonalArchitecture.Application.Dtos;
 
 public record ProtocolEntryDto
 {
-    public string Text { get; init; }
+    [Required]
+    public string Text { get; set; }
     
-    public ProtocolEntryTypeDto EntryType { get; init; }
+    [Required]
+    public ProtocolEntryTypeDto EntryType { get; set; }
     
-    public int Priority { get; init; }
+    [Required]
+    public int Priority { get; set; }
 }

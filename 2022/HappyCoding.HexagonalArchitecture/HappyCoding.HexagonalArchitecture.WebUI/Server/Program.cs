@@ -1,10 +1,9 @@
 using HappyCoding.HexagonalArchitecture.Application;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter;
 using MediatR;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.OpenApi.Models;
 
-namespace HappyCoding.HexagonalArchitecture.WebUI
+namespace HappyCoding.HexagonalArchitecture.WebUI.Server
 {
     public class Program
     {

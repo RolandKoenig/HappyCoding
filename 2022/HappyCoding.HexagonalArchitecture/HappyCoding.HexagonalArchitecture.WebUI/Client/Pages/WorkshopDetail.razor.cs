@@ -9,7 +9,7 @@ public partial class WorkshopDetail
     [Parameter]
     public string WorkshopID { get; set; }
 
-    public WorkshopWithoutIDDto EditingWorkshop { get; private set; } = new WorkshopWithoutIDDto();
+    public WorkshopWithoutIDDto EditingWorkshop { get; private set; } = CreateEmptyWorkshop();
 
     [Inject]
     public IWorkshopClient WorkshopClient { get; set; } = null!;
@@ -19,6 +19,14 @@ public partial class WorkshopDetail
 
     public bool IsCreating { get; private set; }
 
+    private static WorkshopWithoutIDDto CreateEmptyWorkshop() => new WorkshopWithoutIDDto()
+    {
+        Project = "",
+        StartTimestamp = DateTimeOffset.UtcNow,
+        Protocol = new List<ProtocolEntryDto>(),
+        Title = ""
+    };
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -26,11 +34,7 @@ public partial class WorkshopDetail
         if (string.IsNullOrEmpty(this.WorkshopID))
         {
             this.IsCreating = true;
-            this.EditingWorkshop = new WorkshopWithoutIDDto()
-            {
-                StartTimestamp = DateTimeOffset.UtcNow,
-                Protocol = new List<ProtocolEntryDto>()
-            };
+            this.EditingWorkshop = CreateEmptyWorkshop();
         }
         else
         {
@@ -69,5 +73,20 @@ public partial class WorkshopDetail
     private void CancelEditing()
     {
         this.Navigation.NavigateTo("/ui/workshops");
+    }
+
+    private void AddProtocolEntry()
+    {
+        this.EditingWorkshop.Protocol.Add(new ProtocolEntryDto()
+        {
+            Priority = 2,
+            EntryType = ProtocolEntryTypeDto.Information,
+            Text = ""
+        });
+    }
+
+    private void RemoveProtocolEntry(ProtocolEntryDto entryToRemove)
+    {
+        this.EditingWorkshop.Protocol.Remove(entryToRemove);
     }
 }
