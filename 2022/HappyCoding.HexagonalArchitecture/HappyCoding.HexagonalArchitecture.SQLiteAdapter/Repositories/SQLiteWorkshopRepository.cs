@@ -43,8 +43,8 @@ public class SQLiteWorkshopRepository : IWorkshopRepository
         if (!string.IsNullOrEmpty(queryString))
         {
             queryable = queryable.Where(x =>
-                (x.Project == queryString) ||
-                (x.Title == queryString));
+                (x.Project.ToLower() == queryString.ToLower()) ||
+                (x.Title.ToLower() == queryString.ToLower()));
         }
 
         var result = await queryable

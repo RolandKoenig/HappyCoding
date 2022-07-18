@@ -11,6 +11,9 @@ public partial class Workshops
 
     [Inject] public IWorkshopClient WorkshopClient { get; set; } = null!;
 
+    [Inject]
+    public NavigationManager Navigation { get; set; } = null!;
+
     public ImmutableArray<WorkshopShortInfoDto> WorkshopInfos { get; set; } = ImmutableArray<WorkshopShortInfoDto>.Empty;
 
     protected override async Task OnInitializedAsync()
@@ -31,6 +34,24 @@ public partial class Workshops
     private async Task ResetQueryAsync()
     {
         this.SearchFormData.QueryString = "";
+        await this.SubmitQueryAsync();
+    }
+
+    private void CreateWorkshop()
+    {
+        this.Navigation.NavigateTo("/ui/workshopdetail");
+    }
+
+    private void EditWorkshop(WorkshopShortInfoDto workshop)
+    {
+        this.Navigation.NavigateTo($"/ui/workshopdetail/{workshop.ID}");
+    }
+
+    private async Task DeleteWorkshopAsync(WorkshopShortInfoDto workshop)
+    {
+        await this.WorkshopClient.DeleteWorkshopAsync(
+            workshop.ID,
+            CancellationToken.None);
         await this.SubmitQueryAsync();
     }
 }

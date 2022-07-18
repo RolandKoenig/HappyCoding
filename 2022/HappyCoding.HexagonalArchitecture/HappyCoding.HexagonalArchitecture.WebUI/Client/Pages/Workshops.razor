@@ -1,6 +1,13 @@
 ﻿@page "/ui/workshops"
 
 <PageTitle>Workshops</PageTitle>
+<h1>Workshops</h1>
+
+<button class="input-group-text border-0 text-primary"
+        @onclick="CreateWorkshop">
+    <i class="oi oi-plus"></i> &nbsp; Create Workshop
+</button>
+<br />
 
 <EditForm Model="SearchFormData" OnValidSubmit="SubmitQueryAsync">
     
@@ -43,7 +50,15 @@
             <td>@actWorkshopInfo.Title</td>
             <td>@actWorkshopInfo.StartTimestamp.ToString("d")</td>
             <td>
-                <NavLink href="@($"/ui/workshopdetail/{actWorkshopInfo.ID}")">Edit</NavLink>
+                <button type="button" class="btn btn-link"
+                        @onclick="() => EditWorkshop(actWorkshopInfo)">
+                    <i class="oi oi-pencil"></i> Edit
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-link text-danger"
+                        @onclick="() => DeleteWorkshopAsync(actWorkshopInfo)">
+                    <i class="oi oi-delete"></i> Delete
+                </button>
             </td>
         </tr>
     }

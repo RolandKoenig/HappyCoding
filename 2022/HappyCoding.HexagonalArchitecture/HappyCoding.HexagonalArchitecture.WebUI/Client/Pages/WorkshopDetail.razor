@@ -1,35 +1,49 @@
 ﻿@page "/ui/workshopdetail"
 @page "/ui/workshopdetail/{workshopID}"
 
-<PageTitle>Workshop Detail</PageTitle>
+@if (this.IsCreating)
+{
+    <PageTitle>Create new Workshop</PageTitle>
+    <h1>Create new Workshop</h1>
+}
+else
+{
+    <PageTitle>Edit Workshop</PageTitle>
+    <h1>Edit Workshop</h1>
+}
 
 <EditForm Model="EditingWorkshop" OnValidSubmit="SubmitWorkshopAsync">
+    <DataAnnotationsValidator />
 
     @if (!this.IsCreating)
     {
         <label for="workshopID">ID</label>
         <InputText class="form-control" id="workshopID" @bind-Value="WorkshopID" readonly></InputText>
-        <br />
+        <br/>
     }
-    
+
     <label for="project">Project</label>
     <InputText class="form-control" id="project" @bind-Value="EditingWorkshop.Project" placeholder="Project"></InputText>
-    <br />
+    <ValidationMessage For="@(() => EditingWorkshop.Project)" />
+    <br/>
 
     <label for="title">Title</label>
     <InputText class="form-control" id="title" @bind-Value="EditingWorkshop.Title" placeholder="Title"></InputText>
-    <br />
-    
+    <ValidationMessage For="@(() => EditingWorkshop.Title)" />
+    <br/>
+
     <div class="row">
         <label for="timestamp">Timestamp</label>
         <div class="col-md-2">
             <InputDate TValue="DateTimeOffset" class="form-control" id="timestamp" @bind-Value="EditingWorkshop.StartTimestamp"></InputDate>
+            <ValidationMessage For="@(() => EditingWorkshop.StartTimestamp)" />
         </div>
     </div>
-    <br />
+    <br/>
 
-    <br />
-    <button type="submit" class="btn">
+    <br/>
+    <button class="btn"
+            @onclick="CancelEditing">
         Cancel
     </button>
     <button type="submit"

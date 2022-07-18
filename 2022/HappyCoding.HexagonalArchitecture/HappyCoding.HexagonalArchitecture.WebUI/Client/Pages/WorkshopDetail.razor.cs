@@ -28,7 +28,8 @@ public partial class WorkshopDetail
             this.IsCreating = true;
             this.EditingWorkshop = new WorkshopWithoutIDDto()
             {
-                StartTimestamp = DateTimeOffset.UtcNow
+                StartTimestamp = DateTimeOffset.UtcNow,
+                Protocol = new List<ProtocolEntryDto>()
             };
         }
         else
@@ -42,8 +43,31 @@ public partial class WorkshopDetail
 
     private async Task SubmitWorkshopAsync()
     {
-        await Task.Delay(100);
+        if (this.IsCreating)
+        {
+            await this.WorkshopClient.CreateWorkshopAsync(
+                this.EditingWorkshop,
+                CancellationToken.None);
+        }
+        else
+        {
+            await this.WorkshopClient.UpdateWorkshopAsync(
+                new WorkshopDto()
+                {
+                    ID = Guid.Parse(this.WorkshopID),
+                    Project = EditingWorkshop.Project,
+                    Protocol = EditingWorkshop.Protocol,
+                    StartTimestamp = EditingWorkshop.StartTimestamp,
+                    Title = EditingWorkshop.Title
+                },
+                CancellationToken.None);
+        }
 
+        this.Navigation.NavigateTo("/ui/workshops");
+    }
+
+    private void CancelEditing()
+    {
         this.Navigation.NavigateTo("/ui/workshops");
     }
 }
