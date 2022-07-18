@@ -5,5 +5,5 @@ namespace HappyCoding.HexagonalArchitecture.Application;
 
 public record CreateWorkshopRequest : IRequest<WorkshopDto>
 {
-    public WorkshopDto Workshop { get; init; }
+    public WorkshopWithoutIDDto Workshop { get; init; }
 }

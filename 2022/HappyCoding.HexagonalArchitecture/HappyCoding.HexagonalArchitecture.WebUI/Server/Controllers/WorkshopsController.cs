@@ -17,7 +17,7 @@ public class WorkshopsController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateWorkshop(WorkshopDto workshop)
+    public async Task<IActionResult> CreateWorkshop(WorkshopWithoutIDDto workshop)
     {
         return Ok(await _mediator.Send(new CreateWorkshopRequest()
         {

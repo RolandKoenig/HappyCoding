@@ -17,13 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Application.Dtos", "HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj", "{7E72B6FB-482C-4D8B-AB26-6E7D1E993211}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.HexagonalArchitecture.Application.Tests", "HappyCoding.HexagonalArchitecture.Application.Tests\HappyCoding.HexagonalArchitecture.Application.Tests.csproj", "{067DE8B9-328D-46E3-B81F-9F99552FB20B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Application.Tests", "HappyCoding.HexagonalArchitecture.Application.Tests\HappyCoding.HexagonalArchitecture.Application.Tests.csproj", "{067DE8B9-328D-46E3-B81F-9F99552FB20B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.HexagonalArchitecture.Domain.Tests", "HappyCoding.HexagonalArchitecture.Domain.Tests\HappyCoding.HexagonalArchitecture.Domain.Tests.csproj", "{358085DA-1A7F-4BB0-B43C-800B7D28D555}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Domain.Tests", "HappyCoding.HexagonalArchitecture.Domain.Tests\HappyCoding.HexagonalArchitecture.Domain.Tests.csproj", "{358085DA-1A7F-4BB0-B43C-800B7D28D555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter", "HappyCoding.HexagonalArchitecture.SQLiteAdapter\HappyCoding.HexagonalArchitecture.SQLiteAdapter.csproj", "{FBCA78DA-C45A-4E19-AE91-F414E02A981E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter", "HappyCoding.HexagonalArchitecture.SQLiteAdapter\HappyCoding.HexagonalArchitecture.SQLiteAdapter.csproj", "{FBCA78DA-C45A-4E19-AE91-F414E02A981E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests", "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests\HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests.csproj", "{7ABC737B-E242-4715-828B-FCD0E9E31985}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests", "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests\HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests.csproj", "{7ABC737B-E242-4715-828B-FCD0E9E31985}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,40 @@
+﻿@page "/ui/workshopdetail"
+@page "/ui/workshopdetail/{workshopID}"
+
+<PageTitle>Workshop Detail</PageTitle>
+
+<EditForm Model="EditingWorkshop" OnValidSubmit="SubmitWorkshopAsync">
+
+    @if (!this.IsCreating)
+    {
+        <label for="workshopID">ID</label>
+        <InputText class="form-control" id="workshopID" @bind-Value="WorkshopID" readonly></InputText>
+        <br />
+    }
+    
+    <label for="project">Project</label>
+    <InputText class="form-control" id="project" @bind-Value="EditingWorkshop.Project" placeholder="Project"></InputText>
+    <br />
+
+    <label for="title">Title</label>
+    <InputText class="form-control" id="title" @bind-Value="EditingWorkshop.Title" placeholder="Title"></InputText>
+    <br />
+    
+    <div class="row">
+        <label for="timestamp">Timestamp</label>
+        <div class="col-md-2">
+            <InputDate TValue="DateTimeOffset" class="form-control" id="timestamp" @bind-Value="EditingWorkshop.StartTimestamp"></InputDate>
+        </div>
+    </div>
+    <br />
+
+    <br />
+    <button type="submit" class="btn">
+        Cancel
+    </button>
+    <button type="submit"
+            class="btn btn-primary">
+        Submit
+    </button>
+
+</EditForm>
