@@ -1,5 +1,8 @@
+using HappyCoding.HexagonalArchitecture.Application;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter;
+using MediatR;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.OpenApi.Models;
 
 namespace HappyCoding.HexagonalArchitecture.WebUI
 {
@@ -15,6 +18,14 @@ namespace HappyCoding.HexagonalArchitecture.WebUI
             // Infrastructure
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+            builder.Services.AddSwaggerGen(options =>
+                options.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Title = "Hexagonal Architecture",
+                    Version = "v1"
+                }));
+            builder.Services.AddMediatR(
+                typeof(CreateWorkshopRequestHandler).Assembly);
 
             // Adapters
             builder.Services.AddSQLiteAdapter(
@@ -27,6 +38,12 @@ namespace HappyCoding.HexagonalArchitecture.WebUI
             
             if (app.Environment.IsDevelopment())
             {
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hexagonal Architecture v1");
+                });
+
                 app.UseWebAssemblyDebugging();
             }
             else

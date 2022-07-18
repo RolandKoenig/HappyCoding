@@ -7,8 +7,4 @@ public record ProtocolEntryDto
     public ProtocolEntryTypeDto EntryType { get; init; }
     
     public int Priority { get; init; }
-    
-    public string Responsible { get; init; }
-    
-    public DateTimeOffset ChangeDate { get; init; }
 }

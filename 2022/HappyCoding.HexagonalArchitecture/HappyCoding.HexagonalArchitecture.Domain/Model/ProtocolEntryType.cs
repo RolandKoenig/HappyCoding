@@ -1,5 +1,3 @@
-using Microsoft.VisualBasic;
-
 namespace HappyCoding.HexagonalArchitecture.Domain.Model;
 
 public enum ProtocolEntryType : int

@@ -32,6 +32,7 @@ public class SQLiteWorkshopRepository : IWorkshopRepository
     {
         return _dbWorkshops
             .Where(x => x.ID == workshopID)
+            .Include(x => x.Protocol)
             .FirstAsync(cancellationToken);
     }
 
@@ -50,7 +51,6 @@ public class SQLiteWorkshopRepository : IWorkshopRepository
             .Select(x => new WorkshopShortInfo()
             {
                 ID = x.ID,
-                Duration = x.Duration,
                 Project = x.Project,
                 StartTimestamp = x.StartTimestamp,
                 Title = x.Title

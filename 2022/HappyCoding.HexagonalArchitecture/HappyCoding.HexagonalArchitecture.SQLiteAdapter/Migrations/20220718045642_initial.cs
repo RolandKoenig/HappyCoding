@@ -16,9 +16,7 @@ namespace HappyCoding.HexagonalArchitecture.SQLiteAdapter.Migrations
                     ID = table.Column<Guid>(type: "TEXT", nullable: false),
                     Project = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Title = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    StartTimestamp = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    Duration = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    Participants = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    StartTimestamp = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,8 +31,6 @@ namespace HappyCoding.HexagonalArchitecture.SQLiteAdapter.Migrations
                     Text = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
                     EntryType = table.Column<int>(type: "INTEGER", nullable: false),
                     Priority = table.Column<int>(type: "INTEGER", nullable: false),
-                    Responsible = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
-                    ChangeDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     WorkshopID = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

@@ -38,8 +38,7 @@ public class WorkshopRepositoryTests : IDisposable
         // Act
         var createdWorkshop = Workshop.CreateNew(
             "Test", "Test",
-            DateTimeOffset.UtcNow, TimeSpan.FromHours(1.0),
-            Array.Empty<string>(),
+            DateTimeOffset.UtcNow, 
             Array.Empty<ProtocolEntry>());
         await unitOfWork.Workshops.AddWorkshopAsync(
             createdWorkshop,

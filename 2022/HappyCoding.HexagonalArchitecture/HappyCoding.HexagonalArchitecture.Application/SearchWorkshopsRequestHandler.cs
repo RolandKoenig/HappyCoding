@@ -21,7 +21,6 @@ public class SearchWorkshopsRequestHandler : IRequestHandler<SearchWorkshopsRequ
         return searchResults.Select(x => new WorkshopShortInfoDto()
         {
             ID = x.ID,
-            Duration = x.Duration,
             Project = x.Project,
             StartTimestamp = x.StartTimestamp,
             Title = x.Title

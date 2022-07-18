@@ -15,7 +15,7 @@ internal class SQLiteUnitOfWork : IUnitOfWork
         _dbContext = dbContext;
 
         // Trigger for initial migration
-        if (dbBootstrap.BootstrapExecuted)
+        if (!dbBootstrap.BootstrapExecuted)
         {
             dbBootstrap.Bootstrap(dbContext);
         }

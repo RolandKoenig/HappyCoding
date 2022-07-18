@@ -30,11 +30,6 @@ internal class AppDBContext : DbContext
             .Property(x => x.Title)
             .HasMaxLength(100);
         tableWorkshops.Property(x => x.StartTimestamp);
-        tableWorkshops.Property(x => x.Duration);
-        tableWorkshops
-            .Property(x => x.Participants)
-            .HasConversion(new ParticipantsConverter())
-            .HasMaxLength(500);
 
         var tableProtocolEntries = modelBuilder.Entity<ProtocolEntry>().ToTable("Protocol");
         tableProtocolEntries.HasKey(x => x.ID);
@@ -48,10 +43,6 @@ internal class AppDBContext : DbContext
         tableProtocolEntries
             .Property(x => x.Priority)
             .HasConversion(new ProtocolEntryPriorityConverter());
-        tableProtocolEntries
-            .Property(x => x.Responsible)
-            .HasMaxLength(30);
-        tableProtocolEntries.Property(x => x.ChangeDate);
 
         tableWorkshops
             .HasMany<ProtocolEntry>(nameof(Workshop.Protocol))

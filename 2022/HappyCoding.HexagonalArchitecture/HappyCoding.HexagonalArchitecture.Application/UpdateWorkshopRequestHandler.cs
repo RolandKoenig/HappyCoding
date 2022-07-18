@@ -26,14 +26,10 @@ public class UpdateWorkshopRequestHandler : IRequestHandler<UpdateWorkshopReques
             workshopDto.Project,
             workshopDto.Title,
             workshopDto.StartTimestamp,
-            workshopDto.Duration,
-            workshopDto.Participants,
             workshopDto.Protocol.Select(x => ProtocolEntry.CreateNew(
                 x.Text,
                 (ProtocolEntryType)x.EntryType,
-                new ProtocolEntryPriority(x.Priority),
-                x.Responsible,
-                x.ChangeDate)));
+                new ProtocolEntryPriority(x.Priority))));
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

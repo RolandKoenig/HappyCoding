@@ -7,11 +7,11 @@ namespace HappyCoding.HexagonalArchitecture.WebUI.Server.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WorkshopController : ControllerBase
+public class WorkshopsController : ControllerBase
 {
     private readonly IMediator _mediator;
     
-    public WorkshopController(IMediator mediator)
+    public WorkshopsController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -35,7 +35,7 @@ public class WorkshopController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("/{workshopID}")]
+    [Route("{workshopID}")]
     public async Task<IActionResult> DeleteWorkshop(Guid workshopID)
     {
         await _mediator.Send(new DeleteWorkshopRequest()
@@ -47,7 +47,7 @@ public class WorkshopController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> SearchWorkshops([FromQuery] string query)
+    public async Task<IActionResult> SearchWorkshops([FromQuery] string? query)
     {
         return Ok(await _mediator.Send(new SearchWorkshopsRequest()
         {
@@ -56,7 +56,7 @@ public class WorkshopController : ControllerBase
     }
     
     [HttpGet]
-    [Route("/{workshopID}")]
+    [Route("{workshopID}")]
     public async Task<IActionResult> GetWorkshop(Guid workshopID)
     {
         return Ok(await _mediator.Send(new GetWorkshopRequest()

@@ -9,10 +9,6 @@ public class ProtocolEntry
     public ProtocolEntryType EntryType { get; private set; }
     
     public ProtocolEntryPriority Priority { get; private set; }
-    
-    public string Responsible { get; private set; }
-    
-    public DateTimeOffset ChangeDate { get; private set; }
 
     // Constructor is needed for factory methods and EntityFrameworkCore
 #pragma warning disable CS8618
@@ -23,17 +19,14 @@ public class ProtocolEntry
 #pragma warning restore CS8618
 
     public static ProtocolEntry CreateNew(
-        string text, ProtocolEntryType entryType, ProtocolEntryPriority priority,
-        string responsible, DateTimeOffset createDate)
+        string text, ProtocolEntryType entryType, ProtocolEntryPriority priority)
     {
         return new ProtocolEntry()
         {
             ID = Guid.NewGuid(),
             Text = text,
             EntryType = entryType,
-            Priority = priority,
-            Responsible = responsible,
-            ChangeDate = createDate
+            Priority = priority
         };
     }
 }

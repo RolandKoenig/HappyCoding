@@ -10,16 +10,13 @@ internal static class WorkshopMapper
         return new WorkshopDto()
         {
             ID = workshop.ID,
-            Duration = workshop.Duration,
-            Participants = workshop.Participants.ToList(),
             Project = workshop.Project,
             Protocol = workshop.Protocol
                 .Select(x => new ProtocolEntryDto()
                 {
-                    ChangeDate = x.ChangeDate,
+                    Text = x.Text,
                     EntryType = (ProtocolEntryTypeDto)x.EntryType,
-                    Priority = x.Priority.Priority,
-                    Responsible = x.Responsible
+                    Priority = x.Priority.Priority
                 })
                 .ToList(),
             StartTimestamp = workshop.StartTimestamp,

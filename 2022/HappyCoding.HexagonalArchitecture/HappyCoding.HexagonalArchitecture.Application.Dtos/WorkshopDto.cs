@@ -9,10 +9,6 @@ public record WorkshopDto
     public string Title { get; init; }
     
     public DateTimeOffset StartTimestamp { get; init; }
-    
-    public TimeSpan Duration { get; init; }
-    
-    public List<string> Participants { get; init; }
-    
+
     public List<ProtocolEntryDto> Protocol { get; init; }
 }

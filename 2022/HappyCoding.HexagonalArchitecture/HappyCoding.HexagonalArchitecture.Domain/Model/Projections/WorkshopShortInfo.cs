@@ -9,6 +9,4 @@ public record WorkshopShortInfo
     public string Title { get; init; } = "";
     
     public DateTimeOffset StartTimestamp { get; init; }
-    
-    public TimeSpan Duration { get; init; }
 }
