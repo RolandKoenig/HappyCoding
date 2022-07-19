@@ -205,11 +205,6 @@ BundleArtifacts/
 # Snaps
 *.snap
 
-# SQLite DB
-*.db
-*.db-shm
-*.db-wal
-
 # Custom rules
 ignoreforgit/
 logs/
