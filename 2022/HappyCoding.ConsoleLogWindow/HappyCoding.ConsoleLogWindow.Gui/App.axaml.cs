@@ -1,6 +1,9 @@
 using System;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using HappyCoding.ConsoleLogWindow.Gui.Views;
+using HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository;
+using HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HappyCoding.ConsoleLogWindow.Gui;
@@ -22,9 +25,12 @@ public partial class App : Avalonia.Application
         var serviceCollection = new ServiceCollection();
 
         // Register services
+        serviceCollection.AddInEmoryProcessGroupRepository();
+        serviceCollection.AddStdOutProcessRunner();
 
         // Register view models
         serviceCollection.AddTransient<MainWindowViewModel>();
+        serviceCollection.AddTransient<ProcessGroupsViewModel>();
 
         return serviceCollection.BuildServiceProvider();
     }

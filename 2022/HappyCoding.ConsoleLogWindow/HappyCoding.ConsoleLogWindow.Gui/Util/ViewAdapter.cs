@@ -2,7 +2,7 @@
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Util;
 
-internal class ViewAdapter : IView
+public class ViewAdapter : IView
 {
     public ViewAdapter(Control view)
     {

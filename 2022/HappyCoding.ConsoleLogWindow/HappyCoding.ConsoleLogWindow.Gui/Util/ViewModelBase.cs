@@ -2,7 +2,7 @@
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Util;
 
-internal class ViewModelBase
+public class ViewModelBase
 {
     protected IView? View { get; private set; }
 

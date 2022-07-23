@@ -4,14 +4,14 @@ using Avalonia.Controls;
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Util;
 
-internal static class ViewExtensions
+public static class ViewExtensions
 {
-    public static void CreateAndAttachViewModel<TViewModel>(this Control control)
+    public static TViewModel? CreateAndAttachViewModel<TViewModel>(this Control control)
         where TViewModel : ViewModelBase
     {
         if (Design.IsDesignMode)
         {
-            return;
+            return null;
         }
 
         if (Avalonia.Application.Current is not App currentApp)
@@ -30,5 +30,7 @@ internal static class ViewExtensions
         control.AttachedToLogicalTree += (_, _) => viewModel.ViewLoaded(viewAdapter);
         control.DetachedFromLogicalTree += (_, _) => viewModel.ViewUnloaded();
         control.DataContext = viewModel;
+
+        return viewModel;
     }
 }
