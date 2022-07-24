@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -32,5 +32,9 @@
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Domain\HappyCoding.ConsoleLogWindow.Domain.csproj" />
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository\HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository.csproj" />
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.StdOutProcessObserver\HappyCoding.ConsoleLogWindow.StdOutProcessRunner.csproj" />
+    <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.TestService\HappyCoding.ConsoleLogWindow.TestService.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>

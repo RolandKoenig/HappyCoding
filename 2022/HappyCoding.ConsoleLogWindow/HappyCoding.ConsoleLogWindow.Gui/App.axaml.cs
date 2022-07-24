@@ -31,6 +31,7 @@ public partial class App : Avalonia.Application
         // Register view models
         serviceCollection.AddTransient<MainWindowViewModel>();
         serviceCollection.AddTransient<ProcessGroupsViewModel>();
+        serviceCollection.AddTransient<RunningProcessViewModel>();
 
         return serviceCollection.BuildServiceProvider();
     }

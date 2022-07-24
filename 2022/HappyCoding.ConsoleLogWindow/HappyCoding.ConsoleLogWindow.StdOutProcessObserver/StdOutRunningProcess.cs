@@ -43,9 +43,11 @@ internal class StdOutRunningProcess : IRunningProcess
 
     private void AddLine(string text)
     {
-        var newLine = new ProcessOutputLine(
-            DateTimeOffset.Now,
-            text);
+        var newLine = new ProcessOutputLine()
+        {
+            Timestamp = DateTimeOffset.UtcNow,
+            Text = text
+        };
 
         _output.Add(newLine);
     }

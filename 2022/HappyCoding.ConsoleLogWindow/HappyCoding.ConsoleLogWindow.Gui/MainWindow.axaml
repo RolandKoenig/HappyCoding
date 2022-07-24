@@ -29,7 +29,7 @@
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch" />
 
-            <Grid Grid.Column="2" />
+            <views:RunningProcessView Grid.Column="2" />
         </Grid>
 
     </DockPanel>

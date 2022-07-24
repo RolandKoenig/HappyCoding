@@ -1,14 +1,8 @@
 ﻿namespace HappyCoding.ConsoleLogWindow.Domain.Model;
 
-public class ProcessOutputLine
+public record ProcessOutputLine
 {
-    public DateTimeOffset Timestamp { get; private set; }
+    public DateTimeOffset Timestamp { get; init; }
 
-    public string Text { get; private set; }
-
-    public ProcessOutputLine(DateTimeOffset timestamp, string text)
-    {
-        this.Timestamp = timestamp;
-        this.Text = text;
-    }
+    public string Text { get; init; } = string.Empty;
 }

@@ -1,14 +1,10 @@
 ﻿namespace HappyCoding.ConsoleLogWindow.Domain.Model;
 
-public class ProcessInfo
+public record ProcessInfo
 {
-    public string Title { get; set; }
+    public Guid ID { get; init; } = Guid.NewGuid();
 
-    public string CommandLine { get; set; }
+    public string Title { get; init; } = string.Empty;
 
-    public ProcessInfo(string title)
-    {
-        this.Title = title;
-        this.CommandLine = "";
-    }
+    public string CommandLine { get; init; } = string.Empty;
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Domain.Model;
 using HappyCoding.ConsoleLogWindow.Domain.Ports;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
@@ -30,12 +31,43 @@ public class ProcessGroupsViewModel : ViewModelBase
         this.ProcessGroups.Add(
             new ProcessGroup()
             {
-                Title = "Dummy Group 1"
+                Title = "Dummy Group 1",
+                Processes = ImmutableArray.Create(new[]
+                {
+                    new ProcessInfo()
+                    {
+                        Title = "TestService 1",
+                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                    },
+                    new ProcessInfo()
+                    {
+                        Title = "TestService 2",
+                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                    }
+                })
             });
         this.ProcessGroups.Add(
             new ProcessGroup()
             {
-                Title = "Dummy Group 2"
+                Title = "Dummy Group 2",
+                Processes = ImmutableArray.Create(new[]
+                {
+                    new ProcessInfo()
+                    {
+                        Title = "TestService 1",
+                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                    },
+                    new ProcessInfo()
+                    {
+                        Title = "TestService 2",
+                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                    },
+                    new ProcessInfo()
+                    {
+                        Title = "TestService 3",
+                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                    }
+                })
             });
     }
 }

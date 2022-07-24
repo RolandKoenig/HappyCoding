@@ -6,12 +6,14 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.ProcessGroupsView"
              d:DataContext="{x:Static local:DesignData.ProcessGroupsViewModel}">
-    <ListBox Items="{Binding Path=ProcessGroups}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
+    <TreeView Items="{Binding Path=ProcessGroups}">
+        <TreeView.ItemTemplate>
+            <TreeDataTemplate ItemsSource="{Binding Path=Processes}">
                 <TextBlock Text="{Binding Path=Title}" />
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+            </TreeDataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>
+
+    
 
 </UserControl>

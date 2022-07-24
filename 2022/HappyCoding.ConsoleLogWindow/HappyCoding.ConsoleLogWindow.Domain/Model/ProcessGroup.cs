@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Immutable;
 
 namespace HappyCoding.ConsoleLogWindow.Domain.Model;
 
-public class ProcessGroup
+public record ProcessGroup
 {
-    public string Title { get; set; }
+    public Guid ID { get; init; } = Guid.NewGuid();
 
-    public List<ProcessInfo> Processes { get; set; }
+    public string Title { get; init; } = string.Empty;
 
+    public ImmutableArray<ProcessInfo> Processes { get; init; } = ImmutableArray.Create(Array.Empty<ProcessInfo>());
 }
