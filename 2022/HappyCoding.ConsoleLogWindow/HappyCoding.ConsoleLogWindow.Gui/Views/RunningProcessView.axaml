@@ -10,23 +10,28 @@
     <UserControl.Resources>
         <converter:DateTimeOffsetFormattingConverter x:Key="ConverterDateTimeOffset" />
     </UserControl.Resources>
-
-
+    
     <DockPanel LastChildFill="True">
         <TextBlock DockPanel.Dock="Top" 
                    Text="{Binding Path=SelectedProcess.Title, FallbackValue=Nothing selected}" />
 
-        <Button DockPanel.Dock="Top"
-                Content="Start Process"
-                Command="{Binding Path=Command_StartProcess}" />
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal">
+            <Button Content="Start Process"
+                    Command="{Binding Path=Command_StartProcess}" />
+            <Button Content="Stop Process"
+                    Command="{Binding Path=Command_StopProcess}" />
+        </StackPanel>
 
         <ListBox Items="{Binding Path=ProcessOutput}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Timestamp, Converter={StaticResource ConverterDateTimeOffset}}" />
+                        <TextBlock Text="{Binding Path=Timestamp, Converter={StaticResource ConverterDateTimeOffset}}"
+                                   FontFamily="Courier New" />
                         <TextBlock Margin="10,0,0,0"
-                                   Text="{Binding Path=Text}" />
+                                   Text="{Binding Path=Text}" 
+                                   FontFamily="Courier New" />
                     </StackPanel> 
                 </DataTemplate>
             </ListBox.ItemTemplate>

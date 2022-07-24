@@ -6,5 +6,7 @@ public record ProcessInfo
 
     public string Title { get; init; } = string.Empty;
 
-    public string CommandLine { get; init; } = string.Empty;
+    public string FileName { get; init; } = string.Empty;
+
+    public string Arguments { get; init; } = string.Empty;
 }

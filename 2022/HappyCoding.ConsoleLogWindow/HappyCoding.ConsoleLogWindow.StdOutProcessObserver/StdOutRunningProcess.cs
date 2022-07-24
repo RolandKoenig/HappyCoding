@@ -28,6 +28,11 @@ internal class StdOutRunningProcess : IRunningProcess
         _process.ErrorDataReceived += this.OnErrorDataReceived;
     }
 
+    internal void Kill()
+    {
+        _process.Kill();
+    }
+
     public void Dispose()
     {
         if (!_disposed)

@@ -1,8 +1,8 @@
 ﻿namespace HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
 
-internal interface IUseCaseExecutor
+public interface IUseCaseExecutor
 {
-    public void ExecuteUseCaseAsync<T>()
+    public Task ExecuteUseCaseAsync<T>()
         where T : IUseCaseNoArg;
 
     public Task ExecuteUseCaseAsync<T, TArg0>(TArg0 arg0)

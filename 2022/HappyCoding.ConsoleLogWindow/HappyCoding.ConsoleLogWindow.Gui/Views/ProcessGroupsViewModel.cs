@@ -66,12 +66,14 @@ public class ProcessGroupsViewModel : ViewModelBase
                     new ProcessInfo()
                     {
                         Title = "TestService 1",
-                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                        FileName = "dotnet",
+                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
                     },
                     new ProcessInfo()
                     {
                         Title = "TestService 2",
-                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                        FileName = "dotnet",
+                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
                     }
                 })
             });
@@ -84,17 +86,20 @@ public class ProcessGroupsViewModel : ViewModelBase
                     new ProcessInfo()
                     {
                         Title = "TestService 1",
-                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                        FileName = "dotnet",
+                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
                     },
                     new ProcessInfo()
                     {
                         Title = "TestService 2",
-                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                        FileName = "dotnet",
+                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
                     },
                     new ProcessInfo()
                     {
                         Title = "TestService 3",
-                        CommandLine = "HappyCoding.ConsoleLogWindow.TestService.exe"
+                        FileName = "dotnet",
+                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
                     }
                 })
             });

@@ -1,22 +1,112 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
 
-internal class UseCaseExecutor : IUseCaseExecutor
+public class UseCaseExecutor : IUseCaseExecutor
 {
-    /// <inheritdoc />
-    public void ExecuteUseCaseAsync<T>() where T : IUseCaseNoArg
+    private readonly IServiceProvider _serviceProvider;
+    private readonly ConcurrentQueue<Func<Task>> _useCaseQueue;
+
+    private bool _isExecuting;
+    private object _isExecutingLock;
+
+    public UseCaseExecutor(IServiceProvider serviceProvider)
     {
-        throw new NotImplementedException();
+        _serviceProvider = serviceProvider;
+        _useCaseQueue = new ConcurrentQueue<Func<Task>>();
+
+        _isExecuting = false;
+        _isExecutingLock = new object();
+    }
+
+    private async void Trigger()
+    {
+        Func<Task>? nextOneToExecute = null;
+        
+        lock (_isExecutingLock)
+        {
+            if (_isExecuting) { return; }
+
+            _isExecuting = _useCaseQueue.TryDequeue(out nextOneToExecute);
+            if (!_isExecuting) { return; }
+        }
+
+        while (nextOneToExecute != null)
+        {
+            try
+            {
+                await nextOneToExecute();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Handle error from use case
+            }
+            
+            lock (_isExecutingLock)
+            {
+                _isExecuting = _useCaseQueue.TryDequeue(out nextOneToExecute);
+                if (!_isExecuting) { return; }
+            }
+        }
+    }
+
+    /// <inheritdoc />
+    public Task ExecuteUseCaseAsync<T>() where T : IUseCaseNoArg
+    {
+        var taskCompletionSource = new TaskCompletionSource<object?>();
+
+        var useCase = _serviceProvider.GetRequiredService<T>();
+        _useCaseQueue.Enqueue(
+            () =>
+            {
+                try
+                {
+                    var result = useCase.ExecuteAsync();
+                    taskCompletionSource.SetResult(null);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    taskCompletionSource.SetException(ex);
+                    throw;
+                }
+            });
+
+        this.Trigger();
+        
+        return taskCompletionSource.Task;
     }
 
     /// <inheritdoc />
     public Task ExecuteUseCaseAsync<T, TArg0>(TArg0 arg0) where T : IUseCase<TArg0>
     {
-        throw new NotImplementedException();
+        var taskCompletionSource = new TaskCompletionSource<object?>();
+
+        var useCase = _serviceProvider.GetRequiredService<T>();
+        _useCaseQueue.Enqueue(
+            () =>
+            {
+                try
+                {
+                    var result= useCase.ExecuteAsync(arg0);
+                    taskCompletionSource.SetResult(null);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    taskCompletionSource.SetException(ex);
+                    throw;
+                }
+            });
+        
+        this.Trigger();
+
+        return taskCompletionSource.Task;
     }
 }

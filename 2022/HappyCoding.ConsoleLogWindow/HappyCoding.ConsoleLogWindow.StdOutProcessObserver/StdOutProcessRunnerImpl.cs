@@ -17,7 +17,9 @@ internal class StdOutProcessRunnerImpl : IProcessRunner
     /// <inheritdoc />
     public Task<IRunningProcess> StartProcessAsync(ProcessInfo processInfo)
     {
-        var startInfo = new ProcessStartInfo(processInfo.CommandLine);
+        var startInfo = new ProcessStartInfo(
+            processInfo.FileName, 
+            processInfo.Arguments);
         startInfo.RedirectStandardError = true;
         startInfo.RedirectStandardInput = true;
         startInfo.RedirectStandardOutput = true;
@@ -29,13 +31,28 @@ internal class StdOutProcessRunnerImpl : IProcessRunner
         {
             throw new ConsoleLogWindowAdapterException(
                 nameof(StdOutProcessRunnerImpl),
-                $"Unable to start process '{processInfo.CommandLine}'");
+                $"Unable to start process '{processInfo.FileName}'");
         }
 
         var runningProcess = new StdOutRunningProcess(process);
         _runningProcesses[processInfo] = runningProcess;
 
         return Task.FromResult((IRunningProcess)runningProcess);
+    }
+
+    /// <inheritdoc />
+    public async Task StopProcessAsync(ProcessInfo processInfo)
+    {
+        var process = (StdOutRunningProcess?)(await TryGetRunningProcessAsync(processInfo));
+        if (process == null)
+        {
+            return;
+        }
+        
+        process.Kill();
+        process.Dispose();
+
+        _runningProcesses.Remove(processInfo);
     }
 
     /// <inheritdoc />

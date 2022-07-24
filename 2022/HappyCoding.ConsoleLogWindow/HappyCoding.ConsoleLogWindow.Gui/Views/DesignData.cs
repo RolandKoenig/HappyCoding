@@ -1,5 +1,6 @@
 ﻿using FakeItEasy;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
+using HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
 using HappyCoding.ConsoleLogWindow.Application.UseCases;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
@@ -25,9 +26,7 @@ public static class DesignData
             return new RunningProcessViewModel(
                 A.Fake<IProcessRunner>(),
                 A.Fake<IFirLibMessageSubscriber>(),
-                new StartProcessUseCase(
-                    A.Fake<IProcessRunner>(),
-                    A.Fake<IFirLibMessagePublisher>()));
+                A.Fake<IUseCaseExecutor>());
         }
     }
 }

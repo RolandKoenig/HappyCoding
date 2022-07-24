@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Application.Messages;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
+using HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
 using HappyCoding.ConsoleLogWindow.Application.UseCases;
 using HappyCoding.ConsoleLogWindow.Gui.Messages;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
@@ -17,7 +18,7 @@ public class RunningProcessViewModel : ViewModelBase
 
     private readonly IProcessRunner _processRunner;
     private readonly IFirLibMessageSubscriber _messageSubscriber;
-    private readonly StartProcessUseCase _startProcessUseCase;
+    private readonly IUseCaseExecutor _useCaseExecutor;
 
     private IEnumerable<MessageSubscription>? _msgSubscriptions;
 
@@ -28,21 +29,27 @@ public class RunningProcessViewModel : ViewModelBase
     public bool IsRunning { get; private set; }
 
     public DelegateCommand Command_StartProcess { get; private set; }
+    
+    public DelegateCommand Command_StopProcess { get; private set; }
 
     public RunningProcessViewModel(
         IProcessRunner processRunner,
         IFirLibMessageSubscriber messageSubscriber,
-        StartProcessUseCase startProcessUseCase)
+        IUseCaseExecutor useCaseExecutor)
     {
         _processRunner = processRunner;
         _messageSubscriber = messageSubscriber;
-        _startProcessUseCase = startProcessUseCase;
+        _useCaseExecutor = useCaseExecutor;
 
         this.ProcessOutput = EMPTY_PROCESS_OUTPUT;
 
+        // Setup commands
         this.Command_StartProcess = new DelegateCommand(
-            this.StartProcess,
+            () => _useCaseExecutor.ExecuteUseCaseAsync<StartProcessUseCase, ProcessInfo>(this.SelectedProcess!).FireAndForget(),
             () => !this.IsRunning);
+        this.Command_StopProcess = new DelegateCommand(
+            () => _useCaseExecutor.ExecuteUseCaseAsync<StopProcessUseCase, ProcessInfo>(this.SelectedProcess!).FireAndForget(),
+            () => this.IsRunning);
     }
 
     /// <inheritdoc />
@@ -71,16 +78,6 @@ public class RunningProcessViewModel : ViewModelBase
         }
     }
 
-    private async void StartProcess()
-    {
-        if(this.SelectedProcess == null)
-        {
-            return;
-        }
-
-        await _startProcessUseCase.ExecuteAsync(this.SelectedProcess);
-    }
-
     private async void OnMessageReceived(ProcessInfoSelectionChangedMessage message)
     {
         this.SelectedProcess = message.SelectedProcessNew;
@@ -100,17 +97,41 @@ public class RunningProcessViewModel : ViewModelBase
         this.RaisePropertyChanged(nameof(this.SelectedProcess));
         this.RaisePropertyChanged(nameof(this.IsRunning));
         this.RaisePropertyChanged(nameof(this.ProcessOutput));
+        this.Command_StopProcess.RaiseCanExecuteChanged();
+        this.Command_StartProcess.RaiseCanExecuteChanged();
     }
 
     private async void OnMessageReceived(ProcessStartedMessage message)
     {
-        if (message.ProcessInfo.ID != this.SelectedProcess?.ID) { return; }
-
+        if (this.SelectedProcess == null)
+        {
+            return;
+        }
+        
         var runningProcess = await _processRunner.TryGetRunningProcessAsync(this.SelectedProcess);
         this.IsRunning = runningProcess != null;
         this.ProcessOutput = runningProcess?.Output ?? EMPTY_PROCESS_OUTPUT;
 
         this.RaisePropertyChanged(nameof(this.IsRunning));
         this.RaisePropertyChanged(nameof(this.ProcessOutput));
+        this.Command_StopProcess.RaiseCanExecuteChanged();
+        this.Command_StartProcess.RaiseCanExecuteChanged();
+    }
+
+    private async void OnMessageReceived(ProcessStoppedMessage message)
+    {
+        if (this.SelectedProcess == null)
+        {
+            return;
+        }
+        
+        var runningProcess = await _processRunner.TryGetRunningProcessAsync(this.SelectedProcess);
+        this.IsRunning = runningProcess != null;
+        this.ProcessOutput = runningProcess?.Output ?? EMPTY_PROCESS_OUTPUT;
+
+        this.RaisePropertyChanged(nameof(this.IsRunning));
+        this.RaisePropertyChanged(nameof(this.ProcessOutput));
+        this.Command_StopProcess.RaiseCanExecuteChanged();
+        this.Command_StartProcess.RaiseCanExecuteChanged();
     }
 }

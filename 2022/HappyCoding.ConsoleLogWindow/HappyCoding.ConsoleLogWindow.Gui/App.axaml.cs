@@ -1,6 +1,7 @@
 using System;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using HappyCoding.ConsoleLogWindow.Application;
 using HappyCoding.ConsoleLogWindow.Application.UseCases;
 using HappyCoding.ConsoleLogWindow.Gui.Views;
 using HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository;
@@ -38,8 +39,9 @@ public partial class App : Avalonia.Application
         serviceCollection.AddTransient<ProcessGroupsViewModel>();
         serviceCollection.AddTransient<RunningProcessViewModel>();
 
-        // Register use cases
-        serviceCollection.AddTransient<StartProcessUseCase>();
+        // Register application 
+        serviceCollection.AddApplicationServices();
+        serviceCollection.AddApplicationUseCases();
 
         return serviceCollection.BuildServiceProvider();
     }
