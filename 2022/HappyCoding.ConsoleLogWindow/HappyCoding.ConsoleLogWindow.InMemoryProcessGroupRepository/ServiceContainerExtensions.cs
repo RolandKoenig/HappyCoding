@@ -1,4 +1,4 @@
-﻿using HappyCoding.ConsoleLogWindow.Domain.Ports;
+﻿using HappyCoding.ConsoleLogWindow.Application.Ports;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository;

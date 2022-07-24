@@ -2,7 +2,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.RunningProcessView">
-  Welcome to Avalonia!
+             x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.RunningProcessView"
+             d:DataContext="{x:Static local:DesignData.RunningProcessViewModel}">
+    <DockPanel LastChildFill="True">
+        <TextBlock DockPanel.Dock="Top" 
+                   Text="{Binding Path=SelectedProcess.Title, FallbackValue=Nothing selected}" />
+
+        <Button DockPanel.Dock="Top"
+                Content="Start Process"
+                Command="{Binding Path=Command_StartProcess}" />
+
+        <ListBox Items="{Binding Path=ProcessOutput}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Timestamp, StringFormat=yyyy-MM-dd HH:mm:ss.fff}" />
+                        <TextBlock Margin="10,0,0,0"
+                                   Text="{Binding Path=Text}" />
+                    </StackPanel> 
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
 </UserControl>

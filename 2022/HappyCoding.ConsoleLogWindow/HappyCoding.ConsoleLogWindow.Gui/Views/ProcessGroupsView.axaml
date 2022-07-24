@@ -6,7 +6,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.ProcessGroupsView"
              d:DataContext="{x:Static local:DesignData.ProcessGroupsViewModel}">
-    <TreeView Items="{Binding Path=ProcessGroups}">
+    <TreeView Items="{Binding Path=ProcessGroups}"
+              SelectionMode="Single"
+              SelectedItem="{Binding Path=SelectedObject, Mode=TwoWay}">
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Path=Processes}">
                 <TextBlock Text="{Binding Path=Title}" />

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
-using HappyCoding.ConsoleLogWindow.Domain.Model;
-using HappyCoding.ConsoleLogWindow.Domain.Ports;
+using HappyCoding.ConsoleLogWindow.Application.Model;
+using HappyCoding.ConsoleLogWindow.Application.Ports;
 
 namespace HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository;
 

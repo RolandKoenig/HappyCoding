@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Messenger\HappyCoding.ConsoleLogWindow.Messenger.csproj" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+	  <PackageReference Include="Light.GuardClauses" Version="10.0.0" />
   </ItemGroup>
 
 </Project>

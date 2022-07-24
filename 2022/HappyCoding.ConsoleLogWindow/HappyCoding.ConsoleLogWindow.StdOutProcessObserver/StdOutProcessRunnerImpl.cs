@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using HappyCoding.ConsoleLogWindow.Domain.Exceptions;
-using HappyCoding.ConsoleLogWindow.Domain.Model;
-using HappyCoding.ConsoleLogWindow.Domain.Ports;
-using HappyCoding.ConsoleLogWindow.Domain.Runtime;
+using HappyCoding.ConsoleLogWindow.Application.Exceptions;
+using HappyCoding.ConsoleLogWindow.Application.Model;
+using HappyCoding.ConsoleLogWindow.Application.Ports;
+using HappyCoding.ConsoleLogWindow.Application.Runtime;
 
 namespace HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
 
@@ -40,14 +40,14 @@ internal class StdOutProcessRunnerImpl : IProcessRunner
     }
 
     /// <inheritdoc />
-    public Task<bool> IsProcessRunning(ProcessInfo processInfo)
+    public Task<bool> IsProcessRunningAsync(ProcessInfo processInfo)
     {
         return Task.FromResult(
             _runningProcesses.ContainsKey(processInfo));
     }
 
     /// <inheritdoc />
-    public Task<IRunningProcess?> TryGetRunningProcess(ProcessInfo processInfo)
+    public Task<IRunningProcess?> TryGetRunningProcessAsync(ProcessInfo processInfo)
     {
         if (_runningProcesses.TryGetValue(processInfo, out var runningProcess))
         {

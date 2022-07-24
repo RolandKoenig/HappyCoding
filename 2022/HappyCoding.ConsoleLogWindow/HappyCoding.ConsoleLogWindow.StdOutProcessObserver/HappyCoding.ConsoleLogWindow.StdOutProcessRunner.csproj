@@ -10,8 +10,8 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Domain\HappyCoding.ConsoleLogWindow.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Application\HappyCoding.ConsoleLogWindow.Application.csproj" />
+	</ItemGroup>
 
 </Project>

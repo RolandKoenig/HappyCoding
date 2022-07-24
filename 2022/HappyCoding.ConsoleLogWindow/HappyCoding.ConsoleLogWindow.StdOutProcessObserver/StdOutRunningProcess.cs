@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using HappyCoding.ConsoleLogWindow.Domain.Model;
-using HappyCoding.ConsoleLogWindow.Domain.Runtime;
+using HappyCoding.ConsoleLogWindow.Application.Model;
+using HappyCoding.ConsoleLogWindow.Application.Runtime;
 
 namespace HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
 
