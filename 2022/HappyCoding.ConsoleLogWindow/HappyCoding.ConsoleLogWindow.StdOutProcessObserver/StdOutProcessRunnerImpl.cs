@@ -2,7 +2,6 @@
 using HappyCoding.ConsoleLogWindow.Application.Exceptions;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
-using HappyCoding.ConsoleLogWindow.Application.Runtime;
 
 namespace HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
 

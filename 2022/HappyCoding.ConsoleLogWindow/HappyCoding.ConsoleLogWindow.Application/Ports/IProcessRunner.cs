@@ -1,6 +1,5 @@
 ﻿
 using HappyCoding.ConsoleLogWindow.Application.Model;
-using HappyCoding.ConsoleLogWindow.Application.Runtime;
 
 namespace HappyCoding.ConsoleLogWindow.Application.Ports;
 

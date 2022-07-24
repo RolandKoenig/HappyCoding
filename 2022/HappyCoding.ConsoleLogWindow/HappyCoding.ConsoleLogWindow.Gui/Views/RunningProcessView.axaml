@@ -3,9 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Views"
+             xmlns:converter="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Converter"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.RunningProcessView"
              d:DataContext="{x:Static local:DesignData.RunningProcessViewModel}">
+    <UserControl.Resources>
+        <converter:DateTimeOffsetFormattingConverter x:Key="ConverterDateTimeOffset" />
+    </UserControl.Resources>
+
+
     <DockPanel LastChildFill="True">
         <TextBlock DockPanel.Dock="Top" 
                    Text="{Binding Path=SelectedProcess.Title, FallbackValue=Nothing selected}" />
@@ -18,7 +24,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Timestamp, StringFormat=yyyy-MM-dd HH:mm:ss.fff}" />
+                        <TextBlock Text="{Binding Path=Timestamp, Converter={StaticResource ConverterDateTimeOffset}}" />
                         <TextBlock Margin="10,0,0,0"
                                    Text="{Binding Path=Text}" />
                     </StackPanel> 

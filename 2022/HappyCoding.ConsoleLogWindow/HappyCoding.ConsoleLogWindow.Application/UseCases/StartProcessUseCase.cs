@@ -2,6 +2,7 @@
 using HappyCoding.ConsoleLogWindow.Application.Messages;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
+using HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Application.UseCases;

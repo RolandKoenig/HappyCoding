@@ -1,18 +1,18 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using HappyCoding.ConsoleLogWindow.Application.Model;
-using HappyCoding.ConsoleLogWindow.Application.Runtime;
 
 namespace HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
 
 internal class StdOutRunningProcess : IRunningProcess
 {
     private readonly Process _process;
-    private readonly List<ProcessOutputLine> _output;
+    private readonly ObservableCollection<ProcessOutputLine> _output;
 
     private bool _disposed;
 
     /// <inheritdoc />
-    public IReadOnlyList<ProcessOutputLine> Output => _output;
+    public ObservableCollection<ProcessOutputLine> Output => _output;
 
     /// <inheritdoc />
     public bool IsRunning => !_process.HasExited;
@@ -20,7 +20,7 @@ internal class StdOutRunningProcess : IRunningProcess
     internal StdOutRunningProcess(Process process)
     {
         _process = process;
-        _output = new List<ProcessOutputLine>();
+        _output = new ObservableCollection<ProcessOutputLine>();
 
         _process.BeginErrorReadLine();
         _process.BeginOutputReadLine();

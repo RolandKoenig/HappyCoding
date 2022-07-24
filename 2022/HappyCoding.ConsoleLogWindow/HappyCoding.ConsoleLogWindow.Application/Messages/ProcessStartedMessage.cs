@@ -1,5 +1,4 @@
 ﻿using HappyCoding.ConsoleLogWindow.Application.Model;
-using HappyCoding.ConsoleLogWindow.Application.Runtime;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Application.Messages;

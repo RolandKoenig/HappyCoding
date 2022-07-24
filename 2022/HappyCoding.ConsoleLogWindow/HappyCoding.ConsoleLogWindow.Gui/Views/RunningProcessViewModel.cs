@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Application.Messages;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
@@ -12,7 +13,7 @@ namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
 public class RunningProcessViewModel : ViewModelBase
 {
-    private static readonly List<ProcessOutputLine> EMPTY_PROCESS_OUTPUT = new();
+    private static readonly ObservableCollection<ProcessOutputLine> EMPTY_PROCESS_OUTPUT = new();
 
     private readonly IProcessRunner _processRunner;
     private readonly IFirLibMessageSubscriber _messageSubscriber;
@@ -20,7 +21,7 @@ public class RunningProcessViewModel : ViewModelBase
 
     private IEnumerable<MessageSubscription>? _msgSubscriptions;
 
-    public IReadOnlyList<ProcessOutputLine> ProcessOutput { get; private set; }
+    public ObservableCollection<ProcessOutputLine> ProcessOutput { get; private set; }
 
     public ProcessInfo? SelectedProcess { get; private set; }
 
