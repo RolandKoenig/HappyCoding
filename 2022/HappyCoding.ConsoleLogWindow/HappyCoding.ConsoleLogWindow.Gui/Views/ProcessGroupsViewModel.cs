@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Application.Model;
-using HappyCoding.ConsoleLogWindow.Application.Ports;
 using HappyCoding.ConsoleLogWindow.Gui.Messages;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
 using HappyCoding.ConsoleLogWindow.Messenger;
@@ -10,8 +9,6 @@ namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
 public class ProcessGroupsViewModel : ViewModelBase
 {
-    private readonly IProcessGroupRepository _processGroupRepo;
-    private readonly IProcessRunner _processRunner;
     private readonly IFirLibMessagePublisher _messagePublisher;
 
     private object? _selectedObject;
@@ -41,12 +38,8 @@ public class ProcessGroupsViewModel : ViewModelBase
     }
 
     public ProcessGroupsViewModel(
-        IProcessGroupRepository processGroupRepo,
-        IProcessRunner processRunner,
         IFirLibMessagePublisher messagePublisher)
     {
-        _processGroupRepo = processGroupRepo;
-        _processRunner = processRunner;
         _messagePublisher = messagePublisher;
 
         this.ProcessGroups = new ObservableCollection<ProcessGroup>();

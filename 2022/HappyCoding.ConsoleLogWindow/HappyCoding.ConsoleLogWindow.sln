@@ -19,11 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prototyping", "Prototyping"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ConsoleLogWindow.StdOutProcessRunner", "HappyCoding.ConsoleLogWindow.StdOutProcessObserver\HappyCoding.ConsoleLogWindow.StdOutProcessRunner.csproj", "{BEB607E2-004C-4C38-B15D-ED6466B81041}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository", "HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository\HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository.csproj", "{0660C382-0105-4453-90AE-EB84D3A07CEA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Util", "Util", "{AEF9FEAA-7938-4A9F-8AB4-0608BE70D676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.ConsoleLogWindow.Messenger", "HappyCoding.ConsoleLogWindow.Messenger\HappyCoding.ConsoleLogWindow.Messenger.csproj", "{F1E5B757-C0B9-409A-AC54-82BF479466E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ConsoleLogWindow.Messenger", "HappyCoding.ConsoleLogWindow.Messenger\HappyCoding.ConsoleLogWindow.Messenger.csproj", "{F1E5B757-C0B9-409A-AC54-82BF479466E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +49,6 @@ Global
 		{BEB607E2-004C-4C38-B15D-ED6466B81041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEB607E2-004C-4C38-B15D-ED6466B81041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEB607E2-004C-4C38-B15D-ED6466B81041}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0660C382-0105-4453-90AE-EB84D3A07CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0660C382-0105-4453-90AE-EB84D3A07CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0660C382-0105-4453-90AE-EB84D3A07CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0660C382-0105-4453-90AE-EB84D3A07CEA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1E5B757-C0B9-409A-AC54-82BF479466E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1E5B757-C0B9-409A-AC54-82BF479466E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1E5B757-C0B9-409A-AC54-82BF479466E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,7 +62,6 @@ Global
 		{008D8860-826D-4469-ABC5-38B13A4239C7} = {1F17BB55-896F-4FE3-8F71-C6CA42CAB73D}
 		{F64BE6B7-6465-46CB-AD5E-DDAEFC439380} = {B5519384-9C7B-474A-9202-93364A863A89}
 		{BEB607E2-004C-4C38-B15D-ED6466B81041} = {CA4991A1-DED2-40F7-A90A-6BDD1A11AA44}
-		{0660C382-0105-4453-90AE-EB84D3A07CEA} = {CA4991A1-DED2-40F7-A90A-6BDD1A11AA44}
 		{F1E5B757-C0B9-409A-AC54-82BF479466E2} = {AEF9FEAA-7938-4A9F-8AB4-0608BE70D676}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

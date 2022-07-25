@@ -13,8 +13,6 @@ public static class DesignData
         get
         {
             return new ProcessGroupsViewModel(
-                A.Fake<IProcessGroupRepository>(),
-                A.Fake<IProcessRunner>(),
                 A.Fake<IFirLibMessagePublisher>());
         }
     }
