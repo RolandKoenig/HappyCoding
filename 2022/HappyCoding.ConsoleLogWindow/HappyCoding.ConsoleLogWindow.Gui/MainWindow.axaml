@@ -9,7 +9,15 @@
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
+                <MenuItem Header="New" />
+                <MenuItem Header="Open" />
+                <Separator />
 
+                <MenuItem Header="Close" />
+                <Separator />
+
+                <MenuItem Header="Save" />
+                <MenuItem Header="Save as" />
             </MenuItem>
             <MenuItem Header="Edit">
 

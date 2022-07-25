@@ -6,6 +6,6 @@ public class ViewAdapter : IView
 {
     public ViewAdapter(Control view)
     {
-
+        
     }
 }

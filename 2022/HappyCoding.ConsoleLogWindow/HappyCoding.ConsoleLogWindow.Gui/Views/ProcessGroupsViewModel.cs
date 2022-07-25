@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
@@ -61,7 +61,7 @@ public class ProcessGroupsViewModel : ViewModelBase
             new ProcessGroup()
             {
                 Title = "Dummy Group 1",
-                Processes = ImmutableArray.Create(new[]
+                Processes = new List<ProcessInfo>()
                 {
                     new ProcessInfo()
                     {
@@ -75,13 +75,13 @@ public class ProcessGroupsViewModel : ViewModelBase
                         FileName = "dotnet",
                         Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
                     }
-                })
+                }
             });
         this.ProcessGroups.Add(
             new ProcessGroup()
             {
                 Title = "Dummy Group 2",
-                Processes = ImmutableArray.Create(new[]
+                Processes = new List<ProcessInfo>()
                 {
                     new ProcessInfo()
                     {
@@ -101,7 +101,7 @@ public class ProcessGroupsViewModel : ViewModelBase
                         FileName = "dotnet",
                         Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
                     }
-                })
+                }
             });
     }
 }
