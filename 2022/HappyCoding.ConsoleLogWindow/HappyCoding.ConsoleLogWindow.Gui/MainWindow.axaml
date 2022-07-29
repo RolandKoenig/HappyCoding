@@ -17,7 +17,8 @@
                 <Separator />
 
                 <MenuItem Header="Save" />
-                <MenuItem Header="Save as" />
+                <MenuItem Header="Save as"
+                          Command="{Binding Path=Command_SaveAs}"/>
             </MenuItem>
             <MenuItem Header="Edit">
 

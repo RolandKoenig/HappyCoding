@@ -27,9 +27,18 @@ public static class ViewExtensions
 
         var viewAdapter = new ViewAdapter(control);
 
-        control.AttachedToLogicalTree += (_, _) => viewModel.ViewLoaded(viewAdapter);
-        control.DetachedFromLogicalTree += (_, _) => viewModel.ViewUnloaded();
         control.DataContext = viewModel;
+        if (control is WindowBase targetWindow)
+        {
+            targetWindow.Activated += (_, _) => viewModel.ViewLoaded(viewAdapter);
+            targetWindow.Deactivated += (_, _) => viewModel.ViewUnloaded();
+        }
+        else
+        {
+            control.AttachedToLogicalTree += (_, _) => viewModel.ViewLoaded(viewAdapter);
+            control.DetachedFromLogicalTree += (_, _) => viewModel.ViewUnloaded();
+        }
+        
 
         return viewModel;
     }

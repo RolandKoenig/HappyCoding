@@ -1,6 +1,8 @@
-﻿namespace HappyCoding.ConsoleLogWindow.Gui.Util;
+﻿using HappyCoding.ConsoleLogWindow.Gui.Util.ViewServices;
 
-public interface IView
+namespace HappyCoding.ConsoleLogWindow.Gui.Util;
+
+public interface IView : IViewServiceHost
 {
 
 }

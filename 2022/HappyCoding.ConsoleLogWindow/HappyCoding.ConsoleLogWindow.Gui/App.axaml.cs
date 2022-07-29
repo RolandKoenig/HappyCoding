@@ -2,9 +2,9 @@ using System;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using HappyCoding.ConsoleLogWindow.Application;
-using HappyCoding.ConsoleLogWindow.Application.UseCases;
+using HappyCoding.ConsoleLogWindow.Application.Ports;
+using HappyCoding.ConsoleLogWindow.Gui.Model;
 using HappyCoding.ConsoleLogWindow.Gui.Views;
-using HappyCoding.ConsoleLogWindow.InMemoryProcessGroupRepository;
 using HappyCoding.ConsoleLogWindow.Messenger;
 using HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,13 +31,15 @@ public partial class App : Avalonia.Application
         serviceCollection.AddFirLibMessenger();
 
         // Register services from adapters
-        serviceCollection.AddInEmoryProcessGroupRepository();
         serviceCollection.AddStdOutProcessRunner();
 
         // Register view models
         serviceCollection.AddTransient<MainWindowViewModel>();
         serviceCollection.AddTransient<ProcessGroupsViewModel>();
         serviceCollection.AddTransient<RunningProcessViewModel>();
+
+        // Register document model provider
+        serviceCollection.AddSingleton<IDocumentModelProvider, DesktopDocumentModelProvider>();
 
         // Register application 
         serviceCollection.AddApplicationServices();

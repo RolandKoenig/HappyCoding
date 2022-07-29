@@ -33,7 +33,4 @@
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.StdOutProcessObserver\HappyCoding.ConsoleLogWindow.StdOutProcessRunner.csproj" />
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.TestService\HappyCoding.ConsoleLogWindow.TestService.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
 </Project>

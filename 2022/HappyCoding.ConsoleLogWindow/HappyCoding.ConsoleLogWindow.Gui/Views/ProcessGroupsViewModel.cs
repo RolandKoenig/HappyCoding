@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Application.Model;
+using HappyCoding.ConsoleLogWindow.Application.Ports;
 using HappyCoding.ConsoleLogWindow.Gui.Messages;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
 using HappyCoding.ConsoleLogWindow.Messenger;
@@ -9,11 +9,13 @@ namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
 public class ProcessGroupsViewModel : ViewModelBase
 {
+    private readonly IDocumentModelProvider _documentMOdelProvider;
     private readonly IFirLibMessagePublisher _messagePublisher;
 
     private object? _selectedObject;
+    private DocumentModel? _documentModel;
 
-    public ObservableCollection<ProcessGroup> ProcessGroups { get; }
+    public ObservableCollection<ProcessGroup> ProcessGroups => _documentModel?.ProcessGroups ?? new ObservableCollection<ProcessGroup>();
 
     public object? SelectedObject
     {
@@ -38,11 +40,11 @@ public class ProcessGroupsViewModel : ViewModelBase
     }
 
     public ProcessGroupsViewModel(
+        IDocumentModelProvider documentModelProvider,
         IFirLibMessagePublisher messagePublisher)
     {
+        _documentMOdelProvider = documentModelProvider;
         _messagePublisher = messagePublisher;
-
-        this.ProcessGroups = new ObservableCollection<ProcessGroup>();
     }
 
     /// <inheritdoc />
@@ -50,51 +52,7 @@ public class ProcessGroupsViewModel : ViewModelBase
     {
         base.ViewLoaded(view);
 
-        this.ProcessGroups.Add(
-            new ProcessGroup()
-            {
-                Title = "Dummy Group 1",
-                Processes = new List<ProcessInfo>()
-                {
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 1",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    },
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 2",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    }
-                }
-            });
-        this.ProcessGroups.Add(
-            new ProcessGroup()
-            {
-                Title = "Dummy Group 2",
-                Processes = new List<ProcessInfo>()
-                {
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 1",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    },
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 2",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    },
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 3",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    }
-                }
-            });
+        _documentModel = _documentMOdelProvider.GetCurrentDocumentModel();
+        this.RaisePropertyChanged(nameof(this.ProcessGroups)); 
     }
 }
