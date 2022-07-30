@@ -1,8 +1,8 @@
 ﻿using HappyCoding.ConsoleLogWindow.Application.Exceptions;
-using HappyCoding.ConsoleLogWindow.Application.Messages;
+using HappyCoding.ConsoleLogWindow.Application.Events;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
-using HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
+using HappyCoding.ConsoleLogWindow.Application.Services.UseCaseExecution;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Application.UseCases;
@@ -30,9 +30,6 @@ public class StopProcessUseCase : IUseCase<ProcessInfo>
 
         await _processRunner.StopProcessAsync(processToStart);
 
-        _messagePublisher.Publish(new ProcessStoppedMessage()
-        { 
-            ProcessInfo = processToStart,
-        });
+        _messagePublisher.Publish(new ProcessStoppedEvent(processToStart));
     }
 }

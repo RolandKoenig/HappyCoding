@@ -8,6 +8,6 @@ public static class ServiceContainerExtensions
     public static IServiceCollection AddStdOutProcessRunner(this IServiceCollection services)
     {
         return services
-            .AddSingleton<IProcessRunner, StdOutProcessRunnerImpl>();
+            .AddSingleton<IProcessRunner, StdOutProcessRunnerAdapter>();
     }
 }

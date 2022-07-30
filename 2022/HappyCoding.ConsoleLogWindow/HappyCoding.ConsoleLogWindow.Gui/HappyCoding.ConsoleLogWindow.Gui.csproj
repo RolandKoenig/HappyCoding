@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Application\HappyCoding.ConsoleLogWindow.Application.csproj" />
+    <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler\HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler.csproj" />
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.Messenger\HappyCoding.ConsoleLogWindow.Messenger.csproj" />
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.StdOutProcessObserver\HappyCoding.ConsoleLogWindow.StdOutProcessRunner.csproj" />
     <ProjectReference Include="..\HappyCoding.ConsoleLogWindow.TestService\HappyCoding.ConsoleLogWindow.TestService.csproj" />

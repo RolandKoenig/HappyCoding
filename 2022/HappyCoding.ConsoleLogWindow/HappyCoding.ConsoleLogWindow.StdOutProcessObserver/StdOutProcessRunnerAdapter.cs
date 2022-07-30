@@ -5,11 +5,11 @@ using HappyCoding.ConsoleLogWindow.Application.Ports;
 
 namespace HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
 
-internal class StdOutProcessRunnerImpl : IProcessRunner
+internal class StdOutProcessRunnerAdapter : IProcessRunner
 {
     private Dictionary<ProcessInfo, StdOutRunningProcess> _runningProcesses;
 
-    public StdOutProcessRunnerImpl()
+    public StdOutProcessRunnerAdapter()
     {
         _runningProcesses = new Dictionary<ProcessInfo, StdOutRunningProcess>();
     }
@@ -30,7 +30,7 @@ internal class StdOutProcessRunnerImpl : IProcessRunner
         if (process == null)
         {
             throw new ConsoleLogWindowAdapterException(
-                nameof(StdOutProcessRunnerImpl),
+                nameof(StdOutProcessRunnerAdapter),
                 $"Unable to start process '{processInfo.FileName}'");
         }
 

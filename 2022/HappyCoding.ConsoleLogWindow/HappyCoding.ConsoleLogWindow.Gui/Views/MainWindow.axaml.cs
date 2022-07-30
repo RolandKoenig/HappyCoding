@@ -4,7 +4,7 @@ using HappyCoding.ConsoleLogWindow.Gui.Util;
 using HappyCoding.ConsoleLogWindow.Gui.Util.ViewServices;
 using HappyCoding.ConsoleLogWindow.Gui.ViewServices.FileDialogs;
 
-namespace HappyCoding.ConsoleLogWindow.Gui;
+namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
 public partial class MainWindow : Window, IViewServiceHost
 {

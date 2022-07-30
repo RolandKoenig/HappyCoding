@@ -1,8 +1,8 @@
 ﻿using HappyCoding.ConsoleLogWindow.Application.Exceptions;
-using HappyCoding.ConsoleLogWindow.Application.Messages;
+using HappyCoding.ConsoleLogWindow.Application.Events;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
-using HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
+using HappyCoding.ConsoleLogWindow.Application.Services.UseCaseExecution;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Application.UseCases;
@@ -34,10 +34,6 @@ public class StartProcessUseCase : IUseCase<ProcessInfo>
             throw new ConsoleLogWindowApplicationException($"Unable to start process '{processToStart.Title}': Unknown error");
         }
 
-        _messagePublisher.Publish(new ProcessStartedMessage()
-        { 
-            ProcessInfo = processToStart,
-            Process = runningProcess
-        });
+        _messagePublisher.Publish(new ProcessStartedEvent(processToStart, runningProcess));
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using HappyCoding.ConsoleLogWindow.Application.Messages;
+using HappyCoding.ConsoleLogWindow.Application.Events;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
-using HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
+using HappyCoding.ConsoleLogWindow.Application.Services.UseCaseExecution;
 using HappyCoding.ConsoleLogWindow.Application.UseCases;
 using HappyCoding.ConsoleLogWindow.Gui.Messages;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
@@ -101,7 +101,7 @@ public class RunningProcessViewModel : ViewModelBase
         this.Command_StartProcess.RaiseCanExecuteChanged();
     }
 
-    private async void OnMessageReceived(ProcessStartedMessage message)
+    private async void OnMessageReceived(ProcessStartedEvent @event)
     {
         if (this.SelectedProcess == null)
         {
@@ -118,7 +118,7 @@ public class RunningProcessViewModel : ViewModelBase
         this.Command_StartProcess.RaiseCanExecuteChanged();
     }
 
-    private async void OnMessageReceived(ProcessStoppedMessage message)
+    private async void OnMessageReceived(ProcessStoppedEvent @event)
     {
         if (this.SelectedProcess == null)
         {

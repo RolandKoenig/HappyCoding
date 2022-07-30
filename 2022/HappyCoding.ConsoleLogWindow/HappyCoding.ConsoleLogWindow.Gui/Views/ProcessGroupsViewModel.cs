@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Application.Model;
-using HappyCoding.ConsoleLogWindow.Application.Ports;
+using HappyCoding.ConsoleLogWindow.Application.Services.DocumentModelHandling;
 using HappyCoding.ConsoleLogWindow.Gui.Messages;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
 using HappyCoding.ConsoleLogWindow.Messenger;

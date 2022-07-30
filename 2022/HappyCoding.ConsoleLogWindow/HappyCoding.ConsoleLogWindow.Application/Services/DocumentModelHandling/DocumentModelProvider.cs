@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using HappyCoding.ConsoleLogWindow.Application.Events;
 using HappyCoding.ConsoleLogWindow.Application.Model;
-using HappyCoding.ConsoleLogWindow.Application.Ports;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
-namespace HappyCoding.ConsoleLogWindow.Gui.Model;
+namespace HappyCoding.ConsoleLogWindow.Application.Services.DocumentModelHandling;
 
-public class DesktopDocumentModelProvider : IDocumentModelProvider
+public class DocumentModelProvider : IDocumentModelProvider
 {
     private readonly IFirLibMessagePublisher _messagePublisher;
 
-    public string? FileName { get; private set; }
-
     public DocumentModel CurrentDocumentModel { get; private set; }
 
-    public DesktopDocumentModelProvider(
-        IFirLibMessagePublisher messagePublisher)
+    public DocumentModelProvider(IFirLibMessagePublisher messagePublisher)
     {
         _messagePublisher = messagePublisher;
-
-        this.FileName = null;
+        
         this.CurrentDocumentModel = new DocumentModel();
 
         this.CurrentDocumentModel.ProcessGroups.Add(
@@ -72,16 +65,6 @@ public class DesktopDocumentModelProvider : IDocumentModelProvider
             });
     }
 
-    public Task NewAsync()
-    {
-        return Task.CompletedTask;
-    }
-
-    public Task CloseAsync()
-    {
-        return Task.CompletedTask;
-    }
-
     /// <inheritdoc />
     public DocumentModel GetCurrentDocumentModel()
     {
@@ -89,8 +72,27 @@ public class DesktopDocumentModelProvider : IDocumentModelProvider
     }
 
     /// <inheritdoc />
-    public void NotifyDocumentModelChanged()
+    public DocumentModel CloseAndCreateNew()
     {
-        throw new NotImplementedException();
+        var newDocument = new DocumentModel();
+
+        this.CurrentDocumentModel = newDocument;
+
+        _messagePublisher.BeginPublish(new CurrentDocumentChangedEvent(newDocument));
+
+        return this.CurrentDocumentModel;
+    }
+
+    /// <inheritdoc />
+    public void ChangeCurrentDocumentModel(DocumentModel newDocumentModel)
+    {
+        this.CurrentDocumentModel = newDocumentModel;
+        _messagePublisher.BeginPublish(new CurrentDocumentChangedEvent(newDocumentModel));
+    }
+
+    /// <inheritdoc />
+    public void NotifyCurrentDocumentContentChanged()
+    {
+        _messagePublisher.BeginPublish(new CurrentDocumentContentChangedEvent());
     }
 }

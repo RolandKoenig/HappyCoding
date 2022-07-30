@@ -1,7 +1,7 @@
 ﻿using FakeItEasy;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
-using HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
-using HappyCoding.ConsoleLogWindow.Application.UseCases;
+using HappyCoding.ConsoleLogWindow.Application.Services.DocumentModelHandling;
+using HappyCoding.ConsoleLogWindow.Application.Services.UseCaseExecution;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Views;

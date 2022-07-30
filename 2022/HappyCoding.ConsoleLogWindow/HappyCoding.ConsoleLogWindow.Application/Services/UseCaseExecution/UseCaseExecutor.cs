@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HappyCoding.ConsoleLogWindow.Application.Services.UseCases;
+namespace HappyCoding.ConsoleLogWindow.Application.Services.UseCaseExecution;
 
 public class UseCaseExecutor : IUseCaseExecutor
 {
@@ -90,6 +90,33 @@ public class UseCaseExecutor : IUseCaseExecutor
                 try
                 {
                     var result= useCase.ExecuteAsync(arg0);
+                    taskCompletionSource.SetResult(null);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    taskCompletionSource.SetException(ex);
+                    throw;
+                }
+            });
+        
+        this.Trigger();
+
+        return taskCompletionSource.Task;
+    }
+
+    /// <inheritdoc />
+    public Task ExecuteUseCaseAsync<T, TArg0, TArg1>(TArg0 arg0, TArg1 arg1) where T : IUseCase<TArg0, TArg1>
+    {
+        var taskCompletionSource = new TaskCompletionSource<object?>();
+
+        var useCase = _serviceProvider.GetRequiredService<T>();
+        _useCaseQueue.Enqueue(
+            () =>
+            {
+                try
+                {
+                    var result= useCase.ExecuteAsync(arg0, arg1);
                     taskCompletionSource.SetResult(null);
                     return result;
                 }
