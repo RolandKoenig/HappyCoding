@@ -6,8 +6,18 @@ using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
-public static class DesignData
+internal static class DesignData
 {
+    public static MainWindowViewModel MainWindowViewModel
+    {
+        get
+        {
+            return new MainWindowViewModel(
+                A.Fake<IDocumentModelProvider>(),
+                A.Fake<IUseCaseExecutor>());
+        }
+    }
+
     public static ProcessGroupsViewModel ProcessGroupsViewModel
     {
         get

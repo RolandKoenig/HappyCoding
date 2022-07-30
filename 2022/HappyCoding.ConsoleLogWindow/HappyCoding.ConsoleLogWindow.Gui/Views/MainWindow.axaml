@@ -5,18 +5,23 @@
         xmlns:views="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.MainWindow"
-        Title="HappyCoding.ConsoleLogWindow">
+        d:DataContext="{x:Static views:DesignData.MainWindowViewModel}"
+        Title="{Binding Path=Title}">
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="New" />
-                <MenuItem Header="Open" />
+                <MenuItem Header="New" 
+                          Command="{Binding Path=Command_New}"/>
+                <MenuItem Header="Open" 
+                          Command="{Binding Path=Command_Open}"/>
                 <Separator />
 
-                <MenuItem Header="Close" />
+                <MenuItem Header="Close"
+                          Command="{Binding Path=Command_Close}"/>
                 <Separator />
 
-                <MenuItem Header="Save" />
+                <MenuItem Header="Save"
+                          Command="{Binding Path=Command_Save}"/>
                 <MenuItem Header="Save as"
                           Command="{Binding Path=Command_SaveAs}"/>
             </MenuItem>

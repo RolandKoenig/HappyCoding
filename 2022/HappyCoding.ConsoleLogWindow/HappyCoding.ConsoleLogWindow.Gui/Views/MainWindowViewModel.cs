@@ -8,21 +8,17 @@ using HappyCoding.ConsoleLogWindow.Application.UseCases;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
 using HappyCoding.ConsoleLogWindow.Gui.Util.ViewServices;
 using HappyCoding.ConsoleLogWindow.Gui.ViewServices.FileDialogs;
-using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
 internal class MainWindowViewModel : ViewModelBase
 {
     private readonly IDocumentModelProvider _documentModelProvider;
-    private readonly IFirLibMessagePublisher _messagePublisher;
-    private readonly IFirLibMessageSubscriber _messageSubscriber;
     private readonly IUseCaseExecutor _useCaseExecutor;
 
     private IView? _view;
     private string? _loadedDocumentFileName;
-    private bool _containsUnsafedChanges;
-    private DocumentModel? _loadedDocument;
+    private bool _containsUnsavedChanges;
 
     public DelegateCommand Command_New { get; private set; }
 
@@ -45,7 +41,7 @@ internal class MainWindowViewModel : ViewModelBase
                 strBuilder.Append(" - ");
                 strBuilder.Append(Path.GetFileName(_loadedDocumentFileName));
 
-                if (_containsUnsafedChanges)
+                if (_containsUnsavedChanges)
                 {
                     strBuilder.Append('*');
                 }
@@ -54,28 +50,20 @@ internal class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public DocumentModel CurrentDocument => _documentModelProvider.GetCurrentDocumentModel();
+
     public MainWindowViewModel(
         IDocumentModelProvider documentModelProvider,
-        IFirLibMessagePublisher messagePublisher,
-        IFirLibMessageSubscriber messageSubscriber,
         IUseCaseExecutor useCaseExecutor)
     {
         _documentModelProvider = documentModelProvider;
-        _messagePublisher = messagePublisher;
-        _messageSubscriber = messageSubscriber;
         _useCaseExecutor = useCaseExecutor;
 
-        Command_New = new DelegateCommand(New);
-        Command_Open = new DelegateCommand(Open);
-        Command_Close = new DelegateCommand(
-            Close,
-            () => _loadedDocument != null && _loadedDocument.ProcessGroups.Count > 0);
-        Command_Save = new DelegateCommand(
-            Save,
-            () => _loadedDocument != null && _loadedDocument.ProcessGroups.Count > 0);
-        Command_SaveAs = new DelegateCommand(
-            SaveAs,
-            () => _loadedDocument != null && _loadedDocument.ProcessGroups.Count > 0);
+        this.Command_New = new DelegateCommand(this.New);
+        this.Command_Open = new DelegateCommand(this.Open);
+        this.Command_Close = new DelegateCommand(this.Close);
+        this.Command_Save = new DelegateCommand(this.Save);
+        this.Command_SaveAs = new DelegateCommand(this.SaveAs);
     }
 
     /// <inheritdoc />
@@ -84,12 +72,6 @@ internal class MainWindowViewModel : ViewModelBase
         base.ViewLoaded(view);
 
         _view = view;
-    }
-
-    /// <inheritdoc />
-    public override void ViewUnloaded()
-    {
-        base.ViewUnloaded();
     }
 
     private void TriggerUIUpdate()
@@ -108,7 +90,7 @@ internal class MainWindowViewModel : ViewModelBase
         _documentModelProvider.CloseAndCreateNew();
 
         _loadedDocumentFileName = null;
-        _containsUnsafedChanges = false;
+        _containsUnsavedChanges = false;
 
         this.TriggerUIUpdate();
     }
@@ -118,7 +100,7 @@ internal class MainWindowViewModel : ViewModelBase
         _documentModelProvider.CloseAndCreateNew();
 
         _loadedDocumentFileName = null;
-        _containsUnsafedChanges = false;
+        _containsUnsavedChanges = false;
 
         this.TriggerUIUpdate();
     }
@@ -135,13 +117,15 @@ internal class MainWindowViewModel : ViewModelBase
             _documentModelProvider.GetCurrentDocumentModel(),
             _loadedDocumentFileName);
 
-        _containsUnsafedChanges = false;
+        _containsUnsavedChanges = false;
 
         this.TriggerUIUpdate();
     }
 
     private async void SaveAs()
     {
+        if (_view == null) { return; }
+
         var dlgSaveFile = _view.GetViewService<ISaveFileViewService>();
         var targetFile = await dlgSaveFile.ShowSaveFileDialogAsync(
             new[] { new FileDialogFilter("Process list", ".processList") },
@@ -156,13 +140,15 @@ internal class MainWindowViewModel : ViewModelBase
             targetFile);
 
         _loadedDocumentFileName = targetFile;
-        _containsUnsafedChanges = false;
+        _containsUnsavedChanges = false;
 
         this.TriggerUIUpdate();
     }
 
     private async void Open()
     {
+        if (_view == null) { return; }
+
         var dlgOpenFile = _view.GetViewService<IOpenFileViewService>();
         var sourceFile = await dlgOpenFile.ShowOpenFileDialogAsync(
             new[] { new FileDialogFilter("Process list", ".processList") },
@@ -174,14 +160,22 @@ internal class MainWindowViewModel : ViewModelBase
 
         await _useCaseExecutor.ExecuteUseCaseAsync<LoadDocumentFromFileUseCase, string>(sourceFile);
 
-        _containsUnsafedChanges = false;
+        _loadedDocumentFileName = sourceFile;
+        _containsUnsavedChanges = false;
         
         this.TriggerUIUpdate();
     }
 
-    private void OnMessageReceived(CurrentDocumentContentChangedEvent @event)
+    private void OnMessageReceived(CurrentDocumentContentChangedEvent eventData)
     {
-        _containsUnsafedChanges = true;
+        _containsUnsavedChanges = true;
+
+        this.TriggerUIUpdate();
+    }
+
+    private void OnMessageReceived(CurrentDocumentChangedEvent eventData)
+    {
+        _containsUnsavedChanges = false;
 
         this.TriggerUIUpdate();
     }

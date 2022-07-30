@@ -29,7 +29,7 @@ internal class JsonDocumentFileHandlerAdapter : IDocumentFileHandler
     }
 
     /// <inheritdoc />
-    public async Task<DocumentModel> LoadDocumentFromFileAsync(DocumentModel model, string fileName)
+    public async Task<DocumentModel> LoadDocumentFromFileAsync(string fileName)
     {
         using var jsonReader = new JsonTextReader(
             new StreamReader(

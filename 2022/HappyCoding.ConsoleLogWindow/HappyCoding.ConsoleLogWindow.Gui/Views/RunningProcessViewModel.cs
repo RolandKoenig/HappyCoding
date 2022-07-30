@@ -20,8 +20,6 @@ public class RunningProcessViewModel : ViewModelBase
     private readonly IFirLibMessageSubscriber _messageSubscriber;
     private readonly IUseCaseExecutor _useCaseExecutor;
 
-    private IEnumerable<MessageSubscription>? _msgSubscriptions;
-
     public ObservableCollection<ProcessOutputLine> ProcessOutput { get; private set; }
 
     public ProcessInfo? SelectedProcess { get; private set; }
@@ -52,35 +50,9 @@ public class RunningProcessViewModel : ViewModelBase
             () => this.IsRunning);
     }
 
-    /// <inheritdoc />
-    public override void ViewLoaded(IView view)
+    private async void OnMessageReceived(ProcessInfoSelectionChangedEvent eventData)
     {
-        base.ViewLoaded(view);
-
-        if (_msgSubscriptions == null)
-        {
-            _msgSubscriptions = _messageSubscriber.SubscribeAll(this);
-        }
-    }
-
-    /// <inheritdoc />
-    public override void ViewUnloaded()
-    {
-        base.ViewUnloaded();
-
-        if (_msgSubscriptions != null)
-        {
-            foreach (var actSubscription in _msgSubscriptions)
-            {
-                actSubscription.Dispose();
-            }
-            _msgSubscriptions = null;
-        }
-    }
-
-    private async void OnMessageReceived(ProcessInfoSelectionChangedMessage message)
-    {
-        this.SelectedProcess = message.SelectedProcessNew;
+        this.SelectedProcess = eventData.SelectedProcessNew;
 
         if (this.SelectedProcess == null)
         {
@@ -101,7 +73,7 @@ public class RunningProcessViewModel : ViewModelBase
         this.Command_StartProcess.RaiseCanExecuteChanged();
     }
 
-    private async void OnMessageReceived(ProcessStartedEvent @event)
+    private async void OnMessageReceived(ProcessStartedEvent eventData)
     {
         if (this.SelectedProcess == null)
         {
@@ -118,7 +90,7 @@ public class RunningProcessViewModel : ViewModelBase
         this.Command_StartProcess.RaiseCanExecuteChanged();
     }
 
-    private async void OnMessageReceived(ProcessStoppedEvent @event)
+    private async void OnMessageReceived(ProcessStoppedEvent eventData)
     {
         if (this.SelectedProcess == null)
         {

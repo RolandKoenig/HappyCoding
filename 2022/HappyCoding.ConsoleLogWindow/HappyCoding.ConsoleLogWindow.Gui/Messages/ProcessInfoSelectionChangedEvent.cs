@@ -4,7 +4,7 @@ using HappyCoding.ConsoleLogWindow.Messenger;
 namespace HappyCoding.ConsoleLogWindow.Gui.Messages;
 
 [FirLibMessage]
-public record ProcessInfoSelectionChangedMessage
+public record ProcessInfoSelectionChangedEvent
 {
     public ProcessInfo? SelectedProcessOld { get; init; }
 

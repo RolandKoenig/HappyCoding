@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using HappyCoding.ConsoleLogWindow.Application.Events;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Services.DocumentModelHandling;
 using HappyCoding.ConsoleLogWindow.Gui.Messages;
@@ -9,7 +10,7 @@ namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
 public class ProcessGroupsViewModel : ViewModelBase
 {
-    private readonly IDocumentModelProvider _documentMOdelProvider;
+    private readonly IDocumentModelProvider _documentModelProvider;
     private readonly IFirLibMessagePublisher _messagePublisher;
 
     private object? _selectedObject;
@@ -30,7 +31,7 @@ public class ProcessGroupsViewModel : ViewModelBase
                 this.RaisePropertyChanged(nameof(this.SelectedObject));
 
                 _messagePublisher.BeginPublish(
-                    new ProcessInfoSelectionChangedMessage()
+                    new ProcessInfoSelectionChangedEvent()
                     {
                         SelectedProcessOld = prevSelectedObject as ProcessInfo,
                         SelectedProcessNew = _selectedObject as ProcessInfo
@@ -43,7 +44,7 @@ public class ProcessGroupsViewModel : ViewModelBase
         IDocumentModelProvider documentModelProvider,
         IFirLibMessagePublisher messagePublisher)
     {
-        _documentMOdelProvider = documentModelProvider;
+        _documentModelProvider = documentModelProvider;
         _messagePublisher = messagePublisher;
     }
 
@@ -52,7 +53,13 @@ public class ProcessGroupsViewModel : ViewModelBase
     {
         base.ViewLoaded(view);
 
-        _documentModel = _documentMOdelProvider.GetCurrentDocumentModel();
+        _documentModel = _documentModelProvider.GetCurrentDocumentModel();
+        this.RaisePropertyChanged(nameof(this.ProcessGroups)); 
+    }
+
+    private void OnMessageReceived(CurrentDocumentChangedEvent eventData)
+    {
+        _documentModel = _documentModelProvider.GetCurrentDocumentModel();
         this.RaisePropertyChanged(nameof(this.ProcessGroups)); 
     }
 }
