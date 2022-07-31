@@ -7,4 +7,9 @@ public class ProcessInfo
     public string FileName { get; set; } = string.Empty;
 
     public string Arguments { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Optional. By default, the working directory is the same directory where FileName is located in.
+    /// </summary>
+    public string? WorkingDirectory { get; set; } = string.Empty;
 }

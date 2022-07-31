@@ -18,7 +18,7 @@ internal static class Startup
         var serviceCollection = new ServiceCollection();
 
         // Startup arguments
-        serviceCollection.AddSingleton<StartupArguments>(args);
+        serviceCollection.AddSingleton(args);
 
         // Register services for infrastructure
         serviceCollection.AddFirLibMessenger();

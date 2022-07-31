@@ -25,6 +25,9 @@ internal class StdOutProcessRunnerAdapter : IProcessRunner
         startInfo.RedirectStandardOutput = true;
         startInfo.UseShellExecute = false;
         startInfo.CreateNoWindow = true;
+        startInfo.WorkingDirectory = string.IsNullOrEmpty(processInfo.WorkingDirectory)
+            ? StdOutProcessRunnerUtil.GetWorkingDirectory(processInfo.FileName)
+            : processInfo.WorkingDirectory;
 
         var process = Process.Start(startInfo);
         if (process == null)

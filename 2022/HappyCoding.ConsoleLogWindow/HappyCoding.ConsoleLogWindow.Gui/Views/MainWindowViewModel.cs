@@ -155,8 +155,8 @@ internal class MainWindowViewModel : ViewModelBase
 
         var dlgSaveFile = _view.GetViewService<ISaveFileViewService>();
         var targetFile = await dlgSaveFile.ShowSaveFileDialogAsync(
-            new[] { new FileDialogFilter("Process list", ".processList") },
-            ".processList");
+            new[] { new FileDialogFilter("Process list", "processList") },
+            "processList");
         if (string.IsNullOrEmpty(targetFile))
         {
             return;
@@ -178,7 +178,7 @@ internal class MainWindowViewModel : ViewModelBase
 
         var dlgOpenFile = _view.GetViewService<IOpenFileViewService>();
         var sourceFile = await dlgOpenFile.ShowOpenFileDialogAsync(
-            new[] { new FileDialogFilter("Process list", ".processList") },
+            new[] { new FileDialogFilter("Process list", "processList") },
             "Load process list");
         if (string.IsNullOrEmpty(sourceFile))
         {
