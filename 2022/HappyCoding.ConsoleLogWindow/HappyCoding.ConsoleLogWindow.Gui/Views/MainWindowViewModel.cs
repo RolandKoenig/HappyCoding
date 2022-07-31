@@ -13,6 +13,7 @@ namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
 internal class MainWindowViewModel : ViewModelBase
 {
+    private readonly StartupArguments _startupArguments;
     private readonly IDocumentModelProvider _documentModelProvider;
     private readonly IUseCaseExecutor _useCaseExecutor;
 
@@ -20,7 +21,9 @@ internal class MainWindowViewModel : ViewModelBase
     private string? _loadedDocumentFileName;
     private bool _containsUnsavedChanges;
 
-    public DelegateCommand Command_New { get; private set; }
+    public DelegateCommand Command_Bootstrap { get; }
+
+    public DelegateCommand Command_New { get; }
 
     public DelegateCommand Command_Open { get; }
 
@@ -40,12 +43,18 @@ internal class MainWindowViewModel : ViewModelBase
             {
                 strBuilder.Append(" - ");
                 strBuilder.Append(Path.GetFileName(_loadedDocumentFileName));
-
-                if (_containsUnsavedChanges)
-                {
-                    strBuilder.Append('*');
-                }
             }
+            else
+            {
+                strBuilder.Append(" - ");
+                strBuilder.Append("New");
+            }
+
+            if (_containsUnsavedChanges)
+            {
+                strBuilder.Append('*');
+            }
+
             return strBuilder.ToString();
         }
     }
@@ -53,12 +62,15 @@ internal class MainWindowViewModel : ViewModelBase
     public DocumentModel CurrentDocument => _documentModelProvider.GetCurrentDocumentModel();
 
     public MainWindowViewModel(
+        StartupArguments startupArguments,
         IDocumentModelProvider documentModelProvider,
         IUseCaseExecutor useCaseExecutor)
     {
+        _startupArguments = startupArguments;
         _documentModelProvider = documentModelProvider;
         _useCaseExecutor = useCaseExecutor;
 
+        this.Command_Bootstrap = new DelegateCommand(this.Bootstrap);
         this.Command_New = new DelegateCommand(this.New);
         this.Command_Open = new DelegateCommand(this.Open);
         this.Command_Close = new DelegateCommand(this.Close);
@@ -83,6 +95,21 @@ internal class MainWindowViewModel : ViewModelBase
         this.Command_SaveAs.RaiseCanExecuteChanged();
 
         this.RaisePropertyChanged(nameof(this.Title));
+    }
+
+    private async void Bootstrap()
+    {
+        if (string.IsNullOrEmpty(_startupArguments.InitialFile))
+        {
+            return;
+        }
+
+        await _useCaseExecutor.ExecuteUseCaseAsync<LoadDocumentFromFileUseCase, string>(_startupArguments.InitialFile);
+
+        _loadedDocumentFileName = _startupArguments.InitialFile;
+        _containsUnsavedChanges = false;
+        
+        this.TriggerUIUpdate();
     }
 
     private void New()

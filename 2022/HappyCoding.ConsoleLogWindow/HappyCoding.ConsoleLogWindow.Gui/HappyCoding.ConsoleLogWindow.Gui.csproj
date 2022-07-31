@@ -22,6 +22,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.14" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.14" />
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="FakeItEasy" Version="7.3.1" />
     <PackageReference Include="FirLib.Avalonia.CommonControls" Version="0.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />

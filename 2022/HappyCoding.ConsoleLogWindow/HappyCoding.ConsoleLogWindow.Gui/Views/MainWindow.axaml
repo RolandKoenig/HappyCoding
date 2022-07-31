@@ -3,48 +3,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Views"
+        xmlns:controls="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.MainWindow"
         d:DataContext="{x:Static views:DesignData.MainWindowViewModel}"
         Title="{Binding Path=Title}">
-    <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File">
-                <MenuItem Header="New" 
-                          Command="{Binding Path=Command_New}"/>
-                <MenuItem Header="Open" 
-                          Command="{Binding Path=Command_Open}"/>
-                <Separator />
 
-                <MenuItem Header="Close"
-                          Command="{Binding Path=Command_Close}"/>
-                <Separator />
+    <controls:BootstrapControl BootstrapCommand="{Binding Path=Command_Bootstrap}">
 
-                <MenuItem Header="Save"
-                          Command="{Binding Path=Command_Save}"/>
-                <MenuItem Header="Save as"
-                          Command="{Binding Path=Command_SaveAs}"/>
-            </MenuItem>
-            <MenuItem Header="Edit">
+        <DockPanel LastChildFill="True">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="New" 
+                              Command="{Binding Path=Command_New}"/>
+                    <MenuItem Header="Open" 
+                              Command="{Binding Path=Command_Open}"/>
+                    <Separator />
 
-            </MenuItem>
-        </Menu>
+                    <MenuItem Header="Close"
+                              Command="{Binding Path=Command_Close}"/>
+                    <Separator />
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="4" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                    <MenuItem Header="Save"
+                              Command="{Binding Path=Command_Save}"/>
+                    <MenuItem Header="Save as"
+                              Command="{Binding Path=Command_SaveAs}"/>
+                </MenuItem>
+                <MenuItem Header="Edit">
 
-            <views:ProcessGroupsView Grid.Column="0" />
+                </MenuItem>
+            </Menu>
 
-            <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="4" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <views:RunningProcessView Grid.Column="2" />
-        </Grid>
+                <views:ProcessGroupsView Grid.Column="0" />
 
-    </DockPanel>
+                <GridSplitter Grid.Column="1"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch" />
+
+                <views:RunningProcessView Grid.Column="2" />
+            </Grid>
+
+        </DockPanel>
+    </controls:BootstrapControl>
+
 </Window>

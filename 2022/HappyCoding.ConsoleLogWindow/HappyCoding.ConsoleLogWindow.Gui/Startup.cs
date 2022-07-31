@@ -13,9 +13,12 @@ internal static class Startup
     /// <summary>
     /// Configure services for dependency injection
     /// </summary>
-    public static IServiceProvider ConfigureServices(string[] args)
+    public static IServiceProvider ConfigureServices(StartupArguments args)
     {
         var serviceCollection = new ServiceCollection();
+
+        // Startup arguments
+        serviceCollection.AddSingleton<StartupArguments>(args);
 
         // Register services for infrastructure
         serviceCollection.AddFirLibMessenger();

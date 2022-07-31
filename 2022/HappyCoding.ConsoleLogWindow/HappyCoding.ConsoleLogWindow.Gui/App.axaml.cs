@@ -14,7 +14,8 @@ public partial class App : Avalonia.Application
         var classicDesktopApplicationLifetime = this.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
         var args = classicDesktopApplicationLifetime?.Args ?? Array.Empty<string>();
 
-        this.Services = Startup.ConfigureServices(args);
+        var startupArguments = StartupArguments.ParseStartupArguments(args);
+        this.Services = Startup.ConfigureServices(startupArguments);
 
         AvaloniaXamlLoader.Load(this);
     }

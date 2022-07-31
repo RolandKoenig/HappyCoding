@@ -16,53 +16,6 @@ public class DocumentModelProvider : IDocumentModelProvider
         _messagePublisher = messagePublisher;
         
         this.CurrentDocumentModel = new DocumentModel();
-
-        this.CurrentDocumentModel.ProcessGroups.Add(
-            new ProcessGroup()
-            {
-                Title = "Dummy Group 1",
-                Processes = new ObservableCollection<ProcessInfo>()
-                {
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 1",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    },
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 2",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    }
-                }
-            });
-        this.CurrentDocumentModel.ProcessGroups.Add(
-            new ProcessGroup()
-            {
-                Title = "Dummy Group 2",
-                Processes = new ObservableCollection<ProcessInfo>()
-                {
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 1",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    },
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 2",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    },
-                    new ProcessInfo()
-                    {
-                        Title = "TestService 3",
-                        FileName = "dotnet",
-                        Arguments = "HappyCoding.ConsoleLogWindow.TestService.dll"
-                    }
-                }
-            });
     }
 
     /// <inheritdoc />

@@ -13,6 +13,7 @@ internal static class DesignData
         get
         {
             return new MainWindowViewModel(
+                new StartupArguments(),
                 A.Fake<IDocumentModelProvider>(),
                 A.Fake<IUseCaseExecutor>());
         }
