@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using HappyCoding.ConsoleLogWindow.Application.Events;
 using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Application.Ports;
 using HappyCoding.ConsoleLogWindow.Application.Services.UseCaseExecution;
 using HappyCoding.ConsoleLogWindow.Application.UseCases;
-using HappyCoding.ConsoleLogWindow.Gui.Messages;
+using HappyCoding.ConsoleLogWindow.Gui.Events;
 using HappyCoding.ConsoleLogWindow.Gui.Util;
 using HappyCoding.ConsoleLogWindow.Messenger;
 

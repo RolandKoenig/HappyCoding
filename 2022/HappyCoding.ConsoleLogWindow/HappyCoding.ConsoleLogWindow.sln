@@ -25,11 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ConsoleLogWindo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler", "HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler\HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler.csproj", "{BDF93B9D-E5E6-4E59-ADAF-7FEDB5634AA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.ConsoleLogWindow.Gui.Tests", "HappyCoding.ConsoleLogWindow.Gui.Tests\HappyCoding.ConsoleLogWindow.Gui.Tests.csproj", "{4CD5E94D-47B6-48BD-90B4-3CF09F938CDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ConsoleLogWindow.Gui.Tests", "HappyCoding.ConsoleLogWindow.Gui.Tests\HappyCoding.ConsoleLogWindow.Gui.Tests.csproj", "{4CD5E94D-47B6-48BD-90B4-3CF09F938CDF}"
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "HappyCoding.ConsoleLogWindow.App", "HappyCoding.ConsoleLogWindow.App\HappyCoding.ConsoleLogWindow.App.wapproj", "{4249520D-9971-48B1-9692-DFDEC056CCAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.ConsoleLogWindow.StdOutProcessRunner.Tests", "HappyCoding.ConsoleLogWindow.StdOutProcessRunner.Tests\HappyCoding.ConsoleLogWindow.StdOutProcessRunner.Tests.csproj", "{C2C4F830-E7E7-4D68-BE66-AAD77233497D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ConsoleLogWindow.StdOutProcessRunner.Tests", "HappyCoding.ConsoleLogWindow.StdOutProcessRunner.Tests\HappyCoding.ConsoleLogWindow.StdOutProcessRunner.Tests.csproj", "{C2C4F830-E7E7-4D68-BE66-AAD77233497D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler.Tests", "HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler.Tests\HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler.Tests.csproj", "{738081B2-AC03-4215-86E9-AF0193D53192}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -255,6 +257,26 @@ Global
 		{C2C4F830-E7E7-4D68-BE66-AAD77233497D}.Release|x64.Build.0 = Release|Any CPU
 		{C2C4F830-E7E7-4D68-BE66-AAD77233497D}.Release|x86.ActiveCfg = Release|Any CPU
 		{C2C4F830-E7E7-4D68-BE66-AAD77233497D}.Release|x86.Build.0 = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|ARM.Build.0 = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|x64.Build.0 = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Debug|x86.Build.0 = Debug|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|ARM.ActiveCfg = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|ARM.Build.0 = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|ARM64.Build.0 = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|x64.ActiveCfg = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|x64.Build.0 = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|x86.ActiveCfg = Release|Any CPU
+		{738081B2-AC03-4215-86E9-AF0193D53192}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -269,6 +291,7 @@ Global
 		{4CD5E94D-47B6-48BD-90B4-3CF09F938CDF} = {B5519384-9C7B-474A-9202-93364A863A89}
 		{4249520D-9971-48B1-9692-DFDEC056CCAA} = {B5519384-9C7B-474A-9202-93364A863A89}
 		{C2C4F830-E7E7-4D68-BE66-AAD77233497D} = {CA4991A1-DED2-40F7-A90A-6BDD1A11AA44}
+		{738081B2-AC03-4215-86E9-AF0193D53192} = {CA4991A1-DED2-40F7-A90A-6BDD1A11AA44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7128831D-E3E4-4414-9673-572405D34F07}

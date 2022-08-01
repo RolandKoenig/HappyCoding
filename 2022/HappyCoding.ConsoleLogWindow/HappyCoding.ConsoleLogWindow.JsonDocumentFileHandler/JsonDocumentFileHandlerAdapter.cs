@@ -18,13 +18,16 @@ internal class JsonDocumentFileHandlerAdapter : IDocumentFileHandler
     /// <inheritdoc />
     public async Task SaveDocumentToFileAsync(DocumentModel model, string fileName)
     {
+        var jsonModel = new JsonDocumentModel();
+        jsonModel.ProcessGroups.AddRange(model.ProcessGroups);
+
         using var jsonWriter = new JsonTextWriter(
             new StreamWriter(
                 new FileStream(fileName, FileMode.CreateNew, FileAccess.Write)));
 
         await Task.Run(() =>
         {
-            _serializer.Serialize(jsonWriter, model);
+            _serializer.Serialize(jsonWriter, jsonModel);
         });
     }
 
@@ -35,12 +38,18 @@ internal class JsonDocumentFileHandlerAdapter : IDocumentFileHandler
             new StreamReader(
                 new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)));
 
-        var result = await Task.Run(() => _serializer.Deserialize<DocumentModel>(jsonReader));
-        if (result == null)
+        var jsonDocumentModel = await Task.Run(() => _serializer.Deserialize<JsonDocumentModel>(jsonReader));
+        if (jsonDocumentModel == null)
         {
             throw new ConsoleLogWindowAdapterException(
                 nameof(JsonDocumentFileHandlerAdapter),
                 $"Unable to deserialize {nameof(DocumentModel)} from file {fileName}");
+        }
+
+        var result = new DocumentModel();
+        foreach (var actGroup in jsonDocumentModel.ProcessGroups)
+        {
+            result.ProcessGroups.Add(actGroup);
         }
 
         return result;

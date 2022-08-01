@@ -1,7 +1,7 @@
 ﻿using HappyCoding.ConsoleLogWindow.Application.Model;
 using HappyCoding.ConsoleLogWindow.Messenger;
 
-namespace HappyCoding.ConsoleLogWindow.Gui.Messages;
+namespace HappyCoding.ConsoleLogWindow.Gui.Events;
 
 [FirLibMessage]
 public record ProcessInfoSelectionChangedEvent
