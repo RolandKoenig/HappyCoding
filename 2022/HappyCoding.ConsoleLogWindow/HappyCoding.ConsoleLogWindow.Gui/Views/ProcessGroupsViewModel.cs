@@ -8,7 +8,7 @@ using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
-public class ProcessGroupsViewModel : ViewModelBase
+internal class ProcessGroupsViewModel : ViewModelBase
 {
     private readonly IDocumentModelProvider _documentModelProvider;
     private readonly IFirLibMessagePublisher _messagePublisher;

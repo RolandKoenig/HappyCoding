@@ -10,7 +10,7 @@ using HappyCoding.ConsoleLogWindow.Messenger;
 
 namespace HappyCoding.ConsoleLogWindow.Gui.Views;
 
-public class RunningProcessViewModel : ViewModelBase
+internal class RunningProcessViewModel : ViewModelBase
 {
     private static readonly ObservableCollection<ProcessOutputLine> EMPTY_PROCESS_OUTPUT = new();
 

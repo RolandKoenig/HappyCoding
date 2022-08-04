@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Views"
+             xmlns:viewsProcessGroups="clr-namespace:HappyCoding.ConsoleLogWindow.Gui.Views.ProcessGroups"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.ConsoleLogWindow.Gui.Views.ProcessGroupsView"
              d:DataContext="{x:Static local:DesignData.ProcessGroupsViewModel}">
@@ -11,11 +12,14 @@
               SelectedItem="{Binding Path=SelectedObject, Mode=TwoWay}">
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Path=Processes}">
-                <TextBlock Text="{Binding Path=Title}" />
+                <StackPanel Orientation="Horizontal">
+                    <viewsProcessGroups:ProcessStatusView Margin="2"
+                                                          SelectedProcess="{Binding}"/>
+
+                    <TextBlock Text="{Binding Path=Title}" />
+                </StackPanel>
             </TreeDataTemplate>
         </TreeView.ItemTemplate>
     </TreeView>
-
-    
 
 </UserControl>

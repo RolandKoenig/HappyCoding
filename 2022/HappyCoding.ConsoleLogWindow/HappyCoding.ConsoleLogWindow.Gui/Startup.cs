@@ -1,6 +1,7 @@
 ﻿using System;
 using HappyCoding.ConsoleLogWindow.Application;
 using HappyCoding.ConsoleLogWindow.Gui.Views;
+using HappyCoding.ConsoleLogWindow.Gui.Views.ProcessGroups;
 using HappyCoding.ConsoleLogWindow.JsonDocumentFileHandler;
 using HappyCoding.ConsoleLogWindow.Messenger;
 using HappyCoding.ConsoleLogWindow.StdOutProcessRunner;
@@ -31,6 +32,7 @@ internal static class Startup
         serviceCollection.AddTransient<MainWindowViewModel>();
         serviceCollection.AddTransient<ProcessGroupsViewModel>();
         serviceCollection.AddTransient<RunningProcessViewModel>();
+        serviceCollection.AddTransient<ProcessStatusViewModel>();
 
         // Register application 
         serviceCollection.AddApplicationServices();
