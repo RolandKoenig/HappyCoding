@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  mssql_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=DasIstEinGeheimes@Passwort123?
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./ignoreforgit/mssql_data:/var/opt/mssql/data
+      - ./ignoreforgit/logs:/var/opt/mssql/log
+      - ./ignoreforgit/secrets:/var/opt/mssql/secrets
