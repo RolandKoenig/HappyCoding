@@ -12,8 +12,7 @@ public class Program
         {
             Args = args,
             EnvironmentName = "Development",
-            ContentRootPath = appRootPath,
-            WebRootPath = appRootPath
+            ContentRootPath = appRootPath
         };
 
         var builder = WebApplication.CreateBuilder(appOptions);
