@@ -1,6 +1,7 @@
 using HappyCoding.HexagonalArchitecture.Application;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
 namespace HappyCoding.HexagonalArchitecture.WebUI.Server
@@ -29,6 +30,11 @@ namespace HappyCoding.HexagonalArchitecture.WebUI.Server
             // Adapters
             builder.Services.AddSQLiteAdapter(
                 builder.Configuration.GetConnectionString("WorkshopDB"));
+
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             //##########
             // Configure request pipeline

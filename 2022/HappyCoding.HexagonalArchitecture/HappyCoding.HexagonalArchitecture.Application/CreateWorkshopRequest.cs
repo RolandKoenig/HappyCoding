@@ -3,7 +3,5 @@ using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application;
 
-public record CreateWorkshopRequest : IRequest<WorkshopDto>
-{
-    public WorkshopWithoutIDDto Workshop { get; init; }
-}
+public record CreateWorkshopRequest(WorkshopWithoutIDDto Workshop) 
+    : IRequest<WorkshopDto>;

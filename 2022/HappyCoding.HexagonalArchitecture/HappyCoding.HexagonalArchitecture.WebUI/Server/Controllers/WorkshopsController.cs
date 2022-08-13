@@ -17,51 +17,64 @@ public class WorkshopsController : ControllerBase
     }
     
     [HttpPost]
+    [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateWorkshop(WorkshopWithoutIDDto workshop)
     {
-        return Ok(await _mediator.Send(new CreateWorkshopRequest()
-        {
-            Workshop = workshop
-        }));
+        if (!ModelState.IsValid) { return BadRequest(); }
+
+        return Ok(await _mediator.Send(
+            new CreateWorkshopRequest(workshop)));
     }
 
     [HttpPut]
+    [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateWorkshop(WorkshopDto workshop)
     {
-        return Ok(await _mediator.Send(new UpdateWorkshopRequest()
-        {
-            Workshop = workshop
-        }));
+        if (!ModelState.IsValid) { return BadRequest(); }
+
+        return Ok(await _mediator.Send(
+            new UpdateWorkshopRequest(workshop)));
     }
 
     [HttpDelete]
     [Route("{workshopID}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> DeleteWorkshop(Guid workshopID)
     {
-        await _mediator.Send(new DeleteWorkshopRequest()
-        {
-            WorkshopID = workshopID
-        });
+        if (!ModelState.IsValid) { return BadRequest(); }
+
+        await _mediator.Send(
+            new DeleteWorkshopRequest(workshopID));
         
         return Ok();
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<WorkshopDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SearchWorkshops([FromQuery] string? query)
     {
-        return Ok(await _mediator.Send(new SearchWorkshopsRequest()
-        {
-            QueryString = query ?? ""
-        }));
+        if (!ModelState.IsValid) { return BadRequest(); }
+
+        return Ok(await _mediator.Send(
+            new SearchWorkshopsRequest()
+            {
+                QueryString = query
+            }));
     }
     
     [HttpGet]
     [Route("{workshopID}")]
+    [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetWorkshop(Guid workshopID)
     {
-        return Ok(await _mediator.Send(new GetWorkshopRequest()
-        {
-            ID = workshopID
-        }));
+        if (!ModelState.IsValid) { return BadRequest(); }
+
+        return Ok(await _mediator.Send(
+            new GetWorkshopRequest(workshopID)));
     }
 }

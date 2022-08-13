@@ -3,7 +3,7 @@ using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application;
 
-public class SearchWorkshopsRequest : IRequest<IEnumerable<WorkshopShortInfoDto>>
+public record SearchWorkshopsRequest() : IRequest<IEnumerable<WorkshopShortInfoDto>>
 {
-    public string QueryString { get; init; }
+    public string? QueryString { get; init; }
 }
