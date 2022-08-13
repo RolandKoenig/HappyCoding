@@ -15,13 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.WebUI.Client", "HappyCoding.HexagonalArchitecture.WebUI\Client\HappyCoding.HexagonalArchitecture.WebUI.Client.csproj", "{440A9B40-3492-429A-BA57-4FD0CE9AEC12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Application.Dtos", "HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj", "{7E72B6FB-482C-4D8B-AB26-6E7D1E993211}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Domain.Tests", "HappyCoding.HexagonalArchitecture.Domain.Tests\HappyCoding.HexagonalArchitecture.Domain.Tests.csproj", "{358085DA-1A7F-4BB0-B43C-800B7D28D555}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter", "HappyCoding.HexagonalArchitecture.SQLiteAdapter\HappyCoding.HexagonalArchitecture.SQLiteAdapter.csproj", "{FBCA78DA-C45A-4E19-AE91-F414E02A981E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests", "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests\HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests.csproj", "{7ABC737B-E242-4715-828B-FCD0E9E31985}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Dtos", "HappyCoding.HexagonalArchitecture.Dtos\HappyCoding.HexagonalArchitecture.Dtos.csproj", "{B4876F55-EAE3-40AC-8321-44F1EB0614FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{40533F35-34CD-4188-A157-BA40B8B670AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +47,6 @@ Global
 		{440A9B40-3492-429A-BA57-4FD0CE9AEC12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{440A9B40-3492-429A-BA57-4FD0CE9AEC12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{440A9B40-3492-429A-BA57-4FD0CE9AEC12}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E72B6FB-482C-4D8B-AB26-6E7D1E993211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E72B6FB-482C-4D8B-AB26-6E7D1E993211}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E72B6FB-482C-4D8B-AB26-6E7D1E993211}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E72B6FB-482C-4D8B-AB26-6E7D1E993211}.Release|Any CPU.Build.0 = Release|Any CPU
 		{358085DA-1A7F-4BB0-B43C-800B7D28D555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{358085DA-1A7F-4BB0-B43C-800B7D28D555}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{358085DA-1A7F-4BB0-B43C-800B7D28D555}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,6 +59,10 @@ Global
 		{7ABC737B-E242-4715-828B-FCD0E9E31985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ABC737B-E242-4715-828B-FCD0E9E31985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ABC737B-E242-4715-828B-FCD0E9E31985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4876F55-EAE3-40AC-8321-44F1EB0614FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4876F55-EAE3-40AC-8321-44F1EB0614FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4876F55-EAE3-40AC-8321-44F1EB0614FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4876F55-EAE3-40AC-8321-44F1EB0614FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,8 +70,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3C57F6E5-F856-40F2-B5A0-0632A15B1D94} = {B59D3097-54F3-4DDB-BFC7-127C59A81AB8}
 		{440A9B40-3492-429A-BA57-4FD0CE9AEC12} = {B59D3097-54F3-4DDB-BFC7-127C59A81AB8}
+		{358085DA-1A7F-4BB0-B43C-800B7D28D555} = {40533F35-34CD-4188-A157-BA40B8B670AE}
 		{FBCA78DA-C45A-4E19-AE91-F414E02A981E} = {6EDE47E2-8D74-481C-9036-0468F87019F1}
-		{7ABC737B-E242-4715-828B-FCD0E9E31985} = {6EDE47E2-8D74-481C-9036-0468F87019F1}
+		{7ABC737B-E242-4715-828B-FCD0E9E31985} = {40533F35-34CD-4188-A157-BA40B8B670AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC0C763-1085-4177-8080-2202230B893E}

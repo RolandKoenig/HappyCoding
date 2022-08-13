@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace HappyCoding.HexagonalArchitecture.Application.Dtos;
+namespace HappyCoding.HexagonalArchitecture.Dtos;
 
 public class WorkshopShortInfoDto
 {

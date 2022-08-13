@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj" />
     <ProjectReference Include="..\HappyCoding.HexagonalArchitecture.Domain\HappyCoding.HexagonalArchitecture.Domain.csproj" />
+    <ProjectReference Include="..\HappyCoding.HexagonalArchitecture.Dtos\HappyCoding.HexagonalArchitecture.Dtos.csproj" />
   </ItemGroup>
 
   <ItemGroup>
