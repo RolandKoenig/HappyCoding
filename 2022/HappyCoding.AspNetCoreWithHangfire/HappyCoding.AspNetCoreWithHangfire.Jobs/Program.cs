@@ -21,7 +21,10 @@ public static class Program
                     .UseRecommendedSerializerSettings()
                     .UseSqlServerStorage(hostContext.Configuration.GetConnectionString("HangfireDB")));
 
-                services.AddHangfireServer();
+                services.AddHangfireServer(options =>
+                {
+                    options.WorkerCount = 1;
+                });
 
                 services.AddHostedService<BackgroundJobBootstrap>();
             })
