@@ -17,7 +17,8 @@ internal class Program
             return -1;
         }
 
-        // Method for windows: https://stackoverflow.com/questions/283128/how-do-i-send-ctrlc-to-a-process-in-c
+        // Original implementation from:
+        // https://stackoverflow.com/questions/283128/how-do-i-send-ctrlc-to-a-process-in-c
         NativeMethods.FreeConsole();
         if (NativeMethods.AttachConsole(processID)) 
         {

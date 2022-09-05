@@ -2,6 +2,9 @@
 
 namespace HappyCoding.WinProcessSignalingHelper;
 
+// Original implementation from:
+// https://stackoverflow.com/questions/283128/how-do-i-send-ctrlc-to-a-process-in-c
+
 internal class NativeMethods
 {
     internal const int CTRL_C_EVENT = 0;
@@ -16,8 +19,8 @@ internal class NativeMethods
     internal static extern bool FreeConsole();
 
     [DllImport("kernel32.dll")]
-    internal static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate? HandlerRoutine, bool Add);
+    internal static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate? handlerRoutine, bool Add);
 
     // Delegate type to be used as the Handler Routine for SCCH
-    internal delegate Boolean ConsoleCtrlDelegate(uint CtrlType);
+    internal delegate Boolean ConsoleCtrlDelegate(uint ctrlType);
 }

@@ -15,7 +15,7 @@ internal class Program
                 .ReadFrom.Configuration(context.Configuration)
                 .ReadFrom.Services(services)
                 .Enrich.FromLogContext())
-            .ConfigureServices((hostContext, services) =>
+            .ConfigureServices((_, services) =>
             {
                 services.AddHostedService<HostedService>();
             })

@@ -6,7 +6,7 @@ namespace HappyCoding.ControlledProcessShutdownCall;
 
 internal class Program
 {
-    static async Task<int> Main(string[] args)
+    static async Task<int> Main()
     {
         try
         {
@@ -27,7 +27,7 @@ internal class Program
             var processStartInfo = new ProcessStartInfo(
                 "dotnet", "HappyCoding.ControlledProcessShutdownCall.DummyProcess.dll");
             processStartInfo.UseShellExecute = true;
-            var process = Process.Start(processStartInfo);
+            var process = Process.Start(processStartInfo)!;
             Console.WriteLine("Process tarted...");
 
             await Task.Delay(2000);
@@ -35,7 +35,7 @@ internal class Program
             Console.WriteLine("Signaling process");
             await processShutdownCaller.EndProcessAsync(process, CancellationToken.None);
 
-            Console.WriteLine("Process endet");
+            Console.WriteLine("Process ended");
             Console.ReadLine();
 
             return 0;
