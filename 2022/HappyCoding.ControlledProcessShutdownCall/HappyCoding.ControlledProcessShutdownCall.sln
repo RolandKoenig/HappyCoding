@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.ControlledProcessShutdownCall", "HappyCoding.ControlledProcessShutdownCall\HappyCoding.ControlledProcessShutdownCall.csproj", "{A9F0F025-AB99-4CA0-8C5B-26B73C9DB1B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ControlledProcessShutdownCall", "HappyCoding.ControlledProcessShutdownCall\HappyCoding.ControlledProcessShutdownCall.csproj", "{A9F0F025-AB99-4CA0-8C5B-26B73C9DB1B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.WinProcessSignalingHelper", "HappyCoding.WinProcessSignalingHelper\HappyCoding.WinProcessSignalingHelper.csproj", "{3F778A7C-8170-4A88-BE8F-FD94F5AC2C94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.WinProcessSignalingHelper", "HappyCoding.WinProcessSignalingHelper\HappyCoding.WinProcessSignalingHelper.csproj", "{3F778A7C-8170-4A88-BE8F-FD94F5AC2C94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.ControlledProcessShutdownCall.DummyProcess", "HappyCoding.ControlledProcessShutdownCall.DummyProcess\HappyCoding.ControlledProcessShutdownCall.DummyProcess.csproj", "{8842F973-7E7D-43C3-9574-A5032FAFB60B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.ControlledProcessShutdownCall.DummyProcess", "HappyCoding.ControlledProcessShutdownCall.DummyProcess\HappyCoding.ControlledProcessShutdownCall.DummyProcess.csproj", "{8842F973-7E7D-43C3-9574-A5032FAFB60B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -21,22 +21,23 @@ internal class Program
             }
             else
             {
+                Console.WriteLine("Current OS not supported!");
                 return -1;
             }
 
             var processStartInfo = new ProcessStartInfo(
                 "dotnet", "HappyCoding.ControlledProcessShutdownCall.DummyProcess.dll");
             processStartInfo.UseShellExecute = true;
+            // var processStartInfo = new ProcessStartInfo("Notepad.exe");
             var process = Process.Start(processStartInfo)!;
             Console.WriteLine("Process tarted...");
 
             await Task.Delay(2000);
 
             Console.WriteLine("Signaling process");
-            await processShutdownCaller.EndProcessAsync(process, CancellationToken.None);
+            await processShutdownCaller.StopProcessAsync(process, CancellationToken.None);
 
             Console.WriteLine("Process ended");
-            Console.ReadLine();
 
             return 0;
         }

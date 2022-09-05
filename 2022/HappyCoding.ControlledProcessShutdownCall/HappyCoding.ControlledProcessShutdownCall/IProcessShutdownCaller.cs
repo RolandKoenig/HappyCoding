@@ -4,5 +4,5 @@ namespace HappyCoding.ControlledProcessShutdownCall;
 
 internal interface IProcessShutdownCaller
 {
-    Task EndProcessAsync(Process process, CancellationToken cancellationToken);
+    Task StopProcessAsync(Process processToStop, CancellationToken cancellationToken);
 }

@@ -9,11 +9,10 @@ namespace HappyCoding.ControlledProcessShutdownCall.Unix;
 [SupportedOSPlatform(nameof(OSPlatform.OSX))]
 internal class UnixProcessShutdownCaller : IProcessShutdownCaller
 {
-    public Task EndProcessAsync(Process process, CancellationToken cancellationToken)
+    public Task StopProcessAsync(Process processToStop, CancellationToken cancellationToken)
     {
-        Syscall.kill(process.Id, Signum.SIGINT);
+        Syscall.kill(processToStop.Id, Signum.SIGINT);
 
-
-        return process.WaitForExitAsync(cancellationToken);
+        return processToStop.WaitForExitAsync(cancellationToken);
     }
 }
