@@ -7,7 +7,7 @@ namespace HappyCoding.ControlledProcessShutdownCall.Unix;
 
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
 [SupportedOSPlatform(nameof(OSPlatform.OSX))]
-internal class UnixProcessShutdownCaller : IProcessShutdownCaller
+internal class UnixProcessStopCaller : IProcessStopCaller
 {
     public Task StopProcessAsync(Process processToStop, CancellationToken cancellationToken)
     {

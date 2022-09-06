@@ -2,7 +2,7 @@
 
 namespace HappyCoding.ControlledProcessShutdownCall;
 
-internal interface IProcessShutdownCaller
+internal interface IProcessStopCaller
 {
     Task StopProcessAsync(Process processToStop, CancellationToken cancellationToken);
 }

@@ -10,14 +10,14 @@ internal class Program
     {
         try
         {
-            IProcessShutdownCaller processShutdownCaller;
+            IProcessStopCaller processStopCaller;
             if (OperatingSystem.IsWindows())
             {
-                processShutdownCaller = new WindowsProcessShutdownCaller();
+                processStopCaller = new WindowsProcessStopCaller();
             }
             else if (OperatingSystem.IsLinux() || OperatingSystem.IsMacOS())
             {
-                processShutdownCaller = new UnixProcessShutdownCaller();
+                processStopCaller = new UnixProcessStopCaller();
             }
             else
             {
@@ -35,7 +35,7 @@ internal class Program
             await Task.Delay(2000);
 
             Console.WriteLine("Signaling process");
-            await processShutdownCaller.StopProcessAsync(process, CancellationToken.None);
+            await processStopCaller.StopProcessAsync(process, CancellationToken.None);
 
             Console.WriteLine("Process ended");
 

@@ -5,14 +5,24 @@ using System.Runtime.Versioning;
 namespace HappyCoding.ControlledProcessShutdownCall.Windows;
 
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-internal class WindowsProcessShutdownCaller : IProcessShutdownCaller
+internal class WindowsProcessStopCaller : IProcessStopCaller
 {
     public async Task StopProcessAsync(Process processToStop, CancellationToken cancellationToken)
     {
-        if (processToStop.CloseMainWindow())
+        
+
+        if (processToStop.MainWindowHandle != IntPtr.Zero)
         {
-            // Shortcut for UI processes
-            await processToStop.WaitForExitAsync(cancellationToken);
+            // Trigger closing of the MainWindow
+            if (processToStop.CloseMainWindow())
+            {
+                await processToStop.WaitForExitAsync(cancellationToken);
+            }
+            else
+            {
+                throw new UnableToStopProcessException(
+                    $"Unable to stop process {processToStop.Id}, CloseMainWindow returned false");
+            }
         }
         else
         {
@@ -32,7 +42,7 @@ internal class WindowsProcessShutdownCaller : IProcessShutdownCaller
             else
             {
                 var error = (await helperProcess.StandardOutput.ReadToEndAsync()) ?? "";
-                throw new UnableToEndProcessException(
+                throw new UnableToStopProcessException(
                     $"Unable to end process {processToStop.Id}, helper process returned {exitCode} ({error})");
             }
         }
