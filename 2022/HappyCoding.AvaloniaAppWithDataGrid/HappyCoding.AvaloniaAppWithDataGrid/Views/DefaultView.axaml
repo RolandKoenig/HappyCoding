@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HappyCoding.AvaloniaAppWithDataGrid.Views"
+             xmlns:firlibpropgrid="clr-namespace:FirLib.Avalonia.PropertyGridControl;assembly=FirLib.Avalonia.PropertyGridControl"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.AvaloniaAppWithDataGrid.Views.DefaultView">
+    <UserControl.DataContext>
+        <local:DefaultViewModel />
+    </UserControl.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="3" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <DataGrid Grid.Column="0" 
+                  Items="{Binding Path=Items}"
+                  SelectedItem="{Binding Path=SelectedItem}"
+                  SelectionMode="Single"
+                  CanUserResizeColumns="True" 
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="True"
+                  AlternatingRowBackground="#101010">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Int Value"
+                                    Binding="{Binding Path=ValueInt}" />
+                <DataGridTextColumn Header="String Value"
+                                    Binding="{Binding Path=ValueString}" />
+                <DataGridCheckBoxColumn Header="Bool Value"
+                                        Binding="{Binding Path=ValueBool}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <GridSplitter Grid.Column="1"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        
+        <firlibpropgrid:PropertyGrid Grid.Column="2" 
+                                     SelectedObject="{Binding Path=SelectedItem}" />
+    </Grid>
+    
+
+</UserControl>

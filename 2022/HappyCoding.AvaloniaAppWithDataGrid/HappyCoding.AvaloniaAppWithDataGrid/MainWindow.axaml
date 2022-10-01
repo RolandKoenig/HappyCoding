@@ -2,8 +2,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:firlibcommon="clr-namespace:FirLib.Avalonia.CommonControls;assembly=FirLib.Avalonia.CommonControls"
+        xmlns:views="clr-namespace:HappyCoding.AvaloniaAppWithDataGrid.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaAppWithDataGrid.MainWindow"
-        Title="HappyCoding.AvaloniaAppWithDataGrid">
-    Welcome to Avalonia!
+        Title="HappyCoding.AvaloniaAppWithDataGrid"
+        ExtendClientAreaToDecorationsHint="True">
+    <firlibcommon:MainWindowFrame>
+        <firlibcommon:MainWindowFrame.CustomTitleArea>
+            <TextBlock Text="🧪 Avalonia with DataGrid" />
+        </firlibcommon:MainWindowFrame.CustomTitleArea>
+        
+        <firlibcommon:MainWindowFrame.HeaderArea>
+            <Menu>
+                <MenuItem Header="File" />
+                <MenuItem Header="Help" />
+            </Menu>
+        </firlibcommon:MainWindowFrame.HeaderArea>
+        
+        <firlibcommon:MainWindowFrame.MainContentArea>
+            <TabControl>
+                <TabItem Header="Default">
+                    <views:DefaultView />
+                </TabItem>
+                <TabItem Header="With Filtering">
+                    
+                </TabItem>
+            </TabControl>
+        </firlibcommon:MainWindowFrame.MainContentArea>
+    </firlibcommon:MainWindowFrame>
 </Window>
