@@ -2,7 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HappyCoding.AvaloniaAppWithDataGrid.App">
     <Application.Styles>
+        <!-- Dark theme --> 
         <FluentTheme Mode="Dark" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+        
+        <!-- Set tooltip for DataGridColumns always o their header -->
+        <Style Selector="DataGridColumnHeader">
+            <Setter Property="ToolTip.Tip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+        </Style>
     </Application.Styles>
 </Application>

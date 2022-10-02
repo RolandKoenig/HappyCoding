@@ -41,6 +41,4 @@
         <firlibpropgrid:PropertyGrid Grid.Column="2" 
                                      SelectedObject="{Binding Path=SelectedItem}" />
     </Grid>
-    
-
 </UserControl>
