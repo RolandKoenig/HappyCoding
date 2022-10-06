@@ -32,4 +32,8 @@
         <DependentUpon>TestDataRow.cs</DependentUpon>
       </Compile>
     </ItemGroup>
+    <ItemGroup>
+      <None Remove="Resources\TestData.json" />
+      <EmbeddedResource Include="Resources\TestData.json" />
+    </ItemGroup>
 </Project>

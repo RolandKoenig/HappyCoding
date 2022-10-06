@@ -4,25 +4,46 @@ namespace HappyCoding.AvaloniaAppWithDataGrid.Data;
 
 public class TestDataRow : PropertyChangedBase
 {
-    private int _valueInt;
-    private string _valueString = string.Empty;
-    private bool _valueBool;
-    
-    public int ValueInt
+// "name": "Keegan Elliott",
+// "postalZip": "941416",
+// "address": "Ap #611-7891 Consequat Ave",
+// "country": "Nigeria",
+// "region": "Provence-Alpes-Côte d'Azur"
+
+
+    private string _name = "";
+    private string _postalZip = "";
+    private string _address = "sfsadf";
+    private string _country = "asdsaf";
+    private string _region = "sadfsaf";
+
+    public string Name
     {
-        get => _valueInt;
-        set => this.SetField(ref _valueInt, value);
+        get => _name;
+        set => this.SetField(ref _name, value);
     }
 
-    public string ValueString
+    public string PostalZip
     {
-        get => _valueString;
-        set => this.SetField(ref _valueString, value);
+        get => _postalZip;
+        set => this.SetField(ref _postalZip, value);
     }
 
-    public bool ValueBool
+    public string Address
     {
-        get => _valueBool;
-        set => this.SetField(ref _valueBool, value);
+        get => _address;
+        set => this.SetField(ref _address, value);
+    }
+
+    public string Country
+    {
+        get => _country;
+        set => this.SetField(ref _country, value);
+    }
+
+    public string Region
+    {
+        get => _region;
+        set => this.SetField(ref _region, value);
     }
 }

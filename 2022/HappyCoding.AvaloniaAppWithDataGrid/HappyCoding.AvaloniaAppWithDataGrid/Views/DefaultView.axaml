@@ -18,20 +18,32 @@
         </Grid.ColumnDefinitions>
         
         <DataGrid Grid.Column="0" 
+                  x:Name="CtrlDataGrid"
                   Items="{Binding Path=Items}"
                   SelectedItem="{Binding Path=SelectedItem}"
                   SelectionMode="Single"
-                  CanUserResizeColumns="True" 
+                  CanUserResizeColumns="True"
                   CanUserReorderColumns="False"
                   CanUserSortColumns="True"
-                  AlternatingRowBackground="#101010">
+                  AlternatingRowBackground="{DynamicResource ThemeControlMidColor}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Clear sorting"
+                              Click="OnCmdResetSorting_Click"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+                
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Int Value"
-                                    Binding="{Binding Path=ValueInt}" />
-                <DataGridTextColumn Header="String Value"
-                                    Binding="{Binding Path=ValueString}" />
-                <DataGridCheckBoxColumn Header="Bool Value"
-                                        Binding="{Binding Path=ValueBool}" />
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="PostalZip"
+                                    Binding="{Binding Path=PostalZip}" />
+                <DataGridTextColumn Header="Address"
+                                    Binding="{Binding Path=Address}" />
+                <DataGridTextColumn Header="Country"
+                                    Binding="{Binding Path=Country}" />
+                <DataGridTextColumn Header="Region"
+                                    Binding="{Binding Path=Region}" />
             </DataGrid.Columns>
         </DataGrid>
         

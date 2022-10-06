@@ -1,22 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Text.Json;
 
 namespace HappyCoding.AvaloniaAppWithDataGrid.Data;
 
 public static class TestDataFactory
 {
-    public static IEnumerable<TestDataRow> CreateTestData(int randomSeed, int countRows)
+    public static IEnumerable<TestDataRow> LoadTestData(int randomSeed, int countRows)
     {
-        var random = new Random(randomSeed);
+        var assembly = Assembly.GetExecutingAssembly();
+        var rootNamespace = typeof(Program).Namespace ?? "";
+        using var inStream = assembly.GetManifestResourceStream($"{rootNamespace}.Resources.TestData.json");
 
-        for (var loop = 0; loop < countRows; loop++)
-        {
-            yield return new TestDataRow()
-            {
-                ValueInt = random.Next(0, 50000),
-                ValueString = $"STR_{random.Next(0, 50000)}",
-                ValueBool = random.Next(0, 50000) >= 25000
-            };
-        }
+        var jsonOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        return JsonSerializer.Deserialize<TestDataRow[]>(inStream!, jsonOptions) ?? Array.Empty<TestDataRow>();
     }
 }

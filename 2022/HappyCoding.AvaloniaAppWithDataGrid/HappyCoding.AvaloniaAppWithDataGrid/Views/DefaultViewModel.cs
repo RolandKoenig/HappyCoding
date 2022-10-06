@@ -20,7 +20,7 @@ public class DefaultViewModel : ViewModelBase
     public DefaultViewModel()
     {
         this.Items = new ObservableCollection<TestDataRow>(
-            TestDataFactory.CreateTestData(100, 500));
+            TestDataFactory.LoadTestData(100, 500));
         this.SelectedItem = this.Items.FirstOrDefault();
     }
 }

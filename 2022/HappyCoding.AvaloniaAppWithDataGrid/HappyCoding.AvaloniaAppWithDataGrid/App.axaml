@@ -3,7 +3,7 @@
              x:Class="HappyCoding.AvaloniaAppWithDataGrid.App">
     <Application.Styles>
         <!-- Dark theme --> 
-        <FluentTheme Mode="Dark" />
+        <FluentTheme Mode="Light" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
         
         <!-- Set tooltip for DataGridColumns always o their header -->
