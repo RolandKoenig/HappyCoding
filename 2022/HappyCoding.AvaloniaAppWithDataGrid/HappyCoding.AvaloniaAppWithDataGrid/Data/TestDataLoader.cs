@@ -5,9 +5,9 @@ using System.Text.Json;
 
 namespace HappyCoding.AvaloniaAppWithDataGrid.Data;
 
-public static class TestDataFactory
+public static class TestDataLoader
 {
-    public static IEnumerable<TestDataRow> LoadTestData(int randomSeed, int countRows)
+    public static IReadOnlyCollection<TestDataRow> LoadTestData(int randomSeed, int countRows)
     {
         var assembly = Assembly.GetExecutingAssembly();
         var rootNamespace = typeof(Program).Namespace ?? "";

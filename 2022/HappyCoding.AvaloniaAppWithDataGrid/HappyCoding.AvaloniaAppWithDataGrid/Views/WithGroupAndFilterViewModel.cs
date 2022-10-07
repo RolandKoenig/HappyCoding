@@ -1,15 +1,15 @@
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
+using Avalonia.Collections;
 using HappyCoding.AvaloniaAppWithDataGrid.Data;
 using HappyCoding.AvaloniaAppWithDataGrid.Util;
 
 namespace HappyCoding.AvaloniaAppWithDataGrid.Views;
 
-public class DefaultViewModel : ViewModelBase
+public class WithGroupAndFilterViewModel : ViewModelBase
 {
     private TestDataRow? _selectedItem;
 
-    private ObservableCollection<TestDataRow> Items { get; }
+    private DataGridCollectionView Items { get; }
 
     public TestDataRow? SelectedItem
     {
@@ -17,11 +17,13 @@ public class DefaultViewModel : ViewModelBase
         set => SetField(ref _selectedItem, value);
     }
 
-    public DefaultViewModel()
+    public WithGroupAndFilterViewModel()
     {
         var testData = TestDataLoader.LoadTestData(100, 500);
 
-        this.Items = new ObservableCollection<TestDataRow>(testData);
+        this.Items = new DataGridCollectionView(testData, false, false);
+        this.Items.GroupDescriptions.Add(new DataGridPathGroupDescription(nameof(TestDataRow.Country)));
+        this.Items.Filter = x => ((TestDataRow) x).Status == true;
         this.SelectedItem = testData.FirstOrDefault();
     }
 }

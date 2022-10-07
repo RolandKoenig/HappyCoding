@@ -5,9 +5,9 @@
              xmlns:local="clr-namespace:HappyCoding.AvaloniaAppWithDataGrid.Views"
              xmlns:firlibpropgrid="clr-namespace:FirLib.Avalonia.PropertyGridControl;assembly=FirLib.Avalonia.PropertyGridControl"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="HappyCoding.AvaloniaAppWithDataGrid.Views.DefaultView">
+             x:Class="HappyCoding.AvaloniaAppWithDataGrid.Views.WithGroupAndFilterView">
     <UserControl.DataContext>
-        <local:DefaultViewModel />
+        <local:WithGroupAndFilterViewModel />
     </UserControl.DataContext>
     
     <Grid>

@@ -9,26 +9,21 @@
         Title="HappyCoding.AvaloniaAppWithDataGrid"
         ExtendClientAreaToDecorationsHint="True">
     <firlibcommon:MainWindowFrame>
+
         <firlibcommon:MainWindowFrame.CustomTitleArea>
             <TextBlock Text="🧪 Avalonia with DataGrid" />
         </firlibcommon:MainWindowFrame.CustomTitleArea>
-        
-        <firlibcommon:MainWindowFrame.HeaderArea>
-            <Menu>
-                <MenuItem Header="File" />
-                <MenuItem Header="Help" />
-            </Menu>
-        </firlibcommon:MainWindowFrame.HeaderArea>
-        
+
         <firlibcommon:MainWindowFrame.MainContentArea>
             <TabControl>
                 <TabItem Header="Default">
                     <views:DefaultView />
                 </TabItem>
-                <TabItem Header="With Filtering">
-                    
+                <TabItem Header="With grouping and filtering">
+                    <views:WithGroupAndFilterView></views:WithGroupAndFilterView>
                 </TabItem>
             </TabControl>
         </firlibcommon:MainWindowFrame.MainContentArea>
+
     </firlibcommon:MainWindowFrame>
 </Window>
