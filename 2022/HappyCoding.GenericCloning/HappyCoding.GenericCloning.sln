@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GenericCloning", "HappyCoding.GenericCloning.csproj", "{DF6B7559-069F-4497-992D-8DB33CA04AA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GenericCloning.Tests", "..\HappyCoding.GenericCloning.Tests\HappyCoding.GenericCloning.Tests.csproj", "{03C5CC99-074E-4341-9638-5BCF42255BAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF6B7559-069F-4497-992D-8DB33CA04AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF6B7559-069F-4497-992D-8DB33CA04AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF6B7559-069F-4497-992D-8DB33CA04AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF6B7559-069F-4497-992D-8DB33CA04AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03C5CC99-074E-4341-9638-5BCF42255BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03C5CC99-074E-4341-9638-5BCF42255BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03C5CC99-074E-4341-9638-5BCF42255BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03C5CC99-074E-4341-9638-5BCF42255BAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A757357C-36D9-4478-BEF5-823830E2F6FE}
+	EndGlobalSection
+EndGlobal
