@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GenericCloning", "HappyCoding.GenericCloning.csproj", "{DF6B7559-069F-4497-992D-8DB33CA04AA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GenericCloning", "HappyCoding.GenericCloning\HappyCoding.GenericCloning.csproj", "{DF6B7559-069F-4497-992D-8DB33CA04AA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GenericCloning.Tests", "..\HappyCoding.GenericCloning.Tests\HappyCoding.GenericCloning.Tests.csproj", "{03C5CC99-074E-4341-9638-5BCF42255BAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GenericCloning.Tests", "HappyCoding.GenericCloning.Tests\HappyCoding.GenericCloning.Tests.csproj", "{03C5CC99-074E-4341-9638-5BCF42255BAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

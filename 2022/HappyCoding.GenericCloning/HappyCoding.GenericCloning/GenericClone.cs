@@ -10,9 +10,14 @@ public static class GenericClone
     /// </summary>
     /// <param name="source">Object to clone</param>
     /// <returns>Cloned copy</returns>
-    public static T? CloneObject<T>(T? source)
+    public static T CreateDeepClone<T>(T source)
     {
-        return (T?)CloneObjectInternal(source, source, new Dictionary<object, object>());
+        var result = CloneObjectInternal(source, source, new Dictionary<object, object>());
+        if (result == null)
+        {
+            throw new NotSupportedException("Unable to clone the given object!");
+        }
+        return (T)result;
     }
 
     /// <summary>
@@ -122,6 +127,15 @@ public static class GenericClone
                 clone.Add(valCopy);
             }
             refValues[list] = clone;
+            return clone;
+        }
+
+        // Support for Clone method on records
+        var cloneMethod = entityType.GetMethod("<Clone>$", BindingFlags.Instance | BindingFlags.Public);
+        if (cloneMethod != null)
+        {
+            var clone = cloneMethod.Invoke(entity, null);
+            refValues[entity] = clone;
             return clone;
         }
 
