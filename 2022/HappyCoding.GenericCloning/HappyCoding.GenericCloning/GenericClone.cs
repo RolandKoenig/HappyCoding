@@ -9,10 +9,9 @@ public static class GenericClone
     /// Clones an object by doing a full deep copy of every field and property.
     /// </summary>
     /// <param name="source">Object to clone</param>
-    /// <returns>Cloned copy</returns>
     public static T CreateDeepClone<T>(T source)
     {
-        var result = CloneObjectInternal(source, source, new Dictionary<object, object>());
+        var result = CloneObjectInternal(source, new Dictionary<object, object>());
         if (result == null)
         {
             throw new NotSupportedException("Unable to clone the given object!");
@@ -23,7 +22,7 @@ public static class GenericClone
     /// <summary>
     /// Internal method to clone an object
     /// </summary>
-    private static object? CloneObjectInternal(object? entity, object? initiator, Dictionary<object, object> refValues)
+    private static object? CloneObjectInternal(object? entity, Dictionary<object, object> refValues)
     {
         // Null? No work
         if (entity == null)
@@ -86,7 +85,7 @@ public static class GenericClone
                 {
                     for (var loop = copy.GetLowerBound(rank); loop <= copy.GetUpperBound(rank); loop++)
                     {
-                        copy.SetValue(CloneObjectInternal(copy.GetValue(rank, loop), initiator, refValues), rank, loop);
+                        copy.SetValue(CloneObjectInternal(copy.GetValue(rank, loop), refValues), rank, loop);
                     }
                 }
             }
@@ -95,7 +94,7 @@ public static class GenericClone
                 for (var loop = copy.GetLowerBound(0); loop <= copy.GetUpperBound(0); loop++)
                 {
                     var value = copy.GetValue(loop);
-                    copy.SetValue(CloneObjectInternal(value, initiator, refValues), loop);
+                    copy.SetValue(CloneObjectInternal(value, refValues), loop);
                 }
             }
             refValues[entity] = copy;
@@ -105,11 +104,11 @@ public static class GenericClone
         // Dictionary type
         if (entity is IDictionary dictionary)
         {
-            var clone = (IDictionary) Activator.CreateInstance(entityType);
+            var clone = (IDictionary)CreateInstanceWithNullCheck(entityType);
             foreach (var key in dictionary.Keys)
             {
-                var keyCopy = CloneObjectInternal(key, initiator, refValues);
-                var valCopy = CloneObjectInternal(dictionary[key], initiator, refValues);
+                var keyCopy = CloneObjectInternal(key, refValues);
+                var valCopy = CloneObjectInternal(dictionary[key], refValues);
                 clone.Add(keyCopy!, valCopy);
             }
             refValues[dictionary] = clone;
@@ -119,10 +118,10 @@ public static class GenericClone
         // IList type
         if (entity is IList list)
         {
-            var clone = (IList) Activator.CreateInstance(entityType);
+            var clone = (IList)CreateInstanceWithNullCheck(entityType);
             foreach (var value in list)
             {
-                var valCopy = CloneObjectInternal(value, initiator, refValues);
+                var valCopy = CloneObjectInternal(value, refValues);
                 clone.Add(valCopy);
             }
             refValues[list] = clone;
@@ -130,29 +129,34 @@ public static class GenericClone
         }
 
         // No obvious way to copy the object - do a field-by-field copy
-        var result = CreateInstance(entity, entityType);
+        var result = CreateInstanceForCloningPropertyByProperty(entity, entityType);
+        if (result == null)
+        {
+            throw new NotSupportedException($"Unable to clone {entityType.FullName}!");
+        }
 
         // Save off the reference
         refValues[entity] = result;
 
         // Walk through all the fields - this will capture auto-properties as well.
+        var bindingFlags = BindingFlags.Instance | BindingFlags.FlattenHierarchy |
+                           BindingFlags.NonPublic | BindingFlags.Public;
         var actType = entityType;
-        var alreadyScanned = new Dictionary<FieldInfo, object?>();
+        var fields = actType.GetFields(bindingFlags);
+        var alreadyScanned = new Dictionary<FieldInfo, object?>(fields.Length);
         while (actType != null)
         {
-            var fields = actType.GetFields(
-                BindingFlags.Instance | BindingFlags.FlattenHierarchy |
-                BindingFlags.NonPublic | BindingFlags.Public);
             foreach (var actField in fields)
             {
                 // Handle current field
                 if (!alreadyScanned.ContainsKey(actField))
                 {
-                    actField.SetValue(result, CloneObjectInternal(actField.GetValue(entity), initiator, refValues));
+                    actField.SetValue(result, CloneObjectInternal(actField.GetValue(entity), refValues));
                     alreadyScanned.Add(actField, null);
                 }
             }
             actType = actType.BaseType;
+            fields = actType?.GetFields(bindingFlags) ?? Array.Empty<FieldInfo>();
         }
 
         return result;
@@ -163,7 +167,7 @@ public static class GenericClone
     /// </summary>
     /// <param name="entity">The entity to be cloned.</param>
     /// <param name="entityType">The type of the entity.</param>
-    private static object? CreateInstance(object entity, Type entityType)
+    private static object? CreateInstanceForCloningPropertyByProperty(object entity, Type entityType)
     {
         // Support for Clone method on records (they may have no parameterless constructor)
         var cloneMethod = entityType.GetMethod("<Clone>$", BindingFlags.Instance | BindingFlags.Public);
@@ -174,5 +178,19 @@ public static class GenericClone
         
         // Last method.. Create an instance using the parameterless constructor of the entityType
         return Activator.CreateInstance(entityType);
+    }
+
+    /// <summary>
+    /// Creates an instance form the given type and ensures that an object is returned.
+    /// </summary>
+    /// <param name="entityType">The type from which to create an instance.</param>
+    private static object CreateInstanceWithNullCheck(Type entityType)
+    {
+        var result = Activator.CreateInstance(entityType);
+        if (result == null)
+        {
+            throw new NotSupportedException($"Unable to clone {entityType.FullName}!");
+        }
+        return result;
     }
 }
