@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HappyCoding.HexagonalArchitecture.Dtos;
+namespace HappyCoding.HexagonalArchitecture.Application.Dtos;
 
 public record WorkshopWithoutIDDto
 {

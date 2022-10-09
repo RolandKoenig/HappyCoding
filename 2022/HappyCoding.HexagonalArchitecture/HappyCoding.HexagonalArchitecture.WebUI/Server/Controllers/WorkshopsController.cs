@@ -1,5 +1,5 @@
 using HappyCoding.HexagonalArchitecture.Application;
-using HappyCoding.HexagonalArchitecture.Dtos;
+using HappyCoding.HexagonalArchitecture.Application.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

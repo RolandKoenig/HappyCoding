@@ -1,4 +1,4 @@
-namespace HappyCoding.HexagonalArchitecture.Dtos;
+namespace HappyCoding.HexagonalArchitecture.Application.Dtos;
 
 public enum ProtocolEntryTypeDto
 {

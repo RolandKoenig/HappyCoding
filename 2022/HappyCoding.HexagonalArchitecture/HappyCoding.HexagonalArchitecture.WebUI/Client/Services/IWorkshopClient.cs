@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using HappyCoding.HexagonalArchitecture.Dtos;
+using HappyCoding.HexagonalArchitecture.Application.Dtos;
 
 namespace HappyCoding.HexagonalArchitecture.WebUI.Client.Services;
 

@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Dtos;
+using HappyCoding.HexagonalArchitecture.Application.Dtos;
 using HappyCoding.HexagonalArchitecture.Domain.Model;
 
 namespace HappyCoding.HexagonalArchitecture.Application.Util;

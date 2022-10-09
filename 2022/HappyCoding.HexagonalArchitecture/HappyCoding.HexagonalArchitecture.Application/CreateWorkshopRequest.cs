@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Dtos;
+using HappyCoding.HexagonalArchitecture.Application.Dtos;
 using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application;

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using HappyCoding.HexagonalArchitecture.Dtos;
+using HappyCoding.HexagonalArchitecture.Application.Dtos;
 using HappyCoding.HexagonalArchitecture.WebUI.Client.Services;
 using Microsoft.AspNetCore.Components;
 

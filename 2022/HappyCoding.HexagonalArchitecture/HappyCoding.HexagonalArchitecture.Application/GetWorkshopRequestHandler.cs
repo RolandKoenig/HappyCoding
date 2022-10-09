@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Dtos;
+using HappyCoding.HexagonalArchitecture.Application.Dtos;
 using HappyCoding.HexagonalArchitecture.Application.Util;
 using HappyCoding.HexagonalArchitecture.Domain.Ports;
 using MediatR;
