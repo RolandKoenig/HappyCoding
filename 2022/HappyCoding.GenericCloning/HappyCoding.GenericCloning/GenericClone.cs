@@ -32,10 +32,9 @@ public static class GenericClone
         }
 
         var entityType = entity.GetType();
-
-        // Special case value-types; they are passed by value so we have our
-        // own copy right here.
-        if (entityType.IsValueType)
+        
+        // Handle primitive types (int, float, double, etc.)
+        if (entityType.IsPrimitive)
         {
             return entity;
         }
@@ -43,7 +42,7 @@ public static class GenericClone
         // Clone strings (special case)
         if (entityType == typeof(string))
         {
-            return ((string) entity).Clone();
+            return entity;
         }
 
         // See if we've seen this object already.  If so, return the clone.
@@ -57,13 +56,13 @@ public static class GenericClone
         {
             if (weakReference.IsAlive)
             {
-                object clone = new WeakReference(weakReference.Target);
+                var clone = new WeakReference(weakReference.Target);
                 refValues[entity] = clone;
                 return clone;
             }
             else
             {
-                object clone = new WeakReference(new object());
+                var clone = new WeakReference(new object());
                 refValues[entity] = clone;
                 return clone;
             }
@@ -130,17 +129,8 @@ public static class GenericClone
             return clone;
         }
 
-        // Support for Clone method on records
-        var cloneMethod = entityType.GetMethod("<Clone>$", BindingFlags.Instance | BindingFlags.Public);
-        if (cloneMethod != null)
-        {
-            var clone = cloneMethod.Invoke(entity, null);
-            refValues[entity] = clone;
-            return clone;
-        }
-
         // No obvious way to copy the object - do a field-by-field copy
-        var result = Activator.CreateInstance(entityType);
+        var result = CreateInstance(entity, entityType);
 
         // Save off the reference
         refValues[entity] = result;
@@ -155,27 +145,6 @@ public static class GenericClone
                 BindingFlags.NonPublic | BindingFlags.Public);
             foreach (var actField in fields)
             {
-                // Check if this field is to be ignored during clone process
-                if (actField.GetCustomAttribute<IgnoreGenericCloneAttribute>() != null)
-                {
-                    continue;
-                }
-
-                //Handling logic for fields which should get a reference to the original object
-                if (actField.GetCustomAttribute<AssignOriginalParentObjectAfterCloneAttribute>() != null)
-                {
-                    try
-                    {
-                        actField.SetValue(result, entity);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ApplicationException(
-                            "Unable to set original object to field " + actField.Name + ": " + ex.Message, ex);
-                    }
-                    continue;
-                }
-
                 // Handle current field
                 if (!alreadyScanned.ContainsKey(actField))
                 {
@@ -187,5 +156,23 @@ public static class GenericClone
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Creates a new instances from the given type.
+    /// </summary>
+    /// <param name="entity">The entity to be cloned.</param>
+    /// <param name="entityType">The type of the entity.</param>
+    private static object? CreateInstance(object entity, Type entityType)
+    {
+        // Support for Clone method on records (they may have no parameterless constructor)
+        var cloneMethod = entityType.GetMethod("<Clone>$", BindingFlags.Instance | BindingFlags.Public);
+        if (cloneMethod != null)
+        {
+            return cloneMethod.Invoke(entity, null);
+        }
+        
+        // Last method.. Create an instance using the parameterless constructor of the entityType
+        return Activator.CreateInstance(entityType);
     }
 }

@@ -58,6 +58,32 @@ public class GenericCloneTests
     }
     
     [Fact]
+    public void Clone_FlatDataReadOnlyStruct()
+    {
+        // Arrange
+        var dataClass = new FlatDataReadOnlyStruct()
+        {
+            Property1 = "123",
+            Property2 = "456",
+            Property3 = 3523,
+            Property4 = 23.4f,
+            Property5 = null,
+            Property6 = 23
+        };
+        
+        // Act
+        var clonedDataClass = GenericClone.CreateDeepClone(dataClass);
+        
+        // Assert
+        Assert.Equal(dataClass.Property1, clonedDataClass.Property1);
+        Assert.Equal(dataClass.Property2, clonedDataClass.Property2);
+        Assert.Equal(dataClass.Property3, clonedDataClass.Property3);
+        Assert.Equal(dataClass.Property4, clonedDataClass.Property4);
+        Assert.Equal(dataClass.Property5, clonedDataClass.Property5);
+        Assert.Equal(dataClass.Property6, clonedDataClass.Property6);
+    }
+    
+    [Fact]
     public void Clone_FlatDataRecord()
     {
         // Arrange
@@ -149,5 +175,34 @@ public class GenericCloneTests
         Assert.Equal(dataClass.Property4, clonedDataClass.Property4);
         Assert.Equal(dataClass.Property5, clonedDataClass.Property5);
         Assert.Equal(dataClass.Property6, clonedDataClass.Property6);
+    }
+
+    [Fact]
+    public void Clone_ComplexDataRecord()
+    {
+        // Arrange
+        var dataClass = new ComplexDataRecord("123", new FlatDataClass()
+        {
+            Property1 = "123",
+            Property2 = "456",
+            Property3 = 3523,
+            Property4 = 23.4f,
+            Property5 = null,
+            Property6 = 23
+        });
+        
+        // Act
+        var clonedDataClass = GenericClone.CreateDeepClone(dataClass);
+        
+        // Assert
+        Assert.False(ReferenceEquals(dataClass, clonedDataClass));
+        Assert.Equal(dataClass.Property1, clonedDataClass.Property1);
+        Assert.NotEqual(dataClass.Property2, clonedDataClass.Property2);
+        Assert.Equal(dataClass.Property2.Property1, clonedDataClass.Property2.Property1);
+        Assert.Equal(dataClass.Property2.Property2, clonedDataClass.Property2.Property2);
+        Assert.Equal(dataClass.Property2.Property3, clonedDataClass.Property2.Property3);
+        Assert.Equal(dataClass.Property2.Property4, clonedDataClass.Property2.Property4);
+        Assert.Equal(dataClass.Property2.Property5, clonedDataClass.Property2.Property5);
+        Assert.Equal(dataClass.Property2.Property6, clonedDataClass.Property2.Property6);
     }
 }
