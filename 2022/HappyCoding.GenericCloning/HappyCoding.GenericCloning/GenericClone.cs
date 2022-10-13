@@ -31,6 +31,13 @@ public static class GenericClone
         }
 
         var entityType = entity.GetType();
+
+        // Deep clone of a pointer makes no sense
+        if ((entityType == typeof(IntPtr)) ||
+            (entityType == typeof(UIntPtr)))
+        {
+            throw new NotSupportedException("Deep cloning not supported on pointer types!");
+        }
         
         // Handle primitive types (int, float, double, etc.)
         if (entityType.IsPrimitive)
@@ -44,37 +51,18 @@ public static class GenericClone
             return entity;
         }
 
-        // See if we've seen this object already.  If so, return the clone.
+        // See if we've seen this object already. If so, return the clone.
         if (refValues.ContainsKey(entity))
         {
             return refValues[entity];
         }
 
         // Clone weak references
-        if (entity is WeakReference weakReference)
+        if (entity is WeakReference)
         {
-            if (weakReference.IsAlive)
-            {
-                var clone = new WeakReference(weakReference.Target);
-                refValues[entity] = clone;
-                return clone;
-            }
-            else
-            {
-                var clone = new WeakReference(new object());
-                refValues[entity] = clone;
-                return clone;
-            }
+            throw new NotSupportedException("Deep cloning not supported on weak references!");
         }
-
-        // Use the ICloneable implementation of the object if possible
-        if (entity is ICloneable cloneableInterface)
-        {
-            var clone = cloneableInterface.Clone();
-            refValues[entity] = clone;
-            return clone;
-        }
-
+        
         // If the element is an array, then copy it.
         if (entityType.IsArray)
         {
