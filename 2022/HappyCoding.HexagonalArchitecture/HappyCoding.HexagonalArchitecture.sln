@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{40533F35-34CD-4188-A157-BA40B8B670AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.HexagonalArchitecture.Application.Dtos", "HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj", "{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Application.Dtos", "HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj", "{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.WebUI.Integration.Tests", "HappyCoding.HexagonalArchitecture.WebUI.IntegrationTests\HappyCoding.HexagonalArchitecture.WebUI.Integration.Tests.csproj", "{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{358085DA-1A7F-4BB0-B43C-800B7D28D555} = {40533F35-34CD-4188-A157-BA40B8B670AE}
 		{FBCA78DA-C45A-4E19-AE91-F414E02A981E} = {6EDE47E2-8D74-481C-9036-0468F87019F1}
 		{7ABC737B-E242-4715-828B-FCD0E9E31985} = {40533F35-34CD-4188-A157-BA40B8B670AE}
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A} = {40533F35-34CD-4188-A157-BA40B8B670AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC0C763-1085-4177-8080-2202230B893E}
