@@ -23,7 +23,7 @@ public class WebApplicationFixture : WebApplicationFactory<Startup>
         }
     }
 
-    protected override IHostBuilder? CreateHostBuilder()
+    protected override IHostBuilder CreateHostBuilder()
     {
         return Program.CreateHostBuilder($"--Environment:{HostEnvironment}");
     }

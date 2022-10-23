@@ -36,6 +36,14 @@ public class SQLiteWorkshopRepository : IWorkshopRepository
             .FirstAsync(cancellationToken);
     }
 
+    public Task<Workshop?> TryGetWorkshopAsync(Guid workshopID, CancellationToken cancellationToken)
+    {
+        return _dbWorkshops
+            .Where(x => x.ID == workshopID)
+            .Include(x => x.Protocol)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
     public async Task<ImmutableArray<WorkshopShortInfo>> SearchWorkshopsAsync(string queryString, CancellationToken cancellationToken)
     {
         var queryable = (IQueryable<Workshop>)_dbWorkshops;

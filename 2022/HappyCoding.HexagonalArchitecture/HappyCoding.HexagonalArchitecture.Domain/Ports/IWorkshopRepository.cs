@@ -10,6 +10,8 @@ public interface IWorkshopRepository
 
     Task<Workshop> GetWorkshopAsync(Guid workshopID, CancellationToken cancellationToken);
 
+    Task<Workshop?> TryGetWorkshopAsync(Guid workshopID, CancellationToken cancellationToken);
+
     Task<ImmutableArray<WorkshopShortInfo>> SearchWorkshopsAsync(string queryString, CancellationToken cancellationToken);
 
     Task DeleteWorkshopAsync(Guid workshopID, CancellationToken cancellationToken);
