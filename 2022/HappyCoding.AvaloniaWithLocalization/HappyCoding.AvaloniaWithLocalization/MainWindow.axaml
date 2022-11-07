@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HappyCoding.AvaloniaWithLocalization"
+        xmlns:firstPage="clr-namespace:HappyCoding.AvaloniaWithLocalization.FirstPage"
+        xmlns:secondPage="clr-namespace:HappyCoding.AvaloniaWithLocalization.SecondPage"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaWithLocalization.MainWindow"
+        Title="HappyCoding.AvaloniaWithLocalization">
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{x:Static local:MainWindowResources.Menu_File}"></MenuItem>
+        </Menu>
+
+        <TabControl>
+            <TabItem Header="{x:Static local:MainWindowResources.Tab_FirstPage}">
+                <firstPage:FirstPage />
+            </TabItem>
+            <TabItem Header="{x:Static local:MainWindowResources.Tab_SecondPage}">
+                <secondPage:SecondPage />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
