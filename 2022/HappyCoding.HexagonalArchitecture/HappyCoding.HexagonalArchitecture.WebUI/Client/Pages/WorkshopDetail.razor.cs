@@ -39,7 +39,7 @@ public partial class WorkshopDetail
         else
         {
             this.IsCreating = false;
-            this.EditingWorkshop = await this.WorkshopClient.GetWorkshopAsync(
+            this.EditingWorkshop = await this.WorkshopClient.WorkshopsGETAsync(
                 Guid.Parse(this.WorkshopID),
                 CancellationToken.None);
         }
@@ -49,13 +49,13 @@ public partial class WorkshopDetail
     {
         if (this.IsCreating)
         {
-            await this.WorkshopClient.CreateWorkshopAsync(
+            await this.WorkshopClient.WorkshopsPOSTAsync(
                 this.EditingWorkshop,
                 CancellationToken.None);
         }
         else
         {
-            await this.WorkshopClient.UpdateWorkshopAsync(
+            await this.WorkshopClient.WorkshopsPUTAsync(
                 new WorkshopDto()
                 {
                     ID = Guid.Parse(this.WorkshopID),

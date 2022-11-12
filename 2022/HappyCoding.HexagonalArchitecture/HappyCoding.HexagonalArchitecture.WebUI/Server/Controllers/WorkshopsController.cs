@@ -17,8 +17,8 @@ public class WorkshopsController : ControllerBase
     }
     
     [HttpPost]
+    [ActionName(nameof(CreateWorkshop))]
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateWorkshop(WorkshopWithoutIDDto workshop)
     {
         if (!ModelState.IsValid) { return BadRequest(); }
@@ -28,8 +28,8 @@ public class WorkshopsController : ControllerBase
     }
 
     [HttpPut]
+    [ActionName(nameof(UpdateWorkshop))]
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateWorkshop(WorkshopDto workshop)
     {
         if (!ModelState.IsValid) { return BadRequest(); }
@@ -39,9 +39,9 @@ public class WorkshopsController : ControllerBase
     }
 
     [HttpDelete]
+    [ActionName(nameof(DeleteWorkshop))]
     [Route("{workshopID}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> DeleteWorkshop(Guid workshopID)
     {
         if (!ModelState.IsValid) { return BadRequest(); }
@@ -53,8 +53,8 @@ public class WorkshopsController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<WorkshopDto>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ActionName(nameof(SearchWorkshops))]
+    [ProducesResponseType(typeof(IEnumerable<WorkshopShortInfoDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> SearchWorkshops([FromQuery] string? query)
     {
         if (!ModelState.IsValid) { return BadRequest(); }
@@ -67,9 +67,9 @@ public class WorkshopsController : ControllerBase
     }
     
     [HttpGet]
+    [ActionName(nameof(GetWorkshop))]
     [Route("{workshopID}")]
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetWorkshop(Guid workshopID)
     {
         if (!ModelState.IsValid) { return BadRequest(); }

@@ -14,7 +14,7 @@ public partial class Workshops
     [Inject]
     public NavigationManager Navigation { get; set; } = null!;
 
-    public ImmutableArray<WorkshopShortInfoDto> WorkshopInfos { get; set; } = ImmutableArray<WorkshopShortInfoDto>.Empty;
+    public IReadOnlyList<WorkshopShortInfoDto> WorkshopInfos { get; set; } = Array.Empty<WorkshopShortInfoDto>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -25,7 +25,7 @@ public partial class Workshops
 
     private async Task SubmitQueryAsync()
     {
-        this.WorkshopInfos = await this.WorkshopClient.SearchWorkshopsAsync(
+        this.WorkshopInfos = await this.WorkshopClient.WorkshopsAllAsync(
             SearchFormData.QueryString, 
             CancellationToken.None);
         this.StateHasChanged();
@@ -49,7 +49,7 @@ public partial class Workshops
 
     private async Task DeleteWorkshopAsync(WorkshopShortInfoDto workshop)
     {
-        await this.WorkshopClient.DeleteWorkshopAsync(
+        await this.WorkshopClient.WorkshopsDELETEAsync(
             workshop.ID,
             CancellationToken.None);
         await this.SubmitQueryAsync();
