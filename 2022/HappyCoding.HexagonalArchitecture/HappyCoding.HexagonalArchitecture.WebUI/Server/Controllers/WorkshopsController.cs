@@ -17,7 +17,6 @@ public class WorkshopsController : ControllerBase
     }
     
     [HttpPost]
-    [ActionName(nameof(CreateWorkshop))]
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> CreateWorkshop(WorkshopWithoutIDDto workshop)
     {
@@ -28,7 +27,6 @@ public class WorkshopsController : ControllerBase
     }
 
     [HttpPut]
-    [ActionName(nameof(UpdateWorkshop))]
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateWorkshop(WorkshopDto workshop)
     {
@@ -39,7 +37,6 @@ public class WorkshopsController : ControllerBase
     }
 
     [HttpDelete]
-    [ActionName(nameof(DeleteWorkshop))]
     [Route("{workshopID}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteWorkshop(Guid workshopID)
@@ -52,8 +49,7 @@ public class WorkshopsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet]
-    [ActionName(nameof(SearchWorkshops))]
+    [HttpGet("Search")]
     [ProducesResponseType(typeof(IEnumerable<WorkshopShortInfoDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> SearchWorkshops([FromQuery] string? query)
     {
@@ -67,7 +63,6 @@ public class WorkshopsController : ControllerBase
     }
     
     [HttpGet]
-    [ActionName(nameof(GetWorkshop))]
     [Route("{workshopID}")]
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetWorkshop(Guid workshopID)

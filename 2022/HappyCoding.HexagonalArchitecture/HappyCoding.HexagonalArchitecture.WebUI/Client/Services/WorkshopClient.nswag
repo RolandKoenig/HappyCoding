@@ -43,7 +43,9 @@
       "queryNullValue": "",
       "className": "{controller}WorkshopClient",
       "operationGenerationMode": "MultipleClientsFromOperationId",
-      "additionalNamespaceUsages": [],
+      "additionalNamespaceUsages": [
+        "HappyCoding.HexagonalArchitecture.Application.Dtos"
+      ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": false,
       "generateJsonMethods": false,

@@ -25,7 +25,7 @@ public partial class Workshops
 
     private async Task SubmitQueryAsync()
     {
-        this.WorkshopInfos = await this.WorkshopClient.WorkshopsAllAsync(
+        this.WorkshopInfos = await this.WorkshopClient.SearchAsync(
             SearchFormData.QueryString, 
             CancellationToken.None);
         this.StateHasChanged();
