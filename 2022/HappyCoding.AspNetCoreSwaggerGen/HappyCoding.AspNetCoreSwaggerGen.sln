@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetCoreSwaggerGen.API", "HappyCoding.AspNetCoreSwaggerGen.API\HappyCoding.AspNetCoreSwaggerGen.API.csproj", "{AF24CDCC-58F2-4433-B150-7F176CAC25DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetCoreSwaggerGen.ConsoleClient", "HappyCoding.AspNetCoreSwaggerGen.ConsoleClient\HappyCoding.AspNetCoreSwaggerGen.ConsoleClient.csproj", "{873F6131-AC25-4D93-B6AC-8D05B720F44B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF24CDCC-58F2-4433-B150-7F176CAC25DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF24CDCC-58F2-4433-B150-7F176CAC25DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF24CDCC-58F2-4433-B150-7F176CAC25DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF24CDCC-58F2-4433-B150-7F176CAC25DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{873F6131-AC25-4D93-B6AC-8D05B720F44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{873F6131-AC25-4D93-B6AC-8D05B720F44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{873F6131-AC25-4D93-B6AC-8D05B720F44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{873F6131-AC25-4D93-B6AC-8D05B720F44B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
