@@ -4,7 +4,7 @@ namespace HappyCoding.AspNetCoreHealthChecks.HealthChecks;
 
 internal class SometimesUnhealthyHealthCheck : IHealthCheck
 {
-    private Random _random;
+    private readonly Random _random;
 
     public SometimesUnhealthyHealthCheck()
     {
