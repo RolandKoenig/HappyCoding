@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetCoreHealthChecks", "HappyCoding.AspNetCoreHealthChecks\HappyCoding.AspNetCoreHealthChecks.csproj", "{B779DBE0-2D2C-4088-844A-4C90B9AFB6FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetCoreHealthChecks.Monitor", "HappyCoding.AspNetCoreHealthChecks.Monitor\HappyCoding.AspNetCoreHealthChecks.Monitor.csproj", "{D36144E9-A852-4270-8637-0C7E32880195}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B779DBE0-2D2C-4088-844A-4C90B9AFB6FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B779DBE0-2D2C-4088-844A-4C90B9AFB6FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B779DBE0-2D2C-4088-844A-4C90B9AFB6FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B779DBE0-2D2C-4088-844A-4C90B9AFB6FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D36144E9-A852-4270-8637-0C7E32880195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D36144E9-A852-4270-8637-0C7E32880195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D36144E9-A852-4270-8637-0C7E32880195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D36144E9-A852-4270-8637-0C7E32880195}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
