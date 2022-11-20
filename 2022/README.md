@@ -11,3 +11,7 @@ using [AspNetCore.HealthChecks.UI](https://github.com/Xabaril/AspNetCore.Diagnos
 This project shows how to use the DataGrid control in Avalonia cross-platform apps.
 
 ![ResourceImage](HappyCoding.AvaloniaAppWithDataGrid/screenshot.png)
+
+## Misc
+### [HappyCoding.YamlParsing](HappyCoding.YamlParsing)
+This project implements some samples for parsing yaml data and compare them with json documents
