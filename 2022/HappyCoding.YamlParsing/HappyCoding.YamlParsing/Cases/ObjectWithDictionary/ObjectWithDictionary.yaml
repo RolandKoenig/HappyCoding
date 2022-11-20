@@ -1,0 +1,9 @@
+﻿# metadata gets deserialized as a Dictionary
+
+containerName: my-nginx
+imageName: nginx
+metadata:
+  application: dummyApplication
+  group: myGroup
+  groupId: 2
+  owner: myOwner
