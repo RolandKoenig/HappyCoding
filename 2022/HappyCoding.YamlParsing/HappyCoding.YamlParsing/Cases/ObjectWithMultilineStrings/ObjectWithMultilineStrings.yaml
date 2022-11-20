@@ -1,0 +1,9 @@
+﻿name: Dave
+multilineWithLineBreaks: |
+  This text is a multiline text
+  with some linebreaks
+  in it
+multilineWithoutLineBreaks: >
+  this text does not has
+  a linebreak
+  in it

@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="Cases\ObjectWithMultilineStrings\ObjectWithMultilineStrings.yaml" />
       <EmbeddedResource Include="Cases\SimpleChildCollections\SimpleChildCollections.yaml" />
       <EmbeddedResource Include="Cases\SimpleChildObjects\SimpleChildObjects.yaml" />
       <EmbeddedResource Include="Cases\SimpleObject\SimpleObject.yaml" />
