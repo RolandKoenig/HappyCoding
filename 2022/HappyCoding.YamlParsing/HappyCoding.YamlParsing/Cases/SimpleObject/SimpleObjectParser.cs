@@ -9,7 +9,7 @@ public class SimpleObjectParser : CaseBase
     {
         base.WriteCaseStart("SimpleObject");
         
-        var fullYamlString = await base.GetEmbeddedResourceStringAsync("SimpleObject.yaml");
+        var fullYamlString = await base.GetEmbeddedResourceStringAsync("SimpleObject.yml");
 
         base.WriteYaml(fullYamlString);
         

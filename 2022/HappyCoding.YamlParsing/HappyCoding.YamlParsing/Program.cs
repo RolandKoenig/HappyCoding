@@ -4,6 +4,7 @@ using HappyCoding.YamlParsing.Cases.ObjectWithMultilineStrings;
 using HappyCoding.YamlParsing.Cases.SimpleChildCollections;
 using HappyCoding.YamlParsing.Cases.SimpleChildObjects;
 using HappyCoding.YamlParsing.Cases.SimpleObject;
+using HappyCoding.YamlParsing.Cases.YamlWithReferences;
 
 // Define cases
 var cases = new CaseBase[]
@@ -12,7 +13,8 @@ var cases = new CaseBase[]
     new SimpleChildObjectsParser(),
     new SimpleChildCollectionsParser(),
     new ObjectWithMultilineStringsParser(),
-    new ObjectWithDictionaryParser()
+    new ObjectWithDictionaryParser(),
+    new YamlWithReferencesParser()
 };
 
 // Process all cases

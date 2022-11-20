@@ -9,7 +9,7 @@ public class ObjectWithMultilineStringsParser : CaseBase
     {
         base.WriteCaseStart("ObjectWithMultilineStrings");
         
-        var fullYamlString = await base.GetEmbeddedResourceStringAsync("ObjectWithMultilineStrings.yaml");
+        var fullYamlString = await base.GetEmbeddedResourceStringAsync("ObjectWithMultilineStrings.yml");
 
         base.WriteYaml(fullYamlString);
         

@@ -9,7 +9,7 @@ public class ObjectWithDictionaryParser : CaseBase
     {
         base.WriteCaseStart("ObjectWithDictionary");
         
-        var fullYamlString = await base.GetEmbeddedResourceStringAsync("ObjectWithDictionary.yaml");
+        var fullYamlString = await base.GetEmbeddedResourceStringAsync("ObjectWithDictionary.yml");
 
         base.WriteYaml(fullYamlString);
         

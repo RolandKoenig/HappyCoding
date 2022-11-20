@@ -1,15 +1,15 @@
 ﻿using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace HappyCoding.YamlParsing.Cases.SimpleChildCollections;
+namespace HappyCoding.YamlParsing.Cases.YamlWithReferences;
 
-public class SimpleChildCollectionsParser : CaseBase
+public class YamlWithReferencesParser : CaseBase
 {
     public override async Task ParseAsync()
     {
-        base.WriteCaseStart("SimpleChildCollections");
+        base.WriteCaseStart("YamlWithReferences");
         
-        var fullYamlString = await base.GetEmbeddedResourceStringAsync("SimpleChildCollections.yml");
+        var fullYamlString = await base.GetEmbeddedResourceStringAsync("YamlWithReferences.yml");
 
         base.WriteYaml(fullYamlString);
         
@@ -18,7 +18,7 @@ public class SimpleChildCollectionsParser : CaseBase
             .IgnoreUnmatchedProperties()
             .Build();
 
-        var deserializedModel = deserializer.Deserialize<SimpleChildCollectionsModel>(fullYamlString);
+        var deserializedModel = deserializer.Deserialize<YamlWithReferencesModel>(fullYamlString);
 
         base.WriteCaseEnd(deserializedModel);
     }

@@ -16,11 +16,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Cases\ObjectWithDictionary\ObjectWithDictionary.yaml" />
-      <EmbeddedResource Include="Cases\ObjectWithMultilineStrings\ObjectWithMultilineStrings.yaml" />
-      <EmbeddedResource Include="Cases\SimpleChildCollections\SimpleChildCollections.yaml" />
-      <EmbeddedResource Include="Cases\SimpleChildObjects\SimpleChildObjects.yaml" />
-      <EmbeddedResource Include="Cases\SimpleObject\SimpleObject.yaml" />
+      <EmbeddedResource Include="Cases\ObjectWithDictionary\ObjectWithDictionary.yml" />
+      <EmbeddedResource Include="Cases\ObjectWithMultilineStrings\ObjectWithMultilineStrings.yml" />
+      <EmbeddedResource Include="Cases\SimpleChildCollections\SimpleChildCollections.yml" />
+      <EmbeddedResource Include="Cases\SimpleChildObjects\SimpleChildObjects.yml" />
+      <EmbeddedResource Include="Cases\SimpleObject\SimpleObject.yml" />
+      <EmbeddedResource Include="Cases\YamlWithReferences\YamlWithReferences.yml" />
     </ItemGroup>
 
 </Project>
