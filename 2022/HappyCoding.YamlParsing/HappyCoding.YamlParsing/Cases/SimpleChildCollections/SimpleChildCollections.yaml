@@ -1,0 +1,11 @@
+﻿name: Dave
+age: 35
+birthDate: 1987-07-23
+programmingLanguages: [CSharp, JavaScript, TypeScript]
+additionalSkills:
+  - name: Operating Systems
+    description: Windows, Linux, maxOS
+    level: good
+  - name: Language
+    description: German, English
+    level: good

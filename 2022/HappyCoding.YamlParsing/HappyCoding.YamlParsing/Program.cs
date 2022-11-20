@@ -1,12 +1,14 @@
 ﻿using HappyCoding.YamlParsing.Cases;
-using HappyCoding.YamlParsing.Cases.SimpleObject;
+using HappyCoding.YamlParsing.Cases.SimpleChildCollections;
 using HappyCoding.YamlParsing.Cases.SimpleChildObjects;
+using HappyCoding.YamlParsing.Cases.SimpleObject;
 
 // Define cases
 var cases = new CaseBase[]
 {
     new SimpleObjectParser(),
-    new SimpleChildObjectsParser()
+    new SimpleChildObjectsParser(),
+    new SimpleChildCollectionsParser()
 };
 
 // Process all cases
