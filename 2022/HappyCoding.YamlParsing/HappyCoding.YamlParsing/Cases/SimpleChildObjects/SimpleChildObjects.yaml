@@ -1,0 +1,8 @@
+﻿name: Dave
+age: 35
+birthDate: 1987-07-23
+work:
+  title: Software Developer
+  company: Some sample company
+  durationYears: 11
+prevWork: { title: "Junior Developer", company: Some other sample company, durationYears: 3 }
