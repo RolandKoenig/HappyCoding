@@ -4,4 +4,4 @@ birthDate: 1987-07-23
 city: &MyCity
   91052 
   Erlangen
-city2: *MyCity
+favoriteCity: *MyCity
