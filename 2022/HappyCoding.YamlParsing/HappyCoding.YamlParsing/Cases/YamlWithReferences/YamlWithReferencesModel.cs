@@ -10,5 +10,5 @@ public class YamlWithReferencesModel
 
     public string City { get; set; } = string.Empty;
 
-    public string City2 { get; set; } = string.Empty;
+    public string FavoriteCity { get; set; } = string.Empty;
 }
