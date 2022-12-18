@@ -17,6 +17,6 @@ public class SimpleRequestReplyWithStringHandlerService : SimpleRequestReplyWith
     /// <inheritdoc />
     public override Task<SimpleReplyWithString> Handle(SimpleRequestWithString request, ServerCallContext context)
     {
-        return base.Handle(request, context);
+        return Task.FromResult(new SimpleReplyWithString() {Message = "Test message"});
     }
 }

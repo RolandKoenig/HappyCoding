@@ -40,14 +40,11 @@
                   HorizontalScrollBarVisibility="Visible">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Timestamp"
-                                    Width="225"
                                     Binding="{Binding Path=TimestampStr}"></DataGridTextColumn>
 
                 <DataGridTextColumn Header="LogLevel"
-                                    Width="125"
                                     Binding="{Binding Path=LogLevel}"/>
                 <DataGridTextColumn Header="Message"
-                                    Width="*"
                                     Binding="{Binding Path=Message}"/>
             </DataGrid.Columns>
         </DataGrid>

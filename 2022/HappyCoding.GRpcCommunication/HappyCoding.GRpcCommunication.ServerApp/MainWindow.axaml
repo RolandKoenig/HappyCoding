@@ -26,6 +26,9 @@
                 <TabItem Header="Services">
                     <views:ServicesView />
                 </TabItem>
+                <TabItem Header="Options">
+                    <views:OptionsView />
+                </TabItem>
             </TabControl>
         </commonControls:MainWindowFrame.MainContentArea>
     </commonControls:MainWindowFrame>

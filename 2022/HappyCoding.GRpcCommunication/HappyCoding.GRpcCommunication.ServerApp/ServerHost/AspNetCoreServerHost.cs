@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using HappyCoding.GRpcCommunication.ServerApp.Messages;
 using HappyCoding.GRpcCommunication.ServerApp.ServerHost.GRpc;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RolandK.Patterns.Messaging;
@@ -31,6 +34,15 @@ internal class AspNetCoreServerHost
             null);
 
         var builder = WebApplication.CreateBuilder(Array.Empty<string>());
+
+        builder.WebHost.ConfigureKestrel(serverOptions =>
+        {
+            serverOptions.Listen(IPAddress.Any, 5000);
+            serverOptions.ListenAnyIP(5000, options =>
+            {
+                options.Protocols = HttpProtocols.Http2;
+            });
+        });
 
         // Additional configuration is required to successfully run gRPC on macOS.
         // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682

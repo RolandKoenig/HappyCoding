@@ -3,17 +3,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:commonControls="clr-namespace:RolandK.Avalonia.CommonControls;assembly=RolandK.CommonLibs"
+        xmlns:views="clr-namespace:HappyCoding.GRpcCommunication.ClientApp.Views"
+        xmlns:local="clr-namespace:HappyCoding.GRpcCommunication.ClientApp"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.GRpcCommunication.ClientApp.MainWindow"
         ExtendClientAreaToDecorationsHint="True"
         Title="HappyCoding.GRpcCommunication.ClientApp">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
     <commonControls:MainWindowFrame>
         <commonControls:MainWindowFrame.CustomTitleArea>
             <TextBlock Text="gRPC Communication - Client"></TextBlock>
         </commonControls:MainWindowFrame.CustomTitleArea>
 
         <commonControls:MainWindowFrame.MainContentArea>
-
+            <TabControl>
+                <TabItem Header="TestChannels">
+                    <views:TestChannelView />
+                </TabItem>
+                <TabItem Header="Options">
+                    <views:OptionsView />
+                </TabItem>
+            </TabControl>
         </commonControls:MainWindowFrame.MainContentArea>
     </commonControls:MainWindowFrame>
 </Window>

@@ -1,6 +1,13 @@
-﻿namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
-internal interface ITestChannel
+namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
+
+public interface ITestChannel
 {
+    bool IsConnected { get; }
 
+    Task StartAsync(CancellationToken cancellationToken);
+
+    Task StopAsync(CancellationToken cancellationToken);
 }
