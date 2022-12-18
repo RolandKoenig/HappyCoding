@@ -27,6 +27,8 @@ internal class AspNetCoreServerHost
             throw new InvalidOperationException($"Unable to start {nameof(AspNetCoreServerHost)}: It is already started!");
         }
 
+        var options = await ServerOptions.LoadAsync(cancellationToken);
+
         _serverMessenger = new FirLibMessenger();
         _serverMessenger.ConnectToGlobalMessaging(
             FirLibMessengerThreadingBehavior.Ignore,
@@ -37,10 +39,10 @@ internal class AspNetCoreServerHost
 
         builder.WebHost.ConfigureKestrel(serverOptions =>
         {
-            serverOptions.Listen(IPAddress.Any, 5000);
-            serverOptions.ListenAnyIP(5000, options =>
+            serverOptions.Listen(IPAddress.Any, options.Port);
+            serverOptions.ListenAnyIP(options.Port, kestrelOptions =>
             {
-                options.Protocols = HttpProtocols.Http2;
+                kestrelOptions.Protocols = HttpProtocols.Http2;
             });
         });
 
@@ -54,6 +56,8 @@ internal class AspNetCoreServerHost
             loggingBuilder.AddProvider(new ViewLoggerProvider(_serverMessenger));
         });
         builder.Services.AddSingleton<IFirLibMessagePublisher>(_serverMessenger);
+
+        builder.Services.AddSingleton(options);
 
         var app = builder.Build();
 

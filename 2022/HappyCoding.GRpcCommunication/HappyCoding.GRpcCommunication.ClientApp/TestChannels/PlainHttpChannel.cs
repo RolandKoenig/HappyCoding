@@ -21,16 +21,16 @@ internal class PlainHttpChannel : ITestChannel
     }
 
     /// <inheritdoc />
-    public Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(CancellationToken cancellationToken)
     {
+        var options = await ClientOptions.LoadAsync(cancellationToken);
+
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("http://localhost:5000");
+        _httpClient.BaseAddress = new Uri($"http://{options.TargetHost}:{options.Port}");
         _httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
         _httpClient.DefaultRequestVersion = new Version(2, 0);
 
         Run(_httpClient);
-
-        return Task.CompletedTask;
     }
 
     /// <inheritdoc />

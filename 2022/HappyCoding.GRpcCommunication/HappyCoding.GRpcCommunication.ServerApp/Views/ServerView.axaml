@@ -12,7 +12,6 @@
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal"
-                    Margin="3"
                     IsEnabled="{Binding Path=IsNotBusy}">
             <Button Command="{Binding Path=Command_StartServer}"
                     Content="Start" 

@@ -15,13 +15,13 @@ internal class SimpleRequestReplyWithStringChannel : ITestChannel
     public bool IsConnected => _channel?.State == ConnectivityState.Ready ? true : false;
 
     /// <inheritdoc />
-    public Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(CancellationToken cancellationToken)
     {
-        _channel = GrpcChannel.ForAddress("http://localhost:5000");
+        var options = await ClientOptions.LoadAsync(cancellationToken);
+
+        _channel = GrpcChannel.ForAddress($"http://{options.TargetHost}:{options.Port}");
 
         this.Run(_channel);
-
-        return Task.CompletedTask;
     }
 
     /// <inheritdoc />
