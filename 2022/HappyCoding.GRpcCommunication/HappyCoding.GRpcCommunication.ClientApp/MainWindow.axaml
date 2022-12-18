@@ -9,7 +9,7 @@
         Title="HappyCoding.GRpcCommunication.ClientApp">
     <commonControls:MainWindowFrame>
         <commonControls:MainWindowFrame.CustomTitleArea>
-            <TextBlock Text="gRPC Communication - Server"></TextBlock>
+            <TextBlock Text="gRPC Communication - Client"></TextBlock>
         </commonControls:MainWindowFrame.CustomTitleArea>
 
         <commonControls:MainWindowFrame.MainContentArea>

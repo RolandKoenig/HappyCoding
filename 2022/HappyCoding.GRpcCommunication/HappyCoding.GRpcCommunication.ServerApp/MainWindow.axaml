@@ -2,18 +2,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:HappyCoding.GRpcCommunication.ServerApp.Views"
         xmlns:commonControls="clr-namespace:RolandK.Avalonia.CommonControls;assembly=RolandK.CommonLibs"
+        xmlns:local="clr-namespace:HappyCoding.GRpcCommunication.ServerApp"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.GRpcCommunication.ServerApp.MainWindow"
         ExtendClientAreaToDecorationsHint="True"
         Title="HappyCoding.GRpcCommunication.ServerApp">
-    <commonControls:MainWindowFrame>
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
+    <commonControls:MainWindowFrame Status="{Binding Path=Status}">
         <commonControls:MainWindowFrame.CustomTitleArea>
-            <TextBlock Text="gRPC Communication - Client"></TextBlock>
+            <TextBlock Text="gRPC Communication - Server"></TextBlock>
         </commonControls:MainWindowFrame.CustomTitleArea>
 
         <commonControls:MainWindowFrame.MainContentArea>
-
+            <TabControl>
+                <TabItem Header="Server">
+                    <views:ServerView />
+                </TabItem>
+                <TabItem Header="Services">
+                    <views:ServicesView />
+                </TabItem>
+            </TabControl>
         </commonControls:MainWindowFrame.MainContentArea>
     </commonControls:MainWindowFrame>
 </Window>
