@@ -6,7 +6,15 @@ namespace HappyCoding.GRpcCommunication.ClientApp.Views;
 
 public class TestChannelViewModel : PropertyChangedBase
 {
+    private TestChannelItemViewModel? _selectedTestChannel;
+
     public ObservableCollection<TestChannelItemViewModel> TestChannels { get; }
+
+    public TestChannelItemViewModel? SelectedTestChannel
+    {
+        get => _selectedTestChannel;
+        set => this.SetProperty(ref _selectedTestChannel, value);
+    }
 
     public TestChannelViewModel()
     {

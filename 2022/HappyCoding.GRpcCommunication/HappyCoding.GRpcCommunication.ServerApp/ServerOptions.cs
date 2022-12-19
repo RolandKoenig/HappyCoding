@@ -46,7 +46,7 @@ public class ServerOptions
             FILE_NAME);
         try
         {
-            await using var outStream = File.OpenWrite(fullPath);
+            await using var outStream = File.Create(fullPath);
             await JsonSerializer.SerializeAsync(
                 outStream, serverOptions,
                 new JsonSerializerOptions(JsonSerializerDefaults.Web)

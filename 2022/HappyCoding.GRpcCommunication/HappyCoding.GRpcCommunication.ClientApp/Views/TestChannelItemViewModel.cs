@@ -17,6 +17,13 @@ public class TestChannelItemViewModel : PropertyChangedBase
 
     public bool IsStarted { get; private set; }
 
+    public ulong CountSuccess => _testChannel.CountSuccess;
+
+    public ulong CountErrors => _testChannel.CountErrors;
+
+    public string LastErrorDetails => _testChannel.LastErrorDetails;
+
+
     public bool IsBusy { get; private set; }
 
     public bool IsNotBusy => !this.IsBusy;
@@ -90,6 +97,9 @@ public class TestChannelItemViewModel : PropertyChangedBase
             await Task.Delay(100);
 
             this.RaisePropertyChanged(nameof(this.StatusBrush));
+            this.RaisePropertyChanged(nameof(this.CountErrors));
+            this.RaisePropertyChanged(nameof(this.CountSuccess));
+            this.RaisePropertyChanged(nameof(this.LastErrorDetails));
         }
     }
 

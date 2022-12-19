@@ -16,6 +16,10 @@ public class ClientOptions
 
     public bool UseHttps { get; set; } = false;
 
+    public ushort DelayBetweenCallsMS { get; set; } = 100;
+
+    public uint CallTimeoutMS { get; set; } = 1000;
+
     public static async Task<ClientOptions> LoadAsync(CancellationToken cancellationToken)
     {
         var fullPath = Path.Combine(
@@ -47,7 +51,7 @@ public class ClientOptions
             FILE_NAME);
         try
         {
-            await using var outStream = File.OpenWrite(fullPath);
+            await using var outStream = File.Create(fullPath);
             await JsonSerializer.SerializeAsync(
                 outStream, serverOptions,
                 new JsonSerializerOptions(JsonSerializerDefaults.Web)

@@ -9,6 +9,9 @@ internal class PlainHttpChannel : ITestChannel
 {
     private HttpClient? _httpClient;
     private bool _lastGetSuccessful;
+    private ulong _countSuccess;
+    private ulong _countErrors;
+    private string _lastErrorDetails = string.Empty;
 
     /// <inheritdoc />
     public bool IsConnected
@@ -21,6 +24,15 @@ internal class PlainHttpChannel : ITestChannel
     }
 
     /// <inheritdoc />
+    public ulong CountSuccess => _countSuccess;
+
+    /// <inheritdoc />
+    public ulong CountErrors => _countErrors;
+
+    /// <inheritdoc />
+    public string LastErrorDetails => _lastErrorDetails;
+
+    /// <inheritdoc />
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         var options = await ClientOptions.LoadAsync(cancellationToken);
@@ -31,8 +43,9 @@ internal class PlainHttpChannel : ITestChannel
         _httpClient.BaseAddress = new Uri($"{protocol}://{options.TargetHost}:{options.Port}");
         _httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
         _httpClient.DefaultRequestVersion = new Version(2, 0);
+        _httpClient.Timeout = TimeSpan.FromMilliseconds(options.CallTimeoutMS);
 
-        Run(_httpClient);
+        Run(_httpClient, options.DelayBetweenCallsMS);
     }
 
     /// <inheritdoc />
@@ -43,24 +56,33 @@ internal class PlainHttpChannel : ITestChannel
         return Task.CompletedTask;
     }
 
-    private async void Run(HttpClient client)
+    private async void Run(HttpClient client, ushort delayBetweenCallsMS)
     {
+        await Task.Delay(delayBetweenCallsMS)
+            .ConfigureAwait(false);
+
         while (client == _httpClient)
         {
-            await Task.Delay(100)
-                .ConfigureAwait(false);
-
             try
             {
                 var response = await client.GetAsync("/");
                 response.EnsureSuccessStatusCode();
 
+                Interlocked.Increment(ref _countSuccess);
                 _lastGetSuccessful = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _lastGetSuccessful = false;
+                if (client == _httpClient)
+                {
+                    Interlocked.Increment(ref _countErrors);
+                    _lastErrorDetails = ex.ToString();
+                    _lastGetSuccessful = false;
+                }
             }
+
+            await Task.Delay(delayBetweenCallsMS)
+                .ConfigureAwait(false);
         }
     }
 }

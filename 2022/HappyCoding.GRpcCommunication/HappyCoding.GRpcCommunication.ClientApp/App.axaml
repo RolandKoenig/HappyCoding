@@ -4,5 +4,30 @@
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+
+        <!-- GroupBox -->
+        <Style Selector="HeaderedContentControl.GroupBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True" Margin="3">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="0"
+                                        Margin="5,0,0,0">
+                                    <ContentPresenter TextBlock.FontWeight="Bold" Margin="2"
+                                                      Content="{TemplateBinding Header}" />
+                                </Border>
+                            </StackPanel>
+
+                            <Border
+                                BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                                BorderThickness="1">
+                                <ContentPresenter Content="{TemplateBinding Content}" />
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Styles>
 </Application>
