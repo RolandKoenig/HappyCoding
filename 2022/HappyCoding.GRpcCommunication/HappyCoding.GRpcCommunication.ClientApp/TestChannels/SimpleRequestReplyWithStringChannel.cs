@@ -19,7 +19,9 @@ internal class SimpleRequestReplyWithStringChannel : ITestChannel
     {
         var options = await ClientOptions.LoadAsync(cancellationToken);
 
-        _channel = GrpcChannel.ForAddress($"http://{options.TargetHost}:{options.Port}");
+        var protocol = options.UseHttps ? "https" : "http";
+
+        _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.Port}");
 
         this.Run(_channel);
     }

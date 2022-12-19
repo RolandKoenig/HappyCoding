@@ -43,6 +43,8 @@ internal class AspNetCoreServerHost
             serverOptions.ListenAnyIP(options.Port, kestrelOptions =>
             {
                 kestrelOptions.Protocols = HttpProtocols.Http2;
+
+                if (options.UseHttps) { kestrelOptions.UseHttps(); }
             });
         });
 

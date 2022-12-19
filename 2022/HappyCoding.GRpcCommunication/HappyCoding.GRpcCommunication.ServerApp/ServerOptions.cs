@@ -13,6 +13,8 @@ public class ServerOptions
 
     public ushort Port { get; set; } = 5000;
 
+    public bool UseHttps { get; set; } = false;
+
     public static async Task<ServerOptions> LoadAsync(CancellationToken cancellationToken)
     {
         var fullPath = Path.Combine(

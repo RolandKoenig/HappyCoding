@@ -25,8 +25,10 @@ internal class PlainHttpChannel : ITestChannel
     {
         var options = await ClientOptions.LoadAsync(cancellationToken);
 
+        var protocol = options.UseHttps ? "https" : "http";
+
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri($"http://{options.TargetHost}:{options.Port}");
+        _httpClient.BaseAddress = new Uri($"{protocol}://{options.TargetHost}:{options.Port}");
         _httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
         _httpClient.DefaultRequestVersion = new Version(2, 0);
 
