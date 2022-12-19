@@ -19,7 +19,7 @@ public class TestChannelViewModel : PropertyChangedBase
     public TestChannelViewModel()
     {
         this.TestChannels = new ObservableCollection<TestChannelItemViewModel>();
-        this.TestChannels.Add(new TestChannelItemViewModel(new PlainHttpChannel()));
+        this.TestChannels.Add(new TestChannelItemViewModel(new PlainHttp2Channel()));
         this.TestChannels.Add(new TestChannelItemViewModel(new SimpleRequestReplyWithStringChannel()));
     }
 }

@@ -10,6 +10,14 @@ namespace HappyCoding.GRpcCommunication.ClientApp.Views;
 public class TestChannelItemViewModel : PropertyChangedBase
 {
     private readonly ITestChannel _testChannel;
+    private ulong _countSuccess;
+    private ulong _countTimeouts;
+    private ulong _countErrors;
+    private double _callDurationAvgMS;
+    private double _callDurationMinMS;
+    private double _callDurationMaxMS;
+    private string _lastErrorDetails = string.Empty;
+    private ISolidColorBrush _stateBrush = Brushes.Gray;
 
     public DelegateCommand Command_Start { get; }
 
@@ -17,12 +25,47 @@ public class TestChannelItemViewModel : PropertyChangedBase
 
     public bool IsStarted { get; private set; }
 
-    public ulong CountSuccess => _testChannel.CountSuccess;
+    public ulong CountSuccess
+    {
+        get => _countSuccess;
+        private set => this.SetProperty(ref _countSuccess, value);
+    }
 
-    public ulong CountErrors => _testChannel.CountErrors;
+    public ulong CountTimeouts
+    {
+        get => _countTimeouts;
+        private set => this.SetProperty(ref _countTimeouts, value);
+    }
 
-    public string LastErrorDetails => _testChannel.LastErrorDetails;
+    public ulong CountErrors
+    {
+        get => _countErrors;
+        private set => this.SetProperty(ref _countErrors, value);
+    }
 
+    public string LastErrorDetails
+    {
+        get => _lastErrorDetails;
+        private set => this.SetProperty(ref _lastErrorDetails, value);
+    }
+
+    public double CallDurationAvgMS
+    {
+        get => _callDurationAvgMS;
+        set => this.SetProperty(ref _callDurationAvgMS, value);
+    }
+
+    public double CallDurationMinMS
+    {
+        get => _callDurationMinMS;
+        set => this.SetProperty(ref _callDurationMinMS, value);
+    }
+
+    public double CallDurationMaxMS
+    {
+        get => _callDurationMaxMS;
+        set => this.SetProperty(ref _callDurationMaxMS, value);
+    }
 
     public bool IsBusy { get; private set; }
 
@@ -32,12 +75,8 @@ public class TestChannelItemViewModel : PropertyChangedBase
 
     public ISolidColorBrush StatusBrush
     {
-        get
-        {
-            if (!this.IsStarted) { return Brushes.Gray; }
-            if (!_testChannel.IsConnected) { return Brushes.Yellow; }
-            return Brushes.Green;
-        }
+        get => _stateBrush;
+        private set => this.SetProperty(ref _stateBrush, value);
     }
 
     public TestChannelItemViewModel(ITestChannel testChannel)
@@ -96,10 +135,20 @@ public class TestChannelItemViewModel : PropertyChangedBase
         {
             await Task.Delay(100);
 
+            this.CountSuccess = _testChannel.CountSuccess;
+            this.CountTimeouts = _testChannel.CountTimeouts;
+            this.CountErrors = _testChannel.CountErrors;
+            this.LastErrorDetails = _testChannel.LastErrorDetails;
+
+            this.CallDurationAvgMS = _testChannel.CallDurationAvgMS;
+            this.CallDurationMinMS = _testChannel.CallDurationMinMS;
+            this.CallDurationMaxMS = _testChannel.CallDurationMaxMS;
+
+            if (!this.IsStarted) { this.StatusBrush = Brushes.Gray; }
+            else if (!_testChannel.IsConnected) { this.StatusBrush = Brushes.Yellow; }
+            else { this.StatusBrush = Brushes.Green; }
+
             this.RaisePropertyChanged(nameof(this.StatusBrush));
-            this.RaisePropertyChanged(nameof(this.CountErrors));
-            this.RaisePropertyChanged(nameof(this.CountSuccess));
-            this.RaisePropertyChanged(nameof(this.LastErrorDetails));
         }
     }
 

@@ -1,17 +1,22 @@
-﻿using System;
+﻿using RolandK.Utils.Collections;
+using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
 
-internal class PlainHttpChannel : ITestChannel
+internal class PlainHttp2Channel : ITestChannel
 {
     private HttpClient? _httpClient;
     private bool _lastGetSuccessful;
     private ulong _countSuccess;
+    private ulong _countTimeouts;
     private ulong _countErrors;
     private string _lastErrorDetails = string.Empty;
+    private RingBuffer<double> _callDurationsMS = new(32);
 
     /// <inheritdoc />
     public bool IsConnected
@@ -25,9 +30,20 @@ internal class PlainHttpChannel : ITestChannel
 
     /// <inheritdoc />
     public ulong CountSuccess => _countSuccess;
+    /// <inheritdoc />
+    public ulong CountTimeouts => _countTimeouts;
 
     /// <inheritdoc />
     public ulong CountErrors => _countErrors;
+
+    /// <inheritdoc />
+    public double CallDurationMinMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Min() : 0;
+
+    /// <inheritdoc />
+    public double CallDurationAvgMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Average() : 0;
+
+    /// <inheritdoc />
+    public double CallDurationMaxMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Max() : 0;
 
     /// <inheritdoc />
     public string LastErrorDetails => _lastErrorDetails;
@@ -35,6 +51,8 @@ internal class PlainHttpChannel : ITestChannel
     /// <inheritdoc />
     public async Task StartAsync(CancellationToken cancellationToken)
     {
+        _callDurationsMS.Clear();
+
         var options = await ClientOptions.LoadAsync(cancellationToken);
 
         var protocol = options.UseHttps ? "https" : "http";
@@ -65,11 +83,23 @@ internal class PlainHttpChannel : ITestChannel
         {
             try
             {
+                var stopWatch = Stopwatch.StartNew();
+
                 var response = await client.GetAsync("/");
                 response.EnsureSuccessStatusCode();
 
+                _callDurationsMS.Add(stopWatch.Elapsed.TotalMilliseconds);
+
                 Interlocked.Increment(ref _countSuccess);
                 _lastGetSuccessful = true;
+            }
+            catch (TaskCanceledException)
+            {
+                if (client == _httpClient)
+                {
+                    Interlocked.Increment(ref _countTimeouts);
+                    _lastGetSuccessful = false;
+                }
             }
             catch (Exception ex)
             {

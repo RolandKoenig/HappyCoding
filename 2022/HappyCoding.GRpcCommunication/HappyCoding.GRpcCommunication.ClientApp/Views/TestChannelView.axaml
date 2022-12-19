@@ -52,8 +52,21 @@
                 <DataGridTextColumn Header="# Successful"
                                     Binding="{Binding Path=CountSuccess}"
                                     IsReadOnly="True" />
+                <DataGridTextColumn Header="# Timeouts"
+                                    Binding="{Binding Path=CountTimeouts}"
+                                    IsReadOnly="True" />
                 <DataGridTextColumn Header="# Failed"
                                     Binding="{Binding Path=CountErrors}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="⏱ Avg (ms)"
+                                    Binding="{Binding Path=CallDurationAvgMS, StringFormat={}{0:F2}}"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Header="⏱ Min (ms)"
+                                    Binding="{Binding Path=CallDurationMinMS, StringFormat={}{0:F2}}"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Header="⏱ Max (ms)"
+                                    Binding="{Binding Path=CallDurationMaxMS, StringFormat={}{0:F2}}"
                                     IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>

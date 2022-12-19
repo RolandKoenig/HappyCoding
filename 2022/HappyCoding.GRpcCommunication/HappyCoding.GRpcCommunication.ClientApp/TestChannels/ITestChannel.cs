@@ -9,7 +9,15 @@ public interface ITestChannel
 
     ulong CountSuccess { get; }
 
+    ulong CountTimeouts { get; }
+
     ulong CountErrors { get; }
+
+    double CallDurationMinMS { get; }
+
+    double CallDurationAvgMS { get; }
+
+    double CallDurationMaxMS { get; }
 
     public string LastErrorDetails { get; }
 
