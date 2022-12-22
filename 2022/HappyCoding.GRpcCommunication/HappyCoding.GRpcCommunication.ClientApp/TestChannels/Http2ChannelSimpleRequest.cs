@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using HappyCoding.GRpcCommunication.Shared.Dtos;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
 
-internal class PlainHttp2Channel : BaseChannel
+internal class Http2ChannelSimpleRequest : BaseChannel
 {
     private HttpClient? _httpClient;
     private bool _lastGetSuccessful;
@@ -54,10 +56,15 @@ internal class PlainHttp2Channel : BaseChannel
         {
             try
             {
+                var requestObj = new SimpleRequestDto() {Name = "Test"};
+
                 var stopWatch = Stopwatch.StartNew();
 
-                var response = await client.GetAsync("/");
+                var response = await client.PostAsJsonAsync(
+                    "/http/SimpleRequest",
+                    requestObj);
                 response.EnsureSuccessStatusCode();
+                var responseObj = response.Content.ReadFromJsonAsync<SimpleResponseDto>();
 
                 base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
 

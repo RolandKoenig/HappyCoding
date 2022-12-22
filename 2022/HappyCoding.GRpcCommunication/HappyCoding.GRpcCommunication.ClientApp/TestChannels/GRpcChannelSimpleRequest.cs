@@ -4,11 +4,11 @@ using Grpc.Net.Client;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
-using HappyCoding.GRpcCommunication.Shared.Services;
+using HappyCoding.GRpcCommunication.Shared.SimpleRequest;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
 
-internal class SimpleRequestReplyWithStringChannel : BaseChannel
+internal class GRpcChannelSimpleRequest : BaseChannel
 {
     private GrpcChannel? _channel;
 
@@ -47,11 +47,16 @@ internal class SimpleRequestReplyWithStringChannel : BaseChannel
         {
             try
             {
+                var requestObj = new SimpleRequest()
+                {
+                    Name = "Test"
+                };
+
                 var stopWatch = Stopwatch.StartNew();
 
-                var client = new SimpleRequestReplyWithStringHandler.SimpleRequestReplyWithStringHandlerClient(channel);
+                var client = new SimpleRequestHandler.SimpleRequestHandlerClient(channel);
                 client.Handle(
-                    new SimpleRequestWithString() {Name = "Test"},
+                    requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
                 base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);

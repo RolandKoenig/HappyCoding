@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "HappyCoding.GRpcCommunication.Shared.SimpleRequest";
+
+package services;
+
+service SimpleRequestHandler {
+  rpc Handle (SimpleRequest) returns (SimpleResponse);
+}
+
+message SimpleRequest {
+  string name = 1;
+}
+
+message SimpleResponse {
+  string message = 1;
+}
