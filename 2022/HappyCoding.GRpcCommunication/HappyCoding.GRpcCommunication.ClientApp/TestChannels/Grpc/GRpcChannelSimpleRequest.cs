@@ -23,8 +23,12 @@ internal class GRpcChannelSimpleRequest : BaseChannel
         var protocol = options.UseHttps ? "https" : "http";
 
         _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
+        if (options.ConnectGrpcAtStart)
+        {
+            await _channel.ConnectAsync(cancellationToken);
+        }
 
-        Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+        this.Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
     }
 
     /// <inheritdoc />
@@ -59,20 +63,20 @@ internal class GRpcChannelSimpleRequest : BaseChannel
                     requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
-                NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
+                base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.DeadlineExceeded)
             {
                 if (channel == _channel)
                 {
-                    NotifyTimeout();
+                    base.NotifyTimeout();
                 }
             }
             catch (Exception ex)
             {
                 if (channel == _channel)
                 {
-                    NotifyError(ex.ToString());
+                    base.NotifyError(ex.ToString());
                 }
             }
 

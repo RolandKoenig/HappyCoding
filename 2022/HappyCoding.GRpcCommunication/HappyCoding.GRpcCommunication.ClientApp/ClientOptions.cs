@@ -26,6 +26,8 @@ public class ClientOptions
     [Range(2, uint.MaxValue)]
     public uint CountParallelLoopsOnParallelChannels { get; set; } = 5;
 
+    public bool ConnectGrpcAtStart { get; set; } = true;
+
     public static async Task<ClientOptions> LoadAsync(CancellationToken cancellationToken)
     {
         var fullPath = Path.Combine(

@@ -23,8 +23,12 @@ internal class GRpcChannelComplexRequest : BaseChannel
         var protocol = options.UseHttps ? "https" : "http";
 
         _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
+        if (options.ConnectGrpcAtStart)
+        {
+            await _channel.ConnectAsync(cancellationToken);
+        }
 
-        Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+        this.Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
     }
 
     /// <inheritdoc />

@@ -10,6 +10,7 @@ namespace HappyCoding.GRpcCommunication.ClientApp.Views;
 public class TestChannelItemViewModel : PropertyChangedBase
 {
     private readonly ITestChannel _testChannel;
+    private bool _isStarting;
     private ulong _countSuccess;
     private ulong _countTimeouts;
     private ulong _countErrors;
@@ -96,6 +97,7 @@ public class TestChannelItemViewModel : PropertyChangedBase
         this.IsBusy = true;
         try
         {
+            _isStarting = true;
             this.UpdateDialogState();
 
             await _testChannel.StartAsync(CancellationToken.None);
@@ -105,6 +107,7 @@ public class TestChannelItemViewModel : PropertyChangedBase
         }
         finally
         {
+            _isStarting = false;
             this.IsBusy = false;
         }
 
@@ -144,9 +147,7 @@ public class TestChannelItemViewModel : PropertyChangedBase
             this.CallDurationMinMS = _testChannel.CallDurationMinMS;
             this.CallDurationMaxMS = _testChannel.CallDurationMaxMS;
 
-            if (!this.IsStarted) { this.StatusBrush = Brushes.Gray; }
-            else if (!_testChannel.IsConnected) { this.StatusBrush = Brushes.Yellow; }
-            else { this.StatusBrush = Brushes.Green; }
+            this.UpdateStateBrush();
 
             this.RaisePropertyChanged(nameof(this.StatusBrush));
         }
@@ -157,10 +158,20 @@ public class TestChannelItemViewModel : PropertyChangedBase
         this.Command_Start.RaiseCanExecuteChanged();
         this.Command_Stop.RaiseCanExecuteChanged();
 
+        this.UpdateStateBrush();
+
         this.RaisePropertyChanged(nameof(this.IsBusy));
         this.RaisePropertyChanged(nameof(this.IsNotBusy));
 
         this.RaisePropertyChanged(nameof(this.IsStarted));
         this.RaisePropertyChanged(nameof(this.StatusBrush));
+    }
+
+    private void UpdateStateBrush()
+    {
+        if (_isStarting) { this.StatusBrush = Brushes.Yellow; }
+        else if (!this.IsStarted) { this.StatusBrush = Brushes.Gray; }
+        else if (!_testChannel.IsConnected) { this.StatusBrush = Brushes.Yellow; }
+        else { this.StatusBrush = Brushes.Green; }
     }
 }
