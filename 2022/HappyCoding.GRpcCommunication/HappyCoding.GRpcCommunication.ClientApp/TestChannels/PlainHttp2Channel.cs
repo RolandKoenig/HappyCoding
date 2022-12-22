@@ -1,25 +1,18 @@
-﻿using RolandK.Utils.Collections;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
 
-internal class PlainHttp2Channel : ITestChannel
+internal class PlainHttp2Channel : BaseChannel
 {
     private HttpClient? _httpClient;
     private bool _lastGetSuccessful;
-    private ulong _countSuccess;
-    private ulong _countTimeouts;
-    private ulong _countErrors;
-    private string _lastErrorDetails = string.Empty;
-    private RingBuffer<double> _callDurationsMS = new(32);
 
     /// <inheritdoc />
-    public bool IsConnected
+    public override bool IsConnected
     {
         get
         {
@@ -29,30 +22,8 @@ internal class PlainHttp2Channel : ITestChannel
     }
 
     /// <inheritdoc />
-    public ulong CountSuccess => _countSuccess;
-    /// <inheritdoc />
-    public ulong CountTimeouts => _countTimeouts;
-
-    /// <inheritdoc />
-    public ulong CountErrors => _countErrors;
-
-    /// <inheritdoc />
-    public double CallDurationMinMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Min() : 0;
-
-    /// <inheritdoc />
-    public double CallDurationAvgMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Average() : 0;
-
-    /// <inheritdoc />
-    public double CallDurationMaxMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Max() : 0;
-
-    /// <inheritdoc />
-    public string LastErrorDetails => _lastErrorDetails;
-
-    /// <inheritdoc />
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public override async Task StartAsync(CancellationToken cancellationToken)
     {
-        _callDurationsMS.Clear();
-
         var options = await ClientOptions.LoadAsync(cancellationToken);
 
         var protocol = options.UseHttps ? "https" : "http";
@@ -67,7 +38,7 @@ internal class PlainHttp2Channel : ITestChannel
     }
 
     /// <inheritdoc />
-    public Task StopAsync(CancellationToken cancellationToken)
+    public override Task StopAsync(CancellationToken cancellationToken)
     {
         _httpClient = null;
 
@@ -88,16 +59,15 @@ internal class PlainHttp2Channel : ITestChannel
                 var response = await client.GetAsync("/");
                 response.EnsureSuccessStatusCode();
 
-                _callDurationsMS.Add(stopWatch.Elapsed.TotalMilliseconds);
+                base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
 
-                Interlocked.Increment(ref _countSuccess);
                 _lastGetSuccessful = true;
             }
             catch (TaskCanceledException)
             {
                 if (client == _httpClient)
                 {
-                    Interlocked.Increment(ref _countTimeouts);
+                    base.NotifyTimeout();
                     _lastGetSuccessful = false;
                 }
             }
@@ -105,8 +75,7 @@ internal class PlainHttp2Channel : ITestChannel
             {
                 if (client == _httpClient)
                 {
-                    Interlocked.Increment(ref _countErrors);
-                    _lastErrorDetails = ex.ToString();
+                    base.NotifyError(ex.ToString());
                     _lastGetSuccessful = false;
                 }
             }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using HappyCoding.GRpcCommunication.ServerApp.Messages;
 using HappyCoding.GRpcCommunication.ServerApp.ServerHost.GRpc;
+using HappyCoding.GRpcCommunication.ServerApp.ServerHost.Http.SimpleRequest;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -69,6 +70,7 @@ internal class AspNetCoreServerHost
         app.MapGet(
             "/", (
             ) => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+        app.MapSimpleRequestEndpoint();
 
         await app.StartAsync(cancellationToken);
 
