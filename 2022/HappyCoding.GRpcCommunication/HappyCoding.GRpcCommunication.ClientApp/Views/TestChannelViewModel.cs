@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using HappyCoding.GRpcCommunication.ClientApp.TestChannels;
+using HappyCoding.GRpcCommunication.ClientApp.TestChannels.Grpc;
+using HappyCoding.GRpcCommunication.ClientApp.TestChannels.Http;
 using RolandK.Patterns;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.Views;
@@ -19,10 +21,23 @@ public class TestChannelViewModel : PropertyChangedBase
     public TestChannelViewModel()
     {
         this.TestChannels = new ObservableCollection<TestChannelItemViewModel>();
-        this.TestChannels.Add(new TestChannelItemViewModel(new Http2Channel()));
-        this.TestChannels.Add(new TestChannelItemViewModel(new Http2ChannelSimpleRequest()));
-        this.TestChannels.Add(new TestChannelItemViewModel(new Http2ChannelComplexRequest()));
-        this.TestChannels.Add(new TestChannelItemViewModel(new GRpcChannelSimpleRequest()));
-        this.TestChannels.Add(new TestChannelItemViewModel(new GRpcChannelComplexRequest()));
+
+        this.AddTestChannel(new Http1ChannelSimpleRequest());
+        this.AddTestChannel(new Http1ChannelComplexRequest());
+        this.AddTestChannel(new Http1ChannelComplexRequestParallel());
+
+        this.AddTestChannel(new Http2ChannelSimpleRequest());
+        this.AddTestChannel(new Http2ChannelComplexRequest());
+        this.AddTestChannel(new Http2ChannelComplexRequestParallel());
+
+        this.AddTestChannel(new GRpcChannelSimpleRequest());
+        this.AddTestChannel(new GRpcChannelComplexRequest());
+        this.AddTestChannel(new GRpcChannelComplexRequestParallel());
+    }
+
+    private void AddTestChannel(ITestChannel channel)
+    {
+        this.TestChannels.Add(new TestChannelItemViewModel(channel));
+
     }
 }

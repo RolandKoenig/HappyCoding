@@ -6,9 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using HappyCoding.GRpcCommunication.Shared.Dtos;
 
-namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
+namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels.Http;
 
-internal class Http2ChannelSimpleRequest : BaseChannel
+internal abstract class BaseChannelSimpleRequest : BaseChannel
 {
     private HttpClient? _httpClient;
     private bool _lastGetSuccessful;
@@ -23,21 +23,29 @@ internal class Http2ChannelSimpleRequest : BaseChannel
         }
     }
 
+    protected abstract bool IsParallelChannel { get; }
+
     /// <inheritdoc />
     public override async Task StartAsync(CancellationToken cancellationToken)
     {
         var options = await ClientOptions.LoadAsync(cancellationToken);
 
-        var protocol = options.UseHttps ? "https" : "http";
+        _httpClient = this.CreateClient(options);
 
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri($"{protocol}://{options.TargetHost}:{options.Port}");
-        _httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
-        _httpClient.DefaultRequestVersion = new Version(2, 0);
-        _httpClient.Timeout = TimeSpan.FromMilliseconds(options.CallTimeoutMS);
-
-        Run(_httpClient, options.DelayBetweenCallsMS);
+        if (this.IsParallelChannel)
+        {
+            for (var loop = 0; loop < options.CountParallelLoopsOnParallelChannels; loop++)
+            {
+                this.Run(_httpClient, options.DelayBetweenCallsMS);
+            }
+        }
+        else
+        {
+            this.Run(_httpClient, options.DelayBetweenCallsMS);
+        }
     }
+
+    protected abstract HttpClient CreateClient(ClientOptions options);
 
     /// <inheritdoc />
     public override Task StopAsync(CancellationToken cancellationToken)
@@ -49,14 +57,14 @@ internal class Http2ChannelSimpleRequest : BaseChannel
 
     private async void Run(HttpClient client, ushort delayBetweenCallsMS)
     {
-        await Task.Delay(delayBetweenCallsMS)
+        await Task.Delay(100)
             .ConfigureAwait(false);
 
         while (client == _httpClient)
         {
             try
             {
-                var requestObj = new SimpleRequestDto() {Name = "Test"};
+                var requestObj = new SimpleRequestDto() { Name = "Test" };
 
                 var stopWatch = Stopwatch.StartNew();
 
@@ -66,7 +74,7 @@ internal class Http2ChannelSimpleRequest : BaseChannel
                 response.EnsureSuccessStatusCode();
                 var responseObj = response.Content.ReadFromJsonAsync<SimpleResponseDto>();
 
-                base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
+                NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
 
                 _lastGetSuccessful = true;
             }
@@ -74,7 +82,7 @@ internal class Http2ChannelSimpleRequest : BaseChannel
             {
                 if (client == _httpClient)
                 {
-                    base.NotifyTimeout();
+                    NotifyTimeout();
                     _lastGetSuccessful = false;
                 }
             }
@@ -82,13 +90,16 @@ internal class Http2ChannelSimpleRequest : BaseChannel
             {
                 if (client == _httpClient)
                 {
-                    base.NotifyError(ex.ToString());
+                    NotifyError(ex.ToString());
                     _lastGetSuccessful = false;
                 }
             }
 
-            await Task.Delay(delayBetweenCallsMS)
-                .ConfigureAwait(false);
+            if (delayBetweenCallsMS > 0)
+            {
+                await Task.Delay(delayBetweenCallsMS)
+                    .ConfigureAwait(false);
+            }
         }
     }
 }

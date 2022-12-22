@@ -14,7 +14,9 @@ public static class ComplexRequestEndpoint
         return app;
     }
 
-    private static Task<ComplexResponseDto> PostComplexRequestAsync(ComplexRequestDto request)
+    private static async Task<ComplexResponseDto> PostComplexRequestAsync(
+        ComplexRequestDto request,
+        ServerOptions options)
     {
         // Use given seed to calculate same response for same request
         var random = new Random(request.StationId);
@@ -32,6 +34,11 @@ public static class ComplexRequestEndpoint
             });
         }
 
-        return Task.FromResult(response);
+        if (options.SimulatedProcessingTimeMS > 0)
+        {
+            await Task.Delay(TimeSpan.FromMilliseconds(options.SimulatedProcessingTimeMS));
+        }
+
+        return response;
     }
 }

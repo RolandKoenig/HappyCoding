@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using HappyCoding.GRpcCommunication.Shared.ComplexRequest;
 
-namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
+namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels.Grpc;
 
-internal class GRpcChannelComplexRequest : BaseChannel
+internal class GRpcChannelComplexRequestParallel : BaseChannel
 {
     private GrpcChannel? _channel;
 
@@ -22,9 +22,12 @@ internal class GRpcChannelComplexRequest : BaseChannel
 
         var protocol = options.UseHttps ? "https" : "http";
 
-        _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.Port}");
+        _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
 
-        this.Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+        for (var loop = 0; loop < options.CountParallelLoopsOnParallelChannels; loop++)
+        {
+            this.Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+        }
     }
 
     /// <inheritdoc />
@@ -42,7 +45,7 @@ internal class GRpcChannelComplexRequest : BaseChannel
     {
         var random = new Random(100);
 
-        await Task.Delay(delayBetweenCallsMS)
+        await Task.Delay(100)
             .ConfigureAwait(false);
 
         while (channel == _channel)
@@ -58,25 +61,28 @@ internal class GRpcChannelComplexRequest : BaseChannel
                     requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
-                base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
+                NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.DeadlineExceeded)
             {
                 if (channel == _channel)
                 {
-                    base.NotifyTimeout();
+                    NotifyTimeout();
                 }
             }
             catch (Exception ex)
             {
                 if (channel == _channel)
                 {
-                    base.NotifyError(ex.ToString());
+                    NotifyError(ex.ToString());
                 }
             }
 
-            await Task.Delay(delayBetweenCallsMS)
-                .ConfigureAwait(false);
+            if (delayBetweenCallsMS > 0)
+            {
+                await Task.Delay(delayBetweenCallsMS)
+                    .ConfigureAwait(false);
+            }
         }
     }
 

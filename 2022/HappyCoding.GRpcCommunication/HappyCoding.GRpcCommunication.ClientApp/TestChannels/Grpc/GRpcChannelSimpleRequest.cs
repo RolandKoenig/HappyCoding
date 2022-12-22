@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using HappyCoding.GRpcCommunication.Shared.SimpleRequest;
 
-namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
+namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels.Grpc;
 
 internal class GRpcChannelSimpleRequest : BaseChannel
 {
@@ -22,9 +22,9 @@ internal class GRpcChannelSimpleRequest : BaseChannel
 
         var protocol = options.UseHttps ? "https" : "http";
 
-        _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.Port}");
+        _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
 
-        this.Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+        Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
     }
 
     /// <inheritdoc />
@@ -40,7 +40,7 @@ internal class GRpcChannelSimpleRequest : BaseChannel
 
     private async void Run(GrpcChannel channel, ushort delayBetweenCallsMS, uint callTimeoutMS)
     {
-        await Task.Delay(delayBetweenCallsMS)
+        await Task.Delay(100)
             .ConfigureAwait(false);
 
         while (channel == _channel)
@@ -59,25 +59,28 @@ internal class GRpcChannelSimpleRequest : BaseChannel
                     requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
-                base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
+                NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.DeadlineExceeded)
             {
                 if (channel == _channel)
                 {
-                    base.NotifyTimeout();
+                    NotifyTimeout();
                 }
             }
             catch (Exception ex)
             {
                 if (channel == _channel)
                 {
-                    base.NotifyError(ex.ToString());
+                    NotifyError(ex.ToString());
                 }
             }
 
-            await Task.Delay(delayBetweenCallsMS)
-                .ConfigureAwait(false);
+            if (delayBetweenCallsMS > 0)
+            {
+                await Task.Delay(delayBetweenCallsMS)
+                    .ConfigureAwait(false);
+            }
         }
     }
 }

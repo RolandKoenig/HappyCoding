@@ -40,7 +40,14 @@ internal class AspNetCoreServerHost
 
         builder.WebHost.ConfigureKestrel(serverOptions =>
         {
-            serverOptions.Listen(IPAddress.Any, options.Port, kestrelOptions =>
+            serverOptions.Listen(IPAddress.Any, options.PortHttp1, kestrelOptions =>
+            {
+                kestrelOptions.Protocols = HttpProtocols.Http1;
+
+                if (options.UseHttps) { kestrelOptions.UseHttps(); }
+            });
+
+            serverOptions.Listen(IPAddress.Any, options.PortHttp2, kestrelOptions =>
             {
                 kestrelOptions.Protocols = HttpProtocols.Http2;
 

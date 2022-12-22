@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
@@ -12,13 +13,18 @@ public class ClientOptions
 
     public string TargetHost { get; set; } = "localhost";
 
-    public ushort Port { get; set; } = 5000;
+    public ushort PortHttp1 { get; set; } = 5000;
+
+    public ushort PortHttp2 { get; set; } = 5001;
 
     public bool UseHttps { get; set; } = false;
 
     public ushort DelayBetweenCallsMS { get; set; } = 100;
 
     public uint CallTimeoutMS { get; set; } = 1000;
+
+    [Range(2, uint.MaxValue)]
+    public uint CountParallelLoopsOnParallelChannels { get; set; } = 5;
 
     public static async Task<ClientOptions> LoadAsync(CancellationToken cancellationToken)
     {

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Grpc.Core;
 using HappyCoding.GRpcCommunication.Shared.SimpleRequest;
 using RolandK.Patterns.Messaging;
@@ -7,19 +8,24 @@ namespace HappyCoding.GRpcCommunication.ServerApp.ServerHost.GRpc;
 
 public class SimpleRequestHandlerService : SimpleRequestHandler.SimpleRequestHandlerBase
 {
-    private readonly IFirLibMessagePublisher _messagePublisher;
+    private readonly ServerOptions _options;
 
-    public SimpleRequestHandlerService(IFirLibMessagePublisher messagePublisher)
+    public SimpleRequestHandlerService(ServerOptions options)
     {
-        _messagePublisher = messagePublisher;
+        _options = options;
     }
 
     /// <inheritdoc />
-    public override Task<SimpleResponse> Handle(SimpleRequest request, ServerCallContext context)
+    public override async Task<SimpleResponse> Handle(SimpleRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new SimpleResponse()
+        if (_options.SimulatedProcessingTimeMS > 0)
+        {
+            await Task.Delay(TimeSpan.FromMilliseconds(_options.SimulatedProcessingTimeMS));
+        }
+
+        return new SimpleResponse()
         {
             Message = "Test message"
-        });
+        };
     }
 }

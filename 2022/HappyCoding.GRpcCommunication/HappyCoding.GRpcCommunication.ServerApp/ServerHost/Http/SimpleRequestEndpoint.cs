@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using HappyCoding.GRpcCommunication.Shared.Dtos;
 using Microsoft.AspNetCore.Builder;
 
@@ -12,11 +13,18 @@ public static class SimpleRequestEndpoint
         return app;
     }
 
-    private static Task<SimpleResponseDto> PostSimpleRequestAsync(SimpleRequestDto requestDto)
+    private static async Task<SimpleResponseDto> PostSimpleRequestAsync(
+        SimpleRequestDto requestDto,
+        ServerOptions options)
     {
-        return Task.FromResult(new SimpleResponseDto()
+        if (options.SimulatedProcessingTimeMS > 0)
+        {
+            await Task.Delay(TimeSpan.FromMilliseconds(options.SimulatedProcessingTimeMS));
+        }
+
+        return new SimpleResponseDto()
         {
             Message = "Test response"
-        });
+        };
     }
 }

@@ -11,9 +11,13 @@ public class ServerOptions
 {
     private const string FILE_NAME = ".grpcCommunicationServerConfig.json";
 
-    public ushort Port { get; set; } = 5000;
+    public ushort PortHttp1 { get; set; } = 5000;
+
+    public ushort PortHttp2 { get; set; } = 5001;
 
     public bool UseHttps { get; set; } = false;
+
+    public uint SimulatedProcessingTimeMS { get; set; } = 0;
 
     public static async Task<ServerOptions> LoadAsync(CancellationToken cancellationToken)
     {

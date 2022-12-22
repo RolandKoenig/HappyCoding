@@ -11,7 +11,9 @@ public abstract class BaseChannel : ITestChannel
     private ulong _countTimeouts;
     private ulong _countErrors;
     private string _lastErrorDetails = string.Empty;
+
     private RingBuffer<double> _callDurationsMS = new(32);
+    private object _callDurationsMSLock = new object();
 
     /// <inheritdoc />
     public abstract bool IsConnected { get; }
@@ -41,7 +43,10 @@ public abstract class BaseChannel : ITestChannel
     {
         Interlocked.Increment(ref _countSuccess);
 
-        _callDurationsMS.Add(callDurationMS);
+        lock (_callDurationsMSLock)
+        {
+            _callDurationsMS.Add(callDurationMS);
+        }
     }
 
     protected void NotifyTimeout()
