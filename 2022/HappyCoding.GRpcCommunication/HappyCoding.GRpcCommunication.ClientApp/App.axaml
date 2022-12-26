@@ -1,6 +1,12 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HappyCoding.GRpcCommunication.ClientApp.App">
+    <Application.Resources>
+        <SolidColorBrush x:Key="BoxBorderLineBrush"
+                         Opacity="0.4"
+                         Color="{DynamicResource SystemBaseMediumLowColor}" />
+    </Application.Resources>
+    
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
@@ -12,16 +18,13 @@
                     <ControlTemplate>
                         <DockPanel LastChildFill="True" Margin="3">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="0"
-                                        Margin="5,0,0,0">
-                                    <ContentPresenter TextBlock.FontWeight="Bold" Margin="2"
-                                                      Content="{TemplateBinding Header}" />
-                                </Border>
+                                <ContentPresenter TextBlock.FontWeight="Bold" Margin="2"
+                                                  Content="{TemplateBinding Header}" />
                             </StackPanel>
 
                             <Border
-                                BorderBrush="{DynamicResource ThemeBorderMidBrush}"
-                                BorderThickness="1">
+                                BorderBrush="{DynamicResource BoxBorderLineBrush}"
+                                BorderThickness="0,1,0,0">
                                 <ContentPresenter Content="{TemplateBinding Content}" />
                             </Border>
                         </DockPanel>

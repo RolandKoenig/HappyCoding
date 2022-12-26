@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using RolandK.Utils.Collections;
@@ -7,13 +8,16 @@ namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels;
 
 public abstract class BaseChannel : ITestChannel
 {
+    private const int CACHED_CALL_INFO_COUNT_FOR_METRICS = 32;
+
     private ulong _countSuccess;
     private ulong _countTimeouts;
     private ulong _countErrors;
     private string _lastErrorDetails = string.Empty;
 
-    private RingBuffer<double> _callDurationsMS = new(32);
-    private object _callDurationsMSLock = new object();
+    private RingBuffer<double> _callDurationsMS = new(CACHED_CALL_INFO_COUNT_FOR_METRICS);
+    private RingBuffer<DateTimeOffset> _callTimestamps = new(CACHED_CALL_INFO_COUNT_FOR_METRICS);
+    private object _callMetricRingBufferLock = new object();
 
     /// <inheritdoc />
     public abstract bool IsConnected { get; }
@@ -36,6 +40,34 @@ public abstract class BaseChannel : ITestChannel
     /// <inheritdoc />
     public double CallDurationMaxMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Max() : 0;
 
+    public double CallsPerSecond
+    {
+        get
+        {
+            var first = DateTimeOffset.MinValue;
+            var last = DateTimeOffset.MinValue;
+            var callCount = 0;
+            foreach (var actCallTimestamp in _callTimestamps)
+            {
+                callCount++;
+
+                if (first == DateTimeOffset.MinValue)
+                {
+                    first = actCallTimestamp;
+                    continue;
+                }
+                last = actCallTimestamp;
+            }
+
+            if (callCount <= 2) { return 0; }
+            else if (last == first) { return 0; }
+            else if (last < first) { return 0; }
+            {
+                return callCount / (last - first).TotalSeconds;
+            }
+        }
+    }
+
     /// <inheritdoc />
     public string LastErrorDetails => _lastErrorDetails;
 
@@ -43,9 +75,10 @@ public abstract class BaseChannel : ITestChannel
     {
         Interlocked.Increment(ref _countSuccess);
 
-        lock (_callDurationsMSLock)
+        lock (_callMetricRingBufferLock)
         {
             _callDurationsMS.Add(callDurationMS);
+            _callTimestamps.Add(DateTimeOffset.UtcNow);
         }
     }
 
@@ -77,9 +110,10 @@ public abstract class BaseChannel : ITestChannel
         _countSuccess = 0;
         _countTimeouts = 0;
 
-        lock (_callDurationsMSLock)
+        lock (_callMetricRingBufferLock)
         {
-            _callDurationsMS.Clear();
+            _callDurationsMS = new RingBuffer<double>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
+            _callTimestamps = new RingBuffer<DateTimeOffset>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
         }
 
         _lastErrorDetails = string.Empty;

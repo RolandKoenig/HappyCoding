@@ -17,6 +17,7 @@ public class TestChannelItemViewModel : PropertyChangedBase
     private double _callDurationAvgMS;
     private double _callDurationMinMS;
     private double _callDurationMaxMS;
+    private double _callsPerSecond;
     private string _lastErrorDetails = string.Empty;
     private ISolidColorBrush _stateBrush = Brushes.Gray;
 
@@ -66,6 +67,12 @@ public class TestChannelItemViewModel : PropertyChangedBase
     {
         get => _callDurationMaxMS;
         set => this.SetProperty(ref _callDurationMaxMS, value);
+    }
+
+    public double CallsPerSecond
+    {
+        get => _callsPerSecond;
+        set => this.SetProperty(ref _callsPerSecond, value);
     }
 
     public bool IsBusy { get; private set; }
@@ -159,6 +166,8 @@ public class TestChannelItemViewModel : PropertyChangedBase
         this.CallDurationAvgMS = _testChannel.CallDurationAvgMS;
         this.CallDurationMinMS = _testChannel.CallDurationMinMS;
         this.CallDurationMaxMS = _testChannel.CallDurationMaxMS;
+
+        this.CallsPerSecond = _testChannel.CallsPerSecond;
 
         this.UpdateStateBrush();
 

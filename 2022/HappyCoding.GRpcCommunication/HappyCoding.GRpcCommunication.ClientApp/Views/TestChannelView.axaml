@@ -75,6 +75,10 @@
                     <DataGridTextColumn Header="⏱ Max (ms)"
                                         Binding="{Binding Path=CallDurationMaxMS, StringFormat={}{0:F2}}"
                                         IsReadOnly="True" />
+
+                    <DataGridTextColumn Header="# Successful calls per second"
+                                        Binding="{Binding Path=CallsPerSecond, StringFormat={}{0:F2}}"
+                                        IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>
 
