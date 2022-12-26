@@ -17,7 +17,8 @@
                 <Setter.Value>
                     <ControlTemplate>
                         <DockPanel LastChildFill="True" Margin="3">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"
+                                        Height="32">
                                 <ContentPresenter TextBlock.FontWeight="Bold" Margin="2"
                                                   Content="{TemplateBinding Header}" />
                             </StackPanel>

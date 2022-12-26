@@ -8,7 +8,7 @@ using HappyCoding.GRpcCommunication.Shared.ComplexRequest;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels.Grpc;
 
-internal class GRpcChannelComplexRequestParallel : BaseChannel
+internal class GrpcChannelComplexRequestParallel : BaseChannel
 {
     private GrpcChannel? _channel;
 

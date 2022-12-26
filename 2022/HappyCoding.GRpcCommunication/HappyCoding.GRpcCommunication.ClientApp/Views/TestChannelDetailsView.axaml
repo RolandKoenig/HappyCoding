@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HappyCoding.GRpcCommunication.ClientApp.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.GRpcCommunication.ClientApp.Views.TestChannelDetailsView">
+    <UserControl.DataContext>
+        <local:TestChannelDetailsViewModel />
+    </UserControl.DataContext>
+
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top">
+            <Button Command="{Binding Path=Command_Start}"
+                    Content="Start"
+                    Margin="3" />
+            <Button Command="{Binding Path=Command_Stop}"
+                    Content="Stop"
+                    Margin="3" />
+
+            <TextBlock Margin="3"
+                       Text="|"
+                       VerticalAlignment="Center"/>
+
+            <Button Command="{Binding Path=Command_ResetMetrics}"
+                    Content="Reset metrics"
+                    Margin="3" />
+        </StackPanel>
+
+        <TabControl>
+            <TabItem Header="Errors">
+                <TextBlock Text="{Binding Path=CurrentItem.LastErrorDetails, FallbackValue=-}" />
+            </TabItem>
+            <TabItem Header="Measure history">
+
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</UserControl>

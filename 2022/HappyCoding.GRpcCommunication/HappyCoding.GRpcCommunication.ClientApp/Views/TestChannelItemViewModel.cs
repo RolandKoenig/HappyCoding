@@ -25,6 +25,8 @@ public class TestChannelItemViewModel : PropertyChangedBase
 
     public DelegateCommand Command_Stop { get; }
 
+    public DelegateCommand Command_ResetMetrics { get; }
+
     public bool IsStarted { get; private set; }
 
     public ulong CountSuccess
@@ -97,6 +99,8 @@ public class TestChannelItemViewModel : PropertyChangedBase
         this.Command_Stop = new DelegateCommand(
             this.StopTestChannel,
             () => this.IsStarted);
+        this.Command_ResetMetrics = new DelegateCommand(
+            this.ResetMetrics);
     }
 
     public void ResetMetrics()

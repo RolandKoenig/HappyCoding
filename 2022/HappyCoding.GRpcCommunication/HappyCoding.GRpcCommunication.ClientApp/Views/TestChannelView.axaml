@@ -25,6 +25,7 @@
             </Grid.RowDefinitions>
 
             <DataGrid Grid.Row="0"
+                      x:Name="MainGrid"
                       Items="{Binding Path=TestChannels}"
                       SelectedItem="{Binding Path=SelectedTestChannel, Mode=TwoWay}"
                       SelectionMode="Single">
@@ -88,10 +89,7 @@
             <HeaderedContentControl Grid.Row="2"
                                     Classes="GroupBox"
                                     Header="{Binding Path=SelectedTestChannel.Title}">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto">
-                    <TextBlock Text="{Binding Path=SelectedTestChannel.LastErrorDetails}" />
-                </ScrollViewer>
+                <local:TestChannelDetailsView CurrentItem="{Binding ElementName=MainGrid, Path=SelectedItem}" />
             </HeaderedContentControl>
         </Grid>
     </DockPanel>

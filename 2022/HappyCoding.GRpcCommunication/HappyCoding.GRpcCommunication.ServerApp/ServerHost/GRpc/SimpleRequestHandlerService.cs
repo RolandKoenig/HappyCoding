@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Grpc.Core;
 using HappyCoding.GRpcCommunication.Shared.SimpleRequest;
-using RolandK.Patterns.Messaging;
 
 namespace HappyCoding.GRpcCommunication.ServerApp.ServerHost.GRpc;
 

@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using System;
+using Avalonia.Logging;
 
 namespace HappyCoding.GRpcCommunication.ClientApp;
 internal class Program

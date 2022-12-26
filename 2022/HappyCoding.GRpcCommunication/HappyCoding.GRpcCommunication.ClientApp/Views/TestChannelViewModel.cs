@@ -35,9 +35,9 @@ public class TestChannelViewModel : PropertyChangedBase
         this.AddTestChannel(new Http2ChannelComplexRequest());
         this.AddTestChannel(new Http2ChannelComplexRequestParallel());
 
-        this.AddTestChannel(new GRpcChannelSimpleRequest());
-        this.AddTestChannel(new GRpcChannelComplexRequest());
-        this.AddTestChannel(new GRpcChannelComplexRequestParallel());
+        this.AddTestChannel(new GrpcChannelSimpleRequest());
+        this.AddTestChannel(new GrpcChannelComplexRequest());
+        this.AddTestChannel(new GrpcChannelComplexRequestParallel());
     }
 
     private void AddTestChannel(ITestChannel channel)
