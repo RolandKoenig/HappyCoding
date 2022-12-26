@@ -23,9 +23,6 @@
                 <TabItem Header="Server">
                     <views:ServerView />
                 </TabItem>
-                <TabItem Header="Services">
-                    <views:ServicesView />
-                </TabItem>
                 <TabItem Header="Options">
                     <views:OptionsView />
                 </TabItem>

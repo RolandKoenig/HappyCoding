@@ -19,9 +19,11 @@ public interface ITestChannel
 
     double CallDurationMaxMS { get; }
 
-    public string LastErrorDetails { get; }
+    string LastErrorDetails { get; }
 
     Task StartAsync(CancellationToken cancellationToken);
 
     Task StopAsync(CancellationToken cancellationToken);
+
+    void ResetMetrics();
 }

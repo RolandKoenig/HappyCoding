@@ -69,4 +69,19 @@ public abstract class BaseChannel : ITestChannel
 
     /// <inheritdoc />
     public abstract Task StopAsync(CancellationToken cancellationToken);
+
+    /// <inheritdoc />
+    public void ResetMetrics()
+    {
+        _countErrors = 0;
+        _countSuccess = 0;
+        _countTimeouts = 0;
+
+        lock (_callDurationsMSLock)
+        {
+            _callDurationsMS.Clear();
+        }
+
+        _lastErrorDetails = string.Empty;
+    }
 }

@@ -9,79 +9,86 @@
         <local:TestChannelViewModel />
     </UserControl.DataContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="3" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top">
+            <Button Command="{Binding Path=Command_ResetMetrics}"
+                    Content="Reset metrics"
+                    Margin="3" />
+        </StackPanel>
 
-        <DataGrid Grid.Row="0" 
-                  Items="{Binding Path=TestChannels}"
-                  SelectedItem="{Binding Path=SelectedTestChannel, Mode=TwoWay}"
-                  SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="State">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Rectangle
-                                Fill="{Binding Path=StatusBrush}"
-                                Margin="5"
-                                Name="StateRect" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Commands">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding Path=Command_Start}"
-                                        Content="Start"
-                                        Margin="3" />
-                                <Button Command="{Binding Path=Command_Stop}"
-                                        Content="Stop"
-                                        Margin="3" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Title"
-                                    Binding="{Binding Path=Title}"
-                                    IsReadOnly="True" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                <DataGridTextColumn Header="# Successful"
-                                    Binding="{Binding Path=CountSuccess}"
-                                    IsReadOnly="True" />
-                <DataGridTextColumn Header="# Timeouts"
-                                    Binding="{Binding Path=CountTimeouts}"
-                                    IsReadOnly="True" />
-                <DataGridTextColumn Header="# Failed"
-                                    Binding="{Binding Path=CountErrors}"
-                                    IsReadOnly="True" />
+            <DataGrid Grid.Row="0"
+                      Items="{Binding Path=TestChannels}"
+                      SelectedItem="{Binding Path=SelectedTestChannel, Mode=TwoWay}"
+                      SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="State">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Rectangle Fill="{Binding Path=StatusBrush}"
+										   Margin="5"
+                                           Name="StateRect" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Commands">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Command="{Binding Path=Command_Start}"
+                                            Content="Start"
+                                            Margin="3" />
+                                    <Button Command="{Binding Path=Command_Stop}"
+                                            Content="Stop"
+                                            Margin="3" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Title"
+                                        Binding="{Binding Path=Title}"
+                                        IsReadOnly="True" />
 
-                <DataGridTextColumn Header="⏱ Avg (ms)"
-                                    Binding="{Binding Path=CallDurationAvgMS, StringFormat={}{0:F2}}"
-                                    IsReadOnly="True" />
-                <DataGridTextColumn Header="⏱ Min (ms)"
-                                    Binding="{Binding Path=CallDurationMinMS, StringFormat={}{0:F2}}"
-                                    IsReadOnly="True" />
-                <DataGridTextColumn Header="⏱ Max (ms)"
-                                    Binding="{Binding Path=CallDurationMaxMS, StringFormat={}{0:F2}}"
-                                    IsReadOnly="True" />
-            </DataGrid.Columns>
-        </DataGrid>
+                    <DataGridTextColumn Header="# Successful"
+                                        Binding="{Binding Path=CountSuccess}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="# Timeouts"
+                                        Binding="{Binding Path=CountTimeouts}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="# Failed"
+                                        Binding="{Binding Path=CountErrors}"
+                                        IsReadOnly="True" />
 
-        <GridSplitter Grid.Row="1"
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <DataGridTextColumn Header="⏱ Avg (ms)"
+                                        Binding="{Binding Path=CallDurationAvgMS, StringFormat={}{0:F2}}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="⏱ Min (ms)"
+                                        Binding="{Binding Path=CallDurationMinMS, StringFormat={}{0:F2}}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="⏱ Max (ms)"
+                                        Binding="{Binding Path=CallDurationMaxMS, StringFormat={}{0:F2}}"
+                                        IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-        <HeaderedContentControl Grid.Row="2" 
-                                Classes="GroupBox"
-                                Header="{Binding Path=SelectedTestChannel.Title}">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Auto">
-                <TextBlock Text="{Binding Path=SelectedTestChannel.LastErrorDetails}" />
-            </ScrollViewer>
-        </HeaderedContentControl>
-    </Grid>
- 
+            <GridSplitter Grid.Row="1"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <HeaderedContentControl Grid.Row="2"
+                                    Classes="GroupBox"
+                                    Header="{Binding Path=SelectedTestChannel.Title}">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="{Binding Path=SelectedTestChannel.LastErrorDetails}" />
+                </ScrollViewer>
+            </HeaderedContentControl>
+        </Grid>
+    </DockPanel>
 </UserControl>

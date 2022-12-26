@@ -92,6 +92,13 @@ public class TestChannelItemViewModel : PropertyChangedBase
             () => this.IsStarted);
     }
 
+    public void ResetMetrics()
+    {
+        _testChannel.ResetMetrics();
+
+        this.UpdateLocalProperties();
+    }
+
     private async void StartTestChannel()
     {
         this.IsBusy = true;
@@ -138,19 +145,24 @@ public class TestChannelItemViewModel : PropertyChangedBase
         {
             await Task.Delay(100);
 
-            this.CountSuccess = _testChannel.CountSuccess;
-            this.CountTimeouts = _testChannel.CountTimeouts;
-            this.CountErrors = _testChannel.CountErrors;
-            this.LastErrorDetails = _testChannel.LastErrorDetails;
-
-            this.CallDurationAvgMS = _testChannel.CallDurationAvgMS;
-            this.CallDurationMinMS = _testChannel.CallDurationMinMS;
-            this.CallDurationMaxMS = _testChannel.CallDurationMaxMS;
-
-            this.UpdateStateBrush();
-
-            this.RaisePropertyChanged(nameof(this.StatusBrush));
+            this.UpdateLocalProperties();
         }
+    }
+
+    private void UpdateLocalProperties()
+    {
+        this.CountSuccess = _testChannel.CountSuccess;
+        this.CountTimeouts = _testChannel.CountTimeouts;
+        this.CountErrors = _testChannel.CountErrors;
+        this.LastErrorDetails = _testChannel.LastErrorDetails;
+
+        this.CallDurationAvgMS = _testChannel.CallDurationAvgMS;
+        this.CallDurationMinMS = _testChannel.CallDurationMinMS;
+        this.CallDurationMaxMS = _testChannel.CallDurationMaxMS;
+
+        this.UpdateStateBrush();
+
+        this.RaisePropertyChanged(nameof(this.StatusBrush));
     }
 
     private void UpdateDialogState()
