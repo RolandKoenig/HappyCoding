@@ -22,10 +22,20 @@ internal class GrpcChannelComplexRequestParallel : BaseChannel
 
         var protocol = options.UseHttps ? "https" : "http";
 
-        _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
-        if (options.ConnectGrpcAtStart)
+        try
         {
-            await _channel.ConnectAsync(cancellationToken);
+            _channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
+            if (options.ConnectGrpcAtStart)
+            {
+                await _channel.ConnectAsync(cancellationToken);
+            }
+        }
+        catch (Exception ex)
+        {
+            base.NotifyError(ex.ToString());
+            _channel = null;
+
+            throw;
         }
 
         for (var loop = 0; loop < options.CountParallelLoopsOnParallelChannels; loop++)

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using HappyCoding.GRpcCommunication.ClientApp.TestChannels;
@@ -118,15 +119,23 @@ public class TestChannelItemViewModel : PropertyChangedBase
             _isStarting = true;
             this.UpdateDialogState();
 
-            await _testChannel.StartAsync(CancellationToken.None);
+            var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5.0));
+            await _testChannel.StartAsync(cancellationTokenSource.Token);
             this.IsStarted = true;
-
-            this.RunStateWatchTask();
+        }
+        catch (Exception)
+        {
+            this.IsStarted = false;
         }
         finally
         {
             _isStarting = false;
             this.IsBusy = false;
+        }
+
+        if (this.IsStarted)
+        {
+            this.RunStateWatchTask();
         }
 
         this.UpdateDialogState();
