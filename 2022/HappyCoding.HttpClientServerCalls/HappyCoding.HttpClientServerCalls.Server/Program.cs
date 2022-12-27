@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace HappyCoding.HttpClientServerCalls;
+namespace HappyCoding.HttpClientServerCalls.Server;
 
 public class Program
 {
