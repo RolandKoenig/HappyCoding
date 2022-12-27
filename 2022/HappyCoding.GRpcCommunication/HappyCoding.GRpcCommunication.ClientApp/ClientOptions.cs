@@ -28,6 +28,8 @@ public class ClientOptions
 
     public bool ConnectGrpcAtStart { get; set; } = true;
 
+    public uint PooledConnectionIdleTimeoutMS { get; set; } = (uint)TimeSpan.FromMinutes(1.0).TotalMilliseconds;
+
     public static async Task<ClientOptions> LoadAsync(CancellationToken cancellationToken)
     {
         var fullPath = Path.Combine(
