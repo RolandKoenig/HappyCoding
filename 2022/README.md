@@ -15,3 +15,6 @@ This project shows how to use the DataGrid control in Avalonia cross-platform ap
 ## Misc
 ### [HappyCoding.YamlParsing](HappyCoding.YamlParsing)
 This project implements some samples for parsing yaml data and compare them with json documents
+
+### [HappyCoding.HttpClientServerCalls](HappyCoding.HttpClientServerCalls)
+This project shows which http headers are genereated by HttpClient class
