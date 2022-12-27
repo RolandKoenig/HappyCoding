@@ -27,6 +27,28 @@ Content-Type: application/json; charset=utf-8
 Transfer-Encoding: chunked
 ```
 
+## PutJsonObject
+```csharp
+await client.PutAsJsonAsync("dummyEndpoint", new DummyRequestObject());
+```
+
+procudes http headers:
+```
+Host: localhost:5001
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+```
+
+## Delete
+```csharp
+await client.DeleteAsync("dummyEndpoint");
+```
+
+procudes http headers:
+```
+Host: localhost:5001
+```
+
 ## UploadFile
 ```csharp
 using var multipartFormContent = new MultipartFormDataContent();

@@ -15,6 +15,8 @@ internal class Program
         {
             new Get(),
             new PostJsonObject(),
+            new PutJsonObject(),
+            new Delete(),
             new UploadFile()
         };
 
