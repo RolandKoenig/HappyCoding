@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System.ComponentModel;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Layout;
@@ -59,6 +60,11 @@ public class PropertyGridEditControlFactory
             BindingMode.TwoWay);
         ctrlTextBox.Width = double.NaN;
         ctrlTextBox.IsReadOnly = property.IsReadOnly;
+
+        if (property.GetCustomAttribute<PasswordPropertyTextAttribute>() != null)
+        {
+            ctrlTextBox.PasswordChar = '*';
+        }
 
         return ctrlTextBox;
     }

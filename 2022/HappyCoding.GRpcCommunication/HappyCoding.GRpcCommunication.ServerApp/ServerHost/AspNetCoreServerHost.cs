@@ -51,7 +51,10 @@ internal class AspNetCoreServerHost
             {
                 kestrelOptions.Protocols = HttpProtocols.Http2;
 
-                if (options.UseHttps) { kestrelOptions.UseHttps(); }
+                if (options.UseHttps)
+                {
+                    kestrelOptions.UseHttps(options.CertificateFilePath, options.CertificatePassword);
+                }
             });
         });
 
