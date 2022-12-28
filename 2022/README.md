@@ -6,6 +6,12 @@ using [AspNetCore.HealthChecks.UI](https://github.com/Xabaril/AspNetCore.Diagnos
 
 ![ResourceImage](HappyCoding.AspNetCoreHealthChecks/screenshot.png)
 
+### [HappyCoding.GRpcCommunication](HappyCoding.GRpcCommunication)
+This projects does some performance tests with gRPC. It contains a 
+client and server gui using Avalonia for easy testing.
+
+![ResourceImage](HappyCoding.GRpcCommunication/screenshot.png)
+
 ## Avalonia
 ### [AvaloniaAppWithDataGrid](HappyCoding.AvaloniaAppWithDataGrid)
 This project shows how to use the DataGrid control in Avalonia cross-platform apps.
