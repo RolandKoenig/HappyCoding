@@ -1,9 +1,9 @@
-using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
 namespace HappyCoding.GRpcCommunication.ClientApp;
+
 public partial class App : Application
 {
     public override void Initialize()

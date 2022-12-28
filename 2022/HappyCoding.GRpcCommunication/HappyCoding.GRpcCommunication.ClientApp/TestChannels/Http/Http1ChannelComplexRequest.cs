@@ -13,7 +13,12 @@ internal class Http1ChannelComplexRequest : BaseChannelComplexRequest
     {
         var protocol = options.UseHttps ? "https" : "http";
 
-        var httpClient = new HttpClient();
+        var handler = new SocketsHttpHandler();
+        handler.PooledConnectionIdleTimeout = TimeSpan.FromMilliseconds(options.PooledConnectionIdleTimeoutMS);
+        handler.SslOptions.RemoteCertificateValidationCallback =
+            (httpRequestMessage, cert, cetChain, policyErrors) => true;
+
+        var httpClient = new HttpClient(handler);
         httpClient.BaseAddress = new Uri($"{protocol}://{options.TargetHost}:{options.PortHttp1}");
         httpClient.Timeout = TimeSpan.FromMilliseconds(options.CallTimeoutMS);
         return httpClient;

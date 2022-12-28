@@ -11,10 +11,12 @@ internal static class GrpcHelper
         var socketsHttpHandler = new SocketsHttpHandler();
         socketsHttpHandler.PooledConnectionIdleTimeout = 
             TimeSpan.FromMilliseconds(options.PooledConnectionIdleTimeoutMS);
+        socketsHttpHandler.SslOptions.RemoteCertificateValidationCallback =
+            (httpRequestMessage, cert, cetChain, policyErrors) => true;
 
         var grpcChannelOptions = new GrpcChannelOptions()
         {
-            HttpHandler = socketsHttpHandler
+            HttpHandler = socketsHttpHandler,
         };
 
         var protocol = options.UseHttps ? "https" : "http";
