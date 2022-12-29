@@ -11,6 +11,7 @@ internal static class GrpcHelper
         var socketsHttpHandler = new SocketsHttpHandler();
         socketsHttpHandler.PooledConnectionIdleTimeout = 
             TimeSpan.FromMilliseconds(options.PooledConnectionIdleTimeoutMS);
+        socketsHttpHandler.EnableMultipleHttp2Connections = true;
         socketsHttpHandler.SslOptions.RemoteCertificateValidationCallback =
             (httpRequestMessage, cert, cetChain, policyErrors) => true;
 

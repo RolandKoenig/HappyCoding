@@ -36,12 +36,12 @@ internal abstract class BaseChannelSimpleRequest : BaseChannel
         {
             for (var loop = 0; loop < options.CountParallelLoopsOnParallelChannels; loop++)
             {
-                this.Run(_httpClient, options.DelayBetweenCallsMS);
+                this.Run(loop, _httpClient, options.DelayBetweenCallsMS);
             }
         }
         else
         {
-            this.Run(_httpClient, options.DelayBetweenCallsMS);
+            this.Run(0, _httpClient, options.DelayBetweenCallsMS);
         }
     }
 
@@ -55,7 +55,7 @@ internal abstract class BaseChannelSimpleRequest : BaseChannel
         return Task.CompletedTask;
     }
 
-    private async void Run(HttpClient client, ushort delayBetweenCallsMS)
+    private async void Run(int threadId, HttpClient client, ushort delayBetweenCallsMS)
     {
         await Task.Delay(100)
             .ConfigureAwait(false);
@@ -74,7 +74,7 @@ internal abstract class BaseChannelSimpleRequest : BaseChannel
                 response.EnsureSuccessStatusCode();
                 var responseObj = response.Content.ReadFromJsonAsync<SimpleResponseDto>();
 
-                NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
+                NotifySuccess(threadId, stopWatch.Elapsed.TotalMilliseconds);
 
                 _lastGetSuccessful = true;
             }

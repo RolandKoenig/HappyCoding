@@ -41,6 +41,7 @@ internal class AspNetCoreServerHost
 
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
+                serverOptions.Limits.Http2.MaxStreamsPerConnection = (int)options.MaxStreamsPerConnection;
                 serverOptions.Listen(IPAddress.Any, options.PortHttp1, kestrelOptions =>
                 {
                     kestrelOptions.Protocols = HttpProtocols.Http1;
@@ -101,7 +102,7 @@ internal class AspNetCoreServerHost
                 _serverMessenger.Publish(new ServerLogReceivedMessage(
                     DateTimeOffset.UtcNow, 
                     LogLevel.Critical,
-                    $"Error while starting server: {ex.ToString()}"));
+                    $"Error while starting server: {ex}"));
                 _serverMessenger.DisconnectFromGlobalMessaging();
                 _serverMessenger = null;
             }
@@ -126,7 +127,7 @@ internal class AspNetCoreServerHost
             _serverMessenger!.Publish(new ServerLogReceivedMessage(
                 DateTimeOffset.UtcNow, 
                 LogLevel.Critical,
-                $"Error while stopping server: {ex.ToString()}"));
+                $"Error while stopping server: {ex}"));
         }
 
         _serverMessenger!.Publish(new ServerStateChangedMessage(false));

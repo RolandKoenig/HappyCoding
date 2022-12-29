@@ -15,9 +15,8 @@ public abstract class BaseChannel : ITestChannel
     private ulong _countErrors;
     private string _lastErrorDetails = string.Empty;
 
-    private RingBuffer<double> _callDurationsMS = new(CACHED_CALL_INFO_COUNT_FOR_METRICS);
-    private RingBuffer<DateTimeOffset> _callTimestamps = new(CACHED_CALL_INFO_COUNT_FOR_METRICS);
-    private object _callMetricRingBufferLock = new object();
+    private RingBuffer<double>[] _callDurationMS;
+    private RingBuffer<DateTimeOffset>[] _callTimestamps;
 
     /// <inheritdoc />
     public abstract bool IsConnected { get; }
@@ -32,13 +31,40 @@ public abstract class BaseChannel : ITestChannel
     public ulong CountErrors => _countErrors;
 
     /// <inheritdoc />
-    public double CallDurationMinMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Min() : 0;
+    public double CallDurationMinMS
+    {
+        get
+        {
+            var callDurations = _callDurationMS;
+            if (!callDurations.Any(x => x.Count > 0)) { return 0; }
+
+            return callDurations.GetFullEnumerable().Min();
+        }
+    }
 
     /// <inheritdoc />
-    public double CallDurationAvgMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Average() : 0;
+    public double CallDurationAvgMS
+    {
+        get
+        {
+            var callDurations = _callDurationMS;
+            if (!callDurations.Any(x => x.Count > 0)) { return 0; }
+
+            return callDurations.GetFullEnumerable().Average();
+        }
+    }
 
     /// <inheritdoc />
-    public double CallDurationMaxMS => _callDurationsMS.Count > 0 ? _callDurationsMS.Max() : 0;
+    public double CallDurationMaxMS
+    {
+        get
+        {
+            var callDurations = _callDurationMS;
+            if (!callDurations.Any(x => x.Count > 0)) { return 0; }
+
+            return callDurations.GetFullEnumerable().Max();
+        }
+    }
 
     public double CallsPerSecond
     {
@@ -47,16 +73,19 @@ public abstract class BaseChannel : ITestChannel
             var first = DateTimeOffset.MinValue;
             var last = DateTimeOffset.MinValue;
             var callCount = 0;
-            foreach (var actCallTimestamp in _callTimestamps)
+            foreach (var actCallTimestampsCollection in _callTimestamps)
             {
-                callCount++;
-
-                if (first == DateTimeOffset.MinValue)
+                foreach (var actCallTimestamp in actCallTimestampsCollection)
                 {
-                    first = actCallTimestamp;
-                    continue;
+                    callCount++;
+
+                    if (first == DateTimeOffset.MinValue)
+                    {
+                        first = actCallTimestamp;
+                        continue;
+                    }
+                    last = actCallTimestamp;
                 }
-                last = actCallTimestamp;
             }
 
             if (callCount <= 2) { return 0; }
@@ -71,15 +100,26 @@ public abstract class BaseChannel : ITestChannel
     /// <inheritdoc />
     public string LastErrorDetails => _lastErrorDetails;
 
-    protected void NotifySuccess(double callDurationMS)
+    protected BaseChannel()
     {
+        _callTimestamps = new RingBuffer<DateTimeOffset>[ClientAppConstants.MAX_PARALLEL_CALLS];
+        _callDurationMS = new RingBuffer<double>[ClientAppConstants.MAX_PARALLEL_CALLS];
+        for (var loop = 0; loop < ClientAppConstants.MAX_PARALLEL_CALLS; loop++)
+        {
+            _callTimestamps[loop] = new RingBuffer<DateTimeOffset>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
+            _callDurationMS[loop] = new RingBuffer<double>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
+        }
+    }
+
+    protected void NotifySuccess(int threadId, double callDurationMS)
+    {
+        if (threadId < 0) { return; }
+        if (threadId >= ClientAppConstants.MAX_PARALLEL_CALLS) { return; }
+
         Interlocked.Increment(ref _countSuccess);
 
-        lock (_callMetricRingBufferLock)
-        {
-            _callDurationsMS.Add(callDurationMS);
-            _callTimestamps.Add(DateTimeOffset.UtcNow);
-        }
+        _callDurationMS[threadId].Add(callDurationMS);
+        _callTimestamps[threadId].Add(DateTimeOffset.UtcNow);
     }
 
     protected void NotifyTimeout()
@@ -110,11 +150,15 @@ public abstract class BaseChannel : ITestChannel
         _countSuccess = 0;
         _countTimeouts = 0;
 
-        lock (_callMetricRingBufferLock)
+        var callTimestamps = new RingBuffer<DateTimeOffset>[ClientAppConstants.MAX_PARALLEL_CALLS];
+        var callDurationMS = new RingBuffer<double>[ClientAppConstants.MAX_PARALLEL_CALLS];
+        for (var loop = 0; loop < ClientAppConstants.MAX_PARALLEL_CALLS; loop++)
         {
-            _callDurationsMS = new RingBuffer<double>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
-            _callTimestamps = new RingBuffer<DateTimeOffset>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
+            callTimestamps[loop] = new RingBuffer<DateTimeOffset>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
+            callDurationMS[loop] = new RingBuffer<double>(CACHED_CALL_INFO_COUNT_FOR_METRICS);
         }
+        _callTimestamps = callTimestamps;
+        _callDurationMS = callDurationMS;
 
         _lastErrorDetails = string.Empty;
     }

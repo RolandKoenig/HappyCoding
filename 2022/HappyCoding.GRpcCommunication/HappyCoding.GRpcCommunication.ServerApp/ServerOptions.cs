@@ -11,6 +11,7 @@ public class ServerOptions
 {
     private const string CATEGORY_COMMON = "Common";
     private const string CATEGORY_HTTPS = "Https";
+    private const string CATEGORY_HTTP2 = "Http2";
 
     private const string FILE_NAME = ".grpcCommunicationServerConfig.json";
 
@@ -32,6 +33,9 @@ public class ServerOptions
     [Category(CATEGORY_HTTPS)]
     [PasswordPropertyText]
     public string CertificatePassword { get; set; } = string.Empty;
+
+    [Category(CATEGORY_HTTP2)]
+    public uint MaxStreamsPerConnection { get; set; } = 100;
 
     public static async Task<ServerOptions> LoadAsync(CancellationToken cancellationToken)
     {

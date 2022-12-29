@@ -36,7 +36,7 @@ internal class GrpcChannelSimpleRequest : BaseChannel
             throw;
         }
 
-        this.Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+        this.Run(0, _channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
     }
 
     /// <inheritdoc />
@@ -50,7 +50,7 @@ internal class GrpcChannelSimpleRequest : BaseChannel
         return Task.CompletedTask;
     }
 
-    private async void Run(GrpcChannel channel, ushort delayBetweenCallsMS, uint callTimeoutMS)
+    private async void Run(int threadId, GrpcChannel channel, ushort delayBetweenCallsMS, uint callTimeoutMS)
     {
         await Task.Delay(100)
             .ConfigureAwait(false);
@@ -71,7 +71,7 @@ internal class GrpcChannelSimpleRequest : BaseChannel
                     requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
-                base.NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
+                base.NotifySuccess(threadId, stopWatch.Elapsed.TotalMilliseconds);
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.DeadlineExceeded)
             {

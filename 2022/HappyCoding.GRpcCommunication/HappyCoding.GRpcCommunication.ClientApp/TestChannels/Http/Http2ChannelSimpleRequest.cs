@@ -11,19 +11,6 @@ internal class Http2ChannelSimpleRequest : BaseChannelSimpleRequest
 
     protected override HttpClient CreateClient(ClientOptions options)
     {
-        var protocol = options.UseHttps ? "https" : "http";
-
-        var handler = new SocketsHttpHandler();
-        handler.PooledConnectionIdleTimeout = TimeSpan.FromMilliseconds(options.PooledConnectionIdleTimeoutMS);
-        handler.SslOptions.RemoteCertificateValidationCallback =
-            (httpRequestMessage, cert, cetChain, policyErrors) => true;
-
-        var httpClient = new HttpClient(handler);
-        httpClient.BaseAddress = new Uri($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
-        httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
-        httpClient.DefaultRequestVersion = HttpVersion.Version20;
-        httpClient.Timeout = TimeSpan.FromMilliseconds(options.CallTimeoutMS);
-
-        return httpClient;
+        return HttpHelper.BuildHttpClient(options, HttpVersion.Version20, options.PortHttp2);
     }
 }

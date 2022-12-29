@@ -39,7 +39,7 @@ internal class GrpcChannelComplexRequest : BaseChannel
 
         if (_channel != null)
         {
-            this.Run(_channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+            this.Run(0, _channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
         }
     }
 
@@ -54,7 +54,7 @@ internal class GrpcChannelComplexRequest : BaseChannel
         return Task.CompletedTask;
     }
 
-    private async void Run(GrpcChannel channel, ushort delayBetweenCallsMS, uint callTimeoutMS)
+    private async void Run(int threadId, GrpcChannel channel, ushort delayBetweenCallsMS, uint callTimeoutMS)
     {
         var random = new Random(100);
 
@@ -74,7 +74,7 @@ internal class GrpcChannelComplexRequest : BaseChannel
                     requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
-                NotifySuccess(stopWatch.Elapsed.TotalMilliseconds);
+                NotifySuccess(threadId, stopWatch.Elapsed.TotalMilliseconds);
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.DeadlineExceeded)
             {

@@ -39,7 +39,7 @@ public class ClientOptions
     public uint CallTimeoutMS { get; set; } = 1000;
 
     [Category(CATEGORY_CALLS)]
-    [Range(2, uint.MaxValue)]
+    [Range(2, ClientAppConstants.MAX_PARALLEL_CALLS)]
     public uint CountParallelLoopsOnParallelChannels { get; set; } = 5;
 
     public static async Task<ClientOptions> LoadAsync(CancellationToken cancellationToken)
