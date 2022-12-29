@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Net.Http;
 using Grpc.Net.Client;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,7 +38,7 @@ internal class GrpcChannelComplexRequest : BaseChannel
 
         if (_channel != null)
         {
-            this.Run(0, _channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+            this.Run(0, _channel, options.DelayBetweenCallsMS, options.SpikeThresholdMS, options.CallTimeoutMS);
         }
     }
 
@@ -54,7 +53,7 @@ internal class GrpcChannelComplexRequest : BaseChannel
         return Task.CompletedTask;
     }
 
-    private async void Run(int threadId, GrpcChannel channel, ushort delayBetweenCallsMS, uint callTimeoutMS)
+    private async void Run(int threadId, GrpcChannel channel, ushort delayBetweenCallsMS, uint spikeThresholdMS, uint callTimeoutMS)
     {
         var random = new Random(100);
 
@@ -74,20 +73,21 @@ internal class GrpcChannelComplexRequest : BaseChannel
                     requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
-                NotifySuccess(threadId, stopWatch.Elapsed.TotalMilliseconds);
+                var totalMilliseconds = stopWatch.Elapsed.TotalMilliseconds;
+                base.NotifySuccess(threadId, totalMilliseconds, totalMilliseconds > spikeThresholdMS);
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.DeadlineExceeded)
             {
                 if (channel == _channel)
                 {
-                    NotifyTimeout();
+                    base.NotifyTimeout();
                 }
             }
             catch (Exception ex)
             {
                 if (channel == _channel)
                 {
-                    NotifyError(ex.ToString());
+                    base.NotifyError(ex.ToString());
                 }
             }
 

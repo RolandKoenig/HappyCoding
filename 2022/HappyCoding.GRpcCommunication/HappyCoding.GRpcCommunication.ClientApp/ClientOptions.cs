@@ -36,7 +36,10 @@ public class ClientOptions
     public ushort DelayBetweenCallsMS { get; set; } = 100;
 
     [Category(CATEGORY_CALLS)]
-    public uint CallTimeoutMS { get; set; } = 1000;
+    public uint CallTimeoutMS { get; set; } = 10000;
+
+    [Category(CATEGORY_CALLS)]
+    public uint SpikeThresholdMS { get; set; } = 250;
 
     [Category(CATEGORY_CALLS)]
     [Range(2, ClientAppConstants.MAX_PARALLEL_CALLS)]

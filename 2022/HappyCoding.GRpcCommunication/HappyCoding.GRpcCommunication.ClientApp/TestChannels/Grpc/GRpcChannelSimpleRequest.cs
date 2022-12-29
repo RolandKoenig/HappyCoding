@@ -36,7 +36,7 @@ internal class GrpcChannelSimpleRequest : BaseChannel
             throw;
         }
 
-        this.Run(0, _channel, options.DelayBetweenCallsMS, options.CallTimeoutMS);
+        this.Run(0, _channel, options.DelayBetweenCallsMS, options.SpikeThresholdMS, options.CallTimeoutMS);
     }
 
     /// <inheritdoc />
@@ -50,7 +50,7 @@ internal class GrpcChannelSimpleRequest : BaseChannel
         return Task.CompletedTask;
     }
 
-    private async void Run(int threadId, GrpcChannel channel, ushort delayBetweenCallsMS, uint callTimeoutMS)
+    private async void Run(int threadId, GrpcChannel channel, ushort delayBetweenCallsMS, uint spikeThresholdMS, uint callTimeoutMS)
     {
         await Task.Delay(100)
             .ConfigureAwait(false);
@@ -71,7 +71,8 @@ internal class GrpcChannelSimpleRequest : BaseChannel
                     requestObj,
                     new CallOptions(deadline: DateTime.UtcNow.AddMilliseconds(callTimeoutMS)));
 
-                base.NotifySuccess(threadId, stopWatch.Elapsed.TotalMilliseconds);
+                var totalMilliseconds = stopWatch.Elapsed.TotalMilliseconds;
+                base.NotifySuccess(threadId, totalMilliseconds, totalMilliseconds > spikeThresholdMS);
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.DeadlineExceeded)
             {

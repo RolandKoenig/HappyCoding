@@ -37,12 +37,12 @@ internal abstract class BaseChannelComplexRequest : BaseChannel
         {
             for (var loop = 0; loop < options.CountParallelLoopsOnParallelChannels; loop++)
             {
-                this.Run(loop, _httpClient, options.DelayBetweenCallsMS);
+                this.Run(loop, _httpClient, options.SpikeThresholdMS, options.DelayBetweenCallsMS);
             }
         }
         else
         {
-            this.Run(0, _httpClient, options.DelayBetweenCallsMS);
+            this.Run(0, _httpClient, options.SpikeThresholdMS, options.DelayBetweenCallsMS);
         }
     }
 
@@ -56,7 +56,7 @@ internal abstract class BaseChannelComplexRequest : BaseChannel
         return Task.CompletedTask;
     }
 
-    private async void Run(int threadId, HttpClient client, ushort delayBetweenCallsMS)
+    private async void Run(int threadId, HttpClient client, uint spikeThresholdMS, ushort delayBetweenCallsMS)
     {
         var random = new Random(100);
 
@@ -77,7 +77,8 @@ internal abstract class BaseChannelComplexRequest : BaseChannel
                 response.EnsureSuccessStatusCode();
                 var responseObj = response.Content.ReadFromJsonAsync<SimpleResponseDto>();
 
-                NotifySuccess(threadId, stopWatch.Elapsed.TotalMilliseconds);
+                var totalMilliseconds = stopWatch.Elapsed.TotalMilliseconds;
+                base.NotifySuccess(threadId, totalMilliseconds, totalMilliseconds > spikeThresholdMS);
 
                 _lastGetSuccessful = true;
             }

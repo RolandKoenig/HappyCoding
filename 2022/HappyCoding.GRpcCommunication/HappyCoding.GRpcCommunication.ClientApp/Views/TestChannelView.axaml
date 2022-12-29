@@ -60,6 +60,9 @@
                     <DataGridTextColumn Header="# Successful"
                                         Binding="{Binding Path=CountSuccess}"
                                         IsReadOnly="True" />
+                    <DataGridTextColumn Header="# Spikes"
+                                        Binding="{Binding Path=CountSpikes}"
+                                        IsReadOnly="True" />
                     <DataGridTextColumn Header="# Timeouts"
                                         Binding="{Binding Path=CountTimeouts}"
                                         IsReadOnly="True" />

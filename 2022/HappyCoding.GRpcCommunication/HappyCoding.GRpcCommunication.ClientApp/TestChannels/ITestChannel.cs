@@ -9,6 +9,8 @@ public interface ITestChannel
 
     ulong CountSuccess { get; }
 
+    ulong CountSpikes { get; }
+
     ulong CountTimeouts { get; }
 
     ulong CountErrors { get; }

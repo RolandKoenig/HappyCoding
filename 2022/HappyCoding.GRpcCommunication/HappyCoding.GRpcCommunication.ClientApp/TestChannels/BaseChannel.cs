@@ -11,6 +11,7 @@ public abstract class BaseChannel : ITestChannel
     private const int CACHED_CALL_INFO_COUNT_FOR_METRICS = 32;
 
     private ulong _countSuccess;
+    private ulong _countSpikes;
     private ulong _countTimeouts;
     private ulong _countErrors;
     private string _lastErrorDetails = string.Empty;
@@ -23,6 +24,8 @@ public abstract class BaseChannel : ITestChannel
 
     /// <inheritdoc />
     public ulong CountSuccess => _countSuccess;
+
+    public ulong CountSpikes => _countSpikes;
 
     /// <inheritdoc />
     public ulong CountTimeouts => _countTimeouts;
@@ -111,7 +114,7 @@ public abstract class BaseChannel : ITestChannel
         }
     }
 
-    protected void NotifySuccess(int threadId, double callDurationMS)
+    protected void NotifySuccess(int threadId, double callDurationMS, bool isSpike)
     {
         if (threadId < 0) { return; }
         if (threadId >= ClientAppConstants.MAX_PARALLEL_CALLS) { return; }
@@ -120,7 +123,13 @@ public abstract class BaseChannel : ITestChannel
 
         _callDurationMS[threadId].Add(callDurationMS);
         _callTimestamps[threadId].Add(DateTimeOffset.UtcNow);
+
+        if (isSpike)
+        {
+            Interlocked.Increment(ref _countSpikes);
+        }
     }
+
 
     protected void NotifyTimeout()
     {
@@ -148,6 +157,7 @@ public abstract class BaseChannel : ITestChannel
     {
         _countErrors = 0;
         _countSuccess = 0;
+        _countSpikes = 0;
         _countTimeouts = 0;
 
         var callTimestamps = new RingBuffer<DateTimeOffset>[ClientAppConstants.MAX_PARALLEL_CALLS];

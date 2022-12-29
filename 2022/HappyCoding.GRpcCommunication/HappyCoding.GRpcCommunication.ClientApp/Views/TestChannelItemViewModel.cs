@@ -13,6 +13,7 @@ public class TestChannelItemViewModel : PropertyChangedBase
     private readonly ITestChannel _testChannel;
     private bool _isStarting;
     private ulong _countSuccess;
+    private ulong _countSpikes;
     private ulong _countTimeouts;
     private ulong _countErrors;
     private double _callDurationAvgMS;
@@ -34,6 +35,12 @@ public class TestChannelItemViewModel : PropertyChangedBase
     {
         get => _countSuccess;
         private set => this.SetProperty(ref _countSuccess, value);
+    }
+
+    public ulong CountSpikes
+    {
+        get => _countSpikes;
+        private set => this.SetProperty(ref _countSpikes, value);
     }
 
     public ulong CountTimeouts
@@ -172,6 +179,7 @@ public class TestChannelItemViewModel : PropertyChangedBase
     private void UpdateLocalProperties()
     {
         this.CountSuccess = _testChannel.CountSuccess;
+        this.CountSpikes = _testChannel.CountSpikes;
         this.CountTimeouts = _testChannel.CountTimeouts;
         this.CountErrors = _testChannel.CountErrors;
         this.LastErrorDetails = _testChannel.LastErrorDetails;
