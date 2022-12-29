@@ -47,7 +47,7 @@ public class ServerViewModel : ViewModelBase
         this.Command_StopServer = new DelegateCommand(
             this.StopServerAsync,
             () => this.ServerHost.IsStarted);
-        this.Command_ClearLog = new DelegateCommand(() => this.ServerLog.Clear());
+        this.Command_ClearLog = new DelegateCommand(this.ClearLog);
         this.Command_Refresh = new DelegateCommand(this.RefreshLog);
     }
 
@@ -134,6 +134,12 @@ public class ServerViewModel : ViewModelBase
 
         this.ServerLog = newServerLog;
         this.RaisePropertyChanged(nameof(this.ServerLog));
+    }
+
+    private void ClearLog()
+    {
+        _receivedLogEvents.Clear();
+        this.RefreshLog();
     }
 
     private void OnMessageReceived(ServerLogReceivedMessage message)
