@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,26 +10,37 @@ namespace HappyCoding.GRpcCommunication.ClientApp;
 
 public class ClientOptions
 {
+    private const string CATEGORY_CONNECTION = "Connection";
+    private const string CATEGORY_CALLS = "Calls";
     private const string FILE_NAME = ".grpcCommunicationClientConfig.json";
 
+    [Category(CATEGORY_CONNECTION)]
     public string TargetHost { get; set; } = "localhost";
 
+    [Category(CATEGORY_CONNECTION)]
     public ushort PortHttp1 { get; set; } = 5000;
 
+    [Category(CATEGORY_CONNECTION)]
     public ushort PortHttp2 { get; set; } = 5001;
 
+    [Category(CATEGORY_CONNECTION)]
     public bool UseHttps { get; set; } = false;
 
-    public ushort DelayBetweenCallsMS { get; set; } = 100;
-
-    public uint CallTimeoutMS { get; set; } = 1000;
-
-    [Range(2, uint.MaxValue)]
-    public uint CountParallelLoopsOnParallelChannels { get; set; } = 5;
-
+    [Category(CATEGORY_CONNECTION)]
     public bool ConnectGrpcAtStart { get; set; } = true;
 
+    [Category(CATEGORY_CONNECTION)]
     public uint PooledConnectionIdleTimeoutMS { get; set; } = (uint)TimeSpan.FromMinutes(1.0).TotalMilliseconds;
+
+    [Category(CATEGORY_CALLS)]
+    public ushort DelayBetweenCallsMS { get; set; } = 100;
+
+    [Category(CATEGORY_CALLS)]
+    public uint CallTimeoutMS { get; set; } = 1000;
+
+    [Category(CATEGORY_CALLS)]
+    [Range(2, uint.MaxValue)]
+    public uint CountParallelLoopsOnParallelChannels { get; set; } = 5;
 
     public static async Task<ClientOptions> LoadAsync(CancellationToken cancellationToken)
     {

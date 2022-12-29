@@ -6,7 +6,7 @@ public partial class ServerView : UserControl
 {
     public ServerView()
     {
-        this.RegisterViewModelMessageHandler();
+        this.RegisterViewModel();
         this.InitializeComponent();
     }
 }

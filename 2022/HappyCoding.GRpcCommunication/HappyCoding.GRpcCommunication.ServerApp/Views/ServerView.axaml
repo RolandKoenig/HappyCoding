@@ -27,6 +27,20 @@
             <Button Command="{Binding Path=Command_ClearLog}"
                     Content="Clear Logging"
                     Margin="3"></Button>
+
+            <TextBlock Margin="3"
+                       Text="|"
+                       VerticalAlignment="Center"/>
+
+            <Button Command="{Binding Path=Command_Refresh}"
+                    Content="🗘 Refresh"
+                    Margin="3"></Button>
+            <TextBlock Margin="3"
+                       Text="Auto refresh: "
+                       VerticalAlignment="Center" />
+            <CheckBox IsChecked="{Binding Path=AutoRefreshEnabled}"
+                      VerticalAlignment="Center"
+                      Margin="3,0,3,0" />
         </StackPanel>
 
         <DataGrid Items="{Binding Path=ServerLog}"

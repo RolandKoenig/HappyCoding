@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels.Http;
@@ -20,7 +21,7 @@ internal class Http2ChannelComplexRequest : BaseChannelComplexRequest
         var httpClient = new HttpClient(handler);
         httpClient.BaseAddress = new Uri($"{protocol}://{options.TargetHost}:{options.PortHttp2}");
         httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
-        httpClient.DefaultRequestVersion = new Version(2, 0);
+        httpClient.DefaultRequestVersion = HttpVersion.Version20;
         httpClient.Timeout = TimeSpan.FromMilliseconds(options.CallTimeoutMS);
 
         return httpClient;

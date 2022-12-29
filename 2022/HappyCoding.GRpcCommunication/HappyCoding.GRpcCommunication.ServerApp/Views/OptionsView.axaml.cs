@@ -5,7 +5,7 @@ public partial class OptionsView : UserControl
 {
     public OptionsView()
     {
-        this.RegisterViewModelMessageHandler();
+        this.RegisterViewModel();
         this.InitializeComponent();
     }
 }

@@ -7,7 +7,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        this.RegisterViewModelMessageHandler();
+        this.RegisterViewModel();
         this.InitializeComponent();
     }
 }
