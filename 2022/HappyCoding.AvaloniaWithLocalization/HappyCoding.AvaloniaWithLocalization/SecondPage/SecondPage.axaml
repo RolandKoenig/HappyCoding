@@ -5,5 +5,5 @@
              xmlns:local="clr-namespace:HappyCoding.AvaloniaWithLocalization.SecondPage"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.AvaloniaWithLocalization.SecondPage.SecondPage">
-  Welcome to Avalonia! #2
+    <TextBlock Text="{x:Static local:SecondPageResources.WelcomeText}" />
 </UserControl>

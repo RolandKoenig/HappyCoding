@@ -59,5 +59,14 @@ namespace HappyCoding.AvaloniaWithLocalization.SecondPage {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Second page is empty.
+        /// </summary>
+        public static string WelcomeText {
+            get {
+                return ResourceManager.GetString("WelcomeText", resourceCulture);
+            }
+        }
     }
 }

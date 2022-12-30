@@ -117,7 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TestValue" xml:space="preserve">
-    <value>Wert</value>
+  <data name="Column_EMail" xml:space="preserve">
+    <value>EMail Adresse</value>
+  </data>
+  <data name="Column_FirstName" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="Column_Gender" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="Column_LastName" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="Column_UserName" xml:space="preserve">
+    <value>Benutzername</value>
   </data>
 </root>

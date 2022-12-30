@@ -5,8 +5,26 @@
              xmlns:local="clr-namespace:HappyCoding.AvaloniaWithLocalization.FirstPage"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.AvaloniaWithLocalization.FirstPage.FirstPage">
-    <Grid>
-        <TextBlock Text="{x:Static local:FirstPageResources.TestValue}" />
-    </Grid>
+    <UserControl.DataContext>
+        <local:FirstPageViewModel />
+    </UserControl.DataContext>
+    
+    <DataGrid Items="{Binding Path=UserData}"
+              CanUserResizeColumns="True"
+              IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="{x:Static local:FirstPageResources.Column_Gender}" 
+                                Binding="{Binding Path=Gender}" />
+            <DataGridTextColumn Header="{x:Static local:FirstPageResources.Column_FirstName}" 
+                                Binding="{Binding Path=FirstName}" />
+            <DataGridTextColumn Header="{x:Static local:FirstPageResources.Column_LastName}" 
+                                Binding="{Binding Path=LastName}" />
+            <DataGridTextColumn Header="{x:Static local:FirstPageResources.Column_UserName}" 
+                                Binding="{Binding Path=UserName}" />
+            <DataGridTextColumn Header="{x:Static local:FirstPageResources.Column_EMail}" 
+                                Binding="{Binding Path=EMail}" />
+        </DataGrid.Columns>
+
+    </DataGrid>
     
 </UserControl>

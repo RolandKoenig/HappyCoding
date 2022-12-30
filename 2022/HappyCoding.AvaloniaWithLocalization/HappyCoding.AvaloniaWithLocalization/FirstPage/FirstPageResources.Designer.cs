@@ -61,11 +61,47 @@ namespace HappyCoding.AvaloniaWithLocalization.FirstPage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value.
+        ///   Looks up a localized string similar to EMail.
         /// </summary>
-        public static string TestValue {
+        public static string Column_EMail {
             get {
-                return ResourceManager.GetString("TestValue", resourceCulture);
+                return ResourceManager.GetString("Column_EMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string Column_FirstName {
+            get {
+                return ResourceManager.GetString("Column_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender.
+        /// </summary>
+        public static string Column_Gender {
+            get {
+                return ResourceManager.GetString("Column_Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string Column_LastName {
+            get {
+                return ResourceManager.GetString("Column_LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        public static string Column_UserName {
+            get {
+                return ResourceManager.GetString("Column_UserName", resourceCulture);
             }
         }
     }
