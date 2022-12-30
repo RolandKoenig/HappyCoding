@@ -1,5 +1,8 @@
 # HappyCoding 2021
-## ASP.net Core
+## ASP.NET Core
+### [AspNetIntegrationTesting](HappyCoding.AspNetIntegrationTesting)
+A small sample ASP.NET Core API with integration test
+
 ### [BlazorWith3D](HappyCoding.BlazorWith3D)
 This project shows how to integrate Three.js or Babylon.js inside ASP.Net Core Blazor. It is implemented for BlazorServer and BlazorClient model.
 
@@ -35,17 +38,20 @@ This project shows some ways how to render svg images inside Avalonia using Svg.
 
 ![ResourceImage](HappyCoding.AvaloniaSvgImage/screenshot.png)
 
-### [AvaloniaThemeSwitch](HappyCoding.AvaloniaThemeSwitch)
-.. in progress
-
 ### [AvaloniaWindowFrame](HappyCoding.AvaloniaWindowFrame)
 This project shows how to render Avalonia contents over the whole window area.
 
 ![ResourceImage](HappyCoding.AvaloniaWindowFrame/screenshot.png)
 
 ## Misc
+### [CmdInterface](HappyCoding.CmdInterface)
+Some tests with CommandLineParser library
+
 ### [LoggingWithSerilog](HappyCoding.LoggingWithSerilog)
 Some play arround with Serilog for Console application and ASP.Net Core
 
 ### [SpecFlowProject](HappyCoding.SpecFlowProject)
 Some play arround with SpecFlow
+
+### [WinUISimple](HappyCoding.WinUISimple)
+A small sample for a WinUI 3 application
