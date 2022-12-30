@@ -35,6 +35,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MainWindowResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="SecondPage\SecondPageResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SecondPageResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="FirstPage\FirstPageResources.resx">
@@ -44,6 +49,10 @@
     <EmbeddedResource Update="MainWindowResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainWindowResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SecondPage\SecondPageResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SecondPageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
