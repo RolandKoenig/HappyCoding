@@ -130,7 +130,6 @@ public abstract class BaseChannel : ITestChannel
         }
     }
 
-
     protected void NotifyTimeout()
     {
         Interlocked.Increment(ref _countTimeouts);
