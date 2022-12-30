@@ -8,6 +8,10 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaWithLocalization.MainWindow"
         Title="HappyCoding.AvaloniaWithLocalization">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="{x:Static local:MainWindowResources.Menu_File}">
@@ -25,6 +29,16 @@
                 <MenuItem Header="{x:Static local:MainWindowResources.Menu_Help_About}" />
             </MenuItem>
         </Menu>
+
+        <StackPanel DockPanel.Dock="Bottom" 
+                    Margin="4"
+                    Orientation="Horizontal">
+            <TextBlock Text="{Binding Path=CurrentCultureStatusText}" />
+            
+            <TextBlock Text="|" Margin="4,0,4,0" />
+
+            <TextBlock Text="{Binding Path=CurrentUiCultureStatusText}" />
+        </StackPanel>
 
         <TabControl>
             <TabItem Header="{x:Static local:MainWindowResources.Tab_FirstPage}">

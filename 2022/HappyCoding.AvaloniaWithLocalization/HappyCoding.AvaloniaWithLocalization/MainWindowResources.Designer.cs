@@ -61,6 +61,24 @@ namespace HappyCoding.AvaloniaWithLocalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current culture name: {0}.
+        /// </summary>
+        public static string CurrentCultureName {
+            get {
+                return ResourceManager.GetString("CurrentCultureName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current UI culture name: {0}.
+        /// </summary>
+        public static string CurrentUiCultureName {
+            get {
+                return ResourceManager.GetString("CurrentUiCultureName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string Menu_File {

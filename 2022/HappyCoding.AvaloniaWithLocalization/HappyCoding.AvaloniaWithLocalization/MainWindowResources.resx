@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CurrentCultureName" xml:space="preserve">
+    <value>Current culture name: {0}</value>
+  </data>
+  <data name="CurrentUiCultureName" xml:space="preserve">
+    <value>Current UI culture name: {0}</value>
+  </data>
   <data name="Menu_File" xml:space="preserve">
     <value>File</value>
   </data>
