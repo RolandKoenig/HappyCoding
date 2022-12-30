@@ -27,6 +27,8 @@ A sample project for hexagonal architecture with ASP.NET Core 6 and ASP.NET Core
 ### [AvaloniaWithLocalization](HappyCoding.AvaloniaWithLocalization)
 A showcase project for Avalonia UI with localization using resx resources
 
+![ResourceImage](HappyCoding.AvaloniaWithLocalization/screenshot.png)
+
 ### [ConsoleLogWindow](HappyCoding.ConsoleLogWindow)
 A prototype application for hosting console processes in a Avalonia UI application
 
