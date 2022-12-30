@@ -70,6 +70,78 @@ namespace HappyCoding.AvaloniaWithLocalization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Menu_File_Close {
+            get {
+                return ResourceManager.GetString("Menu_File_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string Menu_File_Exit {
+            get {
+                return ResourceManager.GetString("Menu_File_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string Menu_File_New {
+            get {
+                return ResourceManager.GetString("Menu_File_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string Menu_File_Open {
+            get {
+                return ResourceManager.GetString("Menu_File_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Menu_File_Save {
+            get {
+                return ResourceManager.GetString("Menu_File_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as.
+        /// </summary>
+        public static string Menu_File_SaveAs {
+            get {
+                return ResourceManager.GetString("Menu_File_SaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Menu_Help {
+            get {
+                return ResourceManager.GetString("Menu_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string Menu_Help_About {
+            get {
+                return ResourceManager.GetString("Menu_Help_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First page.
         /// </summary>
         public static string Tab_FirstPage {

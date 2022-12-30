@@ -10,7 +10,20 @@
         Title="HappyCoding.AvaloniaWithLocalization">
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="{x:Static local:MainWindowResources.Menu_File}"></MenuItem>
+            <MenuItem Header="{x:Static local:MainWindowResources.Menu_File}">
+                <MenuItem Header="{x:Static local:MainWindowResources.Menu_File_New}" />
+                <MenuItem Header="{x:Static local:MainWindowResources.Menu_File_Open}" />
+                <Separator />
+                <MenuItem Header="{x:Static local:MainWindowResources.Menu_File_Close}" />
+                <Separator />
+                <MenuItem Header="{x:Static local:MainWindowResources.Menu_File_Save}" />
+                <MenuItem Header="{x:Static local:MainWindowResources.Menu_File_SaveAs}" />
+                <Separator />
+                <MenuItem Header="{x:Static local:MainWindowResources.Menu_File_Exit}" />
+            </MenuItem>
+            <MenuItem Header="{x:Static local:MainWindowResources.Menu_Help}">
+                <MenuItem Header="{x:Static local:MainWindowResources.Menu_Help_About}" />
+            </MenuItem>
         </Menu>
 
         <TabControl>

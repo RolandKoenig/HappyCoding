@@ -117,37 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Menu_File" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="Menu_File_Close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="Menu_File_Exit" xml:space="preserve">
-    <value>Exit</value>
-  </data>
-  <data name="Menu_File_New" xml:space="preserve">
-    <value>New</value>
-  </data>
-  <data name="Menu_File_Open" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="Menu_File_Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Menu_File_SaveAs" xml:space="preserve">
-    <value>Save as</value>
-  </data>
-  <data name="Menu_Help" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="Menu_Help_About" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="Tab_FirstPage" xml:space="preserve">
-    <value>First page</value>
-  </data>
-  <data name="Tab_SecondPage" xml:space="preserve">
-    <value>Second page</value>
+  <data name="TestValue" xml:space="preserve">
+    <value>Value</value>
   </data>
 </root>

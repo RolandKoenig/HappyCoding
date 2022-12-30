@@ -120,6 +120,30 @@
   <data name="Menu_File" xml:space="preserve">
     <value>Datei</value>
   </data>
+  <data name="Menu_File_Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="Menu_File_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Menu_File_New" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="Menu_File_Open" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="Menu_File_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Menu_File_SaveAs" xml:space="preserve">
+    <value>Speichern unter</value>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="Menu_Help_About" xml:space="preserve">
+    <value>Über</value>
+  </data>
   <data name="Tab_FirstPage" xml:space="preserve">
     <value>Erste Seite</value>
   </data>

@@ -25,6 +25,11 @@
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="FirstPage\FirstPageResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FirstPageResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="MainWindowResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -32,6 +37,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="FirstPage\FirstPageResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FirstPageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="MainWindowResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainWindowResources.Designer.cs</LastGenOutput>
