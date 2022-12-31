@@ -26,7 +26,7 @@ public static class AppBuilderExtensions
 
             var initialThemeMode = WindowsThemeDetector.GetFluentThemeByCurrentWindowsTheme();
             if (setThemeAction != null) { setThemeAction(initialThemeMode); }
-            else { TrySetTheme(initialThemeMode); }
+            else { TrySetThemeOnCurrentApplication(initialThemeMode); }
 
             var syncContext = SynchronizationContext.Current;
             if (syncContext == null)
@@ -45,7 +45,7 @@ public static class AppBuilderExtensions
                     _ =>
                     {
                         if (setThemeAction != null) { setThemeAction(fluentThemeMode); }
-                        else { TrySetTheme(fluentThemeMode); }
+                        else { TrySetThemeOnCurrentApplication(fluentThemeMode); }
                     },
                     null);
             });
@@ -54,7 +54,7 @@ public static class AppBuilderExtensions
         return appBuilder;
     }
 
-    private static void TrySetTheme(FluentThemeMode themeMode)
+    private static void TrySetThemeOnCurrentApplication(FluentThemeMode themeMode)
     {
         var currentApplication = Application.Current;
         if (currentApplication == null) { return; }
