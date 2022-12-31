@@ -30,7 +30,11 @@ This project shows how to use the DataGrid control in Avalonia cross-platform ap
 ![ResourceImage](HappyCoding.AvaloniaAppWithDataGrid/screenshot.png)
 
 ### [AvaloniaFluentThemeSwitch](HappyCoding.AvaloniaFluentThemeSwitch)
-A sample project which shows how to change FluentThemeMode at runtime
+A sample project which shows how to change FluentThemeMode at runtime. 
+It does also show how to switch theme automatically on Windows when user changes
+the Windows theme
+
+![ResourceImage](HappyCoding.AvaloniaFluentThemeSwitch/screenshot.png)
 
 ### [AvaloniaWithLocalization](HappyCoding.AvaloniaWithLocalization)
 A showcase project for Avalonia UI with localization using resx resources

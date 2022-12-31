@@ -2,9 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HappyCoding.AvaloniaFluentThemeSwitch"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaFluentThemeSwitch.MainWindow"
         Title="HappyCoding.AvaloniaFluentThemeSwitch">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Theme">
@@ -14,8 +19,23 @@
         </Menu>
 
         <Grid>
-            <Button Content="Test Button"
-                    Margin="3" />
+            <DataGrid Items="{Binding Path=UserData}"
+                      CanUserResizeColumns="True"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Gender" 
+                                        Binding="{Binding Path=Gender}" />
+                    <DataGridTextColumn Header="FirstName" 
+                                        Binding="{Binding Path=FirstName}" />
+                    <DataGridTextColumn Header="LastName" 
+                                        Binding="{Binding Path=LastName}" />
+                    <DataGridTextColumn Header="UserName" 
+                                        Binding="{Binding Path=UserName}" />
+                    <DataGridTextColumn Header="EMail" 
+                                        Binding="{Binding Path=EMail}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
         </Grid>
     </DockPanel>
 </Window>
