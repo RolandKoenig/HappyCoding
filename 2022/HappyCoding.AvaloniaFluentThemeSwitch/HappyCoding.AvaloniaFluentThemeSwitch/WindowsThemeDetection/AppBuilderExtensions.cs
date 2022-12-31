@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Avalonia;
@@ -12,7 +13,9 @@ public static class AppBuilderExtensions
     /// <summary>
     /// Uses windows theme detector to set the currently active FluentTheme
     /// </summary>
-    public static AppBuilder UseWindowsThemeDetectorOnWindowsPlatform(this AppBuilder appBuilder, Action<FluentThemeMode> setThemeAction)
+    public static AppBuilder UseWindowsThemeDetectorOnWindowsPlatform(
+        this AppBuilder appBuilder, 
+        Action<FluentThemeMode>? setThemeAction = null)
     {
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) { return appBuilder; }
 
@@ -21,7 +24,9 @@ public static class AppBuilderExtensions
             // This call prevents warnings from the compiler
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) { return; }
 
-            setThemeAction(WindowsThemeDetector.GetFluentThemeByCurrentWindowsTheme());
+            var initialThemeMode = WindowsThemeDetector.GetFluentThemeByCurrentWindowsTheme();
+            if (setThemeAction != null) { setThemeAction(initialThemeMode); }
+            else { TrySetTheme(initialThemeMode); }
 
             var syncContext = SynchronizationContext.Current;
             if (syncContext == null)
@@ -37,11 +42,34 @@ public static class AppBuilderExtensions
             WindowsThemeDetector.ListenForThemeChangeEvent(fluentThemeMode =>
             {
                 syncContext.Post(
-                    _ => setThemeAction(fluentThemeMode),
+                    _ =>
+                    {
+                        if (setThemeAction != null) { setThemeAction(fluentThemeMode); }
+                        else { TrySetTheme(fluentThemeMode); }
+                    },
                     null);
             });
         });
 
         return appBuilder;
+    }
+
+    private static void TrySetTheme(FluentThemeMode themeMode)
+    {
+        var currentApplication = Application.Current;
+        if (currentApplication == null) { return; }
+
+        var fluentTheme = currentApplication.Styles.FirstOrDefault(x => x.GetType() == typeof(FluentTheme));
+        if (fluentTheme == null)
+        {
+            Logger.Sink?.Log(
+                LogEventLevel.Error,
+                typeof(AppBuilderExtensions).Namespace ?? "",
+                null,
+                "Unable to find FluentTheme object on current Application. Automated theme switch does not work");
+            return;
+        }
+
+        ((FluentTheme) fluentTheme).Mode = themeMode;
     }
 }
