@@ -11,4 +11,9 @@
         <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="{DynamicResource SystemChromeMediumColor}" />
     </Application.Resources>
 
+    <Application.Styles>
+        <!-- FluentTheme is loaded in code behind -->
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+    </Application.Styles>
+
 </Application>
