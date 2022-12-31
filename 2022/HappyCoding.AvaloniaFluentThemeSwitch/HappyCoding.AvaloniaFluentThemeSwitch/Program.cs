@@ -1,9 +1,9 @@
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
+using HappyCoding.AvaloniaFluentThemeSwitch.WindowsThemeDetection;
 using System;
 
 namespace HappyCoding.AvaloniaFluentThemeSwitch;
+
 internal class Program
 {
     // Initialization code. Don't use any Avalonia, third-party APIs or any
@@ -17,5 +17,6 @@ internal class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+            .UseWindowsThemeDetectorOnWindowsPlatform(App.SetFluentThemeMode)
             .LogToTrace();
 }

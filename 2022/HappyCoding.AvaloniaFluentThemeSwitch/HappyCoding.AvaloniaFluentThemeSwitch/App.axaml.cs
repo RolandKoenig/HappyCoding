@@ -17,15 +17,14 @@ public partial class App : Application
 
     public override void Initialize()
     {
-        s_fluentTheme.Mode = FluentThemeMode.Light;
-        Styles.Insert(0, s_fluentTheme);
+        this.Styles.Insert(0, s_fluentTheme);
 
         AvaloniaXamlLoader.Load(this);
     }
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow();
         }
