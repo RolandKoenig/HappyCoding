@@ -1,0 +1,35 @@
+using System;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml;
+using Avalonia.Themes.Fluent;
+
+namespace HappyCoding.AvaloniaFluentThemeSwitch;
+
+public partial class App : Application
+{
+    private static FluentTheme s_fluentTheme = new (new Uri("avares://ControlCatalog/Styles"));
+
+    public static void SetFluentThemeMode(FluentThemeMode mode)
+    {
+        s_fluentTheme.Mode = mode;
+    }
+
+    public override void Initialize()
+    {
+        s_fluentTheme.Mode = FluentThemeMode.Light;
+        Styles.Insert(0, s_fluentTheme);
+
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    public override void OnFrameworkInitializationCompleted()
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new MainWindow();
+        }
+
+        base.OnFrameworkInitializationCompleted();
+    }
+}

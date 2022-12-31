@@ -24,6 +24,14 @@ A sample project for hexagonal architecture with ASP.NET Core 6 and ASP.NET Core
 ![ResourceImage](HappyCoding.HexagonalArchitecture/screenshot.png)
 
 ## Avalonia
+### [AvaloniaAppWithDataGrid](HappyCoding.AvaloniaAppWithDataGrid)
+This project shows how to use the DataGrid control in Avalonia cross-platform apps.
+
+![ResourceImage](HappyCoding.AvaloniaAppWithDataGrid/screenshot.png)
+
+### [AvaloniaFluentThemeSwitch](HappyCoding.AvaloniaFluentThemeSwitch)
+A sample project which shows how to change FluentThemeMode at runtime
+
 ### [AvaloniaWithLocalization](HappyCoding.AvaloniaWithLocalization)
 A showcase project for Avalonia UI with localization using resx resources
 
@@ -31,11 +39,6 @@ A showcase project for Avalonia UI with localization using resx resources
 
 ### [ConsoleLogWindow](HappyCoding.ConsoleLogWindow)
 A prototype application for hosting console processes in a Avalonia UI application
-
-### [AvaloniaAppWithDataGrid](HappyCoding.AvaloniaAppWithDataGrid)
-This project shows how to use the DataGrid control in Avalonia cross-platform apps.
-
-![ResourceImage](HappyCoding.AvaloniaAppWithDataGrid/screenshot.png)
 
 ## Entitfy Framework Core
 ### [EFCoreFeatures](HappyCoding.EFCoreFeatures)
