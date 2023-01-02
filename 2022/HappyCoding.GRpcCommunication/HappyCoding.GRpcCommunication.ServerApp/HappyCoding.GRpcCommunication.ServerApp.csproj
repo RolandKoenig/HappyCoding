@@ -33,4 +33,8 @@
     <ProjectReference Include="..\HappyCoding.GRpcCommunication.Shared\HappyCoding.GRpcCommunication.Shared.csproj" />
     <ProjectReference Include="..\RolandK.CommonLibs\RolandK.CommonLibs.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
 </Project>

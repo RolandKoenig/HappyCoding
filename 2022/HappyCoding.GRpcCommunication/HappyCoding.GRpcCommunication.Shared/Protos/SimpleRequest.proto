@@ -6,6 +6,7 @@ package services;
 
 service SimpleRequestHandler {
   rpc Handle (SimpleRequest) returns (SimpleResponse);
+  rpc HandleStreamed (stream SimpleRequest) returns (stream SimpleResponse);
 }
 
 message SimpleRequest {

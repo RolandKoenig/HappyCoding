@@ -135,6 +135,5 @@ internal class AspNetCoreServerHost
         _serverMessenger = null;
 
         _app = null;
-        
     }
 }
