@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Grpc.Core;
 using Grpc.Net.Client;
 
 namespace HappyCoding.GRpcCommunication.ClientApp.TestChannels.Grpc;
@@ -24,5 +27,13 @@ internal static class GrpcHelper
         var channel = GrpcChannel.ForAddress($"{protocol}://{options.TargetHost}:{options.PortHttp2}", grpcChannelOptions);
 
         return channel;
+    }
+
+    public static async Task<TResponse> WaitForResponse<TResponse>(
+        this IAsyncStreamReader<TResponse> stream,
+        CancellationToken cancellationToken)
+    {
+        await stream.MoveNext(cancellationToken);
+        return stream.Current;
     }
 }

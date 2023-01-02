@@ -78,9 +78,9 @@ internal class GrpcChannelSimpleRequestStreamed : BaseChannel
 
                 var stopWatch = Stopwatch.StartNew();
 
+                var nextResponseTask = stream.ResponseStream.WaitForResponse(CancellationToken.None);
                 await stream.RequestStream.WriteAsync(requestObj);
-                await stream.ResponseStream.MoveNext();
-                var response = stream.ResponseStream.Current;
+                var response = await nextResponseTask;
 
                 _lastCallSuccessful = true;
 
