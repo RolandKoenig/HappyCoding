@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:di="clr-namespace:HappyCoding.CommunityToolkitMvvm.DependencyInjection"
+        xmlns:local="clr-namespace:HappyCoding.CommunityToolkitMvvm"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.CommunityToolkitMvvm.MainWindow"
+        Title="{Binding Path=Title}"
+        DataContext="{di:CreateUsingDependencyInjection {x:Type local:MainWindowViewModel}}"
+        d:DataContext="{x:Static local:MainWindowViewModel.DesignViewModel}">
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="⚙ Generate new data"
+                      Command="{Binding Path=GenerateNewDataCommand}" />
+        </Menu>
+        
+        <Grid>
+            <DataGrid Items="{Binding Path=DataRows}"
+                      CanUserResizeColumns="True"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Gender" 
+                                        Binding="{Binding Path=Gender}" />
+                    <DataGridTextColumn Header="FirstName" 
+                                        Binding="{Binding Path=FirstName}" />
+                    <DataGridTextColumn Header="LastName" 
+                                        Binding="{Binding Path=LastName}" />
+                    <DataGridTextColumn Header="UserName" 
+                                        Binding="{Binding Path=UserName}" />
+                    <DataGridTextColumn Header="EMail" 
+                                        Binding="{Binding Path=EMail}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</Window>
