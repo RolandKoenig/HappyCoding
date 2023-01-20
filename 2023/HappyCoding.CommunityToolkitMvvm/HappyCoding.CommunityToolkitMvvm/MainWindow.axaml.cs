@@ -6,7 +6,7 @@ namespace HappyCoding.CommunityToolkitMvvm
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

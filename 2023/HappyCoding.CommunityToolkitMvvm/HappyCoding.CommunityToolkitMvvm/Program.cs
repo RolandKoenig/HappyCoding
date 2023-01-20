@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using CommunityToolkit.Mvvm.Messaging;
 using HappyCoding.CommunityToolkitMvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,8 +22,12 @@ namespace HappyCoding.CommunityToolkitMvvm
                 .LogToTrace()
                 .UseDependencyInjection(services =>
                 {
+                    // Services
+                    services.AddSingleton<IMessenger>(new WeakReferenceMessenger());
+                    
                     // ViewModels
                     services.AddTransient<MainWindowViewModel>();
+                    services.AddTransient<SelectedDataRowViewModel>();
                 });
     }
 }

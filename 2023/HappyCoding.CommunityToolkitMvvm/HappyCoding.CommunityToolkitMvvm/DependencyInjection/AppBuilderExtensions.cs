@@ -15,7 +15,7 @@ public static class AppBuilderExtensions
             registerServicesAction(services);
             
             x.Instance.Resources.Add(
-                "AppServiceProvider",
+                DependencyInjectionConstants.SERVICE_PROVIDER_RESOURCE_KEY,
                 services.BuildServiceProvider());
         });
 

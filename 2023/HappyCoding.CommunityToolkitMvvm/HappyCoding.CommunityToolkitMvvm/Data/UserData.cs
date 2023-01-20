@@ -1,22 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Bogus;
 using Bogus.DataSets;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace HappyCoding.CommunityToolkitMvvm.Data;
 
-public class UserData
+public partial class UserData : ObservableObject
 {
-    public string Gender { get; set; } = string.Empty;
+    [ObservableProperty]
+    private string _gender = string.Empty;
+    
+    [ObservableProperty]
+    private string _firstName = string.Empty;
 
-    public string FirstName { get; set; } = string.Empty;
+    [ObservableProperty]
+    private string _lastName = string.Empty;
 
-    public string LastName { get; set; } = string.Empty;
+    [ObservableProperty]
+    [property: Required]
+    private string _userName = string.Empty;
 
-    public string UserName { get; set; } = string.Empty;
-
-    public string EMail { get; set; } = string.Empty;
+    [ObservableProperty] 
+    [property: Required]
+    private string _eMail = string.Empty;
 
     public static IEnumerable<UserData> CreateFakeData(int count)
     {

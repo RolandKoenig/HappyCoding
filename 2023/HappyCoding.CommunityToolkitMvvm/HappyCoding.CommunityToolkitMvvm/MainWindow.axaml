@@ -16,7 +16,15 @@
         </Menu>
         
         <Grid>
-            <DataGrid Items="{Binding Path=DataRows}"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="400" />
+            </Grid.ColumnDefinitions>
+            
+            <DataGrid Grid.Column="0"
+                      Items="{Binding Path=DataRows}"
+                      SelectedItem="{Binding Path=SelectedUserData, Mode=TwoWay}"
                       CanUserResizeColumns="True"
                       IsReadOnly="True">
                 <DataGrid.Columns>
@@ -33,6 +41,11 @@
                 </DataGrid.Columns>
 
             </DataGrid>
+            
+            <GridSplitter Grid.Column="1"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            
+            <local:SelectedDataRowView Grid.Column="2" />
         </Grid>
     </DockPanel>
 </Window>
