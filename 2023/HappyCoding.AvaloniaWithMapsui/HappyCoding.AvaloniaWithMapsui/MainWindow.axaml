@@ -3,15 +3,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mapsui="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+        xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaWithMapsui.MainWindow"
+        ExtendClientAreaToDecorationsHint="True"
         Title="HappyCoding.AvaloniaWithMapsui">
-    <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Load GPX file"
-                      Click="OnMnuLoadGpxFile_Click" />
-        </Menu>
+    <ext:MainWindowFrame>
+        <ext:MainWindowFrame.MainContentArea>
+            <DockPanel LastChildFill="True">
+                <Menu DockPanel.Dock="Top">
+                    <MenuItem Header="Load GPX file"
+                              Click="OnMnuLoadGpxFile_Click" />
+                    <MenuItem Header="Themes">
+                        <MenuItem Header="Light"
+                                  Click="OnMnuSetThemeLight_Click" />
+                        <MenuItem Header="Dark"
+                                  Click="OnMnuSetThemeDark_Click" />
+                    </MenuItem>
+                </Menu>
 
-        <mapsui:MapControl x:Name="MapControl" />
-    </DockPanel>
+                <mapsui:MapControl x:Name="MapControl" />
+            </DockPanel>
+        </ext:MainWindowFrame.MainContentArea>
+    </ext:MainWindowFrame>
+
 </Window>

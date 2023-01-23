@@ -1,5 +1,6 @@
 using Avalonia;
 using System;
+using RolandK.AvaloniaExtensions.FluentThemeDetection;
 
 namespace HappyCoding.AvaloniaWithMapsui;
 
@@ -16,5 +17,6 @@ internal class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .LogToTrace();
+            .LogToTrace()
+            .UseFluentThemeDetection();
 }

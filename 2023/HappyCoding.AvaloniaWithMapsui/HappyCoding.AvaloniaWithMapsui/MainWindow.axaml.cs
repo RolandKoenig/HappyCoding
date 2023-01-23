@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Themes.Fluent;
 using Mapsui;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using RolandK.AvaloniaExtensions.FluentThemeDetection;
 using RolandK.Formats.Gpx;
 
 namespace HappyCoding.AvaloniaWithMapsui;
@@ -28,6 +31,16 @@ public partial class MainWindow : Window
         MapControl.Map.RotationLock = false;
         MapControl.UnSnapRotationDegrees = 30;
         MapControl.ReSnapRotationDegrees = 5;
+    }
+    
+    private void OnMnuSetThemeLight_Click(object? sender, RoutedEventArgs e)
+    {
+        Application.Current.TrySetFluentThemeMode(FluentThemeMode.Light);
+    }
+    
+    private void OnMnuSetThemeDark_Click(object? sender, RoutedEventArgs e)
+    {
+        Application.Current.TrySetFluentThemeMode(FluentThemeMode.Dark);
     }
 
     private async void OnMnuLoadGpxFile_Click(object? sender, RoutedEventArgs e)
