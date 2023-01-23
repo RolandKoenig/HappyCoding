@@ -19,6 +19,7 @@ internal class HttpHelper
         httpClient.BaseAddress = new Uri($"{protocol}://{options.TargetHost}:{port}");
         httpClient.Timeout = TimeSpan.FromMilliseconds(options.CallTimeoutMS);
         httpClient.DefaultRequestVersion = httpVersion;
+        httpClient.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
         return httpClient;
     }
 }
