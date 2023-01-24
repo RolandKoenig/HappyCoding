@@ -29,11 +29,8 @@
         </StackPanel>
 
         <TabControl>
-            <TabItem Header="Errors">
+            <TabItem Header="Last error">
                 <TextBlock Text="{Binding Path=CurrentItem.LastErrorDetails, FallbackValue=-}" />
-            </TabItem>
-            <TabItem Header="Measure history">
-
             </TabItem>
         </TabControl>
     </DockPanel>

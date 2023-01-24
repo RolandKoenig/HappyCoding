@@ -15,10 +15,12 @@
                     DockPanel.Dock="Top">
             <Button Command="{Binding Path=Command_Save}"
                     Content="Save"
-                    Margin="3" />
+                    Margin="3"
+                    ToolTip.Tip="Changes apply after starting client connections" />
             <Button Command="{Binding Path=Command_DiscardChanges}"
                     Content="Discard changes"
-                    Margin="3" />
+                    Margin="3"
+                    ToolTip.Tip="Resets all values to last saved state" />
         </StackPanel>
 
         <propGrid:PropertyGrid SelectedObject="{Binding Path=Options}" />
