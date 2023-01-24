@@ -5,6 +5,16 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaWithMapsui", "HappyCoding.AvaloniaWithMapsui\HappyCoding.AvaloniaWithMapsui.csproj", "{8902A592-759A-4FFA-B7CF-8E793FA4DD30}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{F9877E9D-7519-4724-97F3-6B3E3B9D5A0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaWithMapsui.SelectionModule", "HappyCoding.AvaloniaWithMapsui.SelectionModule\HappyCoding.AvaloniaWithMapsui.SelectionModule.csproj", "{33DB9F38-8A43-4C9D-B2DE-D0AEA1DF78B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaWithMapsui.FilesModule", "HappyCoding.AvaloniaWithMapsui.FilesModule\HappyCoding.AvaloniaWithMapsui.FilesModule.csproj", "{928FB379-0206-45DD-81E5-38B37F1F3485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaWithMapsui.Shared", "HappyCoding.AvaloniaWithMapsui.Shared\HappyCoding.AvaloniaWithMapsui.Shared.csproj", "{4F230422-C110-4726-9FF2-6CA84F0F6E3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaWithMapsui.MapsModule", "HappyCoding.AvaloniaWithMapsui.MapsModule\HappyCoding.AvaloniaWithMapsui.MapsModule.csproj", "{049933D3-4582-4840-A0A5-AFC4DC1C9723}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +25,32 @@ Global
 		{8902A592-759A-4FFA-B7CF-8E793FA4DD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8902A592-759A-4FFA-B7CF-8E793FA4DD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8902A592-759A-4FFA-B7CF-8E793FA4DD30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33DB9F38-8A43-4C9D-B2DE-D0AEA1DF78B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33DB9F38-8A43-4C9D-B2DE-D0AEA1DF78B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33DB9F38-8A43-4C9D-B2DE-D0AEA1DF78B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33DB9F38-8A43-4C9D-B2DE-D0AEA1DF78B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{928FB379-0206-45DD-81E5-38B37F1F3485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{928FB379-0206-45DD-81E5-38B37F1F3485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{928FB379-0206-45DD-81E5-38B37F1F3485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{928FB379-0206-45DD-81E5-38B37F1F3485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F230422-C110-4726-9FF2-6CA84F0F6E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F230422-C110-4726-9FF2-6CA84F0F6E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F230422-C110-4726-9FF2-6CA84F0F6E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F230422-C110-4726-9FF2-6CA84F0F6E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049933D3-4582-4840-A0A5-AFC4DC1C9723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049933D3-4582-4840-A0A5-AFC4DC1C9723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049933D3-4582-4840-A0A5-AFC4DC1C9723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049933D3-4582-4840-A0A5-AFC4DC1C9723}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54FD3B6B-7DE2-42D4-99C7-13D9483D991E}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33DB9F38-8A43-4C9D-B2DE-D0AEA1DF78B6} = {F9877E9D-7519-4724-97F3-6B3E3B9D5A0B}
+		{928FB379-0206-45DD-81E5-38B37F1F3485} = {F9877E9D-7519-4724-97F3-6B3E3B9D5A0B}
+		{049933D3-4582-4840-A0A5-AFC4DC1C9723} = {F9877E9D-7519-4724-97F3-6B3E3B9D5A0B}
 	EndGlobalSection
 EndGlobal

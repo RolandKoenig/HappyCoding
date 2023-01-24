@@ -1,5 +1,8 @@
 using Avalonia;
 using System;
+using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
+using RolandK.AvaloniaExtensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.FluentThemeDetection;
 
 namespace HappyCoding.AvaloniaWithMapsui;
@@ -16,7 +19,18 @@ internal class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
-            .UsePlatformDetect()
             .LogToTrace()
-            .UseFluentThemeDetection();
+            .UsePlatformDetect()
+            .UseFluentThemeDetection()
+            .UseDependencyInjection(services =>
+            {
+                // Base services
+                var messenger = new StrongReferenceMessenger();
+                services.AddSingleton<IMessenger>(messenger);
+                
+                // Modules
+                FilesModule.Bootstrap.Load(services, messenger);
+                MapsModule.Bootstrap.Load(services, messenger);
+                SelectionModule.Bootstrap.Load(services, messenger);
+            });
 }

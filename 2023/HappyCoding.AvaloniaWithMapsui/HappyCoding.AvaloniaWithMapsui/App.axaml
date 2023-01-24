@@ -3,5 +3,6 @@
              x:Class="HappyCoding.AvaloniaWithMapsui.App">
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
+        <StyleInclude Source="avares://RolandK.AvaloniaExtensions/Themes/Fluent.axaml" />
     </Application.Styles>
 </Application>

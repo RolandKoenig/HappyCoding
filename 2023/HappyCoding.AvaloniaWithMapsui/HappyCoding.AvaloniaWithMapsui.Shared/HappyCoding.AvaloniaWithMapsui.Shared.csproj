@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="RolandK.AvaloniaExtensions" Version="1.0.0-alpha1" />
+        <PackageReference Include="RolandK.AvaloniaExtensions.DependencyInjection" Version="1.0.0-alpha1" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+        <PackageReference Include="RolandK.Formats.Gpx" Version="1.0.1" />
+    </ItemGroup>
+    
+</Project>

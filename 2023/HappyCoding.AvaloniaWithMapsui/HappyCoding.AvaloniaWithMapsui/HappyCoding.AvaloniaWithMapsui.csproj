@@ -22,10 +22,20 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="Mapsui.Avalonia" Version="4.0.0-beta.6" />
     <PackageReference Include="RolandK.AvaloniaExtensions" Version="1.0.0-alpha1" />
+    <PackageReference Include="RolandK.AvaloniaExtensions.DependencyInjection" Version="1.0.0-alpha1" />
     <PackageReference Include="RolandK.AvaloniaExtensions.FluentThemeDetection" Version="1.0.0-alpha1" />
     <PackageReference Include="RolandK.Formats.Gpx" Version="1.0.1" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HappyCoding.AvaloniaWithMapsui.FilesModule\HappyCoding.AvaloniaWithMapsui.FilesModule.csproj" />
+    <ProjectReference Include="..\HappyCoding.AvaloniaWithMapsui.MapsModule\HappyCoding.AvaloniaWithMapsui.MapsModule.csproj" />
+    <ProjectReference Include="..\HappyCoding.AvaloniaWithMapsui.SelectionModule\HappyCoding.AvaloniaWithMapsui.SelectionModule.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Files\Views\LoadedGpxFilesView.axaml" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,26 @@
+<ext:MvvmUserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:HappyCoding.AvaloniaWithMapsui.FilesModule.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.AvaloniaWithMapsui.FilesModule.Views.LoadedGpxFilesView"
+             DataContext="{ext:CreateUsingDependencyInjection {x:Type local:LoadedGpxFilesViewModel}}"
+             d:DataContext="{x:Static local:LoadedGpxFilesViewModel.DesignViewModel}">
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Load gpx file"
+                      Command="{Binding Path=LoadFileCommand}" />
+        </Menu>
+        
+        <ListBox Items="{Binding Path=LoadedGpxFiles}"
+                 SelectedItem="{Binding Path=SelectedFile, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=FileName}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</ext:MvvmUserControl>
