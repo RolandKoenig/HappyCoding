@@ -12,7 +12,9 @@ internal class MapsViewModel : OwnViewModelBase,
     private readonly IMessenger _messenger;
     private readonly IGpxFileRepositoryAdapter _gpxFileRepository;
     private readonly IGpxFileSelectionManager _selectionManager;
-    
+
+    private IMapsViewService? _mapsViewService;
+
     public MapsViewModel(
         IMessenger messenger, 
         IGpxFileRepositoryAdapter gpxFileRepository,
@@ -26,18 +28,14 @@ internal class MapsViewModel : OwnViewModelBase,
     /// <inheritdoc />
     public void Receive(GpxFileSelectionChangedMessage message)
     {
-        var mapsViewService = this.GetViewService<IMapsViewService>();
-        
-        mapsViewService.SetSelectedGpxFile(
+        _mapsViewService?.SetSelectedGpxFile(
             _selectionManager.GetSelectedGpxFile());
     }
 
     /// <inheritdoc />
     public void Receive(GpxFileLoadedMessage message)
     {
-        var mapsViewService = this.GetViewService<IMapsViewService>();
-        
-        mapsViewService.SetAvailableGpxFiles(
+        _mapsViewService?.SetAvailableGpxFiles(
             _gpxFileRepository.GetAllLoadedGpxFiles());
     }
 
@@ -45,26 +43,34 @@ internal class MapsViewModel : OwnViewModelBase,
     protected override void OnViewAttached()
     {
         base.OnViewAttached();
+
+        if (_mapsViewService == null)
+        {
+            _mapsViewService = this.GetViewService<IMapsViewService>();
+            _mapsViewService.RouteClicked += this.OnMapsViewService_RouteClicked;
+            _mapsViewService.SetAvailableGpxFiles(
+                _gpxFileRepository.GetAllLoadedGpxFiles());
+        }
         
         _messenger.RegisterAll(this);
-        
-        // TODO: Workaround because of bug in RolandK.AvaloniaExtensions.Mvvm
-        SynchronizationContext.Current.Post(
-            _ =>
-            {
-                var mapsViewService = this.GetViewService<IMapsViewService>();
-        
-                mapsViewService.SetAvailableGpxFiles(
-                    _gpxFileRepository.GetAllLoadedGpxFiles());
-            },
-            null);
     }
-
+    
     /// <inheritdoc />
     protected override void OnViewDetached()
     {
         base.OnViewDetached();
 
+        if (_mapsViewService != null)
+        {
+            _mapsViewService.RouteClicked -= this.OnMapsViewService_RouteClicked;
+            _mapsViewService = null;
+        }
+        
         _messenger.UnregisterAll(this);
+    }
+
+    private void OnMapsViewService_RouteClicked(object? sender, RouteClickedEventArgs e)
+    {
+        _selectionManager.SetSelectedGpxFile(e.ClickedRoute);
     }
 }

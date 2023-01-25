@@ -8,5 +8,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.AvaloniaWithMapsui.MapsModule.Views.MapsView"
              DataContext="{ext:CreateUsingDependencyInjection {x:Type local:MapsViewModel}}">
-    <mapsui:MapControl x:Name="MapControl" />
+    <mapsui:MapControl x:Name="MapControl"
+                       PointerPressed="OnMapControl_PointerPressed"
+                       PointerReleased="OnMapControl_PointerReleased"
+                       PointerMoved="OnMapControl_PointerMoved"/>
 </ext:MvvmUserControl>
