@@ -6,7 +6,7 @@ using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Tiling;
 using Mapsui.UI.Avalonia;
-using RolandK.AvaloniaExtensions.Mvvm;
+using RolandK.AvaloniaExtensions.Mvvm.Markup;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 using RolandK.Formats.Gpx;
 

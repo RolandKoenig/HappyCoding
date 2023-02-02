@@ -1,5 +1,5 @@
 using Avalonia.Markup.Xaml;
-using RolandK.AvaloniaExtensions.Mvvm;
+using RolandK.AvaloniaExtensions.Mvvm.Markup;
 
 namespace HappyCoding.AvaloniaWithMapsui.FilesModule.Views;
 
