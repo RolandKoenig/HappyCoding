@@ -1,0 +1,32 @@
+﻿@page "/userdataoverview"
+
+<h3>UserData Overview</h3>
+
+<RadzenButton Text="Teschterle" />
+
+<RadzenButton Text="Teschterle 2" />
+
+<RadzenDataGrid Data="@_userData" TItem="UserData"
+                AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="true" FilterMode="FilterMode.Advanced" 
+                AllowSorting="true" PageSize="20" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center" 
+                ShowPagingSummary="true">
+    <Columns>
+        <RadzenDataGridColumn TItem="UserData" Property="Gender" Title="Gender" />
+        <RadzenDataGridColumn TItem="UserData" Property="FirstName" Title="FirstName" />
+        <RadzenDataGridColumn TItem="UserData" Property="LastName" Title="LastName" />
+        <RadzenDataGridColumn TItem="UserData" Property="UserName" Title="UserName" />
+        <RadzenDataGridColumn TItem="UserData" Property="EMail" Title="EMail" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    private UserData[] _userData;
+
+    /// <inheritdoc />
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _userData = UserData.CreateFakeData(300).ToArray();
+    }
+}
