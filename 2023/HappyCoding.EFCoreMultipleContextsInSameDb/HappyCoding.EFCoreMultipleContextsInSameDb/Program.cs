@@ -1,9 +1,15 @@
 ﻿namespace HappyCoding.EFCoreMultipleContextsInSameDb;
 
-internal class Program
+public static class Program
 {
-    static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        var dbConnectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=HappyCoding_2023_MultipleContextsInSameDb;Integrated Security=SSPI";
+
+        Console.WriteLine("Migrating Context1");
+        await Context1.DbMigrator.MigrateDbAsync(dbConnectionString);
+
+        Console.WriteLine("Migrating Context2");
+        await Context2.DbMigrator.MigrateDbAsync(dbConnectionString);
     }
 }

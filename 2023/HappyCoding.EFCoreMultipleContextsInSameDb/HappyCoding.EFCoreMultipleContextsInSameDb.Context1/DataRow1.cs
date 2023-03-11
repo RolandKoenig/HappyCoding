@@ -1,6 +1,18 @@
-﻿namespace HappyCoding.EFCoreMultipleContextsInSameDb.Context1;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class DataRow1
+namespace HappyCoding.EFCoreMultipleContextsInSameDb.Context1;
+
+internal class DataRow1
 {
+    [Key]
+    public long Id { get; set; }
 
+    [MaxLength(50)]
+    public string Dummy1 { get; set; }
+
+    [MaxLength(50)]
+    public string Dummy2 { get; set; }
+
+    [MaxLength(50)]
+    public string Dummy3 { get; set; }
 }

@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HappyCoding.EFCoreMultipleContextsInSameDb.Context1\HappyCoding.EFCoreMultipleContextsInSameDb.Context1.csproj" />
+    <ProjectReference Include="..\HappyCoding.EFCoreMultipleContextsInSameDb.Context2\HappyCoding.EFCoreMultipleContextsInSameDb.Context2.csproj" />
+  </ItemGroup>
+
 </Project>
