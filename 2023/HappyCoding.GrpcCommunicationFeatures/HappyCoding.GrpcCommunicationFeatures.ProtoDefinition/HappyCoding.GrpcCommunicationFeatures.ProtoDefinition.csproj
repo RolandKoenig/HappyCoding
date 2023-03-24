@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Greeter.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.22.1" />
     <PackageReference Include="Grpc" Version="2.46.6" />
     <PackageReference Include="Grpc.Tools" Version="2.52.0">
@@ -16,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Protos\" />
+    <Protobuf Include="Greeter.proto" Access="Public" GrpcServices="Both" />
   </ItemGroup>
 
 </Project>

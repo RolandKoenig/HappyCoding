@@ -5,9 +5,17 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.GrpcCommunicationFeatures.Server", "HappyCoding.GrpcCommunicationFeatures.Server\HappyCoding.GrpcCommunicationFeatures.Server.csproj", "{596E2833-7BE1-4270-B720-52BDDA9292F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GrpcCommunicationFeatures.ConsoleClient", "HappyCoding.GrpcCommunicationFeatures.ConsoleClient\HappyCoding.GrpcCommunicationFeatures.ConsoleClient.csproj", "{A7A96B5C-4FE4-46B6-BD8D-79131EDF01EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.GrpcCommunicationFeatures.ConsoleClient", "HappyCoding.GrpcCommunicationFeatures.ConsoleClient\HappyCoding.GrpcCommunicationFeatures.ConsoleClient.csproj", "{A7A96B5C-4FE4-46B6-BD8D-79131EDF01EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GrpcCommunicationFeatures.Shared", "HappyCoding.GrpcCommunicationFeatures.Shared\HappyCoding.GrpcCommunicationFeatures.Shared.csproj", "{1A9A8EFA-E9DD-4B84-8938-6EA3F3E591E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition", "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition.csproj", "{37E1278B-12A4-4FE4-9579-C10B34694A8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{CEEC5265-E631-447C-89E2-C68AB7ECFA42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{E3BA4421-A010-403B-95B3-F6EB7200E2E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GrpcCommunicationFeatures.DesktopClient", "HappyCoding.GrpcCommunicationFeatures.DesktopClient\HappyCoding.GrpcCommunicationFeatures.DesktopClient.csproj", "{894EC648-4F07-4873-9106-F6A7DB798C98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GrpcCommunicationFeatures.AspNetClient", "HappyCoding.GrpcCommunicationFeatures.AspNetClient\HappyCoding.GrpcCommunicationFeatures.AspNetClient.csproj", "{A86421AE-D193-49F3-A356-3ED1FAFFB2F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,13 +31,27 @@ Global
 		{A7A96B5C-4FE4-46B6-BD8D-79131EDF01EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7A96B5C-4FE4-46B6-BD8D-79131EDF01EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7A96B5C-4FE4-46B6-BD8D-79131EDF01EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A9A8EFA-E9DD-4B84-8938-6EA3F3E591E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A9A8EFA-E9DD-4B84-8938-6EA3F3E591E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A9A8EFA-E9DD-4B84-8938-6EA3F3E591E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A9A8EFA-E9DD-4B84-8938-6EA3F3E591E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37E1278B-12A4-4FE4-9579-C10B34694A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37E1278B-12A4-4FE4-9579-C10B34694A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37E1278B-12A4-4FE4-9579-C10B34694A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37E1278B-12A4-4FE4-9579-C10B34694A8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{894EC648-4F07-4873-9106-F6A7DB798C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{894EC648-4F07-4873-9106-F6A7DB798C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{894EC648-4F07-4873-9106-F6A7DB798C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{894EC648-4F07-4873-9106-F6A7DB798C98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86421AE-D193-49F3-A356-3ED1FAFFB2F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86421AE-D193-49F3-A356-3ED1FAFFB2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86421AE-D193-49F3-A356-3ED1FAFFB2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86421AE-D193-49F3-A356-3ED1FAFFB2F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{596E2833-7BE1-4270-B720-52BDDA9292F9} = {E3BA4421-A010-403B-95B3-F6EB7200E2E9}
+		{A7A96B5C-4FE4-46B6-BD8D-79131EDF01EA} = {CEEC5265-E631-447C-89E2-C68AB7ECFA42}
+		{894EC648-4F07-4873-9106-F6A7DB798C98} = {CEEC5265-E631-447C-89E2-C68AB7ECFA42}
+		{A86421AE-D193-49F3-A356-3ED1FAFFB2F1} = {CEEC5265-E631-447C-89E2-C68AB7ECFA42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84607715-1369-49CB-84BA-0013496EB84C}

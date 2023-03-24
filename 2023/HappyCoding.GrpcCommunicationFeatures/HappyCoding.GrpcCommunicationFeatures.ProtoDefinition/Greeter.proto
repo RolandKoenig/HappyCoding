@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "HappyCoding.GrpcCommunicationFeatures.Shared";
+option csharp_namespace = "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition";
 
 package greet;
 

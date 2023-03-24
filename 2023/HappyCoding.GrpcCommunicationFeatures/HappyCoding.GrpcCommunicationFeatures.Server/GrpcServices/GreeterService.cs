@@ -1,5 +1,5 @@
 using Grpc.Core;
-using HappyCoding.GrpcCommunicationFeatures.Shared;
+using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
 namespace HappyCoding.GrpcCommunicationFeatures.GrpcServices;
 
