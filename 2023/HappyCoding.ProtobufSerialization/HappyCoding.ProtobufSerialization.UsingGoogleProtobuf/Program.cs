@@ -1,14 +1,12 @@
 ﻿using System.Text;
 using Google.Protobuf;
-using Google.Protobuf.Collections;
 using HappyCoding.ProtobufSerialization.UsingGoogleProtobuf.Data;
-using CodedOutputStream = Google.Protobuf.CodedOutputStream;
 
 namespace HappyCoding.ProtobufSerialization.UsingGoogleProtobuf;
 
-internal class Program
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         var myMessage = new MyTestMessage();
         myMessage.FirstName = "Test FirstName";

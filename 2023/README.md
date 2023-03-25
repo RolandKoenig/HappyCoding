@@ -18,3 +18,6 @@ This project show how to use ardalis/SmartEnum with Entity Framework Core
 ## Misc
 ### [HappyCoding.InMemoryCacheUsage](HappyCoding.InMemoryCacheUsage)
 Some play around with Microsoft.Extensions.Caching.Memory
+
+### [HappyCoding.ProtobufSerialization](HappyCoding.ProtobufSerialization)
+Some samples and play arround with protobuf serialization
