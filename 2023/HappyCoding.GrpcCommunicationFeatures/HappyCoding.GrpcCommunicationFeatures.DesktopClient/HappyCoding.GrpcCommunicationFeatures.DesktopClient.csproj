@@ -22,9 +22,14 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.19" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.19" />
-	<PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    <PackageReference Include="RolandK.AvaloniaExtensions" Version="1.0.0" />
+    <PackageReference Include="RolandK.AvaloniaExtensions.DependencyInjection" Version="1.0.0" />
+    <PackageReference Include="RolandK.AvaloniaExtensions.FluentThemeDetection" Version="1.0.0" />
+	  <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
    </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition.csproj" />
+    <ProjectReference Include="..\HappyCoding.GrpcCommunicationFeatures.Shared\HappyCoding.GrpcCommunicationFeatures.Shared.csproj" />
   </ItemGroup>
 </Project>

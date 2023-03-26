@@ -2,8 +2,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+        xmlns:local="clr-namespace:HappyCoding.GrpcCommunicationFeatures.DesktopClient"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.GrpcCommunicationFeatures.DesktopClient.MainWindow"
-        Title="HappyCoding.GrpcCommunicationFeatures.DesktopClient">
-    Welcome to Avalonia!
+        x:Name="RootWindow"
+        Title="GrpcCommunicationFeatures DesktopClient"
+        ExtendClientAreaToDecorationsHint="True">
+    <ext:MainWindowFrame>
+        <ext:MainWindowFrame.CustomTitleArea>
+            <TextBlock Text="{Binding ElementName=RootWindow, Path=Title}" />
+        </ext:MainWindowFrame.CustomTitleArea>
+        <ext:MainWindowFrame.MainContentArea>
+            <DockPanel LastChildFill="True">
+                <Menu DockPanel.Dock="Top">
+                    <MenuItem Header="Theme">
+                        <MenuItem Header="Light" Click="OnMnuThemeLight_Click" />
+                        <MenuItem Header="Dark" Click="OnMnuThemeDark_Click" />
+                    </MenuItem>
+                </Menu>
+
+                <local:GrpcCommunicationView />
+            </DockPanel>
+        </ext:MainWindowFrame.MainContentArea>
+    </ext:MainWindowFrame>
+
+
 </Window>

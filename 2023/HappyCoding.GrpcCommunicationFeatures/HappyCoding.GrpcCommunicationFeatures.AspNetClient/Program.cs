@@ -9,10 +9,12 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Shared services from this sample application
+        builder.Services.AddSharedServices();
+
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
-        builder.Services.AddSharedServices();
         builder.Services.AddGrpc();
         builder.Services.AddGrpcClient<Greeter.GreeterClient>(
             options =>
