@@ -2,11 +2,13 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
+using Microsoft.Extensions.Logging;
 
 namespace HappyCoding.GrpcCommunicationFeatures.DesktopClient;
 
 public partial class GrpcCommunicationViewModel : ObservableObject
 {
+    private readonly ILogger _logger;
     private readonly Greeter.GreeterClient _greeterClient;
 
     [ObservableProperty]
@@ -15,10 +17,13 @@ public partial class GrpcCommunicationViewModel : ObservableObject
     [ObservableProperty]
     private string _greeterLastResponse = string.Empty;
 
-    public static GrpcCommunicationViewModel DesignTimeViewModel => new (null!);
+    public static GrpcCommunicationViewModel DesignTimeViewModel => new (null!, null!);
 
-    public GrpcCommunicationViewModel(Greeter.GreeterClient greeterClient)
+    public GrpcCommunicationViewModel(
+        ILogger<GrpcCommunicationViewModel> logger,
+        Greeter.GreeterClient greeterClient)
     {
+        _logger = logger;
         _greeterClient = greeterClient;
     }
 
@@ -37,7 +42,7 @@ public partial class GrpcCommunicationViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            this.GreeterLastResponse = $"Exception of type ({ex.GetType().FullName}): {ex.Message}";
+            _logger.LogError(ex, "Error while calling Greeter.SayHello");
         }
     }
 }

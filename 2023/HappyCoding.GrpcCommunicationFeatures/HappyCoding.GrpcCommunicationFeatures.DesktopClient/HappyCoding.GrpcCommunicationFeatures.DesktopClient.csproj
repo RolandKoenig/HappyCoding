@@ -23,6 +23,7 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.19" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     <PackageReference Include="RolandK.AvaloniaExtensions" Version="1.0.0" />
     <PackageReference Include="RolandK.AvaloniaExtensions.DependencyInjection" Version="1.0.0" />
     <PackageReference Include="RolandK.AvaloniaExtensions.FluentThemeDetection" Version="1.0.0" />

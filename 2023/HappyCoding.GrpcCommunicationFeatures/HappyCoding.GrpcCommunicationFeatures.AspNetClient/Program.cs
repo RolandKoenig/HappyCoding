@@ -15,7 +15,6 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
-        builder.Services.AddGrpc();
         builder.Services.AddGrpcClient<Greeter.GreeterClient>(
             options =>
             {
