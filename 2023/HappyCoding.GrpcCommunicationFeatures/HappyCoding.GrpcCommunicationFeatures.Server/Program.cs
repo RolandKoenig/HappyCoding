@@ -1,4 +1,5 @@
 using HappyCoding.GrpcCommunicationFeatures.GrpcServices;
+using HappyCoding.GrpcCommunicationFeatures.Shared;
 
 namespace HappyCoding.GrpcCommunicationFeatures;
 
@@ -12,6 +13,7 @@ public class Program
         // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
 
         // Add services to the container.
+        builder.Services.AddSharedServices();
         builder.Services.AddGrpc();
 
         var app = builder.Build();

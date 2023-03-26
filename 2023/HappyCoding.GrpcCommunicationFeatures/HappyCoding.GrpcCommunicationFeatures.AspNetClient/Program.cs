@@ -1,4 +1,5 @@
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
+using HappyCoding.GrpcCommunicationFeatures.Shared;
 
 namespace HappyCoding.GrpcCommunicationFeatures.AspNetClient;
 
@@ -11,11 +12,21 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
+        builder.Services.AddSharedServices();
         builder.Services.AddGrpc();
-        builder.Services.AddGrpcClient<Greeter.GreeterClient>(options =>
-        {
-            options.Address = new Uri("http://localhost:5126");
-        });
+        builder.Services.AddGrpcClient<Greeter.GreeterClient>(
+            options =>
+            {
+                options.Address = new Uri("http://localhost:5000");
+                options.ConfigureSocketHttpHandler(socketHandler =>
+                {
+                    socketHandler.KeepAlivePingDelay = TimeSpan.FromSeconds(30);
+                    socketHandler.KeepAlivePingTimeout = TimeSpan.FromSeconds(5);
+                    socketHandler.PooledConnectionIdleTimeout = TimeSpan.FromMinutes(1);
+                });
+
+            })
+            .AddLoggingForOutgoingHttpCalls();
 
         // Build pipeline
         var app = builder.Build();
@@ -23,10 +34,7 @@ public class Program
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
-            app.UseHsts();
         }
-
-        app.UseHttpsRedirection();
 
         app.UseStaticFiles();
 
