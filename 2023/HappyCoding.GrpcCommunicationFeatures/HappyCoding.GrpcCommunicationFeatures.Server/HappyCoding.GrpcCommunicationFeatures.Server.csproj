@@ -15,8 +15,4 @@
     <ProjectReference Include="..\HappyCoding.GrpcCommunicationFeatures.Shared\HappyCoding.GrpcCommunicationFeatures.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pipeline\" />
-  </ItemGroup>
-
 </Project>

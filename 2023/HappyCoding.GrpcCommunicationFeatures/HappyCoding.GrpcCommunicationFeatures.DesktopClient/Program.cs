@@ -4,6 +4,7 @@ using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 using HappyCoding.GrpcCommunicationFeatures.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Logging.Debug;
 using RolandK.AvaloniaExtensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.FluentThemeDetection;
@@ -28,9 +29,12 @@ internal class Program
                 // Common services
                 services.AddLogging(loggingBuilder =>
                 {
-                    loggingBuilder.AddProvider(new DebugLoggerProvider());
+#if DEBUG
+                    loggingBuilder.AddDebug();
+#endif
+                    loggingBuilder.AddConsole();
                 });
-
+                
                 // ViewModels
                 services.AddTransient<GrpcCommunicationViewModel>();
 
