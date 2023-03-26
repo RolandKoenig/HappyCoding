@@ -11,4 +11,16 @@
     <PackageReference Include="Google.Protobuf" Version="3.22.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\MyTestMessage_DifferentNames.proto">
+      <SubType>Component</SubType>
+    </None>
+    <None Update="Data\MyTestMessage_MoreProperties.proto">
+      <SubType>Component</SubType>
+    </None>
+    <None Update="Data\MyTestMessage_LessProperties.proto">
+      <SubType>Component</SubType>
+    </None>
+  </ItemGroup>
+
 </Project>

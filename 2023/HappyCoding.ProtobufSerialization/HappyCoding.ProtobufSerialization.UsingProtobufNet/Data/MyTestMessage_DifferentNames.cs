@@ -3,16 +3,16 @@
 namespace HappyCoding.ProtobufSerialization.Data;
 
 [ProtoContract]
-internal class MyTestMessage
+internal class MyTestMessage_DifferentNames
 {
     [ProtoMember(1)]
-    public string FirstName { get; set; } = string.Empty;
+    public string Vorname { get; set; } = string.Empty;
 
     [ProtoMember(2)]
-    public string LastName { get; set; } = string.Empty;
+    public string Nachname { get; set; } = string.Empty;
 
     [ProtoMember(3)]
-    public int Age { get; set; }
+    public int Alter { get; set; }
 
     [ProtoMember(4)]
     public List<string> Emails { get; set; } = new List<string>();

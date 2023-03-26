@@ -1,0 +1,10 @@
+﻿syntax="proto3";
+
+option csharp_namespace = "HappyCoding.ProtobufSerialization.UsingGoogleProtobuf.Data";
+
+message MyTestMessage_DifferentNames {
+  string vorName = 1;
+  string nachName = 2;
+  int32 alter = 3;
+  repeated string emails = 4;
+}

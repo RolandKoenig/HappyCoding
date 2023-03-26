@@ -13,11 +13,8 @@ public class Program
         myMessage.FirstName = "Test FirstName";
         myMessage.LastName = "Test LastName";
         myMessage.Age = 8;
-        myMessage.Emails = new[]
-        {
-            "test@test.com",
-            "test@test.de"
-        };
+        myMessage.Emails.Add("test@test.com");
+        myMessage.Emails.Add("test@test.de");
 
         // Json Serialization
         var serializedBytesJson = JsonSerializer.SerializeToUtf8Bytes(myMessage, new JsonSerializerOptions(JsonSerializerDefaults.Web));
@@ -34,6 +31,33 @@ public class Program
 
         Console.WriteLine($"Protobuf serialization ({serializedBytes.Length} bytes): ");
         Console.WriteLine(ToHexString(serializedBytes));
+        Console.WriteLine();
+
+        // Deserialize with more properties
+        var myTestMessageMoreProperties = Serializer.Deserialize<MyTestMessage_MoreProperties>(serializedBytes.AsSpan());
+
+        serializedBytesJson = JsonSerializer.SerializeToUtf8Bytes(myTestMessageMoreProperties, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        serializedJson = Encoding.UTF8.GetString(serializedBytesJson);
+        Console.WriteLine($"Deserialized with more properties:");
+        Console.WriteLine(serializedJson);
+        Console.WriteLine();
+
+        // Deserialize with less properties
+        var myTestMessageLessProperties = Serializer.Deserialize<MyTestMessage_LessProperties>(serializedBytes.AsSpan());
+
+        serializedBytesJson = JsonSerializer.SerializeToUtf8Bytes(myTestMessageLessProperties, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        serializedJson = Encoding.UTF8.GetString(serializedBytesJson);
+        Console.WriteLine($"Deserialized with less properties:");
+        Console.WriteLine(serializedJson);
+        Console.WriteLine();
+
+        // Deserialize with different names
+        var myTestMessageDifferentNames = Serializer.Deserialize<MyTestMessage_DifferentNames>(serializedBytes.AsSpan());
+
+        serializedBytesJson = JsonSerializer.SerializeToUtf8Bytes(myTestMessageDifferentNames, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        serializedJson = Encoding.UTF8.GetString(serializedBytesJson);
+        Console.WriteLine($"Deserialized with different names:");
+        Console.WriteLine(serializedJson);
         Console.WriteLine();
     }
 
