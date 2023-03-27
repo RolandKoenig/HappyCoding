@@ -1,9 +1,28 @@
-﻿namespace HappyCoding.GrpcCommunicationFeatures.ConsoleClient;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Net.Client;
+using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
-internal class Program
+namespace HappyCoding.GrpcCommunicationFeatures.ConsoleClient;
+
+public static class Program
 {
-    static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        using var channel = GrpcChannel.ForAddress($"http://localhost:5000");
+
+        Console.WriteLine("Connecting...");
+        await channel.ConnectAsync();
+
+        var greeterClient = new Greeter.GreeterClient(channel);
+        for (var loop = 0; loop < 10; loop++)
+        {
+            var actRequest = new HelloRequest()
+            {
+                Name = $"Console loop {loop + 1}"
+            };
+
+            Console.WriteLine($"Say hello #{loop + 1}");
+            await greeterClient.SayHelloAsync(actRequest);
+        }
     }
 }
