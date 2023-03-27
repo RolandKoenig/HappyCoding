@@ -25,7 +25,6 @@ public class Program
                     socketHandler.KeepAlivePingTimeout = TimeSpan.FromSeconds(5);
                     socketHandler.PooledConnectionIdleTimeout = TimeSpan.FromMinutes(1);
                 });
-
             })
             .AddLoggingForOutgoingHttpCalls();
 
