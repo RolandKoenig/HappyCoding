@@ -1,8 +1,8 @@
 using Grpc.Core;
-using Grpc.Net.Client.Balancer;
 using Grpc.Net.Client.Configuration;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 using HappyCoding.GrpcCommunicationFeatures.Shared;
+using HappyCoding.GrpcCommunicationFeatures.Shared.LoadBalancing;
 
 namespace HappyCoding.GrpcCommunicationFeatures.AspNetClient;
 
@@ -22,10 +22,10 @@ public class Program
         // Add gRPC clients with load balancing
         builder.Services.AddGrpcStaticLoadBalancingForScheme(
             "happycoding-srv",
-            new BalancerAddress("localhost", 5000),
-            new BalancerAddress("localhost", 5001),
-            new BalancerAddress("localhost", 5002),
-            new BalancerAddress("localhost", 5003));
+            builder.Configuration
+                .GetSection("HappyCodingServer")?
+                .GetSection("Endpoints")?
+                .Get<LoadBalancingTargetHost[]>() ?? Array.Empty<LoadBalancingTargetHost>());
         builder.Services.AddGrpcClient<Greeter.GreeterClient>(
                 options =>
                 {

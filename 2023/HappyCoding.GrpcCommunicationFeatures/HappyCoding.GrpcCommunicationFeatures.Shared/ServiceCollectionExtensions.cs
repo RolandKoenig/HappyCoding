@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddGrpcStaticLoadBalancingForScheme(
         this IServiceCollection services,
         string scheme,
-        params BalancerAddress[] addresses)
+        params LoadBalancingTargetHost[] addresses)
         => services.AddSingleton<ResolverFactory, FixedHostsResolverFactory>(
             _ => new FixedHostsResolverFactory(scheme, addresses));
 }

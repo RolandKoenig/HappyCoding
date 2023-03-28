@@ -4,15 +4,14 @@ namespace HappyCoding.GrpcCommunicationFeatures.Shared.LoadBalancing;
 
 internal class FixedHostsResolverFactory : ResolverFactory
 {
-    private readonly string _scheme;
-    private readonly BalancerAddress[] _addresses;
+    private readonly LoadBalancingTargetHost[] _addresses;
 
     /// <inheritdoc />
-    public override string Name => _scheme;
+    public override string Name { get; }
 
-    public FixedHostsResolverFactory(string scheme, BalancerAddress[] addresses)
+    public FixedHostsResolverFactory(string scheme, LoadBalancingTargetHost[] addresses)
     {
-        _scheme = scheme;
+        this.Name = scheme;
         _addresses = addresses;
     }
 
@@ -34,7 +33,9 @@ internal class FixedHostsResolverFactory : ResolverFactory
         /// <inheritdoc />
         public override void Start(Action<ResolverResult> listener)
         {
-            listener(ResolverResult.ForResult(_owner._addresses));
+            listener(ResolverResult.ForResult(_owner._addresses
+                .Select(x => new BalancerAddress(x.Host, x.Port))
+                .ToArray()));
         }
     }
 }
