@@ -1,3 +1,6 @@
+using Grpc.Core;
+using Grpc.Net.Client.Balancer;
+using Grpc.Net.Client.Configuration;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 using HappyCoding.GrpcCommunicationFeatures.Shared;
 
@@ -15,17 +18,36 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
+
+        // Add gRPC clients with load balancing
+        builder.Services.AddGrpcStaticLoadBalancingForScheme(
+            "happycoding-srv",
+            new BalancerAddress("localhost", 5000),
+            new BalancerAddress("localhost", 5001),
+            new BalancerAddress("localhost", 5002),
+            new BalancerAddress("localhost", 5003));
         builder.Services.AddGrpcClient<Greeter.GreeterClient>(
-            options =>
-            {
-                options.Address = new Uri("http://localhost:5000");
-                options.ConfigureSocketHttpHandler(socketHandler =>
+                options =>
                 {
-                    socketHandler.KeepAlivePingDelay = TimeSpan.FromSeconds(30);
-                    socketHandler.KeepAlivePingTimeout = TimeSpan.FromSeconds(5);
-                    socketHandler.PooledConnectionIdleTimeout = TimeSpan.FromMinutes(1);
-                });
-            })
+                    options.Address = new Uri("happycoding-srv://myservice");
+                    options.ChannelOptionsActions.Add(channelConfig =>
+                    {
+                        channelConfig.Credentials = ChannelCredentials.Insecure;
+                        channelConfig.ServiceConfig = new ServiceConfig()
+                        {
+                            LoadBalancingConfigs =
+                            {
+                                new RoundRobinConfig()
+                            }
+                        };
+                    });
+                    options.ConfigureSocketHttpHandler(socketHandler =>
+                    {
+                        socketHandler.KeepAlivePingDelay = TimeSpan.FromSeconds(30);
+                        socketHandler.KeepAlivePingTimeout = TimeSpan.FromSeconds(5);
+                        socketHandler.PooledConnectionIdleTimeout = TimeSpan.FromMinutes(1);
+                    });
+                })
             .AddLoggingForOutgoingHttpCalls();
 
         // Build pipeline

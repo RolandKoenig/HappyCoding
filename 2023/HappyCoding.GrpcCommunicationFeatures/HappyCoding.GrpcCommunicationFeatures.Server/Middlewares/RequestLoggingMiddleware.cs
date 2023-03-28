@@ -30,7 +30,7 @@ public class RequestLoggingMiddleware
             _logger.LogInformation(
                 "Processed request {Method} {Url}. Response: {StatusCode} in {Time:F2} ms",
                 context.Request?.Method,
-                context.Request?.Path.Value,
+                $"{context.Request.Host}/{context.Request?.Path.Value}",
                 context.Response?.StatusCode.ToString() ?? "(no status)",
                 stopWatch.Elapsed.TotalMilliseconds);
         }

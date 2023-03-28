@@ -10,10 +10,12 @@
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.22.1" />
     <PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition.csproj" />
+    <ProjectReference Include="..\HappyCoding.GrpcCommunicationFeatures.Shared\HappyCoding.GrpcCommunicationFeatures.Shared.csproj" />
   </ItemGroup>
 
 </Project>
