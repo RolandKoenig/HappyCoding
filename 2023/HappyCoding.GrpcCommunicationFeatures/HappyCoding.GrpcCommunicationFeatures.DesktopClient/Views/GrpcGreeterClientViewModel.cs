@@ -4,23 +4,23 @@ using CommunityToolkit.Mvvm.Input;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 using Microsoft.Extensions.Logging;
 
-namespace HappyCoding.GrpcCommunicationFeatures.DesktopClient;
+namespace HappyCoding.GrpcCommunicationFeatures.DesktopClient.Views;
 
-public partial class GrpcCommunicationViewModel : ObservableObject
+public partial class GrpcGreeterClientViewModel : ObservableObject
 {
     private readonly ILogger _logger;
     private readonly Greeter.GreeterClient _greeterClient;
 
-    [ObservableProperty]
-    private string _greeterNameToSend = string.Empty;
+    [ObservableProperty] 
+    private string _greeterNameToSend = "Dummy name";
 
     [ObservableProperty]
     private string _greeterLastResponse = string.Empty;
 
-    public static GrpcCommunicationViewModel DesignTimeViewModel => new (null!, null!);
+    public static GrpcGreeterClientViewModel DesignTimeViewModel => new (null!, null!);
 
-    public GrpcCommunicationViewModel(
-        ILogger<GrpcCommunicationViewModel> logger,
+    public GrpcGreeterClientViewModel(
+        ILogger<GrpcGreeterClientViewModel> logger,
         Greeter.GreeterClient greeterClient)
     {
         _logger = logger;

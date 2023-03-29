@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:HappyCoding.GrpcCommunicationFeatures.DesktopClient.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.GrpcCommunicationFeatures.DesktopClient.Views.GrpcGreeterClientView"
+             DataContext="{ext:CreateUsingDependencyInjection {x:Type local:GrpcGreeterClientViewModel}}"
+             d:DataContext="{x:Static local:GrpcGreeterClientViewModel.DesignTimeViewModel}">
+  <Grid>
+      <Grid.Styles>
+          <Style Selector="TextBlock, Button, TextBox">
+              <Setter Property="Margin" Value="4" />
+          </Style>
+      </Grid.Styles>
+
+      <StackPanel Orientation="Vertical">
+          <TextBlock Margin="4"
+                     Text="Name" />
+
+          <DockPanel LastChildFill="True"
+                     Width="400"
+                     HorizontalAlignment="Left">
+              <Button Margin="4" DockPanel.Dock="Right" 
+                      Content="Send"
+                      Command="{Binding Path=SendGreeterRequestCommand}" />
+              <TextBox Margin="4" 
+                       Text="{Binding Path=GreeterNameToSend}" />
+          </DockPanel>
+
+          <StackPanel Orientation="Horizontal">
+              <TextBlock Text="Greeter Response: " />
+              <TextBlock Text="{Binding Path=GreeterLastResponse}" />
+          </StackPanel>
+      </StackPanel>
+  </Grid>
+</UserControl>

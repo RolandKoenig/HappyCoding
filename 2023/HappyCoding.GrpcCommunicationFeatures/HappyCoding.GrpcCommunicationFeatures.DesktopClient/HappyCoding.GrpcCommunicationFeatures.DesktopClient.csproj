@@ -34,4 +34,9 @@
     <ProjectReference Include="..\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition.csproj" />
     <ProjectReference Include="..\HappyCoding.GrpcCommunicationFeatures.Shared\HappyCoding.GrpcCommunicationFeatures.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\GrpcGreeterClientView.axaml.cs">
+      <DependentUpon>GrpcGreeterClientView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

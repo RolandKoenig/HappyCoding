@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
         xmlns:local="clr-namespace:HappyCoding.GrpcCommunicationFeatures.DesktopClient"
+        xmlns:views="clr-namespace:HappyCoding.GrpcCommunicationFeatures.DesktopClient.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.GrpcCommunicationFeatures.DesktopClient.MainWindow"
         x:Name="RootWindow"
@@ -22,7 +23,11 @@
                     </MenuItem>
                 </Menu>
 
-                <local:GrpcCommunicationView />
+                <TabControl>
+                    <TabItem Header="Greeter">
+                        <views:GrpcGreeterClientView />
+                    </TabItem>
+                </TabControl>
             </DockPanel>
         </ext:MainWindowFrame.MainContentArea>
     </ext:MainWindowFrame>
