@@ -27,6 +27,12 @@
                     <TabItem Header="Greeter">
                         <views:GrpcGreeterClientView />
                     </TabItem>
+                    <TabItem Header="Server side streaming">
+
+                    </TabItem>
+                    <TabItem Header="Bidirectional streaming">
+
+                    </TabItem>
                 </TabControl>
             </DockPanel>
         </ext:MainWindowFrame.MainContentArea>
