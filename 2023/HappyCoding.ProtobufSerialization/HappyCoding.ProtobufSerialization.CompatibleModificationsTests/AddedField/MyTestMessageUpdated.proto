@@ -2,7 +2,8 @@
 
 option csharp_namespace = "HappyCoding.ProtobufSerialization.CompatibleModificationsTests.AddedField";
 
-message MyTestMessageUpdated {
+message MyTestMessageUpdated
+{
   string firstName = 1;
   string lastName = 2;
   int32 age = 3;

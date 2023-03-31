@@ -45,9 +45,6 @@ namespace HappyCoding.ProtobufSerialization.CompatibleModificationsTests.Removed
   #region Enums
   public enum PreferredWayOfCommunicationUpdated {
     [pbr::OriginalName("UNSPECIFIED")] Unspecified = 0,
-    /// <summary>
-    /// EMAIL = 1;
-    /// </summary>
     [pbr::OriginalName("PHONE")] Phone = 2,
     [pbr::OriginalName("POST")] Post = 3,
   }

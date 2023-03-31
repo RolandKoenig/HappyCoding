@@ -2,7 +2,8 @@
 
 option csharp_namespace = "HappyCoding.ProtobufSerialization.CompatibleModificationsTests.RemovedField";
 
-message MyTestMessageOriginal {
+message MyTestMessageOriginal 
+{
   string firstName = 1;
   string lastName = 2;
   int32 age = 3;

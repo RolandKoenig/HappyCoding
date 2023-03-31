@@ -13,7 +13,6 @@ message MyTestMessageUpdated
 
 enum PreferredWayOfCommunicationUpdated {
   UNSPECIFIED = 0;
-  // EMAIL = 1;
   PHONE = 2;
   POST = 3;
 }
