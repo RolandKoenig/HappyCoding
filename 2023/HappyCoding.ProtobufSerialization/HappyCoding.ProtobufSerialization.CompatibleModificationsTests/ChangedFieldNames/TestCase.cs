@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf;
 
-namespace HappyCoding.ProtobufSerialization.CompatibleModificationsTests.Positive.ChangedFieldNames;
+namespace HappyCoding.ProtobufSerialization.CompatibleModificationsTests.ChangedFieldNames;
 
 public class TestCase
 {

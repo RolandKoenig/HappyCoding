@@ -1,0 +1,11 @@
+﻿syntax="proto3";
+
+option csharp_namespace = "HappyCoding.ProtobufSerialization.CompatibleModificationsTests.ChangeFieldType";
+
+message MyTestMessageUpdated 
+{
+  string firstName = 1;
+  string lastName = 2;
+  string age = 3;
+  repeated string emails = 4;
+}

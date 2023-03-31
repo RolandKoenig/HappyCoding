@@ -1,6 +1,6 @@
 ﻿syntax="proto3";
 
-option csharp_namespace = "HappyCoding.ProtobufSerialization.CompatibleModificationsTests.Positive.RemovedField";
+option csharp_namespace = "HappyCoding.ProtobufSerialization.CompatibleModificationsTests.RemovedField";
 
 message MyTestMessageUpdated {
   string firstName = 1;

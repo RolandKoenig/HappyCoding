@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf;
 
-namespace HappyCoding.ProtobufSerialization.CompatibleModificationsTests.Negative.ChangeFieldType;
+namespace HappyCoding.ProtobufSerialization.CompatibleModificationsTests.ChangeFieldType;
 
 public class TestCase
 {
@@ -24,7 +24,10 @@ public class TestCase
         var updated = new MyTestMessageUpdated();
         updated.MergeFrom(serializedBytes);
 
-        // Breaks here because 'age' was not deserialized because of the changed type int32 -> string
-        Assert.Equal(original.Age.ToString(), updated.Age);
+        // Asserts
+        Assert.Equal(original.FirstName, updated.FirstName);
+        Assert.Equal(original.LastName, updated.LastName);
+        Assert.Equal(original.Age.ToString(), updated.Age); // <-- Breaks here, because protobuf can't read the changed type
+        Assert.Equal(original.Emails, updated.Emails);
     }
 }

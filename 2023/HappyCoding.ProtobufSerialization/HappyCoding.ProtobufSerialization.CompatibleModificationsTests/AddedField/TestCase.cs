@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf;
 
-namespace HappyCoding.ProtobufSerialization.CompatibleModificationsTests.Positive.RemovedField;
+namespace HappyCoding.ProtobufSerialization.CompatibleModificationsTests.AddedField;
 
 public class TestCase
 {
@@ -27,6 +27,8 @@ public class TestCase
         // Asserts
         Assert.Equal(original.FirstName, updated.FirstName);
         Assert.Equal(original.LastName, updated.LastName);
+        Assert.Equal(original.Age, updated.Age);
         Assert.Equal(original.Emails, updated.Emails);
+        Assert.Equal(string.Empty, updated.Street);
     }
 }
