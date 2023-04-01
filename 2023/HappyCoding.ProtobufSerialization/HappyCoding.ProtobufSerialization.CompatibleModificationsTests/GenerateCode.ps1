@@ -6,7 +6,7 @@ $currentLocation = Get-Location
 $protoFiles = Get-ChildItem -Path *.proto -Recurse -Force
 foreach ($actProtoFile in $protoFiles)
 {
-    $actProtoFileLocal = $actProtoFile.ToString().Replace("$currentLocation\", "")
+    $actProtoFileLocal = $actProtoFile.ToString().Replace("$currentLocation/", "").Replace("$currentLocation\", "")
 
 	"Compiling $actProtoFileLocal"
     
