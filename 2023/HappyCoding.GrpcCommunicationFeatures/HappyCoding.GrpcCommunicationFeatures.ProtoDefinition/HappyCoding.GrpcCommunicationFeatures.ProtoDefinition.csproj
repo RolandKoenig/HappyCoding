@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Protobuf Include="Greeter.proto" Access="Public" GrpcServices="Both" />
+    <Protobuf Include="ServerSideStreaming.proto" Access="Public" GrpcServices="Both" />
   </ItemGroup>
 
 </Project>

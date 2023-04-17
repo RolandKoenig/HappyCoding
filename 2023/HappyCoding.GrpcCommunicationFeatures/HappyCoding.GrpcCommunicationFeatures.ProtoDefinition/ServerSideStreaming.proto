@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition";
+
+package streaming;
+
+service EventStreamService {
+    rpc OpenEventStream (StreamRequest) returns (stream StreamReply);
+}
+
+message StreamRequest {
+    string event_name = 1;
+}
+
+message StreamReply {
+    string event_guid = 1;
+    Timestamp timestamp = 2;
+    string event_content = 3;
+}
+
+message Timestamp
+{
+    int64 timestamp_ticks = 1;
+    int64 offset_ticks = 2;
+}
