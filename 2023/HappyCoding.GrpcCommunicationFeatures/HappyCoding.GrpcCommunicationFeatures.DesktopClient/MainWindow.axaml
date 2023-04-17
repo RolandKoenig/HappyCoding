@@ -31,7 +31,7 @@
                         <views:GrpcServerSideStreamingView />
                     </TabItem>
                     <TabItem Header="Bidirectional streaming">
-
+                        <views:GrpcBidirectionalStreamingView />
                     </TabItem>
                 </TabControl>
             </DockPanel>

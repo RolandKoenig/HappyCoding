@@ -25,6 +25,12 @@ internal static class GrpcSetup
                     options.Address = new Uri($"http://localhost:5000");
                 })
             .AddLoggingForOutgoingHttpCalls();
+        services.AddGrpcClient<BidirectionalEventStreamService.BidirectionalEventStreamServiceClient>(
+                options =>
+                {
+                    options.Address = new Uri($"http://localhost:5000");
+                })
+            .AddLoggingForOutgoingHttpCalls();
     }
 
     public static void SetupGrpcWithSocketHttpHandlerConfig(IServiceCollection services)
@@ -32,6 +38,8 @@ internal static class GrpcSetup
         services.AddGrpcClient<Greeter.GreeterClient>(ConfigureClientWithSocketHttpHandler)
             .AddLoggingForOutgoingHttpCalls();
         services.AddGrpcClient<EventStreamService.EventStreamServiceClient>(ConfigureClientWithSocketHttpHandler)
+            .AddLoggingForOutgoingHttpCalls();
+        services.AddGrpcClient<BidirectionalEventStreamService.BidirectionalEventStreamServiceClient>(ConfigureClientWithSocketHttpHandler)
             .AddLoggingForOutgoingHttpCalls();
     }
 
@@ -53,9 +61,12 @@ internal static class GrpcSetup
             new LoadBalancingTargetHost("localhost", 5000),
             new LoadBalancingTargetHost("localhost", 5001),
             new LoadBalancingTargetHost("localhost", 5002));
+        
         services.AddGrpcClient<Greeter.GreeterClient>(ConfigureClientWithLoadBalancing)
             .AddLoggingForOutgoingHttpCalls();
         services.AddGrpcClient<EventStreamService.EventStreamServiceClient>(ConfigureClientWithLoadBalancing)
+            .AddLoggingForOutgoingHttpCalls();
+        services.AddGrpcClient<BidirectionalEventStreamService.BidirectionalEventStreamServiceClient>(ConfigureClientWithLoadBalancing)
             .AddLoggingForOutgoingHttpCalls();
     }
 

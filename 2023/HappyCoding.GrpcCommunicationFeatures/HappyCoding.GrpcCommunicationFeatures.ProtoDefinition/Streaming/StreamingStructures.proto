@@ -4,10 +4,6 @@ option csharp_namespace = "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition
 
 package streaming;
 
-service EventStreamService {
-    rpc OpenEventStream (StreamRequest) returns (stream StreamReply);
-}
-
 message StreamRequest {
     string event_name = 1;
 }

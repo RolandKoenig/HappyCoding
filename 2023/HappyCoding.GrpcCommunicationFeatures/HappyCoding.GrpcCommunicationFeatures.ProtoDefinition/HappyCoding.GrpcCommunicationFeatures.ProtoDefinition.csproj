@@ -20,8 +20,38 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Greeter.proto" Access="Public" GrpcServices="Both" />
-    <Protobuf Include="ServerSideStreaming.proto" Access="Public" GrpcServices="Both" />
+    <Protobuf Include="Greeter\Greeter.proto">
+      <GrpcServices>Both</GrpcServices>
+      <Access>Public</Access>
+      <ProtoCompile>True</ProtoCompile>
+      <CompileOutputs>True</CompileOutputs>
+      <OutputDir>obj\Debug/net7.0/</OutputDir>
+      <Generator>MSBuild:Compile</Generator>
+    </Protobuf>
+    <Protobuf Include="Streaming\StreamingStructures.proto">
+      <GrpcServices>Both</GrpcServices>
+      <Access>Public</Access>
+      <ProtoCompile>True</ProtoCompile>
+      <CompileOutputs>True</CompileOutputs>
+      <OutputDir>obj\Debug/net7.0/</OutputDir>
+      <Generator>MSBuild:Compile</Generator>
+    </Protobuf>
+    <Protobuf Include="Streaming\BidirectionalStreaming.proto">
+      <GrpcServices>Both</GrpcServices>
+      <Access>Public</Access>
+      <ProtoCompile>True</ProtoCompile>
+      <CompileOutputs>True</CompileOutputs>
+      <OutputDir>obj\Debug/net7.0/</OutputDir>
+      <Generator>MSBuild:Compile</Generator>
+    </Protobuf>
+    <Protobuf Include="Streaming\ServerSideStreaming.proto">
+      <GrpcServices>Both</GrpcServices>
+      <Access>Public</Access>
+      <ProtoCompile>True</ProtoCompile>
+      <CompileOutputs>True</CompileOutputs>
+      <OutputDir>obj\Debug/net7.0/</OutputDir>
+      <Generator>MSBuild:Compile</Generator>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

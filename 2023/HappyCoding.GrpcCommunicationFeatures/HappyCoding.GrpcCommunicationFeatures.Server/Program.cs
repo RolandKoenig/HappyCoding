@@ -25,6 +25,7 @@ public class Program
         
         app.MapGrpcService<GreeterService>();
         app.MapGrpcService<ServerSideStreamingService>();
+        app.MapGrpcService<BidirectionalStreamingService>();
         
         app.Run();
     }

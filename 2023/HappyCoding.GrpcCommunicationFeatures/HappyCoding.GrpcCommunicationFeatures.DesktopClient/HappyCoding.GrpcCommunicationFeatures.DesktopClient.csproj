@@ -38,5 +38,9 @@
     <Compile Update="Views\GrpcGreeterClientView.axaml.cs">
       <DependentUpon>GrpcGreeterClientView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\GrpcBidirectionalStreamingView.axaml.cs">
+      <DependentUpon>GrpcBidirectionalStreamingView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

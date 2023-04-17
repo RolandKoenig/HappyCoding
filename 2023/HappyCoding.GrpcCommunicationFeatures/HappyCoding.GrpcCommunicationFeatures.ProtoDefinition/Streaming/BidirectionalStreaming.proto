@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition";
+
+package streaming;
+
+import "Streaming/StreamingStructures.proto";
+
+service BidirectionalEventStreamService {
+    rpc OpenEventStream (stream StreamRequest) returns (stream StreamReply);
+}
