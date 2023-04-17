@@ -24,6 +24,7 @@ public class Program
         app.UseMiddleware<RequestLoggingMiddleware>();
         
         app.MapGrpcService<GreeterService>();
+        app.MapGrpcService<ServerSideStreamingService>();
         
         app.Run();
     }

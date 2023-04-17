@@ -12,6 +12,7 @@ public class ServerSideStreamingService : EventStreamService.EventStreamServiceB
         while (!context.CancellationToken.IsCancellationRequested)
         {
             await Task.Delay(1000);
+            if (context.CancellationToken.IsCancellationRequested) { break;}
 
             var newGuid = Guid.NewGuid();
             var currentTimestamp = DateTimeOffset.UtcNow;

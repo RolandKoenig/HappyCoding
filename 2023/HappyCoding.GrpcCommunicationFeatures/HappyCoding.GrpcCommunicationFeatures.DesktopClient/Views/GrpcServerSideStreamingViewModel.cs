@@ -14,9 +14,18 @@ public partial class GrpcServerSideStreamingViewModel : ObservableObject
     private readonly ILogger _logger;
     private readonly EventStreamService.EventStreamServiceClient _streamCreatorClient;
 
+    [ObservableProperty]
     private ObservableCollection<string> _receivedEvents = new ObservableCollection<string>();
 
     private IAsyncEnumerable<StreamReply>? _currentStream;
+
+    [ObservableProperty]
+    private bool _isCurrentStreamStarted = false;
+
+    [ObservableProperty]
+    private bool _isCurrentStreamStopped = false;
+
+    public static GrpcServerSideStreamingViewModel DesignTimeViewModel => new (null!, null!);
 
     public GrpcServerSideStreamingViewModel(
         ILogger<GrpcServerSideStreamingViewModel> logger,
@@ -24,39 +33,57 @@ public partial class GrpcServerSideStreamingViewModel : ObservableObject
     {
         _logger = logger;
         _streamCreatorClient = streamCreatorClient;
+        
+        this.UpdateObservableProperties();
     }
 
     private async void SetCurrentStream(IAsyncEnumerable<StreamReply>? stream, IDisposable streamSource)
     {
         _currentStream = stream;
-        if (_currentStream == null) { return; }
-        
-        await foreach (var actEvent in _currentStream)
+        this.UpdateObservableProperties();
+        if (_currentStream == null)
         {
-            if (_currentStream != stream) { break; }
+            return;
+        }
 
-            Guid actGuid;
-            DateTimeOffset actTimestamp;
-            string eventContent;
-            try
+        try
+        {
+            await foreach (var actEvent in _currentStream)
             {
-                actGuid = Guid.Parse(actEvent.EventGuid);
-                actTimestamp = new DateTimeOffset(
-                    actEvent.Timestamp.TimestampTicks,
-                    TimeSpan.FromTicks(actEvent.Timestamp.OffsetTicks));
-                eventContent = actEvent.EventContent;
+                if (_currentStream != stream) { break; }
+
+                Guid actGuid;
+                DateTimeOffset actTimestamp;
+                string eventContent;
+                try
+                {
+                    actGuid = Guid.Parse(actEvent.EventGuid);
+                    actTimestamp = new DateTimeOffset(
+                        actEvent.Timestamp.TimestampTicks,
+                        TimeSpan.FromTicks(actEvent.Timestamp.OffsetTicks));
+                    eventContent = actEvent.EventContent;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Unable to process event from server");
+                    continue;
+                }
+
+                _receivedEvents.Add(
+                    $"[{actTimestamp}] Received event {actGuid}: {eventContent}");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Unable to process event from server");
-                continue;
-            }
-            
-            _receivedEvents.Add(
-                $"[{actTimestamp}] Received event {actGuid}: {eventContent}");
+        }
+        catch (Exception exOuter)
+        {
+            _logger.LogError(exOuter, "Unable to get events from server. Stopping the stream now...");
         }
         
         streamSource.Dispose();
+        if (_currentStream == streamSource)
+        {
+            _currentStream = null;
+            this.UpdateObservableProperties();
+        }
     }
     
     [RelayCommand]
@@ -80,8 +107,23 @@ public partial class GrpcServerSideStreamingViewModel : ObservableObject
         }
     }
 
+    [RelayCommand]
     public void StopStreaming()
     {
         _currentStream = null;
+        
+        this.UpdateObservableProperties();
+    }
+
+    [RelayCommand]
+    public void ClearEventLog()
+    {
+        this.ReceivedEvents.Clear();
+    }
+
+    private void UpdateObservableProperties()
+    {
+        this.IsCurrentStreamStarted = _currentStream != null;
+        this.IsCurrentStreamStopped = _currentStream == null;
     }
 }

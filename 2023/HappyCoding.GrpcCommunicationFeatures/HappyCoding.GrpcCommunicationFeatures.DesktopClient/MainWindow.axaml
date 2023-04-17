@@ -28,7 +28,7 @@
                         <views:GrpcGreeterClientView />
                     </TabItem>
                     <TabItem Header="Server side streaming">
-
+                        <views:GrpcServerSideStreamingView />
                     </TabItem>
                     <TabItem Header="Bidirectional streaming">
 

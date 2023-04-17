@@ -36,6 +36,7 @@ internal class Program
                 
                 // ViewModels
                 services.AddTransient<GrpcGreeterClientViewModel>();
+                services.AddTransient<GrpcServerSideStreamingViewModel>();
 
                 // Shared services from this sample application
                 services.AddSharedServices();
