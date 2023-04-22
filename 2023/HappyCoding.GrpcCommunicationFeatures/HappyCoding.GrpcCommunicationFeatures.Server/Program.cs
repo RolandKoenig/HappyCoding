@@ -22,7 +22,7 @@ public class Program
         // ###### Configure request pipeline
         var app = builder.Build();
         app.UseMiddleware<RequestLoggingMiddleware>();
-        
+
         app.MapGrpcService<GreeterService>();
         app.MapGrpcService<ServerSideStreamingService>();
         app.MapGrpcService<BidirectionalStreamingService>();

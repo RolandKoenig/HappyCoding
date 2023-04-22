@@ -35,7 +35,7 @@ public class BidirectionalStreamingService : BidirectionalEventStreamService.Bid
             {
                 EventGuid = newGuid.ToString(),
                 EventContent = $"Reply for event {currentEvent} #{counter}",
-                Timestamp = new Timestamp()
+                Timestamp = new ProtoDateTimeOffset()
                 {
                     TimestampTicks = currentTimestamp.Ticks,
                     OffsetTicks = currentTimestamp.Offset.Ticks

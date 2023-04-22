@@ -22,7 +22,7 @@ public class ServerSideStreamingService : EventStreamService.EventStreamServiceB
             {
                 EventGuid = newGuid.ToString(),
                 EventContent = $"Reply #{counter}",
-                Timestamp = new Timestamp()
+                Timestamp = new ProtoDateTimeOffset()
                 {
                     TimestampTicks = currentTimestamp.Ticks,
                     OffsetTicks = currentTimestamp.Offset.Ticks
