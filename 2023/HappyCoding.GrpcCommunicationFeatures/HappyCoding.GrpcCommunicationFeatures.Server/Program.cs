@@ -23,10 +23,9 @@ public class Program
         app.UseMiddleware<RequestLoggingMiddleware>();
 
         // gRPC
-        app.UseGrpcWeb();
-        app.MapGrpcService<GreeterService>().EnableGrpcWeb();
-        app.MapGrpcService<ServerSideStreamingService>().EnableGrpcWeb();
-        app.MapGrpcService<BidirectionalStreamingService>().EnableGrpcWeb();
+        app.MapGrpcService<GreeterService>();
+        app.MapGrpcService<ServerSideStreamingService>();
+        app.MapGrpcService<BidirectionalStreamingService>();
         
         app.Run();
     }
