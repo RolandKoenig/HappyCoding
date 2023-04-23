@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 

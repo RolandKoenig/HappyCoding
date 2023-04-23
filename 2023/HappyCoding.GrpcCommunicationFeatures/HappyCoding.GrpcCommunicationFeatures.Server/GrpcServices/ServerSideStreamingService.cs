@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
@@ -22,11 +23,7 @@ public class ServerSideStreamingService : EventStreamService.EventStreamServiceB
             {
                 EventGuid = newGuid.ToString(),
                 EventContent = $"Reply #{counter}",
-                Timestamp = new ProtoDateTimeOffset()
-                {
-                    TimestampTicks = currentTimestamp.Ticks,
-                    OffsetTicks = currentTimestamp.Offset.Ticks
-                }
+                Timestamp = Timestamp.FromDateTimeOffset(currentTimestamp)
             });
         }
     }

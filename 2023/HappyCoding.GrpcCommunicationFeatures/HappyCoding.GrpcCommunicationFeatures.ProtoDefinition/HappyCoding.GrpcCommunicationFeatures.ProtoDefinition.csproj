@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Greeter.proto" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.22.1" />
     <PackageReference Include="Grpc" Version="2.46.6" />
@@ -18,7 +15,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Protobuf Include="Greeter\Greeter.proto">
       <GrpcServices>Both</GrpcServices>
@@ -53,5 +49,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Protobuf>
   </ItemGroup>
-
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
 </Project>

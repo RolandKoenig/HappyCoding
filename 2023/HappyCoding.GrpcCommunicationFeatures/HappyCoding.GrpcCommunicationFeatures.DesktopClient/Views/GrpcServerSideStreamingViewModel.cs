@@ -58,9 +58,7 @@ public partial class GrpcServerSideStreamingViewModel : ObservableObject
                 try
                 {
                     actGuid = Guid.Parse(actEvent.EventGuid);
-                    actTimestamp = new DateTimeOffset(
-                        actEvent.Timestamp.TimestampTicks,
-                        TimeSpan.FromTicks(actEvent.Timestamp.OffsetTicks));
+                    actTimestamp = actEvent.Timestamp.ToDateTimeOffset();
                     eventContent = actEvent.EventContent;
                 }
                 catch (Exception ex)

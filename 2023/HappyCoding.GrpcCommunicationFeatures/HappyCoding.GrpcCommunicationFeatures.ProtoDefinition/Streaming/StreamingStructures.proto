@@ -2,6 +2,8 @@ syntax = "proto3";
 
 option csharp_namespace = "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition";
 
+import "google/protobuf/timestamp.proto";
+
 package streaming;
 
 message StreamRequest {
@@ -10,12 +12,6 @@ message StreamRequest {
 
 message StreamReply {
     string event_guid = 1;
-    ProtoDateTimeOffset timestamp = 2;
+    google.protobuf.Timestamp timestamp = 2;
     string event_content = 3;
-}
-
-message ProtoDateTimeOffset
-{
-    int64 timestamp_ticks = 1;
-    int64 offset_ticks = 2;
 }

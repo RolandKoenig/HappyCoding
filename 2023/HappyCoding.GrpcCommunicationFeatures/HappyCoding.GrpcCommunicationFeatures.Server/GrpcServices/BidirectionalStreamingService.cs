@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
@@ -35,11 +36,7 @@ public class BidirectionalStreamingService : BidirectionalEventStreamService.Bid
             {
                 EventGuid = newGuid.ToString(),
                 EventContent = $"Reply for event {currentEvent} #{counter}",
-                Timestamp = new ProtoDateTimeOffset()
-                {
-                    TimestampTicks = currentTimestamp.Ticks,
-                    OffsetTicks = currentTimestamp.Offset.Ticks
-                }
+                Timestamp = Timestamp.FromDateTimeOffset(currentTimestamp)
             });
         }
     }
