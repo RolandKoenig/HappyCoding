@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.2" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+        <PackageReference Include="Grpc.AspNetCore.Web" Version="2.52.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition\HappyCoding.GrpcCommunicationFeatures.ProtoDefinition.csproj" />
+        <ProjectReference Include="..\Client\HappyCoding.GrpcCommunicationFeatures.Server.WithGrpcWeb.Client.csproj" />
+    </ItemGroup>
+
+</Project>
