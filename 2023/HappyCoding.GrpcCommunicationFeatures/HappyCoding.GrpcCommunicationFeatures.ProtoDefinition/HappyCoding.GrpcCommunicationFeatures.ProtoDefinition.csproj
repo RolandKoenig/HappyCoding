@@ -13,9 +13,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Protobuf Include="Greeter\Greeter.proto" Services="Both" Access="Public" />
-    <Protobuf Include="Streaming\StreamingStructures.proto" Services="Both" Access="Public" />
-    <Protobuf Include="Streaming\BidirectionalStreaming.proto" Services="Both" Access="Public" />
-    <Protobuf Include="Streaming\ServerSideStreaming.proto" Services="Both" Access="Public" />
+    <Protobuf Include="Greeter/Greeter.proto" Services="Both" Access="Public" />
+    <Protobuf Include="Streaming/StreamingStructures.proto" Services="Both" Access="Public" />
+    <Protobuf Include="Streaming/BidirectionalStreaming.proto" Services="Both" Access="Public" />
+    <Protobuf Include="Streaming/ServerSideStreaming.proto" Services="Both" Access="Public" />
   </ItemGroup>
 </Project>

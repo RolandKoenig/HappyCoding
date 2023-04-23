@@ -1,9 +1,8 @@
-using HappyCoding.GrpcCommunicationFeatures.GrpcServices;
-using HappyCoding.GrpcCommunicationFeatures.Middlewares;
+using HappyCoding.GrpcCommunicationFeatures.Server.GrpcServices;
+using HappyCoding.GrpcCommunicationFeatures.Server.Middlewares;
 using HappyCoding.GrpcCommunicationFeatures.Shared;
-using Microsoft.AspNetCore.HttpLogging;
 
-namespace HappyCoding.GrpcCommunicationFeatures;
+namespace HappyCoding.GrpcCommunicationFeatures.Server;
 
 public class Program
 {
@@ -15,7 +14,7 @@ public class Program
         
         // Shared services from this sample application
         builder.Services.AddSharedServices();
-
+        
         // Add services to the container.
         builder.Services.AddGrpc();
 
@@ -23,6 +22,7 @@ public class Program
         var app = builder.Build();
         app.UseMiddleware<RequestLoggingMiddleware>();
 
+        // gRPC
         app.UseGrpcWeb();
         app.MapGrpcService<GreeterService>().EnableGrpcWeb();
         app.MapGrpcService<ServerSideStreamingService>().EnableGrpcWeb();

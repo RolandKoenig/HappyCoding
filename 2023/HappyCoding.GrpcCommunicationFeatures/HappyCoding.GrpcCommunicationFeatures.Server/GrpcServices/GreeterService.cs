@@ -1,8 +1,7 @@
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
-namespace HappyCoding.GrpcCommunicationFeatures.GrpcServices;
+namespace HappyCoding.GrpcCommunicationFeatures.Server.GrpcServices;
 
 internal class GreeterService : Greeter.GreeterBase
 {

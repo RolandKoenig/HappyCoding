@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace HappyCoding.GrpcCommunicationFeatures.Middlewares;
+namespace HappyCoding.GrpcCommunicationFeatures.Server.Middlewares;
 
 // Coding based on
 // https://blog.elmah.io/asp-net-core-request-logging-middleware/

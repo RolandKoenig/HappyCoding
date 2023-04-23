@@ -3,7 +3,7 @@ using Grpc.Core;
 using Grpc.Core.Utils;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
-namespace HappyCoding.GrpcCommunicationFeatures.GrpcServices;
+namespace HappyCoding.GrpcCommunicationFeatures.Server.GrpcServices;
 
 public class BidirectionalStreamingService : BidirectionalEventStreamService.BidirectionalEventStreamServiceBase
 {

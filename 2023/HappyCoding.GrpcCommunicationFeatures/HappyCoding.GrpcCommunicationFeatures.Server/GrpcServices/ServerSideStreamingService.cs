@@ -2,7 +2,7 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
-namespace HappyCoding.GrpcCommunicationFeatures.GrpcServices;
+namespace HappyCoding.GrpcCommunicationFeatures.Server.GrpcServices;
 
 public class ServerSideStreamingService : EventStreamService.EventStreamServiceBase
 {
