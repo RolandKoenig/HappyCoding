@@ -1,0 +1,8 @@
+services:
+  grpc_server:
+    build: ./HappyCoding.GrpcKubernetesLoadBalancing.Server
+    container_name: grpc_server
+    
+  grpc_client:
+    build: ./HappyCoding.GrpcKubernetesLoadBalancing.Client
+    container_name: grpc_client
