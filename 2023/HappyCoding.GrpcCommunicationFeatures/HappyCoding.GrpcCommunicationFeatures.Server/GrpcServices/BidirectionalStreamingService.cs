@@ -1,5 +1,6 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using Grpc.Core.Utils;
 using HappyCoding.GrpcCommunicationFeatures.ProtoDefinition;
 
 namespace HappyCoding.GrpcCommunicationFeatures.GrpcServices;
@@ -11,18 +12,18 @@ public class BidirectionalStreamingService : BidirectionalEventStreamService.Bid
     {
         var currentEvent = "Unknown";
         var counter = 0;
-        
-        using var requestStreamSubscription = requestStream
-            .ReadAllAsync()
-            .ToObservable()
-            .Subscribe(
-                incomingRequest =>
-                {
-                    currentEvent = incomingRequest.EventName;
-                    counter = 0;
-                },
-                _ => { });
 
+        // Listen for incoming updates
+        var requestStreamSubscription = requestStream
+            .ForEachAsync(incomingRequest =>
+            {
+                currentEvent = incomingRequest.EventName;
+                counter = 0;
+
+                return Task.CompletedTask;
+            });
+
+        // Generate events for the client
         while (!context.CancellationToken.IsCancellationRequested)
         {
             await Task.Delay(1000);

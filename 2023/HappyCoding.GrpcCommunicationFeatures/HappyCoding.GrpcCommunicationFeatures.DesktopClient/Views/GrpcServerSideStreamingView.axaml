@@ -13,6 +13,10 @@
             <Style Selector="Button, ListBox">
                 <Setter Property="Margin" Value="4" />
             </Style>
+            <Style Selector="TextBlock.Separator">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="Gray" />
+            </Style>
         </DockPanel.Styles>
         
         <StackPanel Orientation="Horizontal"
@@ -23,6 +27,10 @@
             <Button Command="{Binding Path=StopStreamingCommand}"
                     Content="Stop streaming"
                     IsEnabled="{Binding Path=IsCurrentStreamStarted}"/>
+            
+            <TextBlock Classes="Separator" 
+                       Text="|" />
+            
             <Button Command="{Binding Path=ClearEventLogCommand}"
                     Content="Clear" />
         </StackPanel>

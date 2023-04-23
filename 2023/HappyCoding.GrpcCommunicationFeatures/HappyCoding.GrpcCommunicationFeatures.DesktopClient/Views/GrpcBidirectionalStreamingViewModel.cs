@@ -17,7 +17,7 @@ public partial class GrpcBidirectionalStreamingViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<string> _receivedEvents = new ObservableCollection<string>();
 
-    private IAsyncEnumerable<StreamReply>? _currentStream;
+    private AsyncDuplexStreamingCall<StreamRequest, StreamReply>? _currentRequest;
 
     [ObservableProperty]
     private bool _isCurrentStreamStarted = false;
@@ -37,20 +37,21 @@ public partial class GrpcBidirectionalStreamingViewModel : ObservableObject
         this.UpdateObservableProperties();
     }
 
-    private async void SetCurrentStream(IAsyncEnumerable<StreamReply>? stream, IDisposable streamSource)
+    private async void SetCurrentStream(AsyncDuplexStreamingCall<StreamRequest, StreamReply>? request)
     {
-        _currentStream = stream;
         this.UpdateObservableProperties();
-        if (_currentStream == null)
+        if ((_currentRequest == null) ||
+            (_currentRequest != request))
         {
             return;
         }
 
+        var stream = request.ResponseStream.ReadAllAsync();
         try
         {
-            await foreach (var actEvent in _currentStream)
+            await foreach (var actEvent in stream)
             {
-                if (_currentStream != stream) { break; }
+                if (_currentRequest != request) { break; }
 
                 Guid actGuid;
                 DateTimeOffset actTimestamp;
@@ -76,10 +77,10 @@ public partial class GrpcBidirectionalStreamingViewModel : ObservableObject
             _logger.LogError(exOuter, "Unable to get events from server. Stopping the stream now...");
         }
         
-        streamSource.Dispose();
-        if (_currentStream == streamSource)
+        request.Dispose();
+        if (_currentRequest == request)
         {
-            _currentStream = null;
+            _currentRequest = null;
             this.UpdateObservableProperties();
         }
     }
@@ -91,29 +92,50 @@ public partial class GrpcBidirectionalStreamingViewModel : ObservableObject
         {
             var request = new StreamRequest()
             {
-                EventName = "MyTestEvent"
+                EventName = GenerateEventName()
             };
 
-            var response = _streamCreatorClient.OpenEventStream();
+            _currentRequest = _streamCreatorClient.OpenEventStream();
             
-            await response.RequestStream.WriteAsync(request);
+            await _currentRequest.RequestStream.WriteAsync(request);
             
-            _currentStream = response.ResponseStream.ReadAllAsync();
-
-            SetCurrentStream(_currentStream, response);
+            SetCurrentStream(_currentRequest);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while calling Greeter.SayHello");
+            _logger.LogError(ex, "Error while opening stream");
+            _currentRequest = null;
         }
     }
 
     [RelayCommand]
     public void StopStreaming()
     {
-        _currentStream = null;
+        _currentRequest = null;
         
         this.UpdateObservableProperties();
+    }
+
+    [RelayCommand]
+    public async void ChangeEvent()
+    {
+        var currentRequest = _currentRequest;
+        if (currentRequest != null)
+        {
+            var request = new StreamRequest()
+            {
+                EventName = GenerateEventName()
+            };
+
+            try
+            {
+                await currentRequest.RequestStream.WriteAsync(request);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while changing event");
+            }
+        }
     }
 
     [RelayCommand]
@@ -124,7 +146,13 @@ public partial class GrpcBidirectionalStreamingViewModel : ObservableObject
 
     private void UpdateObservableProperties()
     {
-        this.IsCurrentStreamStarted = _currentStream != null;
-        this.IsCurrentStreamStopped = _currentStream == null;
+        this.IsCurrentStreamStarted = _currentRequest != null;
+        this.IsCurrentStreamStopped = _currentRequest == null;
+    }
+
+    private static string GenerateEventName()
+    {
+        var randomizer = new Random(Environment.TickCount);
+        return $"Event{randomizer.Next(1, 1000)}";
     }
 }

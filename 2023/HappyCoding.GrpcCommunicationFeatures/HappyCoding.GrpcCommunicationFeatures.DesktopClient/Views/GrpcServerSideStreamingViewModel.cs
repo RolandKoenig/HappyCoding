@@ -101,7 +101,7 @@ public partial class GrpcServerSideStreamingViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while calling Greeter.SayHello");
+            _logger.LogError(ex, "Error while opening stream");
         }
     }
 
