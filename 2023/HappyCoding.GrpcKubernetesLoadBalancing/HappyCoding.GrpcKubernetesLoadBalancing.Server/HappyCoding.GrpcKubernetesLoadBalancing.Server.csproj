@@ -18,9 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="Protos\greet.proto">
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
+      <Protobuf Include="Protos\greet.proto" Services="Server" />
     </ItemGroup>
 
 </Project>

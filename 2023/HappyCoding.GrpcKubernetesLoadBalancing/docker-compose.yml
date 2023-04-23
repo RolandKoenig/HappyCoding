@@ -2,7 +2,11 @@ services:
   grpc_server:
     build: ./HappyCoding.GrpcKubernetesLoadBalancing.Server
     container_name: grpc_server
+    environment:
+      Kestrel__Endpoints__Http__Url: "http://grpc_server:80"
     
   grpc_client:
     build: ./HappyCoding.GrpcKubernetesLoadBalancing.Client
     container_name: grpc_client
+    environment:
+      TargetEndpoint: http://grpc_server:80
