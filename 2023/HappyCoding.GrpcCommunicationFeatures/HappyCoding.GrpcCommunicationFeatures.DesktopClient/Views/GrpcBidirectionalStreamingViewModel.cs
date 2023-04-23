@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Grpc.Core;
@@ -76,8 +77,12 @@ public partial class GrpcBidirectionalStreamingViewModel : ObservableObject
         {
             _logger.LogError(exOuter, "Unable to get events from server. Stopping the stream now...");
         }
-        
+
+        await request.RequestStream.CompleteAsync();
+
+        await Task.Delay(1000); // Wait some time before disposing the stream
         request.Dispose();
+        
         if (_currentRequest == request)
         {
             _currentRequest = null;

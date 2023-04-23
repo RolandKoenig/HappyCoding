@@ -23,9 +23,10 @@ public class Program
         var app = builder.Build();
         app.UseMiddleware<RequestLoggingMiddleware>();
 
-        app.MapGrpcService<GreeterService>();
-        app.MapGrpcService<ServerSideStreamingService>();
-        app.MapGrpcService<BidirectionalStreamingService>();
+        app.UseGrpcWeb();
+        app.MapGrpcService<GreeterService>().EnableGrpcWeb();
+        app.MapGrpcService<ServerSideStreamingService>().EnableGrpcWeb();
+        app.MapGrpcService<BidirectionalStreamingService>().EnableGrpcWeb();
         
         app.Run();
     }
