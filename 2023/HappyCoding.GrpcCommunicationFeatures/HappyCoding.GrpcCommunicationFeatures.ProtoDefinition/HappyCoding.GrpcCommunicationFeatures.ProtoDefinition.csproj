@@ -21,7 +21,4 @@
     <Protobuf Include="Streaming\BidirectionalStreaming.proto" Services="Both" Access="Public" />
     <Protobuf Include="Streaming\ServerSideStreaming.proto" Services="Both" Access="Public" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
 </Project>
