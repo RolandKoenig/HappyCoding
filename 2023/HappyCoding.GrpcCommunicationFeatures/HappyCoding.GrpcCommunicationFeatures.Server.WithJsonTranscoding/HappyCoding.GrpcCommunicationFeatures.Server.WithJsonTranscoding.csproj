@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos/greet.proto" GrpcServices="Server" AdditionalImportDirs="./google/api" />
+        <Protobuf Include="Protos/greet.proto" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>
