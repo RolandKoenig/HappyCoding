@@ -14,6 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{EAC1
 		Scripts\build-and-deploy-minikube.ps1 = Scripts\build-and-deploy-minikube.ps1
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{FE26E0E6-545C-4AAA-9A44-A3313186050B}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\Kubernetes\grpc-client.yaml = Scripts\Kubernetes\grpc-client.yaml
+		Scripts\Kubernetes\grpc-server-service.yaml = Scripts\Kubernetes\grpc-server-service.yaml
+		Scripts\Kubernetes\grpc-server.yaml = Scripts\Kubernetes\grpc-server.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +35,8 @@ Global
 		{080D1A92-CCC0-4C39-8364-A11E2D74D998}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{080D1A92-CCC0-4C39-8364-A11E2D74D998}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{080D1A92-CCC0-4C39-8364-A11E2D74D998}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE26E0E6-545C-4AAA-9A44-A3313186050B} = {EAC1DEB6-703F-4F94-99B6-10A3DFCCD849}
 	EndGlobalSection
 EndGlobal
