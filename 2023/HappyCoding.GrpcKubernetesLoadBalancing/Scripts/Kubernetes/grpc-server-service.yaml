@@ -1,0 +1,13 @@
+# It is important that this service is a headless service
+# see https://techdozo.dev/grpc-load-balancing-on-kubernetes-using-headless-service/
+
+kind: Service
+metadata:
+  name: grpc-server-service
+spec:
+  clusterIP: None
+  selector:
+    app: grpc-server
+  ports:
+    - port: 80
+      targetPort: 80

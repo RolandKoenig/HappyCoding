@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-client
+  labels:
+    app: grpc-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-client
+  template:
+    metadata:
+      labels:
+        app: grpc-client
+    spec:
+      containers:
+        - name: grpc-client
+          image: happycodinggrpckubernetesloadbalancing-grpc-client
+          imagePullPolicy: Never
+          env:
+            - name: TargetEndpoint
+              value: dns:///grpc-server-service

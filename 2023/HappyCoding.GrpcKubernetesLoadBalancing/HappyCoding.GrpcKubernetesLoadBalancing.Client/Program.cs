@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Grpc.Core;
+using Grpc.Net.Client.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -21,6 +23,17 @@ public static class Program
             Console.WriteLine($"Connect to target {targetEndpoint}");
             
             options.Address = new Uri(targetEndpoint);
+            options.ChannelOptionsActions.Add(options =>
+            {
+                options.Credentials = ChannelCredentials.Insecure;
+                options.ServiceConfig = new ServiceConfig()
+                {
+                    LoadBalancingConfigs =
+                    {
+                        new RoundRobinConfig()
+                    }
+                };
+            });
         });
         services.AddSingleton<ServerCallingLoop>();
 

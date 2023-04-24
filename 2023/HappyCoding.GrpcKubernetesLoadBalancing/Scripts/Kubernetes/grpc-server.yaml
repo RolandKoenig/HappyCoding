@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-server
+  labels:
+    app: grpc-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: grpc-server
+  template:
+    metadata:
+      labels:
+        app: grpc-server
+    spec:
+      containers:
+        - name: grpc-server
+          image: happycodinggrpckubernetesloadbalancing-grpc-server
+          imagePullPolicy: Never
+          env:
+            - name: Kestrel__Endpoints__Http__Url
+              value: http://grpc_server:80"
