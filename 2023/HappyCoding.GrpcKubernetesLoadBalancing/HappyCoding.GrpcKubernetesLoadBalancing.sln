@@ -9,6 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Root", "_Root", "{9C229D85
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{EAC1DEB6-703F-4F94-99B6-10A3DFCCD849}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\build-and-deploy-minikube.ps1 = Scripts\build-and-deploy-minikube.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
