@@ -1,0 +1,2 @@
+minikube image build -t happycodinggrpckubernetesloadbalancing-grpc_server ../HappyCoding.GrpcKubernetesLoadBalancing.Server
+minikube image build -t happycodinggrpckubernetesloadbalancing-grpc_client ../HappyCoding.GrpcKubernetesLoadBalancing.Client
