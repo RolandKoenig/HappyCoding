@@ -15,9 +15,20 @@ This project show how to define multipe DbContexts which can create their tables
 ## [HappyCoding.SmartEnumerations](HappyCoding.SmartEnumerations)
 This project show how to use ardalis/SmartEnum with Entity Framework Core
 
+## gRPC
+### [HappyCoding.GrpcCommunicationFeatures](HappyCoding.GrpcCommunicationFeatures)
+This project shoes some of the feature from gRPC like streaming, load balancing and many more
+
+### [HappyCoding.GrpcKubernetesLoadBalancing](HappyCoding.GrpcKubernetesLoadBalancing)
+A project with client, server and configuration for a Kubernetes environment (e. g. Minikube) to show how
+client side load balancing works
+
+### [HappyCoding.ProtobufSerialization](HappyCoding.ProtobufSerialization)
+Some samples and play arround with protobuf serialization
+
 ## Misc
 ### [HappyCoding.InMemoryCacheUsage](HappyCoding.InMemoryCacheUsage)
 Some play around with Microsoft.Extensions.Caching.Memory
 
-### [HappyCoding.ProtobufSerialization](HappyCoding.ProtobufSerialization)
-Some samples and play arround with protobuf serialization
+
+
