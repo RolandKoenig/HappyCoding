@@ -1,11 +1,12 @@
 # It is important that this service is a headless service
 # see https://techdozo.dev/grpc-load-balancing-on-kubernetes-using-headless-service/
 
+apiVersion: v1
 kind: Service
 metadata:
   name: grpc-server-service
 spec:
-  clusterIP: None
+  clusterIP: None # This services does not get a ClusterIP. Instead, it returns all target ip addresses during the dns lookup
   selector:
     app: grpc-server
   ports:
