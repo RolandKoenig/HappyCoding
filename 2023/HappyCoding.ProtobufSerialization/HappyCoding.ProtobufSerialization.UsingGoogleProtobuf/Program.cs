@@ -17,13 +17,27 @@ public class Program
         // myMessage.Emails.Add("test@test.com");
         // myMessage.Emails.Add("test@test.de");
 
-        // MyTestMessageWithOneOf
-        var myMessage = new MyTestMessageWithOneOf();
+        // // MyTestMessageWithOneOf
+        // var myMessage = new MyTestMessageWithOneOf();
+        // myMessage.FirstName = "Test FirstName";
+        // myMessage.LastName = "Test LastName";
+        // myMessage.Age = 8;
+        // myMessage.ContactMailAddress = "test@test.de";
+        
+        // MyTestMessageWithChildMessage
+        var myMessage = new MyTestMessageWithChildMessage();
         myMessage.FirstName = "Test FirstName";
         myMessage.LastName = "Test LastName";
         myMessage.Age = 8;
-        myMessage.ContactMailAddress = "test@test.de";
-        
+        myMessage.Emails.Add("test@test.com");
+        myMessage.Emails.Add("test@test.de");
+        myMessage.Address = new MyTestMessageChild()
+        {
+            City = "Testcity",
+            PostalCode = "12345",
+            Street = "Teststreet"
+        };
+
         // Json Serialization
         var serializedBytesJson = JsonSerializer.SerializeToUtf8Bytes(myMessage, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         var serializedJson = Encoding.UTF8.GetString(serializedBytesJson);

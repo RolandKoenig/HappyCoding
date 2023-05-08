@@ -1,0 +1,18 @@
+﻿syntax="proto3";
+
+option csharp_namespace = "HappyCoding.ProtobufSerialization.UsingGoogleProtobuf.Data";
+
+message MyTestMessageWithChildMessage {
+  string first_name = 1;
+  string last_name = 2;
+  int32 age = 3;
+  repeated string emails = 4;
+  MyTestMessageChild address = 5;
+}
+
+message MyTestMessageChild{
+  string street = 1;
+  string city = 2;
+  string postal_code = 3;
+  string country_name = 4;
+}
