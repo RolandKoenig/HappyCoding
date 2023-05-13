@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "HappyCoding.GrpcCommunicationFeatures.ProtoDefinition";
+
+// Default ASP.NET Core sample for client -> server calls using gRpc
+
+import "google/protobuf/empty.proto";
+
+package scenarios;
+
+service RawDataTransfer {
+  rpc SendRawData (RawDataRequest) returns (google.protobuf.Empty);
+}
+
+message RawDataRequest {
+  string file_name = 1;
+  bytes raw_data = 2;
+}

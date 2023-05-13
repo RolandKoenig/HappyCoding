@@ -24,10 +24,10 @@ namespace HappyCoding.ProtobufSerialization.UsingGoogleProtobuf.Data {
     static MyTestMessageReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNNeVRlc3RNZXNzYWdlLnByb3RvIlEKDU15VGVzdE1lc3NhZ2USEQoJZmly",
-            "c3ROYW1lGAEgASgJEhAKCGxhc3ROYW1lGAIgASgJEgsKA2FnZRgDIAEoBRIO",
-            "CgZlbWFpbHMYBCADKAlCPaoCOkhhcHB5Q29kaW5nLlByb3RvYnVmU2VyaWFs",
-            "aXphdGlvbi5Vc2luZ0dvb2dsZVByb3RvYnVmLkRhdGFiBnByb3RvMw=="));
+            "ChNNeVRlc3RNZXNzYWdlLnByb3RvIlMKDU15VGVzdE1lc3NhZ2USEgoKZmly",
+            "c3RfbmFtZRgBIAEoCRIRCglsYXN0X25hbWUYAiABKAkSCwoDYWdlGAMgASgF",
+            "Eg4KBmVtYWlscxgEIAMoCUI9qgI6SGFwcHlDb2RpbmcuUHJvdG9idWZTZXJp",
+            "YWxpemF0aW9uLlVzaW5nR29vZ2xlUHJvdG9idWYuRGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -85,7 +85,7 @@ namespace HappyCoding.ProtobufSerialization.UsingGoogleProtobuf.Data {
       return new MyTestMessage(this);
     }
 
-    /// <summary>Field number for the "firstName" field.</summary>
+    /// <summary>Field number for the "first_name" field.</summary>
     public const int FirstNameFieldNumber = 1;
     private string firstName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -97,7 +97,7 @@ namespace HappyCoding.ProtobufSerialization.UsingGoogleProtobuf.Data {
       }
     }
 
-    /// <summary>Field number for the "lastName" field.</summary>
+    /// <summary>Field number for the "last_name" field.</summary>
     public const int LastNameFieldNumber = 2;
     private string lastName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
