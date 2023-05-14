@@ -15,6 +15,7 @@ public class Program
         // Configure the HTTP request pipeline.
         app.UseGrpcWeb(new GrpcWebOptions(){ DefaultEnabled = true });
         app.MapGrpcService<GreeterService>();
+        app.MapGrpcService<ServerSideStreamingService>();
 
         app.Run();
     }

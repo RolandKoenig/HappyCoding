@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+option csharp_namespace = "HappyCoding.GrpcWithNet48.ProtoDefinitions";
+
+package rolandk.grpc_with_net48;
+
+service ServerSideStreaming {
+  rpc OpenStream (OpenStreamRequest) returns (stream StreamReply);
+}
+
+message OpenStreamRequest {
+  string event_name = 1;
+}
+
+message StreamReply {
+  string message = 1;
+}
