@@ -23,6 +23,9 @@ This project shoes some of the feature from gRPC like streaming, load balancing 
 A project with client, server and configuration for a Kubernetes environment (e. g. Minikube) to show how
 client side load balancing works
 
+### [HappyCoding.GrpcWithNet48](HappyCoding.GrpcWithNet48)
+In this project I tried to use gRPC for a .NET 4.8 client application.
+
 ### [HappyCoding.ProtobufSerialization](HappyCoding.ProtobufSerialization)
 Some samples and play arround with protobuf serialization
 
