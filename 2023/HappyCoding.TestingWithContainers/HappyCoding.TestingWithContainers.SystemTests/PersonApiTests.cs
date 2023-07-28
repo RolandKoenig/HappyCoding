@@ -16,7 +16,7 @@ public class PersonApiTests : IClassFixture<TestEnvironmentFixture>
     [Fact]
     public async Task Get_persons_after_startup_returns_204_NO_CONTENT()
     {
-        await _fixture.EnsureContainersLoadedAsync();
+        await _fixture.EnsureContainersStartedAsync();
 
         // Act
         var httpClient = new HttpClient();

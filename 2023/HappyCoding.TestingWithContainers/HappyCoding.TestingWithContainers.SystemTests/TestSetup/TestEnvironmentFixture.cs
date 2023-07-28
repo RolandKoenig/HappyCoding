@@ -1,15 +1,12 @@
 ﻿using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Containers;
-using DotNet.Testcontainers.Images;
 using Microsoft.Data.SqlClient;
 
 namespace HappyCoding.TestingWithContainers.SystemTests.TestSetup;
 
-
-public class TestEnvironmentFixture : IAsyncDisposable
+public class TestEnvironmentFixture
 {
     private IContainer[]? _containers;
-    private IFutureDockerImage[]? _builtImages;
 
     private string? _sqlConnectionString;
     private string? _applicationBaseUrl;
@@ -18,8 +15,7 @@ public class TestEnvironmentFixture : IAsyncDisposable
 
     public string ApplicationBaseUrl => _applicationBaseUrl ?? string.Empty;
     
-    
-    public async Task EnsureContainersLoadedAsync()
+    public async Task EnsureContainersStartedAsync()
     {
         if (_containers != null)
         {
@@ -55,7 +51,6 @@ public class TestEnvironmentFixture : IAsyncDisposable
             .WithBuildArgument("RESOURCE_REAPER_SESSION_ID", ResourceReaper.DefaultSessionId.ToString("D"))
             .Build();
         await applicationImage.CreateAsync();
-        _builtImages = new[] {applicationImage};
 
         var applicationContainer = new ContainerBuilder()
             .WithImage(applicationImage)
@@ -77,39 +72,14 @@ public class TestEnvironmentFixture : IAsyncDisposable
         _containers = new[] { sqlEdgeContainer, applicationContainer };
     }
 
-    private async Task CleanupDatabaseAsync()
+    public async Task CleanupDatabaseAsync()
     {
         await using var connection = new SqlConnection(_sqlConnectionString);
         await connection.OpenAsync();
 
         await using var command = connection.CreateCommand();
         command.CommandText = "DELETE FROM dbo.Persons";
-        var countDeleted = await command.ExecuteNonQueryAsync();
-    }
-
-    /// <inheritdoc />
-    public async ValueTask DisposeAsync()
-    {
-        if (_containers != null)
-        {
-            foreach (var actContainer in _containers)
-            {
-                await actContainer.DisposeAsync();
-            }
-            _containers = null;
-        }
-
-        if (_builtImages != null)
-        {
-            foreach (var actImage in _builtImages)
-            {
-                await actImage.DeleteAsync();
-                await actImage.DisposeAsync();
-            }
-            _builtImages = null;
-        }
-
-        _sqlConnectionString = null;
+        await command.ExecuteNonQueryAsync();
     }
 }
 

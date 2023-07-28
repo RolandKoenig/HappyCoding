@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.TestingWithCont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.TestingWithContainers.SystemTests", "HappyCoding.TestingWithContainers.SystemTests\HappyCoding.TestingWithContainers.SystemTests.csproj", "{1CE5E5DF-D5BA-4961-A045-FCACBE9BFCD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.TestingWithContainers.IntegrationTests", "HappyCoding.TestingWithContainers.IntegrationTests\HappyCoding.TestingWithContainers.IntegrationTests.csproj", "{A1CDC4BC-5BCF-4025-918C-5B19F88E8D5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1CE5E5DF-D5BA-4961-A045-FCACBE9BFCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CE5E5DF-D5BA-4961-A045-FCACBE9BFCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CE5E5DF-D5BA-4961-A045-FCACBE9BFCD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CDC4BC-5BCF-4025-918C-5B19F88E8D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CDC4BC-5BCF-4025-918C-5B19F88E8D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CDC4BC-5BCF-4025-918C-5B19F88E8D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CDC4BC-5BCF-4025-918C-5B19F88E8D5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
