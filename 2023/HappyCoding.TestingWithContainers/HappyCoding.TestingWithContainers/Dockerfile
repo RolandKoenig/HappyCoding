@@ -1,7 +1,9 @@
+ARG RESOURCE_REAPER_SESSION_ID="00000000-0000-0000-0000-000000000000"
+
 #####################################
 # Build image
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-ARG RESOURCE_REAPER_SESSION_ID="00000000-0000-0000-0000-000000000000"
+ARG RESOURCE_REAPER_SESSION_ID
 LABEL "org.testcontainers.resource-reaper-session"=$RESOURCE_REAPER_SESSION_ID
 WORKDIR /src
 COPY . .

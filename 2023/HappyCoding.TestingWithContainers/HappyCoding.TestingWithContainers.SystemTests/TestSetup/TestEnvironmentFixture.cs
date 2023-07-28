@@ -3,7 +3,7 @@ using DotNet.Testcontainers.Containers;
 using DotNet.Testcontainers.Images;
 using Microsoft.Data.SqlClient;
 
-namespace HappyCoding.TestingWithContainers.Tests.TestSetup;
+namespace HappyCoding.TestingWithContainers.SystemTests.TestSetup;
 
 
 public class TestEnvironmentFixture : IAsyncDisposable

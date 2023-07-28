@@ -1,7 +1,7 @@
 using System.Net;
-using HappyCoding.TestingWithContainers.Tests.TestSetup;
+using HappyCoding.TestingWithContainers.SystemTests.TestSetup;
 
-namespace HappyCoding.TestingWithContainers.Tests;
+namespace HappyCoding.TestingWithContainers.SystemTests;
 
 [Collection(nameof(TestEnvironmentCollection))]
 public class PersonApiTests : IClassFixture<TestEnvironmentFixture>
