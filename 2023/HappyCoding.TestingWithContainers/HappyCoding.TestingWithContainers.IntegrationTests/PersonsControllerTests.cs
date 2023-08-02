@@ -1,33 +1,35 @@
 using System.Net;
 using System.Net.Http.Json;
-using HappyCoding.TestingWithContainers.SystemTests.Data;
-using HappyCoding.TestingWithContainers.SystemTests.TestSetup;
+using HappyCoding.TestingWithContainers.Data;
+using HappyCoding.TestingWithContainers.IntegrationTests.TestSetup;
 
-namespace HappyCoding.TestingWithContainers.SystemTests;
+namespace HappyCoding.TestingWithContainers.IntegrationTests;
 
-[Collection(nameof(TestEnvironmentCollection))]
-public class PersonApiTests : IClassFixture<TestEnvironmentFixture>
+[Collection(nameof(WebApplicationTestCollection))]
+public class PersonsControllerTests : IClassFixture<WebApplicationFixture>
 {
-    private readonly TestEnvironmentFixture _fixture;
+    private readonly WebApplicationFixture _fixture;
+    private readonly HttpClient _httpClient;
 
-    public PersonApiTests(TestEnvironmentFixture fixture)
+    public PersonsControllerTests(WebApplicationFixture fixture)
     {
         _fixture = fixture;
+        _httpClient = _fixture.CreateClient();
     }
-
+    
     [Fact]
     public async Task Get_persons_after_startup_returns_empty_result()
     {
-        await _fixture.EnsureContainersStartedAsync();
-
+        // Arrange
+        await _fixture.CleanupDatabaseAsync();
+        
         // Act
-        var httpClient = new HttpClient();
-        var response = await httpClient.GetAsync($"{_fixture.ApplicationBaseUrl}/Persons");
-
+        var response = await _httpClient.GetAsync("Persons");
+        
         // Assert
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
     }
-    
+
     [Fact]
     public async Task Create_new_person_and_get_it_over_person_list()
     {
@@ -40,9 +42,8 @@ public class PersonApiTests : IClassFixture<TestEnvironmentFixture>
             Name = "Roland",
             City = "Erlangen"
         };
-        var httpClient = new HttpClient();
-        var responsePost = await httpClient.PostAsJsonAsync($"{_fixture.ApplicationBaseUrl}/Persons", newPerson);
-        var responseGetAll = await httpClient.GetAsync($"{_fixture.ApplicationBaseUrl}/Persons");
+        var responsePost = await _httpClient.PostAsJsonAsync("Persons", newPerson);
+        var responseGetAll = await _httpClient.GetAsync("Persons");
 
         // Assert
         Assert.True(responsePost.IsSuccessStatusCode);

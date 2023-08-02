@@ -9,6 +9,7 @@ public class TestEnvironmentFixture
     private IContainer[]? _containers;
 
     private string? _sqlConnectionString;
+    private string? _sqlConnectionStringFromPublic;
     private string? _applicationBaseUrl;
 
     public string SqlConnectionString => _sqlConnectionString ?? string.Empty;
@@ -38,6 +39,7 @@ public class TestEnvironmentFixture
             .WithEnvironment("MSSQL_USER", "SA")
             .WithEnvironment("MSSQL_SA_PASSWORD", "MySecret@Password123?")
             .WithEnvironment("MSSQL_PID", "Developer")
+            .WithPortBinding(1433, true)
             .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(1433))
             .Build();
 
@@ -65,6 +67,9 @@ public class TestEnvironmentFixture
         // Start all containers
         await sqlEdgeContainer.StartAsync();
         await applicationContainer.StartAsync();
+        
+        _sqlConnectionStringFromPublic =
+            $"Data Source=localhost,{sqlEdgeContainer.GetMappedPublicPort(1433)};Initial Catalog=HappyCoding_TestingWithContainers;Integrated Security=SSPI;User Id=SA;Password=MySecret@Password123?;Trusted_Connection=False;Encrypt=False;";
 
         var applicationPort = applicationContainer.GetMappedPublicPort(80);
         _applicationBaseUrl = $"http://localhost:{applicationPort}";
@@ -74,7 +79,12 @@ public class TestEnvironmentFixture
 
     public async Task CleanupDatabaseAsync()
     {
-        await using var connection = new SqlConnection(_sqlConnectionString);
+        if (string.IsNullOrEmpty(_sqlConnectionStringFromPublic))
+        {
+            throw new InvalidOperationException("Container not started. Create a client before calling this method!");
+        }
+        
+        await using var connection = new SqlConnection(_sqlConnectionStringFromPublic);
         await connection.OpenAsync();
 
         await using var command = connection.CreateCommand();
