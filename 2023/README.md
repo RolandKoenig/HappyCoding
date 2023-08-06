@@ -33,5 +33,5 @@ Some samples and play arround with protobuf serialization
 ### [HappyCoding.InMemoryCacheUsage](HappyCoding.InMemoryCacheUsage)
 Some play around with Microsoft.Extensions.Caching.Memory
 
-
-
+### [HappyCoding.TestingWithContainers](HappyCoding.TestingWithContainers)
+Sample projects for using docker containers in automated tests
