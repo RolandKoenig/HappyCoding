@@ -12,6 +12,9 @@ This project shows some play around with Avaonia and CommunityToolkit.Mvvm
 ## [HappyCoding.EFCoreMultipleContextsInSameDb](HappyCoding.EFCoreMultipleContextsInSameDb)
 This project show how to define multipe DbContexts which can create their tables into the same database
 
+## [HappyCoding.EFCoreOwnedTypes](HappyCoding.EFCoreOwnedTypes)
+Some play around with EF Core owned types
+
 ## [HappyCoding.SmartEnumerations](HappyCoding.SmartEnumerations)
 This project show how to use ardalis/SmartEnum with Entity Framework Core
 
