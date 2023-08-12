@@ -1,4 +1,4 @@
-﻿namespace Testing.MinioClientApp.MinioHandling;
+﻿namespace HappyCoding.MinioClientApp.MinioHandling;
 
 public class MinioInterfaceConfiguration
 {

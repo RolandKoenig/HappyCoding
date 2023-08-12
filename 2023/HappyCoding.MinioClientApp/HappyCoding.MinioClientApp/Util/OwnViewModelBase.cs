@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using RolandK.AvaloniaExtensions.Mvvm;
 using RolandK.AvaloniaExtensions.ViewServices.Base;
 
-namespace Testing.MinioClientApp.Util;
+namespace HappyCoding.MinioClientApp.Util;
 
 public class OwnViewModelBase : ObservableObject, IAttachableViewModel
 {

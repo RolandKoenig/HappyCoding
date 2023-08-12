@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
-             xmlns:local="clr-namespace:Testing.MinioClientApp.Views"
+             xmlns:local="clr-namespace:HappyCoding.MinioClientApp.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              DataContext="{ext:CreateUsingDependencyInjection {x:Type local:UploadViewModel}}"
              d:DataContext="{x:Static local:UploadViewModel.DesignViewModel}"
-             x:Class="Testing.MinioClientApp.Views.UploadView">
+             x:Class="HappyCoding.MinioClientApp.Views.UploadView">
     <Border Margin="3">
         <Button Content="Upload!"
                 Command="{Binding Path=UploadFileCommand}" />

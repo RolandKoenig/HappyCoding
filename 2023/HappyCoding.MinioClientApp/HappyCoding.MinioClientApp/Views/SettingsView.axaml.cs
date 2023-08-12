@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Testing.MinioClientApp.Views;
+namespace HappyCoding.MinioClientApp.Views;
 
 public partial class SettingsView : UserControl
 {

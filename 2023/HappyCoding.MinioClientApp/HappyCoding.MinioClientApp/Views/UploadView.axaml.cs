@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using RolandK.AvaloniaExtensions.Mvvm.Markup;
 
-namespace Testing.MinioClientApp.Views;
+namespace HappyCoding.MinioClientApp.Views;
 
 public partial class UploadView : MvvmUserControl
 {

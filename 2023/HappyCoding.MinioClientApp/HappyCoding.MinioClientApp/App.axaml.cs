@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace Testing.MinioClientApp
+namespace HappyCoding.MinioClientApp
 {
     public partial class App : Application
     {

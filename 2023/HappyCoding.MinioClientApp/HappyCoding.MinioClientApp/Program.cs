@@ -2,10 +2,10 @@
 using Avalonia;
 using Microsoft.Extensions.DependencyInjection;
 using RolandK.AvaloniaExtensions.DependencyInjection;
-using Testing.MinioClientApp.MinioHandling;
-using Testing.MinioClientApp.Views;
+using HappyCoding.MinioClientApp.MinioHandling;
+using HappyCoding.MinioClientApp.Views;
 
-namespace Testing.MinioClientApp
+namespace HappyCoding.MinioClientApp
 {
     class Program
     {

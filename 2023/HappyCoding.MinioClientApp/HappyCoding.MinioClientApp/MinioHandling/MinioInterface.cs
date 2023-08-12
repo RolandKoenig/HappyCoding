@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Minio;
 
-namespace Testing.MinioClientApp.MinioHandling;
+namespace HappyCoding.MinioClientApp.MinioHandling;
 
 public class MinioInterface
 {

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Testing.MinioClientApp.MinioHandling;
+using HappyCoding.MinioClientApp.MinioHandling;
 
-namespace Testing.MinioClientApp.Views;
+namespace HappyCoding.MinioClientApp.Views;
 
 public class SettingsViewModel : ObservableObject
 {

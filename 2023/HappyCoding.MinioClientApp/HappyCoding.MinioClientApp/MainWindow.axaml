@@ -3,10 +3,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
-        xmlns:views="clr-namespace:Testing.MinioClientApp.Views"
+        xmlns:views="clr-namespace:HappyCoding.MinioClientApp.Views"
         ExtendClientAreaToDecorationsHint="True"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Testing.MinioClientApp.MainWindow"
+        x:Class="HappyCoding.MinioClientApp.MainWindow"
         Title="Testing.MinioClientApp">
     <ext:MainWindowFrame>
         <ext:MainWindowFrame.CustomTitleArea>

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.MinioClientApp", "Testing.MinioClientApp\Testing.MinioClientApp.csproj", "{CDF46324-C65A-40D3-A804-9E3C7C531D2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.MinioClientApp", "HappyCoding.MinioClientApp\HappyCoding.MinioClientApp.csproj", "{CDF46324-C65A-40D3-A804-9E3C7C531D2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

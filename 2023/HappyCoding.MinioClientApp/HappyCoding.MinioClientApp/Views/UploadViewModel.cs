@@ -3,13 +3,13 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
+using HappyCoding.MinioClientApp.MinioHandling;
+using HappyCoding.MinioClientApp.Util;
 using RolandK.AvaloniaExtensions.ViewServices;
 using RolandK.AvaloniaExtensions.ViewServices.FileDialogs;
 using RolandK.AvaloniaExtensions.ViewServices.MessageBox;
-using Testing.MinioClientApp.MinioHandling;
-using Testing.MinioClientApp.Util;
 
-namespace Testing.MinioClientApp.Views;
+namespace HappyCoding.MinioClientApp.Views;
 
 public partial class UploadViewModel : OwnViewModelBase
 {

@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Markup.Xaml;
 using RolandK.AvaloniaExtensions.Mvvm.Markup;
 
-namespace Testing.MinioClientApp
+namespace HappyCoding.MinioClientApp
 {
     public partial class MainWindow : MvvmWindow
     {
