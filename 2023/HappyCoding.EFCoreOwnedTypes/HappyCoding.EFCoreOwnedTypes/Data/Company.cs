@@ -12,4 +12,6 @@ public class Company
     public Address Address { get; set; } = new Address();
 
     public Address SecondaryAddress { get; set; } = new Address();
+
+    public List<Address> AdditionalAddresses { get; set; } = new List<Address>();
 }

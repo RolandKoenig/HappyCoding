@@ -23,6 +23,7 @@ public class MyDbContext : DbContext
         var tableCompany = modelBuilder.Entity<Company>().ToTable("Companies");
         tableCompany.OwnsOne<Address>(x => x.Address);
         tableCompany.OwnsOne<Address>(x => x.SecondaryAddress);
+        tableCompany.OwnsMany<Address>(x => x.AdditionalAddresses);
 
         var tablePerson = modelBuilder.Entity<Person>().ToTable("Persons");
         tablePerson.OwnsOne<Address>(x => x.Address);
