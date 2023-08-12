@@ -6,7 +6,7 @@ namespace HappyCoding.EFCoreOwnedTypes;
 
 public class DbUtil
 {
-    public static MyDbContext CreateDbContext(string dbConnectionString)
+    public static MyDbContext CreateDbContext(string dbConnectionString, bool doLog = false)
     {
         var dbContextBuilder = new DbContextOptionsBuilder<MyDbContext>();
         dbContextBuilder.UseSqlServer(
@@ -15,6 +15,13 @@ public class DbUtil
             {
                 config.MigrationsHistoryTable("Migrations"); 
             });
+
+        if (doLog)
+        {
+            dbContextBuilder.LogTo(Console.WriteLine, (eventId, _) => eventId.Id == 20100);
+            dbContextBuilder.EnableSensitiveDataLogging();
+        }
+
         return new MyDbContext(dbContextBuilder.Options);
     }
 

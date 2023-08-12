@@ -14,11 +14,9 @@ public static class Program
         var dbConnectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=HappyCoding_2023_EFCoreOwnedTypes;Integrated Security=SSPI";
 
         await MigrateDatabaseAsync(dbConnectionString);
-        await DeletingPreviousTestData(dbConnectionString);
-        await CreateNewTestData(dbConnectionString);
-
-
-
+        await DeletingPreviousTestDataAsync(dbConnectionString);
+        await CreateNewTestDataAsync(dbConnectionString);
+        await QuerySomeDataAsync(dbConnectionString);
     }
 
     private static async Task MigrateDatabaseAsync(string dbConnectionString)
@@ -27,7 +25,7 @@ public static class Program
         await DbUtil.MigrateDbAsync(dbConnectionString);
     }
 
-    private static async Task DeletingPreviousTestData(string dbConnectionString)
+    private static async Task DeletingPreviousTestDataAsync(string dbConnectionString)
     {
         Console.WriteLine("Deleting previous test data...");
 
@@ -37,7 +35,7 @@ public static class Program
         await dbContext.Persons.ExecuteDeleteAsync();
     }
 
-    public static async Task CreateNewTestData(string dbConnectionString)
+    public static async Task CreateNewTestDataAsync(string dbConnectionString)
     {
         Console.WriteLine("Creating new test data...");
 
@@ -74,5 +72,32 @@ public static class Program
         await dbContext.Companies.AddRangeAsync(companyFaker.Generate(50));
 
         await dbContext.SaveChangesAsync();
+    }
+
+    public static async Task QuerySomeDataAsync(string dbConnectionString)
+    {
+        Console.WriteLine("Selecting some data...");
+        
+        await using var dbContext = DbUtil.CreateDbContext(dbConnectionString, true);
+
+        Console.WriteLine();
+        Console.WriteLine("### All persons, order by postal code");
+        var personsByPostalCode = await dbContext.Persons
+            .OrderBy(x => x.Address.PostalCode)
+            .ToArrayAsync();
+
+        Console.WriteLine();
+        Console.WriteLine("### All companies, order by postal code of secondary address");
+        var companiesByPostalCode = await dbContext.Companies
+            .OrderBy(x => x.SecondaryAddress.PostalCode)
+            .ToArrayAsync();
+
+        Console.WriteLine();
+        var cityName = personsByPostalCode[3].Address.City;
+        Console.WriteLine($"### All persons in city '{cityName}', order by last name");
+        var personsInCity = await dbContext.Persons
+            .Where(x => x.Address.City == cityName)
+            .OrderBy(x => x.LastName)
+            .ToArrayAsync();
     }
 }
