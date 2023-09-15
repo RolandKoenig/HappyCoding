@@ -11,7 +11,7 @@ public static class Program
 {
     public static async Task Main(string[] args)
     {
-        var dbConnectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=HappyCoding_2023_EFCoreOwnedTypes;Integrated Security=SSPI";
+        var dbConnectionString = "Data Source=localhost,1433;Initial Catalog=HappyCoding_2023_EFCoreOwnedTypes;User Id=SA;Password=DasIstEinGeheimes@Passwort123?;Trusted_Connection=False;Encrypt=False;";
 
         await MigrateDatabaseAsync(dbConnectionString);
         await DeletingPreviousTestDataAsync(dbConnectionString);
