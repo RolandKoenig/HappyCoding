@@ -6,7 +6,7 @@ using HappyCoding.TestingWithContainers.IntegrationTests.TestSetup;
 namespace HappyCoding.TestingWithContainers.IntegrationTests;
 
 [Collection(nameof(WebApplicationTestCollection))]
-public class PersonsControllerTests : IClassFixture<WebApplicationFixture>
+public class PersonsControllerTests
 {
     private readonly WebApplicationFixture _fixture;
     private readonly HttpClient _httpClient;

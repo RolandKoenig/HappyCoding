@@ -6,7 +6,7 @@ using HappyCoding.TestingWithContainers.SystemTests.TestSetup;
 namespace HappyCoding.TestingWithContainers.SystemTests;
 
 [Collection(nameof(TestEnvironmentCollection))]
-public class PersonApiTests : IClassFixture<TestEnvironmentFixture>
+public class PersonApiTests
 {
     private readonly TestEnvironmentFixture _fixture;
 

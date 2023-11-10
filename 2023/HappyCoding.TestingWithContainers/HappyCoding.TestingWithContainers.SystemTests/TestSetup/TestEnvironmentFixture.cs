@@ -15,7 +15,7 @@ public class TestEnvironmentFixture
     public string SqlConnectionString => _sqlConnectionString ?? string.Empty;
 
     public string ApplicationBaseUrl => _applicationBaseUrl ?? string.Empty;
-    
+
     public async Task EnsureContainersStartedAsync()
     {
         if (_containers != null)
@@ -30,7 +30,11 @@ public class TestEnvironmentFixture
             .Build();
 
         var azureSqlTag = ":2.0.0";
-        if (OperatingSystem.IsMacOS()) { azureSqlTag = "";}
+        if (OperatingSystem.IsMacOS())
+        {
+            azureSqlTag = "";
+        }
+
         var sqlEdgeContainer = new ContainerBuilder()
             .WithImage($"mcr.microsoft.com/azure-sql-edge{azureSqlTag}")
             .WithNetwork(dockerNetwork)
@@ -67,7 +71,7 @@ public class TestEnvironmentFixture
         // Start all containers
         await sqlEdgeContainer.StartAsync();
         await applicationContainer.StartAsync();
-        
+
         _sqlConnectionStringFromPublic =
             $"Data Source=localhost,{sqlEdgeContainer.GetMappedPublicPort(1433)};Initial Catalog=HappyCoding_TestingWithContainers;Integrated Security=SSPI;User Id=SA;Password=MySecret@Password123?;Trusted_Connection=False;Encrypt=False;";
 
@@ -83,7 +87,7 @@ public class TestEnvironmentFixture
         {
             throw new InvalidOperationException("Container not started. Create a client before calling this method!");
         }
-        
+
         await using var connection = new SqlConnection(_sqlConnectionStringFromPublic);
         await connection.OpenAsync();
 
@@ -92,6 +96,3 @@ public class TestEnvironmentFixture
         await command.ExecuteNonQueryAsync();
     }
 }
-
-[CollectionDefinition(nameof(TestEnvironmentCollection))]
-public class TestEnvironmentCollection : ICollectionFixture<TestEnvironmentFixture> { }
