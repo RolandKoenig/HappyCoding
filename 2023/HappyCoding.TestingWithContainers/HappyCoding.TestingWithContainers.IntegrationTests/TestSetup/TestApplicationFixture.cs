@@ -6,7 +6,7 @@ using Microsoft.Data.SqlClient;
 
 namespace HappyCoding.TestingWithContainers.IntegrationTests.TestSetup;
 
-public class WebApplicationFixture : WebApplicationFactory<Program>
+public class TestApplicationFixture : WebApplicationFactory<Program>
 {
     private static readonly string HostEnvironment = "IntegrationTests";
 

@@ -8,9 +8,9 @@ namespace HappyCoding.TestingWithContainers.SystemTests;
 [Collection(nameof(TestEnvironmentCollection))]
 public class PersonApiTests
 {
-    private readonly TestEnvironmentFixture _fixture;
+    private readonly TestApplicationFixture _fixture;
 
-    public PersonApiTests(TestEnvironmentFixture fixture)
+    public PersonApiTests(TestApplicationFixture fixture)
     {
         _fixture = fixture;
     }
@@ -18,6 +18,7 @@ public class PersonApiTests
     [Fact]
     public async Task Get_persons_after_startup_returns_empty_result()
     {
+        // Arrange
         await _fixture.EnsureContainersStartedAsync();
 
         // Act
@@ -32,7 +33,7 @@ public class PersonApiTests
     public async Task Create_new_person_and_get_it_over_person_list()
     {
         // Arrange
-        await _fixture.CleanupDatabaseAsync();
+        await _fixture.EnsureContainersStartedAsync();
         
         // Act
         var newPerson = new PersonDataRow()

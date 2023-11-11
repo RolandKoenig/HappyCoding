@@ -8,10 +8,10 @@ namespace HappyCoding.TestingWithContainers.IntegrationTests;
 [Collection(nameof(WebApplicationTestCollection))]
 public class PersonsControllerTests
 {
-    private readonly WebApplicationFixture _fixture;
+    private readonly TestApplicationFixture _fixture;
     private readonly HttpClient _httpClient;
 
-    public PersonsControllerTests(WebApplicationFixture fixture)
+    public PersonsControllerTests(TestApplicationFixture fixture)
     {
         _fixture = fixture;
         _httpClient = _fixture.CreateClient();

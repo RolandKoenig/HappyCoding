@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 
 namespace HappyCoding.TestingWithContainers.SystemTests.TestSetup;
 
-public class TestEnvironmentFixture
+public class TestApplicationFixture
 {
     private IContainer[]? _containers;
 
