@@ -1,4 +1,8 @@
 # HappyCoding 2023
+## ASP.NET Core
+### [WebApiWithSqliteDb](HappyCoding.WebApiWithSqliteDb)
+A REST data service which uses a SQLite database as the persistence layer
+
 ## Avalonia
 ### [AvaloniaWithMapsui](HappyCoding.AvaloniaWithMapsui)
 This project is a prototype for using Mapsui MapControl in an Avalonia application
