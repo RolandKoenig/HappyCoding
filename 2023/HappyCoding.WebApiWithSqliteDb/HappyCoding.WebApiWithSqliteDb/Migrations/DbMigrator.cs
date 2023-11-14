@@ -14,7 +14,7 @@ internal static class DbMigrator
         var dbContext = new PersonDataDbContext(dbContextBuilder.Options);
 
         var dbMigrator = dbContext.Database.GetService<IMigrator>();
-
+        
         await dbMigrator.MigrateAsync();
     }
 }

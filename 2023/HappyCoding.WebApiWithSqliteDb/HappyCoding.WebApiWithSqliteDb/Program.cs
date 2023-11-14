@@ -12,6 +12,11 @@ public class Program
         var appRootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         Environment.CurrentDirectory = appRootPath!;
 
+        if (!Directory.Exists("data"))
+        {
+            Directory.CreateDirectory("data");
+        }
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Migrate database
