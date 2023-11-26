@@ -1,0 +1,47 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HappyCoding.AvaloniaWithAcrylicBackground"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaWithAcrylicBackground.MainWindow"
+        x:CompileBindings="False"
+        Title="HappyCoding.AvaloniaWithAcrylicBackground"
+        TransparencyLevelHint="AcrylicBlur"
+        ExtendClientAreaToDecorationsHint="True"
+        Background="Transparent">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <DockPanel LastChildFill="True">
+        <Panel Background="{DynamicResource AppBackgroundBrush}"
+               DockPanel.Dock="Top"
+               IsHitTestVisible="False">
+            <TextBlock Text="HappyCoding - AvaloniaWithAcrylicBackground"
+                       Foreground="{DynamicResource AppForegroundBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Margin="5"/>
+        </Panel>
+
+        <Grid ColumnDefinitions="100,3,*">
+            <ListBox Grid.Column="0"
+                     Background="Transparent"
+                     ItemsSource="{Binding Path=ListItems}"
+                     Margin="4">
+                
+                
+            </ListBox>
+            
+            <GridSplitter Grid.Column="1"
+                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                          Background="Transparent"/>
+            
+            <Panel Grid.Column="2">
+                
+            </Panel>
+        </Grid>
+    </DockPanel>
+</Window>
