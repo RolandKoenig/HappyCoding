@@ -12,30 +12,44 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key='Light'>
-                    <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
-                                                 BackgroundSource="Digger"
-                                                 TintColor="WhiteSmoke"
-                                                 TintOpacity="0.8"
-                                                 MaterialOpacity="0.5" />
                     <ExperimentalAcrylicMaterial x:Key="AppTitleAcrylicMaterial"
                                                  BackgroundSource="Digger"
                                                  TintColor="WhiteSmoke"
-                                                 TintOpacity="1"
+                                                 TintOpacity="0.8"
                                                  MaterialOpacity="0.3" />
+                    <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                 BackgroundSource="Digger"
+                                                 TintColor="WhiteSmoke"
+                                                 TintOpacity="0.9"
+                                                 MaterialOpacity="0.7" />
+                    <LinearGradientBrush x:Key="AppBorderBrush" 
+                                         StartPoint="0,0" EndPoint="2,0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0" Color="#aaaaaa" />
+                            <GradientStop Offset="2" Color="#cccccc" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
                     <SolidColorBrush x:Key='AppBackgroundBrush'>WhiteSmoke</SolidColorBrush>
                     <SolidColorBrush x:Key='AppForegroundBrush'>Black</SolidColorBrush>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key='Dark'>
-                    <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
-                                                 BackgroundSource="Digger"
-                                                 TintColor="Black"
-                                                 TintOpacity="0.8"
-                                                 MaterialOpacity="0.5" />
                     <ExperimentalAcrylicMaterial x:Key="AppTitleAcrylicMaterial"
                                                  BackgroundSource="Digger"
                                                  TintColor="Black"
-                                                 TintOpacity="1"
+                                                 TintOpacity="0.8"
                                                  MaterialOpacity="0.3" />
+                    <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                 BackgroundSource="Digger"
+                                                 TintColor="Black"
+                                                 TintOpacity="0.9"
+                                                 MaterialOpacity="0.7" />
+                    <LinearGradientBrush x:Key="AppBorderBrush" 
+                                         StartPoint="0,0" EndPoint="2,0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0" Color="#777777" />
+                            <GradientStop Offset="2" Color="#333333" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
                     <SolidColorBrush x:Key='AppBackgroundBrush'>Black</SolidColorBrush>
                     <SolidColorBrush x:Key='AppForegroundBrush'>WhiteSmoke</SolidColorBrush>
                 </ResourceDictionary>

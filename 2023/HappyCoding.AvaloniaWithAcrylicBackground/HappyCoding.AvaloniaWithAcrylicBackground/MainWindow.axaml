@@ -15,36 +15,31 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     
-    <Panel>
-        <ExperimentalAcrylicBorder Material="{DynamicResource AppAcrylicMaterial}"
-                                   Margin="0,32,0,0"/>
+    <Grid ColumnDefinitions="250,2,*">
+        <ExperimentalAcrylicBorder Grid.Column="0" Material="{DynamicResource AppTitleAcrylicMaterial}"/>
+        <ExperimentalAcrylicBorder Grid.Column="2"
+                                   Material="{DynamicResource AppAcrylicMaterial}"/>
         
-        <ext:MainWindowFrame>
-            <ext:MainWindowFrame.CustomTitleArea>
-                <ExperimentalAcrylicBorder Material="{DynamicResource AppTitleAcrylicMaterial}"/>
-                <TextBlock Text="HappyCoding - AvaloniaWithAcrylicBackground"
-                           Foreground="{DynamicResource AppForegroundBrush}"
-                           FontSize="16"
-                           Height="32"/>
-            </ext:MainWindowFrame.CustomTitleArea>
+        <GridSplitter Grid.Column="1"
+                      MinWidth="2"
+                      Background="{DynamicResource AppBorderBrush}"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         
-            <ext:MainWindowFrame.MainContentArea>
-                <Grid ColumnDefinitions="100,3,*">
-                    <ListBox Grid.Column="0"
-                             Background="Transparent"
-                             ItemsSource="{Binding Path=ListItems}"
-                             Margin="4">
-                    </ListBox>
+        <ListBox Grid.Column="0"
+                 Background="Transparent"
+                 ItemsSource="{Binding Path=ListItems}"
+                 Margin="4,30,4,4">
+        </ListBox>
+        
+        <StackPanel Grid.Column="2" 
+                    Orientation="Vertical"
+                    Margin="4,30,4,4">
+            <TextBlock Text="Some dummy text" />
+            <Button Content="Test button"
+                    Width="120" Margin="4"/>
+            <TextBox Width="120" Margin="4" 
+                     HorizontalAlignment="Left"/>
             
-                    <GridSplitter Grid.Column="1"
-                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                  Background="Transparent"/>
-                    
-                    <Panel Grid.Column="2">
-                
-                    </Panel>
-                </Grid>
-            </ext:MainWindowFrame.MainContentArea>
-        </ext:MainWindowFrame>
-    </Panel>
+        </StackPanel>
+    </Grid>
 </Window>
