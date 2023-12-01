@@ -12,12 +12,32 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key='Light'>
-                    <SolidColorBrush x:Key='AppBackgroundBrush'>SkyBlue</SolidColorBrush>
+                    <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                 BackgroundSource="Digger"
+                                                 TintColor="WhiteSmoke"
+                                                 TintOpacity="0.8"
+                                                 MaterialOpacity="0.5" />
+                    <ExperimentalAcrylicMaterial x:Key="AppTitleAcrylicMaterial"
+                                                 BackgroundSource="Digger"
+                                                 TintColor="WhiteSmoke"
+                                                 TintOpacity="1"
+                                                 MaterialOpacity="0.3" />
+                    <SolidColorBrush x:Key='AppBackgroundBrush'>WhiteSmoke</SolidColorBrush>
                     <SolidColorBrush x:Key='AppForegroundBrush'>Black</SolidColorBrush>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key='Dark'>
-                    <SolidColorBrush x:Key='AppBackgroundBrush'>DodgerBlue</SolidColorBrush>
-                    <SolidColorBrush x:Key='AppForegroundBrush'>White</SolidColorBrush>
+                    <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                 BackgroundSource="Digger"
+                                                 TintColor="Black"
+                                                 TintOpacity="0.8"
+                                                 MaterialOpacity="0.5" />
+                    <ExperimentalAcrylicMaterial x:Key="AppTitleAcrylicMaterial"
+                                                 BackgroundSource="Digger"
+                                                 TintColor="Black"
+                                                 TintOpacity="1"
+                                                 MaterialOpacity="0.3" />
+                    <SolidColorBrush x:Key='AppBackgroundBrush'>Black</SolidColorBrush>
+                    <SolidColorBrush x:Key='AppForegroundBrush'>WhiteSmoke</SolidColorBrush>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
