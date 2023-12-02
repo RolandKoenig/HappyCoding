@@ -15,14 +15,15 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     
-    <Grid ColumnDefinitions="250,2,*">
-        <ExperimentalAcrylicBorder Grid.Column="0" Material="{DynamicResource AppTitleAcrylicMaterial}"/>
+    <Grid ColumnDefinitions="250,3,*">
+        <ExperimentalAcrylicBorder Grid.Column="0" 
+                                   Grid.ColumnSpan="2"
+                                   Material="{DynamicResource AppNavigationAcrylicMaterial}"/>
         <ExperimentalAcrylicBorder Grid.Column="2"
                                    Material="{DynamicResource AppAcrylicMaterial}"/>
         
         <GridSplitter Grid.Column="1"
-                      MinWidth="2"
-                      Background="{DynamicResource AppBorderBrush}"
+                      Background="Transparent"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         
         <ListBox Grid.Column="0"
@@ -30,6 +31,9 @@
                  ItemsSource="{Binding Path=ListItems}"
                  Margin="4,30,4,4">
         </ListBox>
+        <Rectangle Grid.Column="0" 
+                   Fill="#33888888" Width="200" Height="500"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"></Rectangle>
         
         <StackPanel Grid.Column="2" 
                     Orientation="Vertical"
