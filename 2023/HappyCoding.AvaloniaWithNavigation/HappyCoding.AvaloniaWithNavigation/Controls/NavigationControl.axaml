@@ -5,5 +5,5 @@
              xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.AvaloniaWithNavigation.Controls.NavigationControl">
-    
+    <TransitioningContentControl x:Name="CtrlTransition" />
 </ext:ViewServiceHostUserControl>

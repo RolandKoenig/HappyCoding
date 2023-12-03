@@ -48,13 +48,13 @@ public partial class NavigationControl : ViewServiceHostUserControl
             return false;
         }
 
-        this.Content = viewObjectControl;
+        this.CtrlTransition.Content = viewObjectControl;
         return true;
     }
 
     private void TriggerInitialNavigation()
     {
-        if (this.Content != null) { return; }
+        if (this.CtrlTransition.Content != null) { return; }
         if (string.IsNullOrEmpty(this.InitialViewName)) { return; }
 
         this.TryNavigateTo(this.InitialViewName);
