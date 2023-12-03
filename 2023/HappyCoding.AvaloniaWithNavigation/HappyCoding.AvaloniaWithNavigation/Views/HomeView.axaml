@@ -1,0 +1,23 @@
+<ext:MvvmUserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:HappyCoding.AvaloniaWithNavigation.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="local:HomeViewModel"
+             x:Class="HappyCoding.AvaloniaWithNavigation.Views.HomeView">
+    <ext:MvvmUserControl.DataContext>
+        <local:HomeViewModel />
+    </ext:MvvmUserControl.DataContext>
+
+    <Panel>
+        <Button VerticalAlignment="Center" HorizontalAlignment="Center"
+                Content="Start"
+                Command="{Binding Path=NavigateToNextCommand}">
+            <Button.RenderTransform>
+                <ScaleTransform ScaleX="6" ScaleY="6" />
+            </Button.RenderTransform>
+        </Button>
+    </Panel>
+</ext:MvvmUserControl>

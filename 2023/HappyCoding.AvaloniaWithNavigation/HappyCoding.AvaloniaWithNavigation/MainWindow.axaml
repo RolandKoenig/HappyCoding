@@ -1,0 +1,24 @@
+<ext:MvvmWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+        xmlns:controls="clr-namespace:HappyCoding.AvaloniaWithNavigation.Controls"
+        xmlns:views="clr-namespace:HappyCoding.AvaloniaWithNavigation.Views"
+        xmlns:local="clr-namespace:HappyCoding.AvaloniaWithNavigation"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaWithNavigation.MainWindow"
+        Title="HappyCoding.AvaloniaWithNavigation">
+    <ext:MvvmWindow.DataContext>
+        <local:MainWindowViewModel />
+    </ext:MvvmWindow.DataContext>
+
+    <controls:NavigationControl InitialViewName="Home">
+        <controls:NavigationControl.NavigationItems>
+            <controls:NavigationItem Name="Home"
+                                     ViewType="{x:Type views:HomeView}" />
+            <controls:NavigationItem Name="ToDoList"
+                                     ViewType="{x:Type views:ToDoListView}" />
+        </controls:NavigationControl.NavigationItems>
+    </controls:NavigationControl>
+</ext:MvvmWindow>
