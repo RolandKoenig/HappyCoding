@@ -3,6 +3,9 @@ using Microsoft.Playwright;
 
 namespace HappyCoding.AspNetTestWithPlaywright.Tests;
 
+// Test ASP.NET Core Web Application using Playwright
+// Method described here: https://www.meziantou.net/automated-ui-tests-an-asp-net-core-application-with-playwright-and-xunit.htm
+
 public class MyPlaywrightTests(WebHostServerFixture<Startup> server) : IClassFixture<WebHostServerFixture<Startup>>
 {
     [Fact]
