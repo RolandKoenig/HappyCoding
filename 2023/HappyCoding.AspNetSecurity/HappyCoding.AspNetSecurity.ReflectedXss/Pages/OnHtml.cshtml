@@ -1,0 +1,22 @@
+@page
+@model HappyCoding.AspNetSecurity.ReflectedXss.Pages.OnHtml
+
+@{
+    ViewData["Title"] = "Reflected XSS on Html";
+}
+
+<div class="text-center">
+    <h1>Reflected XSS on Html</h1>
+    <p>Type in &lt;script&gt;alert('dummy');&lt;&#47;script&gt; to inject custom JavaScript </p>
+    <form method="POST">
+        <p>Search: </p>
+        <input type="text" name="txtSearch" />
+        <button type="submit">Submit</button>
+    </form>
+    
+    <!-- Correct way, Razor is protecting us here -->
+    <p>Last input: @Model.TxtSearch</p>
+    
+    <!-- Wrong way. WriteLiteral disables XSS protection of the Razor engine -->
+    <p>Last input: @{ WriteLiteral(Model.TxtSearch); }</p>
+</div>

@@ -1,13 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HappCoding.AspNetSecurity.ReflectedXss.Pages;
+namespace HappyCoding.AspNetSecurity.ReflectedXss.Pages;
 
-public class IndexModel : PageModel
+public class OnHtml : PageModel
 {
     public string TxtSearch { get; set; } = string.Empty;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public OnHtml(ILogger<IndexModel> logger)
     {
    
     }

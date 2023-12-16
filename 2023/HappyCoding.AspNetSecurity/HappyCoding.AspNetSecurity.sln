@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappCoding.AspNetSecurity.ReflectedXss", "HappCoding.AspNetSecurity.ReflectedXss\HappCoding.AspNetSecurity.ReflectedXss.csproj", "{345F5D80-2B19-4314-86E9-89F16889B694}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetSecurity.ReflectedXss", "HappyCoding.AspNetSecurity.ReflectedXss\HappyCoding.AspNetSecurity.ReflectedXss.csproj", "{345F5D80-2B19-4314-86E9-89F16889B694}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
