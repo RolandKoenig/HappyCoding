@@ -14,6 +14,7 @@ public abstract class WebHostServerFixture : IDisposable
     private readonly Lazy<Uri> _rootUriInitializer;
 
     public Uri RootUri => _rootUriInitializer.Value;
+    
     private IHost? Host { get; set; }
 
     protected WebHostServerFixture()
@@ -53,6 +54,8 @@ public abstract class WebHostServerFixture : IDisposable
 
     protected virtual string StartAndGetRootUri()
     {
+        TestUtil.EnsureBrowsersInstalled();
+        
         // As the port is generated automatically, we can use IServerAddressesFeature to get the actual server URL
         Host = CreateWebHost();
         RunInBackgroundThread(Host.Start);
