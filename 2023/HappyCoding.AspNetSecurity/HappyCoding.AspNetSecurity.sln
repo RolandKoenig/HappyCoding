@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetSecurity.ReflectedXss", "HappyCoding.AspNetSecurity.ReflectedXss\HappyCoding.AspNetSecurity.ReflectedXss.csproj", "{345F5D80-2B19-4314-86E9-89F16889B694}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XSS", "XSS", "{A9612EC5-2410-4DB3-95AF-E6DAC4CBD53B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSRF", "CSRF", "{1D27D478-8367-4A92-9218-E561F982192B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,8 @@ Global
 		{345F5D80-2B19-4314-86E9-89F16889B694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{345F5D80-2B19-4314-86E9-89F16889B694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{345F5D80-2B19-4314-86E9-89F16889B694}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{345F5D80-2B19-4314-86E9-89F16889B694} = {A9612EC5-2410-4DB3-95AF-E6DAC4CBD53B}
 	EndGlobalSection
 EndGlobal
