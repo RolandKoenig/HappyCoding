@@ -7,21 +7,25 @@ if (string.IsNullOrEmpty(socketFile))
     return 0;
 }
 
-if (!File.Exists(socketFile))
+if (File.Exists(socketFile))
 {
-    await using var fileStream = File.Create(socketFile);
-    fileStream.Close();
+    File.Delete(socketFile);
 }
 
 Console.WriteLine("Connecting to socket...");
-var socketEndPoint = new UnixDomainSocketEndPoint(socketFile);
-var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
-await socket.ConnectAsync(
-    socketEndPoint, 
-    CancellationToken.None);
-Console.WriteLine("Successfully conected");
 
-var networkStream = new NetworkStream(socket);
+var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.IP);
+
+var socketEndPoint = new UnixDomainSocketEndPoint(socketFile);
+socket.Bind(socketEndPoint);
+socket.Listen();
+
+var remoteSocket = await socket.AcceptAsync();
+Console.WriteLine("Connected");
+Console.WriteLine();
+
+
+var networkStream = new NetworkStream(remoteSocket, FileAccess.ReadWrite);
 var networkStreamWriter = new StreamWriter(networkStream);
 var networkStreamReader = new StreamReader(networkStream);
 Task.Run(async () =>
@@ -35,9 +39,9 @@ Task.Run(async () =>
             nextReceivedLine = await networkStreamReader.ReadLineAsync();
         }
     }
-    catch (Exception)
+    catch (Exception ex)
     {
-        // Nothing to do
+        Console.WriteLine("Error while listening: " + ex.ToString());
     }
 });
 
@@ -45,7 +49,8 @@ Task.Run(async () =>
 var nextLine = Console.ReadLine();
 while (!string.IsNullOrEmpty(nextLine))
 {
-    await networkStreamWriter.WriteAsync(nextLine);
+    await networkStreamWriter.WriteLineAsync(nextLine);
+    await networkStreamWriter.FlushAsync();
 
     nextLine = Console.ReadLine();
 }
