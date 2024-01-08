@@ -14,7 +14,7 @@ if (File.Exists(socketFile))
 
 Console.WriteLine("Connecting to socket...");
 
-var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.IP);
+var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
 
 var socketEndPoint = new UnixDomainSocketEndPoint(socketFile);
 socket.Bind(socketEndPoint);
@@ -25,7 +25,7 @@ Console.WriteLine("Connected");
 Console.WriteLine();
 
 
-var networkStream = new NetworkStream(remoteSocket, FileAccess.ReadWrite);
+var networkStream = new NetworkStream(remoteSocket);
 var networkStreamWriter = new StreamWriter(networkStream);
 var networkStreamReader = new StreamReader(networkStream);
 Task.Run(async () =>
