@@ -12,7 +12,6 @@
 
     <ItemGroup>
       <Folder Include="WebApp\" />
-      <Folder Include="WebApp\src\components\" />
     </ItemGroup>
 
 </Project>
