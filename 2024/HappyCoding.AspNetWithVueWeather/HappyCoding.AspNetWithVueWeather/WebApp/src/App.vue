@@ -18,14 +18,16 @@
     <h1 class="text-center">Weather-Data</h1>
     <div class="container">
       <div class="row">
-        <div class="col-3 fw-bold">Date</div>
+        <div class="col-1 fw-bold">#</div>
+        <div class="col-2 fw-bold">Date</div>
         <div class="col-3 fw-bold">Temperature (C)</div>
         <div class="col-3 fw-bold">Temperature (F)</div>
         <div class="col-3 fw-bold">Summary</div>
       </div>
-      <div v-for="actRow in weatherData">
+      <div v-for="(actRow, index) in weatherData">
         <div class="row">
-          <div class="col-3">{{ actRow.date }}</div>
+          <div class="col-1">{{ index + 1 }}</div>
+          <div class="col-2">{{ actRow.date }}</div>
           <div class="col-3">{{ actRow.temperatureC }}</div>
           <div class="col-3">{{ actRow.temperatureF }}</div>
           <div class="col-3">{{ actRow.summary }}</div>
