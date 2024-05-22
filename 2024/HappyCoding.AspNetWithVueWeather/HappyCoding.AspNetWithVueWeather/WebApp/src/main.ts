@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.min.css"
+
 import { createApp } from 'vue'
 import { WeatherApiClient } from "@/services/WeatherApiClient.generated";
 import App from './App.vue'

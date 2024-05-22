@@ -15,24 +15,32 @@
 
 <template>
   <main>
-    <h1>Weather-Data</h1>
-    <table>
-      <thead>
-        <tr>
-          <td>Date</td>
-          <td>Temperature (C)</td>
-          <td>Temperature (F)</td>
-          <td>Summary</td>
-        </tr>
-      </thead>
-      <tr v-for="actRow in weatherData">
-        <td>{{ actRow.date }}</td>
-        <td>{{ actRow.temperatureC }}</td>
-        <td>{{ actRow.temperatureF }}</td>
-        <td>{{ actRow.summary }}</td>
-      </tr>
-    </table>
-    <button @click="fetchWeatherData">Refresh</button>
+    <h1 class="text-center">Weather-Data</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-3 fw-bold">Date</div>
+        <div class="col-3 fw-bold">Temperature (C)</div>
+        <div class="col-3 fw-bold">Temperature (F)</div>
+        <div class="col-3 fw-bold">Summary</div>
+      </div>
+      <div v-for="actRow in weatherData">
+        <div class="row">
+          <div class="col-3">{{ actRow.date }}</div>
+          <div class="col-3">{{ actRow.temperatureC }}</div>
+          <div class="col-3">{{ actRow.temperatureF }}</div>
+          <div class="col-3">{{ actRow.summary }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <br />
+          <button @click="fetchWeatherData"
+                  class="btn btn-primary">
+            Refresh
+          </button>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
