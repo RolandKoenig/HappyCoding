@@ -52,6 +52,10 @@ export default defineConfig(async ({ command }) => {
 
     // Ensure the certificate and key exist
     if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
+      
+      // In macOS this doesn't work
+      // Workaround see https://github.com/dotnet/runtime/issues/99735
+      
       await new Promise<void>((resolve) => {
         spawn('dotnet', [
           'dev-certs',
