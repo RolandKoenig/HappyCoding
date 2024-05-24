@@ -11,7 +11,7 @@ simple Vue.js UI
 
 1. Build Vue.js application
 ```bash
-cd HappyCoding.AspNetWithVueWeather/WebApp
+cd HappyCoding.AspNetWithVueWeather/ClientApp
 
 npm install
 npm run build

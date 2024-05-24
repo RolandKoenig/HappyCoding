@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetWithVueWeather", "HappyCoding.AspNetWithVueWeather\HappyCoding.AspNetWithVueWeather.csproj", "{692609F7-E6ED-4D95-8697-59D07940FA3A}"
 EndProject
 Global

@@ -15,9 +15,16 @@ public static class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        app.UseAuthorization();
+
         app.UseStaticFiles();
+        app.UseRouting();
+        
+        app.UseAuthentication();
+        app.UseAuthorization();
+        
         app.MapControllers();
+        app.MapFallbackToFile("index.html");
+        
         app.Run();
     }
 }
