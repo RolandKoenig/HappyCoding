@@ -1,6 +1,8 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetWithVueWeather", "HappyCoding.AspNetWithVueWeather\HappyCoding.AspNetWithVueWeather.csproj", "{692609F7-E6ED-4D95-8697-59D07940FA3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AspNetWithVueWeatherSsl", "HappyCoding.AspNetWithVueWeatherSsl\HappyCoding.AspNetWithVueWeatherSsl.csproj", "{A8EC5568-2E0B-49FF-81D1-6BFFBFFA5285}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -11,5 +13,9 @@ Global
 		{692609F7-E6ED-4D95-8697-59D07940FA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{692609F7-E6ED-4D95-8697-59D07940FA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{692609F7-E6ED-4D95-8697-59D07940FA3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8EC5568-2E0B-49FF-81D1-6BFFBFFA5285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8EC5568-2E0B-49FF-81D1-6BFFBFFA5285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8EC5568-2E0B-49FF-81D1-6BFFBFFA5285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8EC5568-2E0B-49FF-81D1-6BFFBFFA5285}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
