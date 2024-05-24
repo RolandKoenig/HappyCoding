@@ -5,7 +5,7 @@
   const weatherApiClient = inject<WeatherApiClient>("WeatherApiClient");
   
   const weatherData: Ref<WeatherForecast[]> = ref([]);
-  
+
   async function fetchWeatherData() {
     weatherData.value = await weatherApiClient?.getWeatherForecast() ?? [];
   }
