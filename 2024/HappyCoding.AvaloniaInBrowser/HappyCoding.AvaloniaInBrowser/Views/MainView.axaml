@@ -1,0 +1,37 @@
+<ext:MvvmUserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             xmlns:local="clr-namespace:HappyCoding.AvaloniaInBrowser.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.AvaloniaInBrowser.Views.MainView"
+             x:DataType="local:MainViewViewModel"
+             ViewFor="{x:Type local:MainViewViewModel}"
+             DataContext="{ext:CreateUsingDependencyInjection {x:Type local:MainViewViewModel}}"
+             d:DataContext="{x:Static local:MainViewViewModel.DesignViewModel}">
+    <ext:MainWindowFrame>
+        <ext:MainWindowFrame.CustomTitleArea>
+            <TextBlock Text="HappyCoding - Avalonia In Browser"></TextBlock>
+        </ext:MainWindowFrame.CustomTitleArea>
+        <ext:MainWindowFrame.MainContentArea>
+            <DockPanel LastChildFill="True">
+                <Menu DockPanel.Dock="Top">
+                    <MenuItem Header="Tests">
+                        <MenuItem Header="Recreate test data"
+                                  Command="{Binding Path=RecreateTestDataCommand}"/>
+                        <MenuItem Header="Show dummy MessageBox"
+                                  Command="{Binding Path=ShowDummyMessageBoxCommand}" />
+                    </MenuItem>
+                </Menu>
+        
+                <Grid>
+                    <DataGrid ItemsSource="{Binding Path=DataRows}"
+                              IsReadOnly="True"
+                              AutoGenerateColumns="True"
+                              CanUserResizeColumns="True" />
+                </Grid>
+            </DockPanel>
+        </ext:MainWindowFrame.MainContentArea>
+    </ext:MainWindowFrame>
+</ext:MvvmUserControl>
