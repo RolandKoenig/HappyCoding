@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.RequestCompression.Server", "HappyCoding.RequestCompression.Server\HappyCoding.RequestCompression.Server.csproj", "{84082195-99FC-4EB6-B33D-AF4CB689FAC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.RequestCompression.Client", "HappyCoding.RequestCompression.Client\HappyCoding.RequestCompression.Client.csproj", "{35A103CF-F246-40C6-98A9-497E568D032F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84082195-99FC-4EB6-B33D-AF4CB689FAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84082195-99FC-4EB6-B33D-AF4CB689FAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84082195-99FC-4EB6-B33D-AF4CB689FAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84082195-99FC-4EB6-B33D-AF4CB689FAC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A103CF-F246-40C6-98A9-497E568D032F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A103CF-F246-40C6-98A9-497E568D032F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A103CF-F246-40C6-98A9-497E568D032F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A103CF-F246-40C6-98A9-497E568D032F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB57B2BA-EDEB-4F37-AA2A-6825BE29BACF}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+@HappyCoding.RequestCompression.Server_HostAddress = http://localhost:5224
+
+GET {{HappyCoding.RequestCompression.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
