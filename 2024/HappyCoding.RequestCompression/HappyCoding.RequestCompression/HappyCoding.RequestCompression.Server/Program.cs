@@ -8,8 +8,10 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddRequestDecompression();
 
         var app = builder.Build();
+        // app.UseRequestDecompression();
         
         app.MapPost("/hello", async ([FromServices] ILogger<Program> logger, HttpContext context) =>
         {
