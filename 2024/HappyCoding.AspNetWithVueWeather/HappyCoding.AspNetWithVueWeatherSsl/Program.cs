@@ -1,4 +1,4 @@
-namespace HappyCoding.AspNetWithVueWeather;
+namespace HappyCoding.AspNetWithVueWeatherSsl;
 
 public static class Program
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace HappyCoding.AspNetWithVueWeather.WeatherForecastModule;
+namespace HappyCoding.AspNetWithVueWeatherSsl.WeatherForecastModule;
 
 [ApiController]
 [Route("api/[controller]")]

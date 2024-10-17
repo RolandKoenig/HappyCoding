@@ -1,4 +1,4 @@
-namespace HappyCoding.AspNetWithVueWeather.WeatherForecastModule;
+namespace HappyCoding.AspNetWithVueWeatherSsl.WeatherForecastModule;
 
 public class WeatherForecast
 {
