@@ -1,5 +1,4 @@
-﻿using System.IO.Compression;
-using System.Net;
+﻿using System.Net;
 
 namespace HappyCoding.RequestCompression.Client;
 
@@ -9,27 +8,22 @@ namespace HappyCoding.RequestCompression.Client;
 public class CompressedContent : HttpContent
 {
     private readonly HttpContent _originalContent;
-    private readonly string _encodingType;
+    private readonly CompressedContentEncoding _encodingType;
 
-    public CompressedContent(HttpContent content, string encodingType)
+    public CompressedContent(HttpContent content, CompressedContentEncoding encodingType)
     {
         ArgumentNullException.ThrowIfNull(content);
         ArgumentNullException.ThrowIfNull(encodingType);
 
         _originalContent = content;
-        _encodingType = encodingType.ToLowerInvariant();
-
-        if (_encodingType != "gzip" && this._encodingType != "deflate")
-        {
-            throw new InvalidOperationException($"Encoding '{this._encodingType}' is not supported. Only supports gzip or deflate encoding.");
-        }
+        _encodingType = encodingType;
 
         foreach (var header in _originalContent.Headers)
         {
             Headers.TryAddWithoutValidation(header.Key, header.Value);
         }
 
-        Headers.ContentEncoding.Add(encodingType);
+        Headers.ContentEncoding.Add(encodingType.EncodingName);
     }
 
     protected override bool TryComputeLength(out long length)
@@ -40,13 +34,7 @@ public class CompressedContent : HttpContent
 
     protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context)
     {
-        
-        Stream compressedStream = _encodingType switch
-        {
-            "gzip" => new GZipStream(stream, CompressionMode.Compress, leaveOpen: true),
-            "deflate" => new DeflateStream(stream, CompressionMode.Compress, leaveOpen: true),
-            _ => throw new InvalidOperationException($"Unable to compress. Encoding type '{_encodingType}' is not handled!")
-        };
+        var compressedStream = _encodingType.WrapStream(stream);
 
         return _originalContent.CopyToAsync(compressedStream).ContinueWith(_ =>
         {

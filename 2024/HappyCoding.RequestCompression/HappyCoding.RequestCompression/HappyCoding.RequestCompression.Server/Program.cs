@@ -10,6 +10,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         var app = builder.Build();
+        
         app.MapPost("/hello", async ([FromServices] ILogger<Program> logger, HttpContext context) =>
         {
             var strBuilder = new StringBuilder(2048);

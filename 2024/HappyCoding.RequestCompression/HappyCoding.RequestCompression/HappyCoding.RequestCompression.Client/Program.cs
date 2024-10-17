@@ -21,7 +21,9 @@ public static class Program
     {
         Console.WriteLine("Select which request to trigger:");
         Console.WriteLine(" 1 = Uncompressed");
-        Console.WriteLine(" 2 = Compressed by gzip");
+        Console.WriteLine(" 2 = Compressed by deflate");
+        Console.WriteLine(" 3 = Compressed by gzip");
+        Console.WriteLine(" 4 = Compressed by brotli");
         Console.WriteLine();
 
         Console.Write("Input: ");
@@ -36,7 +38,17 @@ public static class Program
                 break;
             
             case "2":
+                await TriggerRequestCompressedByDeflateAsync();
+                Console.WriteLine("Request triggered");
+                break;
+            
+            case "3":
                 await TriggerRequestCompressedByGzipAsync();
+                Console.WriteLine("Request triggered");
+                break;
+            
+            case "4":
+                await TriggerRequestCompressedByBrotliAsync();
                 Console.WriteLine("Request triggered");
                 break;
             
@@ -58,13 +70,35 @@ public static class Program
         await httpClient.PostAsync(TARGET_ENDPOINT, httpContent);
     }
 
+    private static async Task TriggerRequestCompressedByDeflateAsync()
+    {
+        var httpClient = new HttpClient();
+        httpClient.BaseAddress = new Uri(TARGET_BASE_ADDRESS);
+        
+        using var httpContent = new StringContent(BODY_UNCOMPRESSED, Encoding.UTF8);
+        using var compressedContent = new CompressedContent(httpContent, CompressedContentEncoding.Deflate);
+        
+        await httpClient.PostAsync(TARGET_ENDPOINT, compressedContent);
+    }
+    
     private static async Task TriggerRequestCompressedByGzipAsync()
     {
         var httpClient = new HttpClient();
         httpClient.BaseAddress = new Uri(TARGET_BASE_ADDRESS);
         
         using var httpContent = new StringContent(BODY_UNCOMPRESSED, Encoding.UTF8);
-        using var compressedContent = new CompressedContent(httpContent, "gzip");
+        using var compressedContent = new CompressedContent(httpContent, CompressedContentEncoding.GZip);
+        
+        await httpClient.PostAsync(TARGET_ENDPOINT, compressedContent);
+    }
+    
+    private static async Task TriggerRequestCompressedByBrotliAsync()
+    {
+        var httpClient = new HttpClient();
+        httpClient.BaseAddress = new Uri(TARGET_BASE_ADDRESS);
+        
+        using var httpContent = new StringContent(BODY_UNCOMPRESSED, Encoding.UTF8);
+        using var compressedContent = new CompressedContent(httpContent, CompressedContentEncoding.Brotli);
         
         await httpClient.PostAsync(TARGET_ENDPOINT, compressedContent);
     }
