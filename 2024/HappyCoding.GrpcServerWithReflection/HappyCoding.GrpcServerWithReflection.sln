@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.GrpcServerWithReflection", "HappyCoding.GrpcServerWithReflection\HappyCoding.GrpcServerWithReflection.csproj", "{1200478C-EDAF-47FD-801C-D3AF0D6E0541}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1200478C-EDAF-47FD-801C-D3AF0D6E0541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1200478C-EDAF-47FD-801C-D3AF0D6E0541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1200478C-EDAF-47FD-801C-D3AF0D6E0541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1200478C-EDAF-47FD-801C-D3AF0D6E0541}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

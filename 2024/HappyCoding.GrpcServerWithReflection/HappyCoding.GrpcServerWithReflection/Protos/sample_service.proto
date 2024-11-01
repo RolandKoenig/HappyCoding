@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option csharp_namespace = "HappyCoding.GrpcServerWithReflection";
+
+package sample_service;
+
+service SampleService {
+  rpc SayHello (HelloRequest) returns (HelloResponse);
+  
+  rpc AddPerson (AddPersonRequest) returns (AddPersonResponse);
+  rpc GetPersons (GetPersonsRequest) returns (GetPersonsResponse);
+}
+
+// Greeter
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string message = 1;
+}
+
+// Add Person
+message AddPersonRequest {
+  Person person = 1;
+}
+
+message AddPersonResponse {
+  bool successful = 1;
+  AddPersonError error = 2;
+  Person added_person = 3;
+}
+
+enum AddPersonError {
+  ADD_PERSON_RESULT_UNSPECIFIED = 0;
+  ADD_PERSON_RESULT_INVALID_DATA = 1;
+  ADD_PERSON_RESULT_ALREADY_EXISTS = 2;
+}
+
+// Get Persons
+message GetPersonsRequest {
+  
+}
+
+message GetPersonsResponse {
+  repeated Person persons = 1;
+}
+
+// Shared
+message Person{
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  int32 age = 4;
+  repeated string email = 5;
+}
