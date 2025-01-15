@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+	  <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.11" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj" />
+    <ProjectReference Include="..\..\HappyCoding.HexagonalArchitecture.Application\HappyCoding.HexagonalArchitecture.Application.csproj" />
+    <ProjectReference Include="..\..\HappyCoding.HexagonalArchitecture.SQLiteAdapter\HappyCoding.HexagonalArchitecture.SQLiteAdapter.csproj" />
+    <ProjectReference Include="..\Client\HappyCoding.HexagonalArchitecture.WebUI.Client.csproj" />
+  </ItemGroup>
+
+
+</Project>

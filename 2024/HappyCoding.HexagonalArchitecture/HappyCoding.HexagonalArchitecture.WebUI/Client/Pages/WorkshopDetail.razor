@@ -1,0 +1,108 @@
+﻿@page "/ui/workshopdetail"
+@page "/ui/workshopdetail/{workshopID}"
+@using HappyCoding.HexagonalArchitecture.Application.Dtos
+
+@if (this.IsCreating)
+{
+    <PageTitle>Create new Workshop</PageTitle>
+    <h1>Create new Workshop</h1>
+}
+else
+{
+    <PageTitle>Edit Workshop</PageTitle>
+    <h1>Edit Workshop</h1>
+}
+
+<EditForm Model="EditingWorkshop" OnValidSubmit="SubmitWorkshopAsync">
+    <DataAnnotationsValidator />
+    
+    <h2>Common data</h2>
+    
+    @if (!this.IsCreating)
+    {
+        <label for="workshopID">ID</label>
+        <InputText class="form-control" id="workshopID" @bind-Value="WorkshopID" readonly></InputText>
+        <br/>
+    }
+
+    <label for="project">Project</label>
+    <InputText class="form-control" id="project" @bind-Value="EditingWorkshop.Project" placeholder="Project"></InputText>
+    <ValidationMessage For="@(() => EditingWorkshop.Project)" />
+    <br/>
+
+    <label for="title">Title</label>
+    <InputText class="form-control" id="title" @bind-Value="EditingWorkshop.Title" placeholder="Title"></InputText>
+    <ValidationMessage For="@(() => EditingWorkshop.Title)" />
+    <br/>
+
+    <div class="row">
+        <label for="timestamp">Timestamp</label>
+        <div class="col-md-2">
+            <InputDate TValue="DateTimeOffset" class="form-control" id="timestamp" @bind-Value="EditingWorkshop.StartTimestamp"></InputDate>
+            <ValidationMessage For="@(() => EditingWorkshop.StartTimestamp)" />
+        </div>
+    </div>
+    <br/>
+    
+    <h2>Protocol</h2>
+
+    <button type="button"
+            class="input-group-text border-0 text-primary"
+            @onclick="AddProtocolEntry">
+        <i class="oi oi-plus"></i> &nbsp; Add protocol entry
+    </button>
+    <br />
+
+    <table>
+        <thead>
+        <tr>
+            <th scope="col" class="col-2">Type</th>
+            <th scope="col" class="col-1">Priority</th>
+            <th scope="col" class="col-8">Text</th>
+            <th scope="col" class="col-1"> </th>
+        </tr></thead>
+        <tbody>
+        @foreach (var actProtocolEntry in EditingWorkshop.Protocol)
+        {
+            <tr>
+                <td scope="row">
+                    <InputSelect class="form-control" id="entryType" @bind-Value="actProtocolEntry.EntryType">
+                        @foreach (var actTypeValue in Enum.GetValues(typeof(ProtocolEntryTypeDto)))
+                        {
+                            <option value="@actTypeValue">@actTypeValue</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => actProtocolEntry.EntryType)" />
+                </td>
+                <td>
+                    <InputNumber TValue="Int32" class="form-control" id="project" @bind-Value="actProtocolEntry.Priority" placeholder="Priority"></InputNumber>
+                    <ValidationMessage For="@(() => actProtocolEntry.Priority)" />
+                </td>
+                <td>
+                    <InputText class="form-control" id="project" @bind-Value="actProtocolEntry.Text" placeholder="Text"></InputText>
+                    <ValidationMessage For="@(() => actProtocolEntry.Text)" />
+                </td>
+                <td>
+                    <button type="button"
+                            class="input-group-text border-0 text-danger"
+                            @onclick="() => RemoveProtocolEntry(actProtocolEntry)">
+                        <i class="oi oi-delete"></i> &nbsp; Delete
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <br/>
+    <button type="button" 
+            class="btn"
+            @onclick="CancelEditing">
+        Cancel
+    </button>
+    <button type="submit"
+            class="btn btn-primary">
+        Submit
+    </button>
+
+</EditForm>

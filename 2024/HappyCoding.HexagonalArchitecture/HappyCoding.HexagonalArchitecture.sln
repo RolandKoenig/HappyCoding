@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Domain", "HappyCoding.HexagonalArchitecture.Domain\HappyCoding.HexagonalArchitecture.Domain.csproj", "{6E3AC1A6-F4E7-46E7-9249-1981E1D7994E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Application", "HappyCoding.HexagonalArchitecture.Application\HappyCoding.HexagonalArchitecture.Application.csproj", "{D189A657-D41A-4387-B996-7B9D58C23289}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DrivingAdapters (Incoming)", "DrivingAdapters (Incoming)", "{B59D3097-54F3-4DDB-BFC7-127C59A81AB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DrivenAdapters (Outgoing)", "DrivenAdapters (Outgoing)", "{6EDE47E2-8D74-481C-9036-0468F87019F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.WebUI.Server", "HappyCoding.HexagonalArchitecture.WebUI\Server\HappyCoding.HexagonalArchitecture.WebUI.Server.csproj", "{3C57F6E5-F856-40F2-B5A0-0632A15B1D94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.WebUI.Client", "HappyCoding.HexagonalArchitecture.WebUI\Client\HappyCoding.HexagonalArchitecture.WebUI.Client.csproj", "{440A9B40-3492-429A-BA57-4FD0CE9AEC12}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Domain.Tests", "HappyCoding.HexagonalArchitecture.Domain.Tests\HappyCoding.HexagonalArchitecture.Domain.Tests.csproj", "{358085DA-1A7F-4BB0-B43C-800B7D28D555}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter", "HappyCoding.HexagonalArchitecture.SQLiteAdapter\HappyCoding.HexagonalArchitecture.SQLiteAdapter.csproj", "{FBCA78DA-C45A-4E19-AE91-F414E02A981E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests", "HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests\HappyCoding.HexagonalArchitecture.SQLiteAdapter.Tests.csproj", "{7ABC737B-E242-4715-828B-FCD0E9E31985}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{40533F35-34CD-4188-A157-BA40B8B670AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.Application.Dtos", "HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj", "{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyCoding.HexagonalArchitecture.WebUI.Integration.Tests", "HappyCoding.HexagonalArchitecture.WebUI.IntegrationTests\HappyCoding.HexagonalArchitecture.WebUI.Integration.Tests.csproj", "{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E3AC1A6-F4E7-46E7-9249-1981E1D7994E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E3AC1A6-F4E7-46E7-9249-1981E1D7994E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E3AC1A6-F4E7-46E7-9249-1981E1D7994E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E3AC1A6-F4E7-46E7-9249-1981E1D7994E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D189A657-D41A-4387-B996-7B9D58C23289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D189A657-D41A-4387-B996-7B9D58C23289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D189A657-D41A-4387-B996-7B9D58C23289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D189A657-D41A-4387-B996-7B9D58C23289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C57F6E5-F856-40F2-B5A0-0632A15B1D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C57F6E5-F856-40F2-B5A0-0632A15B1D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C57F6E5-F856-40F2-B5A0-0632A15B1D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C57F6E5-F856-40F2-B5A0-0632A15B1D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{440A9B40-3492-429A-BA57-4FD0CE9AEC12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440A9B40-3492-429A-BA57-4FD0CE9AEC12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440A9B40-3492-429A-BA57-4FD0CE9AEC12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440A9B40-3492-429A-BA57-4FD0CE9AEC12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358085DA-1A7F-4BB0-B43C-800B7D28D555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358085DA-1A7F-4BB0-B43C-800B7D28D555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358085DA-1A7F-4BB0-B43C-800B7D28D555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358085DA-1A7F-4BB0-B43C-800B7D28D555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBCA78DA-C45A-4E19-AE91-F414E02A981E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBCA78DA-C45A-4E19-AE91-F414E02A981E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBCA78DA-C45A-4E19-AE91-F414E02A981E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBCA78DA-C45A-4E19-AE91-F414E02A981E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ABC737B-E242-4715-828B-FCD0E9E31985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ABC737B-E242-4715-828B-FCD0E9E31985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ABC737B-E242-4715-828B-FCD0E9E31985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ABC737B-E242-4715-828B-FCD0E9E31985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F87C11C1-28D7-4A55-B5A5-B6DECCE35A09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C57F6E5-F856-40F2-B5A0-0632A15B1D94} = {B59D3097-54F3-4DDB-BFC7-127C59A81AB8}
+		{440A9B40-3492-429A-BA57-4FD0CE9AEC12} = {B59D3097-54F3-4DDB-BFC7-127C59A81AB8}
+		{358085DA-1A7F-4BB0-B43C-800B7D28D555} = {40533F35-34CD-4188-A157-BA40B8B670AE}
+		{FBCA78DA-C45A-4E19-AE91-F414E02A981E} = {6EDE47E2-8D74-481C-9036-0468F87019F1}
+		{7ABC737B-E242-4715-828B-FCD0E9E31985} = {40533F35-34CD-4188-A157-BA40B8B670AE}
+		{E13B4AA4-3639-4BE7-B2C4-AFABB9BAFE4A} = {40533F35-34CD-4188-A157-BA40B8B670AE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCC0C763-1085-4177-8080-2202230B893E}
+	EndGlobalSection
+EndGlobal
