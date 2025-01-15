@@ -1,7 +1,8 @@
 # ASP.NET Core Options pattern
  - Options pattern is the default way to map settings from Microsoft.Extensions.Configuration to objects
  - Configure using dependency injection 
-   - services.Configure<T>(configuration.GetSection("...")); 
+   - services.AddOptions<T>().Bind(configuration.GetSection("..."));
+   - Add validation if needed
  - The consumer of a configuration object can decide, how to react on configuration changes
    - IOptions<T>: Get the values set when the application started
    - IOptionsSnapshop<T>: Get current values

@@ -8,9 +8,11 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.Configure<ApplicationOptions>(
-            builder.Configuration.GetSection(ApplicationOptions.SECTION_NAME));
-   
+        builder.Services.AddOptions<ApplicationOptions>()
+            .Bind(builder.Configuration.GetSection(ApplicationOptions.SECTION_NAME))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         var app = builder.Build();
         app.MapGet("/OptionsUsingIOptions", (IOptions<ApplicationOptions> options) => options.Value);
         app.MapGet("/OptionsUsingIOptionsSnapshop", (IOptionsSnapshot<ApplicationOptions> options) => options.Value);

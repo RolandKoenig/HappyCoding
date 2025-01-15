@@ -1,8 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace HappyCoding.AspNetOptionsPattern;
 
 public class ApplicationOptions
 {
     public const string SECTION_NAME = "ApplicationOptions";
     
-    public string SomeDummyOption { get; set; } = string.Empty;
+    [Required]
+    public string OtherServiceName { get; set; } = string.Empty;
+    
+    public ushort OtherServicePort { get; set; }
 }
