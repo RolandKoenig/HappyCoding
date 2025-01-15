@@ -1,16 +1,13 @@
 @HostAddress = https://localhost:5001
 
+### Using IOptions<T>
 GET {{HostAddress}}/OptionsUsingIOptions
 Accept: application/json
 
-###
-
+### Using IOptionsSnapshop<T>
 GET {{HostAddress}}/OptionsUsingIOptionsSnapshop
 Accept: application/json
 
-###
-
+### Using IOptionsMonitor<T>
 GET {{HostAddress}}/OptionsUsingIOptionsMonitor
 Accept: application/json
-
-###
