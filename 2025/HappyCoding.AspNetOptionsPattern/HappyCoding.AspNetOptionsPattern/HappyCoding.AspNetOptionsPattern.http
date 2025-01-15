@@ -1,0 +1,16 @@
+@HostAddress = https://localhost:5001
+
+GET {{HostAddress}}/OptionsUsingIOptions
+Accept: application/json
+
+###
+
+GET {{HostAddress}}/OptionsUsingIOptionsSnapshop
+Accept: application/json
+
+###
+
+GET {{HostAddress}}/OptionsUsingIOptionsMonitor
+Accept: application/json
+
+###
