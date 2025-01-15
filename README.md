@@ -5,3 +5,4 @@ This repository is a collection of demo projects and some experiments for differ
 * [2022](2022)
 * [2023](2023)
 * [2024](2024)
+* [2025](2025)
