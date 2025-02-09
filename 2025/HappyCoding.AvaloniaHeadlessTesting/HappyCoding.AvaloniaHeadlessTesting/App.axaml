@@ -1,10 +1,36 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:HappyCoding.AvaloniaHeadlessTesting"
              x:Class="HappyCoding.AvaloniaHeadlessTesting.App"
+             Name="HappyCoding AvaloniaHeadlessTesting"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+    
+    <NativeMenu.Menu>
+        <NativeMenu />
+    </NativeMenu.Menu>
+    
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+        
+        <!-- Alternating row colors -->
+        <Style Selector="DataGridRow:nth-child(odd)">
+            <Setter Property="Background" Value="#20AAAAAA"/>
+        </Style>
+        
+        <!-- Header styles -->
+        <Style Selector="TextBlock.H1">
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        <Style Selector="TextBlock.H2">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
     </Application.Styles>
 </Application>

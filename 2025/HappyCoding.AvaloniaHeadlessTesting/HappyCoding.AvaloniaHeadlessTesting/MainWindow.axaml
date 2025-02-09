@@ -11,12 +11,21 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     
-    <Grid>
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <TextBox x:Name="TxtInputInt" 
-                     Width="150"
-                     Text="{Binding InputInt}"/>
-        </StackPanel>
+    <Grid ColumnDefinitions="150,5,*">
+        <ListBox Grid.Column="0"
+                 ItemsSource="{Binding Views}"
+                 SelectedItem="{Binding SelectedView, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <GridSplitter Grid.Column="1"
+                      Background="#88888888"/>
+        
+        <ContentControl Grid.Column="2" 
+                        Content="{Binding SelectedView.ViewModel}" />
     </Grid>
 </Window>
