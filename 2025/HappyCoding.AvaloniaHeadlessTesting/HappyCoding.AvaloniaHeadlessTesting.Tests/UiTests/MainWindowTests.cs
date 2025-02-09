@@ -26,7 +26,7 @@ public class MainWindowTests
         
         // Assert
         var selectedNavigationItem = window.LocateByTestId("Navigation").LocateBySelection();
-        var textBlock = selectedNavigationItem.LocateLogicalChildOfType<TextBlock>();
+        var textBlock = selectedNavigationItem.LocateByType<TextBlock>();
         
         Assert.Equal("Home", textBlock.Text);
     }

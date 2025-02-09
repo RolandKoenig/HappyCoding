@@ -23,6 +23,6 @@ public static class InteractionExtensions
         
         var pointOnWindow = visual.TranslatePoint(middleOffset, topLevel);
         topLevel.MouseDown(pointOnWindow!.Value, MouseButton.Left);
-        topLevel.MouseUp(pointOnWindow!.Value, MouseButton.Left);
+        topLevel.MouseUp(pointOnWindow.Value, MouseButton.Left);
     }
 }
