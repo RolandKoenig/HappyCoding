@@ -5,7 +5,7 @@
    - see HappyCoding.AvaloniaHeadless.Tests.Util
 
 ## Things to consider
- - Using custom control locators to find ui elements an interact with them
+ - Use control locators to find ui elements an interact with them
 
 ## Recommendation
  - Test your UI automatically

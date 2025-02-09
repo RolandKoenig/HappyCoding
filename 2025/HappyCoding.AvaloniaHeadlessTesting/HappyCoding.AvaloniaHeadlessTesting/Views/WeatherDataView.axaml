@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:test="clr-namespace:HappyCoding.AvaloniaHeadlessTesting.Toolkit;assembly=HappyCoding.AvaloniaHeadlessTesting.Toolkit"
              xmlns:local="clr-namespace:HappyCoding.AvaloniaHeadlessTesting.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.AvaloniaHeadlessTesting.Views.WeatherDataView"
@@ -17,7 +18,9 @@
                 <TextBlock Text="Fetching data..." />
             </Panel>
             
-            <DataGrid ItemsSource="{Binding Forecasts}"
+            <DataGrid test:TestProperties.TestId="WeatherForecastGrid" 
+                      IsVisible="{Binding IsDataLoaded}"
+                      ItemsSource="{Binding Forecasts}"
                       CanUserResizeColumns="True"
                       IsReadOnly="True"
                       AutoGenerateColumns="True">

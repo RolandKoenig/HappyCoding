@@ -39,6 +39,15 @@ public static class LocatorInteractions
             conditionsNeverMetExceptionFactory: () => new LocateElementException("Locator returned no Visuals!"));
     }
     
+    public static async Task ShouldBeVisibleAsync(this ILocator locator)
+    {
+        _ = await InteractWithLocatorAsync(
+            locator,
+            checkConditionsMet: (visuals) => (visuals.Length > 0) && visuals.All(x => x.IsVisible),
+            generateResult: _ => true,
+            conditionsNeverMetExceptionFactory: () => new LocateElementException("Locator returned no Visuals!"));
+    }
+    
     public static async Task ShouldHaveTextAsync(this ILocator locator, string text)
     {
         var texts = await locator.GetAllTextsAsync();
@@ -91,7 +100,7 @@ public static class LocatorInteractions
         Func<Exception> conditionsNeverMetExceptionFactory)
     {
         var tryNumber = 0;
-        while (tryNumber < 10)
+        while (tryNumber < 500)
         {
             tryNumber++;
             
