@@ -25,11 +25,9 @@ public class MainWindowTests
         window.Show();
         
         // Assert
-        var lstNavigation = window.LocateLogicalChildOfTypeWithName<ListBox>("LstNavigation");
-        var selectedListBoxItem = lstNavigation.LocateSelectedItem();
-        Assert.NotNull(selectedListBoxItem);
-
-        var textBlock = selectedListBoxItem.LocateLogicalChildOfType<TextBlock>();
+        var selectedNavigationItem = window.LocateByTestId("Navigation").LocateBySelection();
+        var textBlock = selectedNavigationItem.LocateLogicalChildOfType<TextBlock>();
+        
         Assert.Equal("Home", textBlock.Text);
     }
 
@@ -43,12 +41,11 @@ public class MainWindowTests
         window.Show();
         
         // Act
-        var lstNavigation = window.LocateLogicalChildOfTypeWithName<ListBox>("LstNavigation");
-        var item = lstNavigation.LocateLogicalChildTextBlockWithText(viewDisplayName);
-        item.SimulateClick(window);
+        window.LocateByTestId("Navigation").LocateByText(viewDisplayName).SimulateClick();
         
         // Assert
-        var currentHeader = window.LocateLogicalChildOfTypeWithClass<TextBlock>("H2");
-        Assert.Equal(viewHeader, currentHeader.Text);
+        var currentHeader = window.LocateByTestId("MainContent").LocateByClass("H2");
+        var currentHeaderText = currentHeader.ReadTextFromVisual();
+        Assert.Equal(viewHeader, currentHeaderText);
     }
 }

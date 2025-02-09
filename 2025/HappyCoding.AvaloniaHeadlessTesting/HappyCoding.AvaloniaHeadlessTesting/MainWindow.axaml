@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HappyCoding.AvaloniaHeadlessTesting"
+        xmlns:test="clr-namespace:HappyCoding.AvaloniaHeadlessTesting.Toolkit;assembly=HappyCoding.AvaloniaHeadlessTesting.Toolkit"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaHeadlessTesting.MainWindow"
         x:DataType="local:MainWindowViewModel"
@@ -12,7 +13,8 @@
     </Window.DataContext>
     
     <Grid ColumnDefinitions="150,5,*">
-        <ListBox x:Name="LstNavigation" 
+        <ListBox x:Name="LstNavigation"
+                 test:TestProperties.TestId="Navigation"
                  Grid.Column="0"
                  ItemsSource="{Binding Views}"
                  SelectedItem="{Binding SelectedView, Mode=TwoWay}">
@@ -27,6 +29,7 @@
                       Background="#88888888"/>
         
         <ContentControl Grid.Column="2" 
+                        test:TestProperties.TestId="MainContent"
                         Content="{Binding SelectedView.ViewModel}" />
     </Grid>
 </Window>

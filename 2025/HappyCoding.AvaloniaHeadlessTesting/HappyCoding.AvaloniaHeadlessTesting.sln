@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaHeadles
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaHeadlessTesting.Tests", "HappyCoding.AvaloniaHeadlessTesting.Tests\HappyCoding.AvaloniaHeadlessTesting.Tests.csproj", "{FEE8E5FC-2A8B-4388-B377-1934262D904C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.AvaloniaHeadlessTesting.Toolkit", "HappyCoding.AvaloniaHeadlessTesting.Toolkit\HappyCoding.AvaloniaHeadlessTesting.Toolkit.csproj", "{08F45E62-4EE7-4916-B018-C59AD6F5E8B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{FEE8E5FC-2A8B-4388-B377-1934262D904C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEE8E5FC-2A8B-4388-B377-1934262D904C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEE8E5FC-2A8B-4388-B377-1934262D904C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08F45E62-4EE7-4916-B018-C59AD6F5E8B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08F45E62-4EE7-4916-B018-C59AD6F5E8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08F45E62-4EE7-4916-B018-C59AD6F5E8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08F45E62-4EE7-4916-B018-C59AD6F5E8B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
