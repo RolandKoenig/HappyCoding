@@ -12,7 +12,8 @@
     </Window.DataContext>
     
     <Grid ColumnDefinitions="150,5,*">
-        <ListBox Grid.Column="0"
+        <ListBox x:Name="LstNavigation" 
+                 Grid.Column="0"
                  ItemsSource="{Binding Views}"
                  SelectedItem="{Binding SelectedView, Mode=TwoWay}">
             <ListBox.ItemTemplate>
