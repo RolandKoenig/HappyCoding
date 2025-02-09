@@ -1,6 +1,6 @@
-using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
-using HappyCoding.AvaloniaHeadlessTesting.Tests.Util;
+using HappyCoding.AvaloniaHeadlessTesting.Tests.Util.Actions;
+using HappyCoding.AvaloniaHeadlessTesting.Tests.Util.Locators;
 
 namespace HappyCoding.AvaloniaHeadlessTesting.Tests.UiTests;
 
@@ -18,34 +18,29 @@ public class MainWindowTests
     }
 
     [AvaloniaFact]
-    public void Navigation_should_select_HomeView_initially()
+    public async Task Navigation_should_select_HomeView_initially()
     {
         // Arrange / Act
         var window = new MainWindow();
         window.Show();
         
         // Assert
-        var selectedNavigationItem = window.LocateByTestId("Navigation").LocateBySelection();
-        var textBlock = selectedNavigationItem.LocateByType<TextBlock>();
-        
-        Assert.Equal("Home", textBlock.Text);
+        await window.LocateByTestId("Navigation").ThenBySelection().ShouldHaveTextAsync("Home");
     }
 
     [AvaloniaTheory]
     [InlineData("Counter", "Counter")]
     [InlineData("Weather", "Weather Forecast")]
-    public void Navigation_should_be_able_to_navigate_to(string viewDisplayName, string viewHeader)
+    public async Task Navigation_should_be_able_to_navigate_to(string viewDisplayName, string viewHeader)
     {
         // Arrange
         var window = new MainWindow();
         window.Show();
         
         // Act
-        window.LocateByTestId("Navigation").LocateByText(viewDisplayName).SimulateClick();
+        await window.LocateByTestId("Navigation").ThenByText(viewDisplayName).ClickAsync();
         
         // Assert
-        var currentHeader = window.LocateByTestId("MainContent").LocateByClass("H2");
-        var currentHeaderText = currentHeader.ReadTextFromVisual();
-        Assert.Equal(viewHeader, currentHeaderText);
+        await window.LocateByTestId("MainContent").ThenByClass("H2").ShouldHaveTextAsync(viewHeader);
     }
 }

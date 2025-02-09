@@ -1,5 +1,6 @@
 using Avalonia.Headless.XUnit;
-using HappyCoding.AvaloniaHeadlessTesting.Tests.Util;
+using HappyCoding.AvaloniaHeadlessTesting.Tests.Util.Actions;
+using HappyCoding.AvaloniaHeadlessTesting.Tests.Util.Locators;
 
 namespace HappyCoding.AvaloniaHeadlessTesting.Tests.UiTests;
 
@@ -9,26 +10,22 @@ public class CounterViewTests
     [InlineData(0, "0")]
     [InlineData(1, "1")]
     [InlineData(5, "5")]
-    public void CounterView_should_increment_correctly(int incrementClickCount, string expectedCounterText)
+    public async Task CounterView_should_increment_correctly(int incrementClickCount, string expectedCounterText)
     {
         // Arrange
         var window = new MainWindow();
         window.Show();
-        
-        window
-            .LocateByTestId("Navigation")
-            .LocateByText("Counter")
-            .SimulateClick();
-        var mainContent = window.LocateByTestId("MainContent");
-        
+
+        await window.LocateByTestId("Navigation").ThenByText("Counter").ClickAsync();
+
         // Act
-        var counterButton = mainContent.LocateByText("Increment");
+        var incrementButtonLocator = window.LocateByTestId("MainContent").ThenByText("Increment");
         for (var loop = 0; loop < incrementClickCount; loop++)
         {
-            counterButton.SimulateClick();
+            await incrementButtonLocator.ClickAsync();
         }
         
         // Assert
-        mainContent.LocateByText(expectedCounterText);
+        await window.LocateByTestId("MainContent").ThenByText(expectedCounterText).ShouldExistAsync();
     }
 }
