@@ -30,11 +30,4 @@
       <ProjectReference Include="..\HappyCoding.AvaloniaHeadlessTesting\HappyCoding.AvaloniaHeadlessTesting.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="App.axaml.cs">
-        <DependentUpon>App.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-    </ItemGroup>
-
 </Project>
