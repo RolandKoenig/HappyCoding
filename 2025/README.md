@@ -1,5 +1,5 @@
 # HappyCoding 2025
-## Avalkonia
+## Avalonia
 ### [HappyCoding.AvaloniaHeadlessTesting](HappyCoding.AvaloniaHeadlessTesting)
 Sample for testing with Avalonia.Headless and custom control locators
 
