@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HappyCoding.AvaloniaAppZoom"
+        xmlns:converter="clr-namespace:HappyCoding.AvaloniaAppZoom.Converter"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaAppZoom.MainWindow"
+        x:DataType="local:MainWindowViewModel"
+        ExtendClientAreaToDecorationsHint="True"
+        Title="HappyCoding.AvaloniaAppZoom">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    HorizontalAlignment="Center"
+                    Margin="4" Spacing="4"
+                    Orientation="Horizontal">
+            <TextBlock Text="HappyCoding.AvaloniaAppZoom | Zoom: "
+                       VerticalAlignment="Center"/>
+            
+            <!-- Configure zoom -->
+            <ComboBox Width="100" ItemsSource="{Binding SupportedZoomLevels}"
+                      SelectedItem="{Binding SelectedZoomLevel, Mode=TwoWay} ">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={x:Static converter:PercentageDisplayConverter.Instance}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        
+        <LayoutTransformControl Margin="6">
+            
+            <!-- Apply zoom -->
+            <LayoutTransformControl.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding ScaleX}"
+                                ScaleY="{Binding ScaleY}" />
+            </LayoutTransformControl.LayoutTransform>
+            
+            <TabControl>
+                <TabItem Header="FirstPage">
+                    <DataGrid ItemsSource="{Binding Forecasts}"
+                              AutoGenerateColumns="True"
+                              CanUserResizeColumns="True"
+                              IsReadOnly="True" />
+                </TabItem>
+                <TabItem Header="SecondPage">
+                    <DataGrid ItemsSource="{Binding Forecasts}"
+                              AutoGenerateColumns="True"
+                              CanUserResizeColumns="True"
+                              IsReadOnly="True" />
+                </TabItem>
+            </TabControl>
+        </LayoutTransformControl>
+    </DockPanel>
+</Window>

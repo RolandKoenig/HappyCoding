@@ -1,10 +1,13 @@
 # HappyCoding 2025
 ## Avalonia
+### [HappyCoding.AvaloniaAppZoom](HappyCoding.AvaloniaAppZoom)
+A sample for a full application zoom
+
 ### [HappyCoding.AvaloniaHeadlessTesting](HappyCoding.AvaloniaHeadlessTesting)
-Sample for testing with Avalonia.Headless and custom control locators
+A sample for testing with Avalonia.Headless and custom control locators
 
 ### [HappyCoding.AvaloniaTopLevel](HappyCoding.AvaloniaTopLevel)
-Sample for working with the TopLevel class
+A sample for working with the TopLevel class
 
 ## ASP.NET Core
 ### [HappyCoding.AspNetOptionsPattern](HappyCoding.AspNetOptionsPattern)
