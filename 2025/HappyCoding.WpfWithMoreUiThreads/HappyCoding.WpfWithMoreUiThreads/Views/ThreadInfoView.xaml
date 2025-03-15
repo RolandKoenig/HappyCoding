@@ -6,7 +6,33 @@
              xmlns:local="clr-namespace:HappyCoding.WpfWithMoreUiThreads.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:ThreadInfoViewModel />
+    </UserControl.DataContext>
+    
     <Grid>
-            
+
+        <StackPanel Orientation="Vertical">
+            <TextBlock HorizontalAlignment="Center">
+                    Thread: <Run Text="{Binding ThreadId, Mode=OneWay}" />
+            </TextBlock>
+
+            <Button Content="Trigger Async Work"
+                    Width="200"
+                    Command="{Binding DoSomeAsyncWorkCommand}" />
+            <Button Content="Trigger Sync Work"
+                    Width="200"
+                    Command="{Binding DoSomeSyncWorkCommand}" />
+        </StackPanel>
+        
+
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                    Margin="10">
+            <TextBlock Text="Dummy animation:"
+                       Margin="5"/>
+            <ProgressBar IsIndeterminate="True"
+                     Height="20" />
+        </StackPanel>
+       
     </Grid>
 </UserControl>
