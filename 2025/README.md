@@ -6,6 +6,9 @@ A sample for a full application zoom
 ### [HappyCoding.AvaloniaHeadlessTesting](HappyCoding.AvaloniaHeadlessTesting)
 A sample for testing with Avalonia.Headless and custom control locators
 
+### [HappyCoding.AvaloniaTemperatureViewer](HappyCoding.AvaloniaTemperatureViewer)
+A small temperature viewer sample application developed in Avalonia
+
 ### [HappyCoding.AvaloniaTopLevel](HappyCoding.AvaloniaTopLevel)
 A sample for working with the TopLevel class
 
