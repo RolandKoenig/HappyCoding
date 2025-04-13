@@ -21,7 +21,8 @@ public class RandomMeasurementService : IMeasurementService
             
             try
             {
-                await Task.Delay(1000, cancellationToken);
+                await Task.Delay(1000, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
