@@ -15,3 +15,7 @@ A sample for working with the TopLevel class
 ## ASP.NET Core
 ### [HappyCoding.AspNetOptionsPattern](HappyCoding.AspNetOptionsPattern)
 Working with the Options pattern in ASP.NET Core
+
+## WPF
+### [HappyCoding.WpfWithMoreUiThreads](HappyCoding.WpfWithMoreUiThreads)
+Working with multiple UI threads in WPF
