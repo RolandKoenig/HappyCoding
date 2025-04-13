@@ -13,8 +13,8 @@
                   IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Timestamp"
-                                    Binding="{Binding TimeStamp}"
-                                    Width="225"/>
+                                    Binding="{Binding TimeStamp, StringFormat='yyyy-MM-dd hh:mm:ss.fff zzz'}"
+                                    Width="275"/>
                 <DataGridTextColumn Header="Temperature" 
                                     Binding="{Binding TemperatureInDegrees, StringFormat='{}{0:F2}°'}"
                                     Width="125"/>
