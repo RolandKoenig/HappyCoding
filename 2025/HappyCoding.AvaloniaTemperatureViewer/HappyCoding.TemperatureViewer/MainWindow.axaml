@@ -2,37 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:HappyCoding.TemperatureViewer.Views"
         xmlns:local="clr-namespace:HappyCoding.TemperatureViewer"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.TemperatureViewer.MainWindow"
-        x:DataType="local:MainWindowViewModel"
+        x:DataType="local:TemperatureViewerViewModel"
         Title="Temperature Measurement">
-    <DockPanel>
-        
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Start Measuring"
-                      Command="{Binding Path=StartMeasurementCommand}" />
-            <MenuItem Header="Stop Measuring"
-                      Command="{Binding Path=StartMeasurementCommand.Cancel}"
-                      IsEnabled="{Binding Path=StartMeasurementCommand.CanBeCanceled}" />
-        </Menu>
-        
-        <Grid Margin="15"
-              ColumnDefinitions="300,10,*">
-            <HeaderedContentControl Grid.Column="0" 
-                                    Header="Current">
-                <views:CurrentTemperatureView />
-            </HeaderedContentControl>
-        
-            <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        
-            <HeaderedContentControl Grid.Column="2" 
-                                    Header="Details">
-                <views:DetailsView />
-            </HeaderedContentControl>
-        </Grid>
-    </DockPanel>
-    
+    <local:MainSingleView />
 </Window>

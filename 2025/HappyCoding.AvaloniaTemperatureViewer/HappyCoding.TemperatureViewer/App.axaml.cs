@@ -17,11 +17,18 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainWindowViewModel(new RandomMeasurementService());
+            mainWindow.DataContext = 
+                new TemperatureViewerViewModel(new RandomMeasurementService());
 
             desktop.MainWindow = mainWindow;
         }
-
+        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
+        {
+            var mainView = new MainSingleView();
+            mainView.DataContext = new TemperatureViewerViewModel(new RandomMeasurementService());
+            singleView.MainView = mainView;
+        }
+        
         base.OnFrameworkInitializationCompleted();
     }
 }

@@ -8,7 +8,7 @@ using HappyCoding.TemperatureViewer.Services;
 
 namespace HappyCoding.TemperatureViewer;
 
-public partial class MainWindowViewModel(IMeasurementService measurementService) : ObservableObject
+public partial class TemperatureViewerViewModel(IMeasurementService measurementService) : ObservableObject
 {
     [ObservableProperty]
     private TemperatureMeasurement? _currentMeasurement;

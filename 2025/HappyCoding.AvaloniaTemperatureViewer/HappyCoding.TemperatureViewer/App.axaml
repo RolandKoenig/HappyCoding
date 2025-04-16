@@ -10,7 +10,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border Background="{DynamicResource ComboBoxDropDownBackground}"
+                        <Border Background="{DynamicResource SystemControlTransientBackgroundBrush}"
                                 BorderThickness="0"
                                 CornerRadius="5">
                             <DockPanel Margin="3">

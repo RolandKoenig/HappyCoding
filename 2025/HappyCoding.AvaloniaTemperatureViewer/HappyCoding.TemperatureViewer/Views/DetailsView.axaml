@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:HappyCoding.TemperatureViewer"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HappyCoding.TemperatureViewer.Views.DetailsView"
-             x:DataType="local:MainWindowViewModel">
+             x:DataType="local:TemperatureViewerViewModel">
     <Border Classes="GridBorder">
         <DataGrid ItemsSource="{Binding Measurements}"
                   CanUserResizeColumns="True"
