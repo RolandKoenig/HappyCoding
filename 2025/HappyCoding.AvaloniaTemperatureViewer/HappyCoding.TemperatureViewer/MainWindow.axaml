@@ -2,7 +2,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:HappyCoding.TemperatureViewer.Views"
         xmlns:local="clr-namespace:HappyCoding.TemperatureViewer"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.TemperatureViewer.MainWindow"
@@ -10,29 +9,51 @@
         Title="Temperature Measurement">
     <DockPanel>
         
+        <!-- Menu bar -->
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Start Measuring"
+            <MenuItem Name="MnuStartMeasuring" 
+                      Header="Start Measuring"
                       Command="{Binding Path=StartMeasurementCommand}" />
-            <MenuItem Header="Stop Measuring"
+            <MenuItem Name="MnuStopMeasuring"
+                      Header="Stop Measuring"
                       Command="{Binding Path=StartMeasurementCommand.Cancel}"
                       IsEnabled="{Binding Path=StartMeasurementCommand.CanBeCanceled}" />
         </Menu>
         
         <Grid Margin="15"
               ColumnDefinitions="300,10,*">
+            
+            <!-- Current temperature -->
             <HeaderedContentControl Grid.Column="0" 
                                     Header="Current">
-                <views:CurrentTemperatureView />
+                <TextBlock Name="TxtCurrentTemperature" 
+                           Text="{Binding CurrentMeasurement.TemperatureInDegrees, StringFormat='{}{0:F2}°'}" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontSize="40"/>
             </HeaderedContentControl>
         
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         
+            <!-- Details -->
             <HeaderedContentControl Grid.Column="2" 
                                     Header="Details">
-                <views:DetailsView />
+                <Border Classes="GridBorder">
+                    <DataGrid ItemsSource="{Binding Measurements}"
+                              CanUserResizeColumns="True"
+                              CanUserSortColumns="False"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Timestamp"
+                                                Binding="{Binding TimeStamp, StringFormat='yyyy-MM-dd hh:mm:ss.fff zzz'}"
+                                                Width="275"/>
+                            <DataGridTextColumn Header="Temperature" 
+                                                Binding="{Binding TemperatureInDegrees, StringFormat='{}{0:F2}°'}"
+                                                Width="125"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
             </HeaderedContentControl>
         </Grid>
     </DockPanel>
-    
 </Window>

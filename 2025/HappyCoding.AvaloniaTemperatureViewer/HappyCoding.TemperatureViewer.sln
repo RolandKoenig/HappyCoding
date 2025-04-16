@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.TemperatureViewer", "HappyCoding.TemperatureViewer\HappyCoding.TemperatureViewer.csproj", "{719794CB-B0FB-4E48-80E2-7BD25AF7DBAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.TemperatureViewer.Tests", "HappyCoding.TemperatureViewer.Tests\HappyCoding.TemperatureViewer.Tests.csproj", "{C2BD6E3D-1B1E-44A5-B6D5-E59B61267703}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{719794CB-B0FB-4E48-80E2-7BD25AF7DBAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719794CB-B0FB-4E48-80E2-7BD25AF7DBAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719794CB-B0FB-4E48-80E2-7BD25AF7DBAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2BD6E3D-1B1E-44A5-B6D5-E59B61267703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BD6E3D-1B1E-44A5-B6D5-E59B61267703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BD6E3D-1B1E-44A5-B6D5-E59B61267703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BD6E3D-1B1E-44A5-B6D5-E59B61267703}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

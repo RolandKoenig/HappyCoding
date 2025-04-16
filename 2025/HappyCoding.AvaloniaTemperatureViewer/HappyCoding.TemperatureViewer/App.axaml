@@ -6,6 +6,7 @@
         <FluentTheme />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
 
+        <!-- GroupBox -->
         <Style Selector="HeaderedContentControl">
             <Setter Property="Template">
                 <Setter.Value>
@@ -26,11 +27,12 @@
             </Setter>
         </Style>
         
-        <!-- Alternating row colors -->
+        <!-- Alternating row colors for the DataGrid -->
         <Style Selector="DataGridRow:nth-child(odd)">
             <Setter Property="Background" Value="#20AAAAAA"/>
         </Style>
         
+        <!-- Box around the DataGrid -->
         <Style Selector="Border.GridBorder">
             <Setter Property="Background" Value="{DynamicResource SystemRegionBrush}" />
             <Setter Property="BorderThickness" Value="0" />
@@ -40,5 +42,4 @@
         </Style>
         
     </Application.Styles>
-    
 </Application>
