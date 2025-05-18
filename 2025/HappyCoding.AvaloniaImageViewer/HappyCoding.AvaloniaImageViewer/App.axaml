@@ -1,0 +1,34 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HappyCoding.AvaloniaImageViewer.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+             
+   <Application.Resources>
+                 <ResourceDictionary>
+                     <SolidColorBrush x:Key="MainWindowFrameTitleBackgroundBrush"
+                                      Color="Transparent" />
+            
+                     <ResourceDictionary.ThemeDictionaries>
+                         <ResourceDictionary x:Key='Light'>
+                             <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                          BackgroundSource="Digger"
+                                                          TintColor="White"
+                                                          TintOpacity="0.7"
+                                                          MaterialOpacity="0.6" />
+                         </ResourceDictionary>
+                         <ResourceDictionary x:Key='Dark'>
+                             <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                          BackgroundSource="Digger"
+                                                          TintColor="Black"
+                                                          TintOpacity="0.7"
+                                                          MaterialOpacity="0.6" />
+                         </ResourceDictionary>
+                     </ResourceDictionary.ThemeDictionaries>
+                 </ResourceDictionary>
+             </Application.Resources>
+</Application>
