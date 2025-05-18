@@ -19,6 +19,7 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.6.0" />
         <PackageReference Include="RolandK.AvaloniaExtensions" Version="11.3.0" />
         <PackageReference Include="RolandK.AvaloniaExtensions.DependencyInjection" Version="11.3.0" />
         <PackageReference Include="RolandK.InProcessMessaging" Version="1.0.3" />

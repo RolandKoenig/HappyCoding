@@ -22,8 +22,16 @@
             <ExperimentalAcrylicBorder Material="{DynamicResource AppAcrylicMaterial}"/>
         </ext:MainWindowFrame.FullBackgroundArea>
         
+        <ext:MainWindowFrame.HeaderMenuArea>
+            <Menu>
+                <MenuItem Header="Load"
+                          Command="{Binding Path=LoadImageCommand}" />
+            </Menu>
+        </ext:MainWindowFrame.HeaderMenuArea>
+        
         <ext:MainWindowFrame.MainContentArea>
-            <Image Source="{Binding Path=CurrentBitmap}" />
+            <Image Source="{Binding Path=CurrentBitmap}"
+                   Margin="20"/>
         </ext:MainWindowFrame.MainContentArea>
         
     </ext:MainWindowFrame>
