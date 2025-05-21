@@ -6,29 +6,36 @@
 
     <Application.Styles>
         <FluentTheme />
+        
+        <Style Selector="Menu > Separator">
+            <Setter Property="Margin" Value="1,1,1,1"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Width" Value="1" />
+        </Style>
+
     </Application.Styles>
              
    <Application.Resources>
-                 <ResourceDictionary>
-                     <SolidColorBrush x:Key="MainWindowFrameTitleBackgroundBrush"
-                                      Color="Transparent" />
-            
-                     <ResourceDictionary.ThemeDictionaries>
-                         <ResourceDictionary x:Key='Light'>
-                             <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
-                                                          BackgroundSource="Digger"
-                                                          TintColor="White"
-                                                          TintOpacity="0.7"
-                                                          MaterialOpacity="0.6" />
-                         </ResourceDictionary>
-                         <ResourceDictionary x:Key='Dark'>
-                             <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
-                                                          BackgroundSource="Digger"
-                                                          TintColor="Black"
-                                                          TintOpacity="0.7"
-                                                          MaterialOpacity="0.6" />
-                         </ResourceDictionary>
-                     </ResourceDictionary.ThemeDictionaries>
-                 </ResourceDictionary>
-             </Application.Resources>
+       <ResourceDictionary>
+           <SolidColorBrush x:Key="MainWindowFrameTitleBackgroundBrush"
+                            Color="Transparent" />
+       
+           <ResourceDictionary.ThemeDictionaries>
+               <ResourceDictionary x:Key='Light'>
+                   <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                BackgroundSource="Digger"
+                                                TintColor="White"
+                                                TintOpacity="0.7"
+                                                MaterialOpacity="0.6" />
+               </ResourceDictionary>
+               <ResourceDictionary x:Key='Dark'>
+                   <ExperimentalAcrylicMaterial x:Key="AppAcrylicMaterial"
+                                                BackgroundSource="Digger"
+                                                TintColor="Black"
+                                                TintOpacity="0.7"
+                                                MaterialOpacity="0.6" />
+               </ResourceDictionary>
+           </ResourceDictionary.ThemeDictionaries>
+       </ResourceDictionary>
+   </Application.Resources>
 </Application>

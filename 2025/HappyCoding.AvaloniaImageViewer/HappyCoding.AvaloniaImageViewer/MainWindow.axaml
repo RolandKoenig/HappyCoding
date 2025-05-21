@@ -26,6 +26,16 @@
             <Menu>
                 <MenuItem Header="Load"
                           Command="{Binding Path=LoadImageCommand}" />
+                <Separator />
+                
+                <MenuItem Header="Previous"
+                          Command="{Binding Path=MovePreviousImageCommand}" />
+                <MenuItem Header="Next"
+                          Command="{Binding Path=MoveNextImageCommand}" />
+                <Separator />
+                
+                <MenuItem Header="Auto Orient"
+                          Command="{Binding Path=AutoOrientCommand}" />
             </Menu>
         </ext:MainWindowFrame.HeaderMenuArea>
         
