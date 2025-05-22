@@ -25,7 +25,7 @@ public class DefaultFileDialogViewService : ViewServiceBase, IFileDialogViewServ
         var filePickerOptions = new FilePickerOpenOptions();
         filePickerOptions.AllowMultiple = false;
         filePickerOptions.FileTypeFilter = filters?.ToList();
-
+        
         var selectedFiles = await _parentWindow.StorageProvider.OpenFilePickerAsync(filePickerOptions);
         
         if (selectedFiles.Count == 0)

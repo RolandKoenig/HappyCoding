@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
@@ -6,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HappyCoding.AvaloniaImageViewer.Util;
 using HappyCoding.AvaloniaImageViewer.ViewServices;
+using ImageMagick;
 
 namespace HappyCoding.AvaloniaImageViewer;
 
@@ -61,10 +64,8 @@ public partial class MainWindowViewModel : OwnViewModelBase
         IStorageFile? previousFile = null;
         await foreach (var actItem in directory.GetItemsAsync().WithCancellation(cancellationToken))
         {
-            if (actItem is not IStorageFile actFile)
-            {
-                continue;
-            }
+            if (actItem is not IStorageFile actFile) { continue; }
+            if (!ImageUtil.IsSupportedImageFormat(actFile)){ continue; }
             
             if (actFile.Path == this.CurrentFile.Path)
             {
@@ -90,10 +91,8 @@ public partial class MainWindowViewModel : OwnViewModelBase
         var fileFound = false;
         await foreach (var actItem in directory.GetItemsAsync().WithCancellation(cancellationToken))
         {
-            if (actItem is not IStorageFile actFile)
-            {
-                continue;
-            }
+            if (actItem is not IStorageFile actFile) { continue; }
+            if (!ImageUtil.IsSupportedImageFormat(actFile)){ continue; }
 
             if (fileFound)
             {
@@ -111,13 +110,29 @@ public partial class MainWindowViewModel : OwnViewModelBase
     [RelayCommand]
     private async Task AutoOrientAsync(CancellationToken cancellationToken)
     {
-        var bitmap = this.CurrentBitmap;
-        if (bitmap == null)
+        if(this.CurrentFile == null) { return; }
+
+        await using var inStream = await this.CurrentFile.OpenReadAsync();
+        await using var memStream = new MemoryStream((int)inStream.Length);
+        await inStream.CopyToAsync(memStream, cancellationToken);
+        inStream.Close();
+        var memStreamBuffer = memStream.GetBuffer();
+        
+        using var image = await Task.Run(() =>
         {
-            return;
-        }
+            ReadOnlySpan<byte> memStreamSpan = memStreamBuffer;
+            return new MagickImage(memStreamSpan);
+        }, cancellationToken);
         
+        image.AutoOrient();
+
+        await using var outStream = await this.CurrentFile.OpenWriteAsync();
+        await image.WriteAsync(outStream, cancellationToken);
         
+        // ReSharper disable once DisposeOnUsingVariable
+        await outStream.DisposeAsync();
+
+        await this.LoadImageAsync(this.CurrentFile);
     }
     
     private async Task LoadImageAsync(IStorageFile file)
