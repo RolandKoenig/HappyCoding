@@ -29,9 +29,11 @@
                 <Separator />
                 
                 <MenuItem Header="Previous"
-                          Command="{Binding Path=MovePreviousImageCommand}" />
+                          Command="{Binding Path=MovePreviousImageCommand}"
+                          HotKey="Left" />
                 <MenuItem Header="Next"
-                          Command="{Binding Path=MoveNextImageCommand}" />
+                          Command="{Binding Path=MoveNextImageCommand}"
+                          HotKey="Right"/>
                 <Separator />
                 
                 <MenuItem Header="Auto Orient"

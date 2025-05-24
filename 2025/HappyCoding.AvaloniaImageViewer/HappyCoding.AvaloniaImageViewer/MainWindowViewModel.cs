@@ -93,7 +93,6 @@ public partial class MainWindowViewModel : OwnViewModelBase
         {
             if (actItem is not IStorageFile actFile) { continue; }
             if (!ImageUtil.IsSupportedImageFormat(actFile)){ continue; }
-
             if (fileFound)
             {
                 await this.LoadImageAsync(actFile);
