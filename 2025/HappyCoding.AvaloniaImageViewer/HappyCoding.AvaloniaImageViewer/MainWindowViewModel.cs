@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
@@ -62,7 +63,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
         if(directory == null) { return; }
 
         IStorageFile? previousFile = null;
-        await foreach (var actItem in directory.GetItemsAsync().WithCancellation(cancellationToken))
+        await foreach (var actItem in directory.GetItemsAsync().OrderBy(x => x.Path.LocalPath).WithCancellation(cancellationToken))
         {
             if (actItem is not IStorageFile actFile) { continue; }
             if (!ImageUtil.IsSupportedImageFormat(actFile)){ continue; }
@@ -89,7 +90,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
         if(directory == null) { return; }
 
         var fileFound = false;
-        await foreach (var actItem in directory.GetItemsAsync().WithCancellation(cancellationToken))
+        await foreach (var actItem in directory.GetItemsAsync().OrderBy(x => x.Path.LocalPath).WithCancellation(cancellationToken))
         {
             if (actItem is not IStorageFile actFile) { continue; }
             if (!ImageUtil.IsSupportedImageFormat(actFile)){ continue; }
