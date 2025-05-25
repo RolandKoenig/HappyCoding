@@ -32,7 +32,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
             if (this.CurrentFile != null)
             {
                 strBuilder.Append(" - ");
-                strBuilder.Append(this.CurrentFile.Path.LocalPath);
+                strBuilder.Append(PathUtil.GetFileName(this.CurrentFile.Path));
             }
             
             return strBuilder.ToString();
