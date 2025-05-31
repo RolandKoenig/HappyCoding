@@ -36,7 +36,13 @@
                           HotKey="Right"/>
                 <Separator />
                 
+                <MenuItem Header="Delete"
+                          Command="{Binding Path=DeleteImageCommand}"
+                          HotKey="Delete"/>
+                <Separator />
+                
                 <MenuItem Header="Auto Orient"
+                          HotKey="O"
                           Command="{Binding Path=AutoOrientCommand}" />
             </Menu>
         </ext:MainWindowFrame.HeaderMenuArea>

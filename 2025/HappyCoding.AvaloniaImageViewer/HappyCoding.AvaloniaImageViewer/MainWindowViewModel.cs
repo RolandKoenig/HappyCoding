@@ -55,14 +55,15 @@ public partial class MainWindowViewModel : OwnViewModelBase
     }
     
     [RelayCommand]
-    private async Task MovePreviousImageAsync(CancellationToken cancellationToken)
+    private async Task<bool> MovePreviousImageAsync(CancellationToken cancellationToken)
     {
-        if (this.CurrentFile == null) { return; }
+        if (this.CurrentFile == null) { return false; }
 
         var directory = await this.CurrentFile.GetParentAsync();
-        if(directory == null) { return; }
+        if(directory == null) { return false; }
 
         IStorageFile? previousFile = null;
+        var fileChanged = false;
         await foreach (var actItem in directory.GetItemsAsync().OrderBy(x => x.Path.LocalPath).WithCancellation(cancellationToken))
         {
             if (actItem is not IStorageFile actFile) { continue; }
@@ -73,23 +74,27 @@ public partial class MainWindowViewModel : OwnViewModelBase
                 if (previousFile != null)
                 {
                     await this.LoadImageAsync(previousFile);
+                    fileChanged = true;
                 }
                 break;
             }
 
             previousFile = actFile;
         }
+
+        return fileChanged;
     }
     
     [RelayCommand]
-    private async Task MoveNextImageAsync(CancellationToken cancellationToken)
+    private async Task<bool> MoveNextImageAsync(CancellationToken cancellationToken)
     {
-        if (this.CurrentFile == null) { return; }
+        if (this.CurrentFile == null) { return false; }
 
         var directory = await this.CurrentFile.GetParentAsync();
-        if(directory == null) { return; }
+        if(directory == null) { return false; }
 
         var fileFound = false;
+        var fileChanged = false;
         await foreach (var actItem in directory.GetItemsAsync().OrderBy(x => x.Path.LocalPath).WithCancellation(cancellationToken))
         {
             if (actItem is not IStorageFile actFile) { continue; }
@@ -97,6 +102,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
             if (fileFound)
             {
                 await this.LoadImageAsync(actFile);
+                fileChanged = true;
                 break;
             }
             
@@ -105,6 +111,8 @@ public partial class MainWindowViewModel : OwnViewModelBase
                 fileFound = true;
             }
         }
+
+        return fileChanged;
     }
     
     [RelayCommand]
@@ -133,6 +141,26 @@ public partial class MainWindowViewModel : OwnViewModelBase
         await outStream.DisposeAsync();
 
         await this.LoadImageAsync(this.CurrentFile);
+    }
+
+    [RelayCommand]
+    private async Task DeleteImageAsync(CancellationToken cancellationToken)
+    {
+        if(this.CurrentFile == null) { return; }
+
+        var previousFile = this.CurrentFile;
+        if (await MoveNextImageAsync(cancellationToken) ||
+            await MovePreviousImageAsync(cancellationToken))
+        {
+            await previousFile.DeleteAsync();
+        }
+        else
+        {
+            // Last file in the current directory
+            this.CurrentFile = null;
+            this.CurrentBitmap = null;
+            await previousFile.DeleteAsync();
+        }
     }
     
     private async Task LoadImageAsync(IStorageFile file)
