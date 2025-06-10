@@ -12,6 +12,10 @@ Prototype for an image previewer application
 ### [HappyCoding.AvaloniaTemperatureViewer](HappyCoding.AvaloniaTemperatureViewer)
 A small temperature viewer sample application developed in Avalonia
 
+### [HappyCoding.AvaloniaTemperatureViewer.Browser](HappyCoding.AvaloniaTemperatureViewer.Browser)
+A small temperature viewer sample application developed in Avalonia, running in the browser.
+See it running at https://demos.rolandk.de/2025/happycoding-temperatureviewer/
+
 ### [HappyCoding.AvaloniaTopLevel](HappyCoding.AvaloniaTopLevel)
 A sample for working with the TopLevel class
 
