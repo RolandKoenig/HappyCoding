@@ -19,6 +19,9 @@ See it running at https://demos.rolandk.de/2025/happycoding-temperatureviewer/
 ### [HappyCoding.AvaloniaTopLevel](HappyCoding.AvaloniaTopLevel)
 A sample for working with the TopLevel class
 
+### [HappyCoding.AvaloniaTreeDataGrid](HappyCoding.AvaloniaTreeDataGrid)
+Some play around with Avalonia TreeDataGrid control
+
 ## ASP.NET Core
 ### [HappyCoding.AspNetOptionsPattern](HappyCoding.AspNetOptionsPattern)
 Working with the Options pattern in ASP.NET Core

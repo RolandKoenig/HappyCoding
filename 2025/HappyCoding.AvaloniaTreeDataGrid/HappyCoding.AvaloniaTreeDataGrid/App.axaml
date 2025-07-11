@@ -1,0 +1,13 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HappyCoding.AvaloniaTreeDataGrid.App"
+             RequestedThemeVariant="Default">
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
+        
+        <Style Selector="TreeDataGridRow:nth-child(odd)">
+            <Setter Property="Background" Value="#33888888" />
+        </Style>
+    </Application.Styles>
+</Application>
