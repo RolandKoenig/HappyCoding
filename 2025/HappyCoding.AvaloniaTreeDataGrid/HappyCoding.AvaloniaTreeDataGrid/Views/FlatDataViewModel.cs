@@ -22,5 +22,6 @@ public partial class FlatDataViewModel : ObservableObject
             new TextColumn<UserData, string>("Last Name", x => x.LastName),
             new TextColumn<UserData, string>("Username", x => x.UserName),
             new TextColumn<UserData, string>("E-Mail", x => x.EMail)]);
+        this.DataSource.RowSelection!.SingleSelect = false;
     }
 }
