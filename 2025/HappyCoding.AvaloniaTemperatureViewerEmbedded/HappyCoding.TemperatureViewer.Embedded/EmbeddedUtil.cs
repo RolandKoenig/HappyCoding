@@ -1,20 +1,33 @@
 using System;
 using System.Threading;
 
+// ReSharper disable UseObjectOrCollectionInitializer
+// ReSharper disable once LoopVariableIsNeverChangedInsideLoop
+
 namespace HappyCoding.TemperatureViewer.Embedded;
 
-public static class EmbeddedUtil
+internal static class EmbeddedUtil
 {
-    internal static void SilenceConsole()
+    internal static IDisposable SilenceConsole()
     {
-        new Thread(() =>
+        var isRunning = true;
+        Console.CursorVisible = false;
+        
+        var consoleListenerThread = new Thread(() =>
+        {
+            while (isRunning)
             {
-                Console.CursorVisible = false;
-                while (true)
-                {
-                    Console.ReadKey(true);
-                }
-            })
-            { IsBackground = true }.Start();
+                Console.ReadKey(true);
+            }
+        });
+        consoleListenerThread.IsBackground = true;
+        consoleListenerThread.Start();
+
+        return new DummyDisposable(
+            () =>
+            {
+                isRunning = false;
+                Console.CursorVisible = true;
+            });
     }
 }
