@@ -19,7 +19,7 @@ public partial class App : Application
         {
             var mainWindow = new MainWindow();
             mainWindow.DataContext = mainViewModel;
-
+            
             desktop.MainWindow = mainWindow;
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewApplicationLifetime)

@@ -11,7 +11,7 @@ public static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        using var consoleListener = EmbeddedUtil.SilenceConsole();
+        using var consoleListener = EmbeddedConsoleUtil.SilenceConsole();
 
         BuildAvaloniaApp()
             .StartLinuxDrm(args: args, card: null, scaling: 1.0);
