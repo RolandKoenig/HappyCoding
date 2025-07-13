@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.TemperatureView
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.TemperatureViewer.Desktop", "HappyCoding.TemperatureViewer.Desktop\HappyCoding.TemperatureViewer.Desktop.csproj", "{BD969BFD-FDFF-4296-99C2-D13125302900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.TemperatureViewer.Browser", "HappyCoding.TemperatureViewer.Browser\HappyCoding.TemperatureViewer.Browser.csproj", "{9B541044-202F-40F2-AC76-70C673E60C87}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.TemperatureViewer.Embedded", "HappyCoding.TemperatureViewer.Embedded\HappyCoding.TemperatureViewer.Embedded.csproj", "{ABA95399-FE0A-4622-A45B-728BE2B3D9BA}"
 EndProject
 Global
@@ -28,10 +26,6 @@ Global
 		{BD969BFD-FDFF-4296-99C2-D13125302900}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD969BFD-FDFF-4296-99C2-D13125302900}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD969BFD-FDFF-4296-99C2-D13125302900}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B541044-202F-40F2-AC76-70C673E60C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B541044-202F-40F2-AC76-70C673E60C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B541044-202F-40F2-AC76-70C673E60C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B541044-202F-40F2-AC76-70C673E60C87}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ABA95399-FE0A-4622-A45B-728BE2B3D9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABA95399-FE0A-4622-A45B-728BE2B3D9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABA95399-FE0A-4622-A45B-728BE2B3D9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
