@@ -9,6 +9,9 @@ A sample for testing with Avalonia.Headless and custom control locators
 ### [HappyCoding.AvaloniaImageViewer](HappyCoding.AvaloniaImageViewer)
 Prototype for an image previewer application
 
+### [HappyCoding.AvaloniaStyleTransitions](HappyCoding.AvaloniaStyleTransitions)
+A sample for the style transitions feature
+ 
 ### [HappyCoding.AvaloniaTemperatureViewer](HappyCoding.AvaloniaTemperatureViewer)
 A small temperature viewer sample application developed in Avalonia
 
