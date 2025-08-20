@@ -6,10 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.Browser" Version="11.3.1"/>
+        <PackageReference Include="Avalonia.Browser" Version="11.3.4" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\HappyCoding.TemperatureViewer\HappyCoding.TemperatureViewer.csproj"/>
+        <ProjectReference Include="..\HappyCoding.TemperatureViewer\HappyCoding.TemperatureViewer.csproj" />
     </ItemGroup>
 </Project>
