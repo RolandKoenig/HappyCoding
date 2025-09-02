@@ -39,7 +39,17 @@ public partial class MainWindowViewModel : OwnViewModelBase
             return strBuilder.ToString();
         }
     }
+    
+    public CompositeAsyncCommandState AsyncState { get; }
 
+    public MainWindowViewModel()
+    {
+        this.AsyncState = new CompositeAsyncCommandState(
+            AutoOrientCommand,
+            MoveNextImageCommand, MovePreviousImageCommand,
+            LoadImageCommand, DeleteImageCommand);
+    }
+    
     [RelayCommand]
     private async Task LoadImageAsync(CancellationToken cancellationToken)
     {
@@ -58,7 +68,7 @@ public partial class MainWindowViewModel : OwnViewModelBase
     private async Task<bool> MovePreviousImageAsync(CancellationToken cancellationToken)
     {
         if (this.CurrentFile == null) { return false; }
-
+        
         var directory = await this.CurrentFile.GetParentAsync();
         if(directory == null) { return false; }
 

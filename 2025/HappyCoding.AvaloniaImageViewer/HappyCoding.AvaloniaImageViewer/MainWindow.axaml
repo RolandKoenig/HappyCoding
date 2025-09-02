@@ -11,9 +11,6 @@
         TransparencyLevelHint="AcrylicBlur"
         Title="HappyCoding.AvaloniaImageViewer"
         DataContext="{ext:CreateUsingDependencyInjection Type={x:Type local:MainWindowViewModel}}">
-    <Window.DataTemplates>
-
-    </Window.DataTemplates>
     
     <ext:MainWindowFrame>
         
@@ -27,7 +24,7 @@
         </ext:MainWindowFrame.FullBackgroundArea>
         
         <ext:MainWindowFrame.HeaderMenuArea>
-            <Menu>
+            <Menu IsEnabled="{Binding !AsyncState.IsRunning}">
                 <MenuItem Header="Load"
                           Command="{Binding Path=LoadImageCommand}" />
                 <Separator />
@@ -52,18 +49,26 @@
         </ext:MainWindowFrame.HeaderMenuArea>
         
         <ext:MainWindowFrame.MainContentArea>
-            <TransitioningContentControl Content="{Binding Path=CurrentBitmap}">
-                <TransitioningContentControl.PageTransition>
-                    <CrossFade Duration="0:00:00.300" />
-                </TransitioningContentControl.PageTransition>
-                <TransitioningContentControl.ContentTemplate>
-                    <DataTemplate DataType="Bitmap">
-                        <Image Source="{Binding}"
-                               Margin="20" />
-                    </DataTemplate>
-                </TransitioningContentControl.ContentTemplate>
-            </TransitioningContentControl>
-
+            <Panel>
+                <TransitioningContentControl Content="{Binding Path=CurrentBitmap}">
+                    <TransitioningContentControl.PageTransition>
+                        <CrossFade Duration="0:00:00.300" />
+                    </TransitioningContentControl.PageTransition>
+                    <TransitioningContentControl.ContentTemplate>
+                        <DataTemplate DataType="Bitmap">
+                            <Image Source="{Binding}"
+                                   Margin="20" />
+                        </DataTemplate>
+                    </TransitioningContentControl.ContentTemplate>
+                </TransitioningContentControl>
+                
+                <ProgressBar VerticalAlignment="Bottom"
+                             HorizontalAlignment="Stretch"
+                             Margin="10" Height="15"
+                             IsIndeterminate="True"
+                             IsVisible="{Binding AsyncState.IsRunning}" />
+            </Panel>
+            
         </ext:MainWindowFrame.MainContentArea>
         
     </ext:MainWindowFrame>
