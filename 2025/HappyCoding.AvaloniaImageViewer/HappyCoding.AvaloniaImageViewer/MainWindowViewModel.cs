@@ -131,6 +131,11 @@ public partial class MainWindowViewModel : OwnViewModelBase
             ReadOnlySpan<byte> memStreamSpan = memStreamBuffer;
             return new MagickImage(memStreamSpan);
         }, cancellationToken);
+
+        if (image.Orientation == OrientationType.TopLeft)
+        {
+            return;
+        }
         
         image.AutoOrient();
 
