@@ -11,6 +11,10 @@
         TransparencyLevelHint="AcrylicBlur"
         Title="HappyCoding.AvaloniaImageViewer"
         DataContext="{ext:CreateUsingDependencyInjection Type={x:Type local:MainWindowViewModel}}">
+    <Window.DataTemplates>
+
+    </Window.DataTemplates>
+    
     <ext:MainWindowFrame>
         
         <ext:MainWindowFrame.CustomTitleArea>
@@ -48,8 +52,18 @@
         </ext:MainWindowFrame.HeaderMenuArea>
         
         <ext:MainWindowFrame.MainContentArea>
-            <Image Source="{Binding Path=CurrentBitmap}"
-                   Margin="20"/>
+            <TransitioningContentControl Content="{Binding Path=CurrentBitmap}">
+                <TransitioningContentControl.PageTransition>
+                    <CrossFade Duration="0:00:00.300" />
+                </TransitioningContentControl.PageTransition>
+                <TransitioningContentControl.ContentTemplate>
+                    <DataTemplate DataType="Bitmap">
+                        <Image Source="{Binding}"
+                               Margin="20" />
+                    </DataTemplate>
+                </TransitioningContentControl.ContentTemplate>
+            </TransitioningContentControl>
+
         </ext:MainWindowFrame.MainContentArea>
         
     </ext:MainWindowFrame>
