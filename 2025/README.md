@@ -9,6 +9,9 @@ A sample for testing with Avalonia.Headless and custom control locators
 ### [HappyCoding.AvaloniaImageViewer](HappyCoding.AvaloniaImageViewer)
 Prototype for an image previewer application
 
+### [HappyCoding.AvaloniaReferencingValueConverters](HappyCoding.AvaloniaReferencingValueConverters)
+A sample that shows some possible ways to reference ValueConverters in XAML
+
 ### [HappyCoding.AvaloniaStyleTransitions](HappyCoding.AvaloniaStyleTransitions)
 A sample for the style transitions feature
  

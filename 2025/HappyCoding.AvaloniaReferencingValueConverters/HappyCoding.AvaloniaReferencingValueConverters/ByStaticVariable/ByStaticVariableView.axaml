@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HappyCoding.AvaloniaReferencingValueConverters.ByStaticVariable"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.AvaloniaReferencingValueConverters.ByStaticVariable.ByStaticVariableView"
+             x:DataType="local:ByStaticVariableViewModel">
+    <UserControl.DataContext>
+        <local:ByStaticVariableViewModel />
+    </UserControl.DataContext>
+    
+    <Border Classes="Form">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Classes="H1">By Static Variable</TextBlock>
+            
+            <StackPanel Orientation="Vertical"
+                        Classes="FormRow">
+                <TextBlock Text="Input" />
+                <TextBox Text="{Binding VersionString}" />
+            </StackPanel>
+
+            <Rectangle Height="10"
+                       HorizontalAlignment="Stretch"
+                       Margin="5"
+                       Fill="{Binding 
+                           Path=VersionString, 
+                           Converter={x:Static local:VersionStringToBrushConverter.Instance}
+                       }" />
+        </StackPanel>
+    </Border>
+</UserControl>

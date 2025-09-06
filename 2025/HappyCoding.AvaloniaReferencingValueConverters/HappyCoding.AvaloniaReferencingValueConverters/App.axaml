@@ -1,0 +1,35 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HappyCoding.AvaloniaReferencingValueConverters.App"
+             RequestedThemeVariant="Default">
+    <Application.Styles>
+        <FluentTheme />
+        
+        <!-- Common Styles -->
+        <Style Selector="TextBlock.H1">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,0,0, 15" />
+        </Style>
+        
+        <!-- Form Styles -->
+        <Style Selector="Border.Form">
+            <Setter Property="Background" Value="#AAAAAAAA" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="Padding" Value="15" />
+
+            <Style Selector="^ StackPanel.FormRow">
+                <Setter Property="Margin" Value="3" />
+            </Style>
+            <Style Selector="^ StackPanel.FormRow > TextBlock">
+                <Setter Property="Width" Value="125" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Margin" Value="5,0,0,2"></Setter>
+            </Style>
+            <Style Selector="^ StackPanel.FormRow > TextBox">
+                <Setter Property="Width" Value="200" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+            </Style>
+        </Style>
+
+    </Application.Styles>
+</Application>
