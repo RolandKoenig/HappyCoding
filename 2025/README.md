@@ -3,6 +3,9 @@
 ### [HappyCoding.AvaloniaAppZoom](HappyCoding.AvaloniaAppZoom)
 A sample for a full application zoom
 
+### [HappyCoding.AvaloniaCustomResponsiveControls](HappyCoding.AvaloniaCustomResponsiveControls)
+Prototype for custom responsive Controls in Avalonia
+
 ### [HappyCoding.AvaloniaHeadlessTesting](HappyCoding.AvaloniaHeadlessTesting)
 A sample for testing with Avalonia.Headless and custom control locators
 
