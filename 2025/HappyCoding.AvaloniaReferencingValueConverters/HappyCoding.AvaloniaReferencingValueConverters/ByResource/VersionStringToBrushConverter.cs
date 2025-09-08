@@ -9,7 +9,7 @@ namespace HappyCoding.AvaloniaReferencingValueConverters.ByResource;
 
 public class VersionStringToBrushConverter : IValueConverter
 {
-    private static readonly Version VERSION_1_0 = new Version(1, 0, 0, 0);
+    private static readonly Version REFERENCE_VERSION = new Version(1, 0, 0, 0);
     
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
@@ -23,8 +23,8 @@ public class VersionStringToBrushConverter : IValueConverter
             return AvaloniaProperty.UnsetValue;
         }
 
-        if (parsedVersion < VERSION_1_0) { return Brushes.Red; }
-        if (parsedVersion == VERSION_1_0) { return Brushes.Yellow; }
+        if (parsedVersion < REFERENCE_VERSION) { return Brushes.Red; }
+        if (parsedVersion == REFERENCE_VERSION) { return Brushes.Yellow; }
         return Brushes.Green; 
     }
 

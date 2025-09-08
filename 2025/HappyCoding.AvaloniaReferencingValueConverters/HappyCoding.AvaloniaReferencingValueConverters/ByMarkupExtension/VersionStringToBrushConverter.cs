@@ -10,7 +10,7 @@ namespace HappyCoding.AvaloniaReferencingValueConverters.ByMarkupExtension;
 
 public class VersionStringToBrushConverter : MarkupExtension, IValueConverter
 {
-    public Version ReferenceVersion { get; set; } = new Version(1, 0, 0, 0);
+    public Version ReferenceVersion { get; set; } = new (1, 0, 0, 0);
     
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
