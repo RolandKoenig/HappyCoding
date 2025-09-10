@@ -109,20 +109,30 @@ public class ResponsiveGrid : Panel
     {
         this.CurrentBreakpoint = GetCurrentBreakpoint(availableSize.Width);
         
-        var singleColumnWidth = availableSize.Width / 12.0;
+        var singleColumnWidth = double.IsFinite(availableSize.Width)
+            ? availableSize.Width / 12.0
+            : double.PositiveInfinity;
         var fullBottomLine = 0d;
         var currentColumnStartIndex = 0;
 
         var actLineBottomLine = 0d;
+        var actRowDesiredWith = 0d;
+        var maxRowDesiredWith = 0d;
         foreach (var actChild in Children)
         {
             var actChildColumns = GetColumnCount(actChild, CurrentBreakpoint);
             if (currentColumnStartIndex + actChildColumns > 12)
             {
+                if (actRowDesiredWith > maxRowDesiredWith)
+                {
+                    maxRowDesiredWith = actRowDesiredWith;
+                }
+                
                 // Proceed to new line
                 fullBottomLine += actLineBottomLine;
                 actLineBottomLine = 0d;
                 currentColumnStartIndex = 0;
+                actRowDesiredWith = 0d;
             }
             
             actChild.Measure(new Size(
@@ -134,12 +144,17 @@ public class ResponsiveGrid : Panel
             {
                 actLineBottomLine = actChildDesiredSize.Height;
             }
+            actRowDesiredWith += actChildDesiredSize.Width;
 
             currentColumnStartIndex += actChildColumns;
         }
         fullBottomLine += actLineBottomLine;
         
-        return new Size(availableSize.Width, fullBottomLine);
+        return new Size(
+            double.IsFinite(availableSize.Width)
+                ? availableSize.Width
+                : maxRowDesiredWith, 
+            fullBottomLine);
     }
 
     protected override Size ArrangeOverride(Size finalSize)
@@ -202,7 +217,7 @@ public class ResponsiveGrid : Panel
         var currentColumnIndex = 0;
         foreach (var actContent in contents)
         {
-            actContent.Control.Arrange(new Rect(
+            actContent.Control!.Arrange(new Rect(
                 new Point(currentColumnIndex * singleColumnWidth, topLine),
                 new Size(actContent.ColumnCount * singleColumnWidth, lineHeight)));
             currentColumnIndex += actContent.ColumnCount;
