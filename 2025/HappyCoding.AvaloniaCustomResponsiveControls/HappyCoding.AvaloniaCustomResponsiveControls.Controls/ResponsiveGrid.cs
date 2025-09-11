@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Layout;
 
 namespace HappyCoding.AvaloniaCustomResponsiveControls.Controls;
 
@@ -12,7 +13,7 @@ public class ResponsiveGrid : Panel
             validate: v => v is >= 0 and <= 12);
     public static readonly AttachedProperty<int> ColumnsSmProperty =
         AvaloniaProperty.RegisterAttached<ResponsiveGrid, Control, int>(
-            "ColumnSm",
+            "ColumnsSm",
             defaultValue: 0,
             validate: v => v is >= 0 and <= 12);
     public static readonly AttachedProperty<int> ColumnsMdProperty =
@@ -36,6 +37,11 @@ public class ResponsiveGrid : Panel
             defaultValue: 0,
             validate: v => v is >= 0 and <= 12);
 
+    public static readonly StyledProperty<HorizontalAlignment> RowAlignmentProperty =
+        AvaloniaProperty.Register<ResponsiveGrid, HorizontalAlignment>(
+            nameof(RowAlignment), 
+            defaultValue: HorizontalAlignment.Left);
+    
     private ResponsiveGridBreakpoint _currentBreakpoint = ResponsiveGridBreakpoint.Sm;
     private IReadOnlyList<ResponsiveGridRow> _currentRows = [];
     
@@ -44,6 +50,20 @@ public class ResponsiveGrid : Panel
     /// </summary>
     public ResponsiveGridBreakpoint CurrentBreakpoint => _currentBreakpoint;
 
+    public HorizontalAlignment RowAlignment
+    {
+        get => GetValue(RowAlignmentProperty);
+        set => SetValue(RowAlignmentProperty, value);
+    }
+    
+    static ResponsiveGrid()
+    {
+        AffectsMeasure<ResponsiveGrid>(RowAlignmentProperty);
+        AffectsParentMeasure<ResponsiveGrid>(
+            ColumnsProperty, ColumnsSmProperty, ColumnsMdProperty,
+            ColumnsLgProperty, ColumnsXlProperty, ColumnsXxlProperty);
+    }
+    
     public static void SetColumns(AvaloniaObject element, int value)
     {
         element.SetValue(ColumnsProperty, value);
@@ -178,12 +198,38 @@ public class ResponsiveGrid : Panel
         IReadOnlyList<ResponsiveGridRowChild> contents, 
         double startYPosition, double rowHeight, double singleColumnWidth, double availableWidth)
     {
+        var startXPosition = 0d;
+        var extendedWidthPerColumn = 0d;
+        if (RowAlignment != HorizontalAlignment.Left)
+        {
+            var occupiedColumns = contents.Sum(x => x.ColumnCount);
+            var remainingSpace = (12 - occupiedColumns) * singleColumnWidth;
+            if (remainingSpace > 0d)
+            {
+                startXPosition = RowAlignment switch
+                {
+                    HorizontalAlignment.Center => remainingSpace / 2d,
+                    HorizontalAlignment.Right => remainingSpace,
+                    _ => 0d
+                };
+                extendedWidthPerColumn = RowAlignment switch
+                {
+                    HorizontalAlignment.Stretch => remainingSpace / (double)occupiedColumns,
+                    _ => 0d
+                };
+            }
+        }
+        
         var currentColumnIndex = 0;
         foreach (var actContent in contents)
         {
+            var controlXPosition =
+                startXPosition +
+                currentColumnIndex * (singleColumnWidth + extendedWidthPerColumn);
+            var controlWidth = actContent.ColumnCount * (singleColumnWidth + extendedWidthPerColumn);
             actContent.ChildControl!.Arrange(new Rect(
-                new Point(currentColumnIndex * singleColumnWidth, startYPosition),
-                new Size(actContent.ColumnCount * singleColumnWidth, rowHeight)));
+                new Point(controlXPosition, startYPosition),
+                new Size(controlWidth, rowHeight)));
             currentColumnIndex += actContent.ColumnCount;
         }
     }

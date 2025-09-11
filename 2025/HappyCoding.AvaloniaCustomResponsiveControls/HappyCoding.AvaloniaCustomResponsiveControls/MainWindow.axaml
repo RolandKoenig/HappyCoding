@@ -7,7 +7,8 @@
         Title="HappyCoding.AvaloniaCustomResponsiveControls">
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   HorizontalScrollBarVisibility="Disabled">
-        <ResponsiveGrid VerticalAlignment="Top">
+        <ResponsiveGrid VerticalAlignment="Top"
+                        RowAlignment="Stretch">
             <ResponsiveGrid.Styles>
                 <Style Selector="Grid">
                     <Setter Property="Height" Value="50" />
