@@ -2,8 +2,8 @@ using Avalonia.Controls;
 
 namespace HappyCoding.AvaloniaCustomResponsiveControls.Controls;
 
-struct ResponsiveGridRowContent(Control control, int columnCount)
+struct ResponsiveGridRowChild(Control childControl, int columnCount)
 {
-    public readonly Control? Control = control;
+    public readonly Control? ChildControl = childControl;
     public readonly int ColumnCount = columnCount;
 }

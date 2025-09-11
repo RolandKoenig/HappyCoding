@@ -35,15 +35,14 @@ public class ResponsiveGrid : Panel
             "ColumnsXxl",
             defaultValue: 0,
             validate: v => v is >= 0 and <= 12);
+
+    private ResponsiveGridBreakpoint _currentBreakpoint = ResponsiveGridBreakpoint.Sm;
+    private IReadOnlyList<ResponsiveGridRow> _currentRows = [];
     
     /// <summary>
-    /// Gets the breakpoint that was calculated in the last measure pass.
+    /// Gets the breakpoint calculated in the last measure pass.
     /// </summary>
-    public ResponsiveGridBreakpoint CurrentBreakpoint
-    {
-        get;
-        private set;
-    }
+    public ResponsiveGridBreakpoint CurrentBreakpoint => _currentBreakpoint;
 
     public static void SetColumns(AvaloniaObject element, int value)
     {
@@ -107,53 +106,45 @@ public class ResponsiveGrid : Panel
     
     protected override Size MeasureOverride(Size availableSize)
     {
-        this.CurrentBreakpoint = GetCurrentBreakpoint(availableSize.Width);
+        _currentBreakpoint = ResponsiveBreakpointUtil.GetCurrentBreakpoint(availableSize.Width);
         
         var singleColumnWidth = double.IsFinite(availableSize.Width)
             ? availableSize.Width / 12.0
             : double.PositiveInfinity;
+        
         var fullBottomLine = 0d;
-        var currentColumnStartIndex = 0;
-
-        var actLineBottomLine = 0d;
-        var actRowDesiredWith = 0d;
-        var maxRowDesiredWith = 0d;
-        foreach (var actChild in Children)
+        var fullDesiredWith = 0d;
+        _currentRows = this.CalculateRows();
+        foreach (var actRow in _currentRows)
         {
-            var actChildColumns = GetColumnCount(actChild, CurrentBreakpoint);
-            if (currentColumnStartIndex + actChildColumns > 12)
+            var actRowBottomLine = 0d;
+            var actRowDesiredWith = 0d;
+            foreach (var actChild in actRow.Children)
             {
-                if (actRowDesiredWith > maxRowDesiredWith)
-                {
-                    maxRowDesiredWith = actRowDesiredWith;
-                }
+                var actChildControl = actChild.ChildControl!;
+                actChildControl.Measure(new Size(
+                    singleColumnWidth * actChild.ColumnCount, 
+                    availableSize.Height));
                 
-                // Proceed to new line
-                fullBottomLine += actLineBottomLine;
-                actLineBottomLine = 0d;
-                currentColumnStartIndex = 0;
-                actRowDesiredWith = 0d;
+                var actChildDesiredSize = actChildControl.DesiredSize;
+                if (actChildDesiredSize.Height > actRowBottomLine)
+                {
+                    actRowBottomLine = actChildDesiredSize.Height;
+                }
+                actRowDesiredWith += actChildDesiredSize.Width;
             }
-            
-            actChild.Measure(new Size(
-                singleColumnWidth * actChildColumns, 
-                availableSize.Height));
-            
-            var actChildDesiredSize = actChild.DesiredSize;
-            if (actChildDesiredSize.Height > actLineBottomLine)
-            {
-                actLineBottomLine = actChildDesiredSize.Height;
-            }
-            actRowDesiredWith += actChildDesiredSize.Width;
 
-            currentColumnStartIndex += actChildColumns;
+            fullBottomLine += actRowBottomLine;
+            if (actRowDesiredWith > fullDesiredWith)
+            {
+                fullDesiredWith = actRowDesiredWith;
+            }
         }
-        fullBottomLine += actLineBottomLine;
         
         return new Size(
             double.IsFinite(availableSize.Width)
                 ? availableSize.Width
-                : maxRowDesiredWith, 
+                : fullDesiredWith, 
             fullBottomLine);
     }
 
@@ -161,85 +152,80 @@ public class ResponsiveGrid : Panel
     {
         var singleColumnWidth = finalSize.Width / 12.0;
         
-        var fullBottomLine = 0d;
-        var currentColumnStartIndex = 0;
-
-        var actLineBottomLine = 0d;
-        var currentLineContents = new List<ResponsiveGridRowContent>(12);
-        foreach (var actChild in Children)
+        var fullBottomYPosition = 0d;
+        foreach (var actChild in _currentRows)
         {
-            var actChildColumnCount = GetColumnCount(actChild, CurrentBreakpoint);
-            if (currentColumnStartIndex + actChildColumnCount > 12)
-            {
-                // Arrange all childs in the last row
-                ArrangeChilds(
-                    currentLineContents, fullBottomLine, actLineBottomLine, singleColumnWidth);
-                currentLineContents.Clear();
-                
-                // Proceed to new line
-                fullBottomLine += actLineBottomLine;
-                actLineBottomLine = 0d;
-                currentColumnStartIndex = 0;
-            }
-            
-            var actChildDesiredSize = actChild.DesiredSize;
-            if (actChildDesiredSize.Height > actLineBottomLine)
-            {
-                actLineBottomLine = actChildDesiredSize.Height;
-            }
+            var actRowHeight = actChild.Children.Max(x => x.ChildControl!.DesiredSize.Height);
 
-            currentColumnStartIndex += actChildColumnCount;
-            
-            currentLineContents.Add(new ResponsiveGridRowContent(
-                actChild, actChildColumnCount));
-        }
-
-        if (currentLineContents.Count > 0)
-        {
-            // Arrange all childs in the last row
             ArrangeChilds(
-                currentLineContents, fullBottomLine, actLineBottomLine, singleColumnWidth);
-            currentLineContents.Clear();
-            
-            // Close up
-            fullBottomLine += actLineBottomLine;
+                actChild.Children,
+                fullBottomYPosition,
+                actRowHeight,
+                singleColumnWidth,
+                finalSize.Width);
+
+            fullBottomYPosition += actRowHeight;
         }
         
         return new Size(
             finalSize.Width, 
-            fullBottomLine < finalSize.Height 
-                ? fullBottomLine
+            fullBottomYPosition < finalSize.Height 
+                ? fullBottomYPosition
                 : finalSize.Height);
     }
-
-    private void ArrangeChilds(IReadOnlyList<ResponsiveGridRowContent> contents, double topLine, double lineHeight, double singleColumnWidth)
+    
+    private void ArrangeChilds(
+        IReadOnlyList<ResponsiveGridRowChild> contents, 
+        double startYPosition, double rowHeight, double singleColumnWidth, double availableWidth)
     {
         var currentColumnIndex = 0;
         foreach (var actContent in contents)
         {
-            actContent.Control!.Arrange(new Rect(
-                new Point(currentColumnIndex * singleColumnWidth, topLine),
-                new Size(actContent.ColumnCount * singleColumnWidth, lineHeight)));
+            actContent.ChildControl!.Arrange(new Rect(
+                new Point(currentColumnIndex * singleColumnWidth, startYPosition),
+                new Size(actContent.ColumnCount * singleColumnWidth, rowHeight)));
             currentColumnIndex += actContent.ColumnCount;
         }
     }
 
-    private ResponsiveGridBreakpoint GetCurrentBreakpoint(double width)
+    private IReadOnlyList<ResponsiveGridRow> CalculateRows()
     {
-        return width switch
+        var result = new List<ResponsiveGridRow>(4);
+        
+        var actRow = new List<ResponsiveGridRowChild>(12);
+        var actColumnCount = 0;
+        var breakpoint = this.CurrentBreakpoint;
+        foreach (var actChild in this.Children)
         {
-            >= 1400d => ResponsiveGridBreakpoint.Xxl,
-            >= 1200d => ResponsiveGridBreakpoint.Xl,
-            >= 992 => ResponsiveGridBreakpoint.Lg,
-            >= 768 => ResponsiveGridBreakpoint.Md,
-            >= 576d => ResponsiveGridBreakpoint.Sm,
-            _ => ResponsiveGridBreakpoint.Xs
-        };
-    }
+            var actChildColumnCount = GetColumnCount(actChild, breakpoint);
+            var columnCountForCalculation = actChildColumnCount > 0
+                ? actChildColumnCount
+                : 1;
+            if (actColumnCount + columnCountForCalculation > 12)
+            {
+                // Transit to new row
+                result.Add(new ResponsiveGridRow(actRow.ToArray()));
+                actRow.Clear();
+                actColumnCount = 0;
+            }
 
+            actColumnCount += columnCountForCalculation;
+            actRow.Add(new ResponsiveGridRowChild(
+                actChild, actChildColumnCount));
+        }
+
+        // Finish last row
+        if (actRow.Count > 0)
+        {
+            result.Add(new ResponsiveGridRow(actRow.ToArray()));
+        }
+
+        return result;
+    }
+    
     private int GetColumnCount(Control child, ResponsiveGridBreakpoint breakpoint)
     {
-        var allBreakpoints = new ResponsiveGridBreakpoint[]
+        var allBreakpoints = new[]
         {
             ResponsiveGridBreakpoint.Xs,
             ResponsiveGridBreakpoint.Sm,
@@ -264,19 +250,13 @@ public class ResponsiveGrid : Panel
                 break;
             }
         }
-
-        if (columnCount == 0)
-        {
-            // TODO: Default column sizing (use available space)
-            columnCount = 1;
-        }
         
         return columnCount;
     }
     
     private int GetColumnCountForBreakpoint(Control child, ResponsiveGridBreakpoint breakpoint)
     {
-        return breakpoint switch
+        var result = breakpoint switch
         {
             ResponsiveGridBreakpoint.Xxl => child.GetValue(ColumnsXxlProperty),
             ResponsiveGridBreakpoint.Xl => child.GetValue(ColumnsXlProperty),
@@ -285,5 +265,9 @@ public class ResponsiveGrid : Panel
             ResponsiveGridBreakpoint.Sm => child.GetValue(ColumnsSmProperty),
             _ => child.GetValue(ColumnsProperty),
         };
+        
+        if (result < 0) { return 0; }
+        if (result > 12) { return 12; }
+        return result;
     }
 }
