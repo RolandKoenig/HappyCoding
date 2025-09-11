@@ -1,5 +1,5 @@
 using Avalonia.Metadata;
 
 [assembly: XmlnsDefinition(
-    "https://github.com/avaloniaui", 
+    "https://github.com/RolandK.AvaloniaExtensions", 
     "HappyCoding.AvaloniaCustomResponsiveControls.Controls")]

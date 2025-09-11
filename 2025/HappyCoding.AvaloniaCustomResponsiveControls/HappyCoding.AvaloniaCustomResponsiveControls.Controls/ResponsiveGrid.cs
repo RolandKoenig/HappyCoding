@@ -158,8 +158,15 @@ public class ResponsiveGrid : Panel
         var fullBottomLine = 0d;
         var fullDesiredWith = 0d;
         _currentRows = this.CalculateRows();
-        foreach (var actRow in _currentRows)
+        for(var loopRow = 0; loopRow < _currentRows.Count; loopRow++)
         {
+            var actRow = _currentRows[loopRow];
+
+            if (loopRow > 0)
+            {
+                fullBottomLine += this.RowSpacing;
+            }
+            
             var actRowBottomLine = 0d;
             var actRowDesiredWith = 0d;
             foreach (var actChild in actRow.Children)
@@ -214,11 +221,6 @@ public class ResponsiveGrid : Panel
 
             fullBottomYPosition += actRowHeight;
         }
-
-        if (_currentRows.Count > 1)
-        {
-            fullBottomYPosition += (_currentRows.Count - 1) * this.RowSpacing;
-        }
         
         return new Size(
             finalSize.Width, fullBottomYPosition);
@@ -256,13 +258,10 @@ public class ResponsiveGrid : Panel
         var currentColumnIndex = 0;
         foreach(var actRowChild in rowChildren)
         {
-            var spacingXPosition = (currentColumnIndex > 0)
-                ? this.ColumnSpacing / 2.0
-                : 0;
             var spacingExtendedWidth = (actRowChild.ColumnCount - 1) * this.ColumnSpacing;
             
             var controlXPosition =
-                startXPosition + spacingXPosition +
+                startXPosition + 
                 currentColumnIndex * (singleColumnWidth + extendedWidthPerColumn) + (currentColumnIndex * this.ColumnSpacing);
             var controlWidth = 
                 actRowChild.ColumnCount * (singleColumnWidth + extendedWidthPerColumn) +

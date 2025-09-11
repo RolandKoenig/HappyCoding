@@ -2,73 +2,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:samples="clr-namespace:HappyCoding.AvaloniaCustomResponsiveControls.SampleLayouts"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaCustomResponsiveControls.MainWindow"
         Title="HappyCoding.AvaloniaCustomResponsiveControls">
-    <ScrollViewer VerticalScrollBarVisibility="Visible"
-                  HorizontalScrollBarVisibility="Disabled"
-                  Margin="20" Background="SteelBlue">
-        <ResponsiveGrid VerticalAlignment="Top"
-                        RowAlignment="Stretch"
-                        RowSpacing="10" ColumnSpacing="10"
-                        Background="LightGray">
-            <ResponsiveGrid.Styles>
-                <Style Selector="Grid">
-                    <Setter Property="Height" Value="50" />
-                    <Setter Property="ResponsiveGrid.Columns" Value="6"></Setter>
-                    <Setter Property="ResponsiveGrid.ColumnsMd" Value="3"></Setter>
-                    <Setter Property="ResponsiveGrid.ColumnsLg" Value="2"></Setter>
-                    <Setter Property="ResponsiveGrid.ColumnsXl" Value="1"></Setter>
-                </Style>
-            </ResponsiveGrid.Styles>
-        
-            <Grid Background="DarkGray">
-                <TextBlock Text="1" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="2" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="3" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="4" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="5" />
-            </Grid>
-        
-            <Grid Background="DarkGray">
-                <TextBlock Text="6" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="7" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="8" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="9" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="10" />
-            </Grid>
-        
-            <Grid Background="DarkGray">
-                <TextBlock Text="11" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="12" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="13" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="14" />
-            </Grid>
-            <Grid Background="DarkGray">
-                <TextBlock Text="15" />
-            </Grid>
-        </ResponsiveGrid>
-    </ScrollViewer>
+    <TabControl Margin="0,0,0,12">
+        <TabItem Header="Basic">
+            <samples:BasicSample />
+        </TabItem>
+        <TabItem Header="TwoColumns">
+            <samples:TwoColumnsSample />
+        </TabItem>
+    </TabControl>
 </Window>
