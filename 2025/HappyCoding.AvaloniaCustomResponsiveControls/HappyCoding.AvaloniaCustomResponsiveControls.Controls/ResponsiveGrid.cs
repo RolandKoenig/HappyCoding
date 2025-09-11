@@ -42,6 +42,11 @@ public class ResponsiveGrid : Panel
             nameof(RowAlignment), 
             defaultValue: HorizontalAlignment.Left);
     
+    public static readonly StyledProperty<double> RowSpacingProperty =
+        AvaloniaProperty.Register<ResponsiveGrid, double>(
+            nameof(RowSpacing), 
+            defaultValue: 0d);
+    
     private ResponsiveGridBreakpoint _currentBreakpoint = ResponsiveGridBreakpoint.Sm;
     private IReadOnlyList<ResponsiveGridRow> _currentRows = [];
     
@@ -56,9 +61,17 @@ public class ResponsiveGrid : Panel
         set => SetValue(RowAlignmentProperty, value);
     }
     
+    public double RowSpacing
+    {
+        get => GetValue(RowSpacingProperty);
+        set => SetValue(RowSpacingProperty, value);
+    }
+    
     static ResponsiveGrid()
     {
-        AffectsMeasure<ResponsiveGrid>(RowAlignmentProperty);
+        AffectsMeasure<ResponsiveGrid>(
+            RowAlignmentProperty,
+            RowSpacingProperty);
         AffectsParentMeasure<ResponsiveGrid>(
             ColumnsProperty, ColumnsSmProperty, ColumnsMdProperty,
             ColumnsLgProperty, ColumnsXlProperty, ColumnsXxlProperty);
@@ -173,10 +186,16 @@ public class ResponsiveGrid : Panel
         var singleColumnWidth = finalSize.Width / 12.0;
         
         var fullBottomYPosition = 0d;
-        foreach (var actChild in _currentRows)
+        for (var loop = 0; loop < _currentRows.Count; loop++)
         {
+            var actChild = _currentRows[loop];
             var actRowHeight = actChild.Children.Max(x => x.ChildControl!.DesiredSize.Height);
 
+            if (loop > 0)
+            {
+                fullBottomYPosition += this.RowSpacing;
+            }
+            
             ArrangeChilds(
                 actChild.Children,
                 fullBottomYPosition,
@@ -186,12 +205,14 @@ public class ResponsiveGrid : Panel
 
             fullBottomYPosition += actRowHeight;
         }
+
+        if (_currentRows.Count > 1)
+        {
+            fullBottomYPosition += (_currentRows.Count - 1) * this.RowSpacing;
+        }
         
         return new Size(
-            finalSize.Width, 
-            fullBottomYPosition < finalSize.Height 
-                ? fullBottomYPosition
-                : finalSize.Height);
+            finalSize.Width, fullBottomYPosition);
     }
     
     private void ArrangeChilds(

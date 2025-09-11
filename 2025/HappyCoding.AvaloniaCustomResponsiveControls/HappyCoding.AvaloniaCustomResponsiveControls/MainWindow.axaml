@@ -8,7 +8,8 @@
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   HorizontalScrollBarVisibility="Disabled">
         <ResponsiveGrid VerticalAlignment="Top"
-                        RowAlignment="Stretch">
+                        RowAlignment="Stretch"
+                        RowSpacing="10">
             <ResponsiveGrid.Styles>
                 <Style Selector="Grid">
                     <Setter Property="Height" Value="50" />
