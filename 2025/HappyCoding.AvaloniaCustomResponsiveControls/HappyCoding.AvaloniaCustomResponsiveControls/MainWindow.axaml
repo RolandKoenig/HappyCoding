@@ -6,10 +6,12 @@
         x:Class="HappyCoding.AvaloniaCustomResponsiveControls.MainWindow"
         Title="HappyCoding.AvaloniaCustomResponsiveControls">
     <ScrollViewer VerticalScrollBarVisibility="Visible"
-                  HorizontalScrollBarVisibility="Disabled">
+                  HorizontalScrollBarVisibility="Disabled"
+                  Margin="20" Background="SteelBlue">
         <ResponsiveGrid VerticalAlignment="Top"
                         RowAlignment="Stretch"
-                        RowSpacing="10">
+                        RowSpacing="10" ColumnSpacing="10"
+                        Background="LightGray">
             <ResponsiveGrid.Styles>
                 <Style Selector="Grid">
                     <Setter Property="Height" Value="50" />
@@ -20,51 +22,51 @@
                 </Style>
             </ResponsiveGrid.Styles>
         
-            <Grid Background="Red">
+            <Grid Background="DarkGray">
                 <TextBlock Text="1" />
             </Grid>
-            <Grid Background="Green">
+            <Grid Background="DarkGray">
                 <TextBlock Text="2" />
             </Grid>
-            <Grid Background="Blue">
+            <Grid Background="DarkGray">
                 <TextBlock Text="3" />
             </Grid>
-            <Grid Background="Yellow">
+            <Grid Background="DarkGray">
                 <TextBlock Text="4" />
             </Grid>
-            <Grid Background="Purple">
+            <Grid Background="DarkGray">
                 <TextBlock Text="5" />
             </Grid>
         
-            <Grid Background="Red">
+            <Grid Background="DarkGray">
                 <TextBlock Text="6" />
             </Grid>
-            <Grid Background="Green">
+            <Grid Background="DarkGray">
                 <TextBlock Text="7" />
             </Grid>
-            <Grid Background="Blue">
+            <Grid Background="DarkGray">
                 <TextBlock Text="8" />
             </Grid>
-            <Grid Background="Yellow">
+            <Grid Background="DarkGray">
                 <TextBlock Text="9" />
             </Grid>
-            <Grid Background="Purple">
+            <Grid Background="DarkGray">
                 <TextBlock Text="10" />
             </Grid>
         
-            <Grid Background="Red">
+            <Grid Background="DarkGray">
                 <TextBlock Text="11" />
             </Grid>
-            <Grid Background="Green">
+            <Grid Background="DarkGray">
                 <TextBlock Text="12" />
             </Grid>
-            <Grid Background="Blue">
+            <Grid Background="DarkGray">
                 <TextBlock Text="13" />
             </Grid>
-            <Grid Background="Yellow">
+            <Grid Background="DarkGray">
                 <TextBlock Text="14" />
             </Grid>
-            <Grid Background="Purple">
+            <Grid Background="DarkGray">
                 <TextBlock Text="15" />
             </Grid>
         </ResponsiveGrid>

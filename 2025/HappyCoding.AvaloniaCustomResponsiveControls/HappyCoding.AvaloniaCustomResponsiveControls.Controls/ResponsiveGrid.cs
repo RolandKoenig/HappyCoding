@@ -46,6 +46,10 @@ public class ResponsiveGrid : Panel
         AvaloniaProperty.Register<ResponsiveGrid, double>(
             nameof(RowSpacing), 
             defaultValue: 0d);
+    public static readonly StyledProperty<double> ColumnSpacingProperty =
+        AvaloniaProperty.Register<ResponsiveGrid, double>(
+            nameof(ColumnSpacing), 
+            defaultValue: 0d);
     
     private ResponsiveGridBreakpoint _currentBreakpoint = ResponsiveGridBreakpoint.Sm;
     private IReadOnlyList<ResponsiveGridRow> _currentRows = [];
@@ -65,6 +69,12 @@ public class ResponsiveGrid : Panel
     {
         get => GetValue(RowSpacingProperty);
         set => SetValue(RowSpacingProperty, value);
+    }
+    
+    public double ColumnSpacing
+    {
+        get => GetValue(ColumnSpacingProperty);
+        set => SetValue(ColumnSpacingProperty, value);
     }
     
     static ResponsiveGrid()
@@ -142,7 +152,7 @@ public class ResponsiveGrid : Panel
         _currentBreakpoint = ResponsiveBreakpointUtil.GetCurrentBreakpoint(availableSize.Width);
         
         var singleColumnWidth = double.IsFinite(availableSize.Width)
-            ? availableSize.Width / 12.0
+            ? ((availableSize.Width - this.ColumnSpacing * 11.0) / 12.0)
             : double.PositiveInfinity;
         
         var fullBottomLine = 0d;
@@ -156,7 +166,7 @@ public class ResponsiveGrid : Panel
             {
                 var actChildControl = actChild.ChildControl!;
                 actChildControl.Measure(new Size(
-                    singleColumnWidth * actChild.ColumnCount, 
+                    singleColumnWidth * actChild.ColumnCount + (this.ColumnSpacing * actChild.ColumnCount - 1), 
                     availableSize.Height));
                 
                 var actChildDesiredSize = actChildControl.DesiredSize;
@@ -166,6 +176,8 @@ public class ResponsiveGrid : Panel
                 }
                 actRowDesiredWith += actChildDesiredSize.Width;
             }
+
+            actRowDesiredWith += (actRow.Children.Count - 1) * this.ColumnSpacing;
 
             fullBottomLine += actRowBottomLine;
             if (actRowDesiredWith > fullDesiredWith)
@@ -183,8 +195,6 @@ public class ResponsiveGrid : Panel
 
     protected override Size ArrangeOverride(Size finalSize)
     {
-        var singleColumnWidth = finalSize.Width / 12.0;
-        
         var fullBottomYPosition = 0d;
         for (var loop = 0; loop < _currentRows.Count; loop++)
         {
@@ -196,11 +206,10 @@ public class ResponsiveGrid : Panel
                 fullBottomYPosition += this.RowSpacing;
             }
             
-            ArrangeChilds(
+            ArrangeRowChildren(
                 actChild.Children,
                 fullBottomYPosition,
                 actRowHeight,
-                singleColumnWidth,
                 finalSize.Width);
 
             fullBottomYPosition += actRowHeight;
@@ -215,43 +224,54 @@ public class ResponsiveGrid : Panel
             finalSize.Width, fullBottomYPosition);
     }
     
-    private void ArrangeChilds(
-        IReadOnlyList<ResponsiveGridRowChild> contents, 
-        double startYPosition, double rowHeight, double singleColumnWidth, double availableWidth)
+    private void ArrangeRowChildren(
+        IReadOnlyList<ResponsiveGridRowChild> rowChildren, 
+        double startYPosition, double rowHeight, double availableWidth)
     {
+        var singleColumnWidth = (availableWidth - this.ColumnSpacing * 11.0) / 12.0;
+        
         var startXPosition = 0d;
         var extendedWidthPerColumn = 0d;
         if (RowAlignment != HorizontalAlignment.Left)
         {
-            var occupiedColumns = contents.Sum(x => x.ColumnCount);
-            var remainingSpace = (12 - occupiedColumns) * singleColumnWidth;
-            if (remainingSpace > 0d)
+            var occupiedColumnCount = rowChildren.Sum(x => x.ColumnCount);
+            var occupiedWidth = occupiedColumnCount * singleColumnWidth + (occupiedColumnCount - 1) * ColumnSpacing;
+            var remainingWidth = availableWidth - occupiedWidth;
+            if (remainingWidth > 0d)
             {
-                startXPosition = RowAlignment switch
+                startXPosition = this.RowAlignment switch
                 {
-                    HorizontalAlignment.Center => remainingSpace / 2d,
-                    HorizontalAlignment.Right => remainingSpace,
+                    HorizontalAlignment.Center => remainingWidth / 2d,
+                    HorizontalAlignment.Right => remainingWidth,
                     _ => 0d
                 };
-                extendedWidthPerColumn = RowAlignment switch
+                extendedWidthPerColumn = this.RowAlignment switch
                 {
-                    HorizontalAlignment.Stretch => remainingSpace / (double)occupiedColumns,
+                    HorizontalAlignment.Stretch => remainingWidth / (double)occupiedColumnCount,
                     _ => 0d
                 };
             }
         }
         
         var currentColumnIndex = 0;
-        foreach (var actContent in contents)
+        foreach(var actRowChild in rowChildren)
         {
+            var spacingXPosition = (currentColumnIndex > 0)
+                ? this.ColumnSpacing / 2.0
+                : 0;
+            var spacingExtendedWidth = (actRowChild.ColumnCount - 1) * this.ColumnSpacing;
+            
             var controlXPosition =
-                startXPosition +
-                currentColumnIndex * (singleColumnWidth + extendedWidthPerColumn);
-            var controlWidth = actContent.ColumnCount * (singleColumnWidth + extendedWidthPerColumn);
-            actContent.ChildControl!.Arrange(new Rect(
+                startXPosition + spacingXPosition +
+                currentColumnIndex * (singleColumnWidth + extendedWidthPerColumn) + (currentColumnIndex * this.ColumnSpacing);
+            var controlWidth = 
+                actRowChild.ColumnCount * (singleColumnWidth + extendedWidthPerColumn) +
+                spacingExtendedWidth;
+            
+            actRowChild.ChildControl!.Arrange(new Rect(
                 new Point(controlXPosition, startYPosition),
                 new Size(controlWidth, rowHeight)));
-            currentColumnIndex += actContent.ColumnCount;
+            currentColumnIndex += actRowChild.ColumnCount;
         }
     }
 
