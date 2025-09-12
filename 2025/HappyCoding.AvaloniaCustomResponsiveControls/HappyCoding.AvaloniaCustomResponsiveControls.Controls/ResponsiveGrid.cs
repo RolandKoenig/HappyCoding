@@ -81,7 +81,7 @@ public class ResponsiveGrid : Panel
     {
         AffectsMeasure<ResponsiveGrid>(
             RowAlignmentProperty,
-            RowSpacingProperty);
+            RowSpacingProperty, ColumnSpacingProperty);
         AffectsParentMeasure<ResponsiveGrid>(
             ColumnsProperty, ColumnsSmProperty, ColumnsMdProperty,
             ColumnsLgProperty, ColumnsXlProperty, ColumnsXxlProperty);
@@ -337,6 +337,7 @@ public class ResponsiveGrid : Panel
             }
         }
         
+        if (columnCount > 12) { return 12; }
         return columnCount;
     }
     
