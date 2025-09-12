@@ -289,7 +289,7 @@ public class ResponsiveGrid : BreakpointAwarePanel
 
             actColumnCount += columnCountForCalculation;
             actRow.Add(new ResponsiveGridRowChild(
-                actChild, actChildColumnCount));
+                actChild, columnCountForCalculation));
         }
 
         // Finish last row

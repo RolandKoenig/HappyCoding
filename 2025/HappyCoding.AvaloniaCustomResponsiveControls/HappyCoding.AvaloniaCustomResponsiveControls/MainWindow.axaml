@@ -13,5 +13,8 @@
         <TabItem Header="TwoColumns">
             <samples:TwoColumnsSample />
         </TabItem>
+        <TabItem Header="ImageGallery">
+            <samples:ImageGallerySample />
+        </TabItem>
     </TabControl>
 </Window>

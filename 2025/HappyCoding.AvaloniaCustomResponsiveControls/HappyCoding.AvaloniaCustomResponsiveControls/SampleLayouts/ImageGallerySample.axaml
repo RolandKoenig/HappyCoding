@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HappyCoding.AvaloniaCustomResponsiveControls.SampleLayouts.ImageGallerySample">
+    <UserControl.Styles>
+        <Style Selector="Border.ImageBorder">
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="TextBlock.Foreground" Value="Black" />
+            <Setter Property="Background" Value="LightGray" />
+            <Setter Property="BorderBrush" Value="SlateGray" />
+            <Setter Property="BorderThickness" Value="1" />
+            
+            <Setter Property="ext:ResponsiveGrid.Columns" Value="6" />
+            <Setter Property="ext:ResponsiveGrid.ColumnsMd" Value="4" />
+            <Setter Property="ext:ResponsiveGrid.ColumnsLg" Value="3" />
+        </Style>
+    </UserControl.Styles>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Visible"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Background="#333333">
+        <Border Padding="12">
+            <ext:ResponsiveGrid VerticalAlignment="Top" 
+                                ColumnSpacing="12"
+                                RowSpacing="12">
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+                <Border Classes="ImageBorder">
+                    <Image Source="/Assets/SampleImage.jpg"
+                           HorizontalAlignment="Stretch" />
+                </Border>
+            </ext:ResponsiveGrid>
+        </Border>
+   </ScrollViewer>
+</UserControl>
