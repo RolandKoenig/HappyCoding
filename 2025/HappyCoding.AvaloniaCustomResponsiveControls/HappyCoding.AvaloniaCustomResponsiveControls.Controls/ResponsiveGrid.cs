@@ -4,7 +4,7 @@ using Avalonia.Layout;
 
 namespace HappyCoding.AvaloniaCustomResponsiveControls.Controls;
 
-public class ResponsiveGrid : Panel
+public class ResponsiveGrid : BreakpointAwarePanel
 {
     public static readonly AttachedProperty<int> ColumnsProperty =
         AvaloniaProperty.RegisterAttached<ResponsiveGrid, Control, int>(
@@ -51,14 +51,8 @@ public class ResponsiveGrid : Panel
             nameof(ColumnSpacing), 
             defaultValue: 0d);
     
-    private ResponsiveGridBreakpoint _currentBreakpoint = ResponsiveGridBreakpoint.Sm;
     private IReadOnlyList<ResponsiveGridRow> _currentRows = [];
     
-    /// <summary>
-    /// Gets the breakpoint calculated in the last measure pass.
-    /// </summary>
-    public ResponsiveGridBreakpoint CurrentBreakpoint => _currentBreakpoint;
-
     public HorizontalAlignment RowAlignment
     {
         get => GetValue(RowAlignmentProperty);
@@ -149,8 +143,6 @@ public class ResponsiveGrid : Panel
     
     protected override Size MeasureOverride(Size availableSize)
     {
-        _currentBreakpoint = ResponsiveBreakpointUtil.GetCurrentBreakpoint(availableSize.Width);
-        
         var singleColumnWidth = double.IsFinite(availableSize.Width)
             ? ((availableSize.Width - this.ColumnSpacing * 11.0) / 12.0)
             : double.PositiveInfinity;
