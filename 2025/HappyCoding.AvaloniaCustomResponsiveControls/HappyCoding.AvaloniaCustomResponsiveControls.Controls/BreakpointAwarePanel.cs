@@ -60,17 +60,18 @@ public class BreakpointAwarePanel : Panel
         set => this.SetValue(BreakpointXxlProperty, value);
     }
     
-    private ResponsiveGridBreakpoint _currentBreakpoint = ResponsiveGridBreakpoint.Sm;
+    private Breakpoint _currentBreakpoint = Breakpoint.Sm;
     
     // ReSharper disable once MemberCanBeProtected.Global
     /// <summary>
     /// Gets the breakpoint calculated in the last measure pass.
     /// </summary>
-    public ResponsiveGridBreakpoint CurrentBreakpoint => _currentBreakpoint;
+    public Breakpoint CurrentBreakpoint => _currentBreakpoint;
     
     protected override Size MeasureCore(Size availableSize)
     {
         _currentBreakpoint = CalculateBreakpoint(availableSize.Width);
+        
         return base.MeasureCore(availableSize);
     }
     
@@ -78,33 +79,33 @@ public class BreakpointAwarePanel : Panel
     /// <summary>
     /// Calculates the breakpoint for the given width.
     /// </summary>
-    protected ResponsiveGridBreakpoint CalculateBreakpoint(double width)
+    protected Breakpoint CalculateBreakpoint(double width)
     {
         if (width >= this.BreakpointXxl)
         {
-            return ResponsiveGridBreakpoint.Xxl;
+            return Breakpoint.Xxl;
         }
 
         if (width >= this.BreakpointXl)
         {
-            return ResponsiveGridBreakpoint.Xl;
+            return Breakpoint.Xl;
         }
 
         if (width >= this.BreakpointLg)
         {
-            return ResponsiveGridBreakpoint.Lg;
+            return Breakpoint.Lg;
         }
 
         if (width >= this.BreakpointMd)
         {
-            return ResponsiveGridBreakpoint.Md;
+            return Breakpoint.Md;
         }
 
         if (width >= this.BreakpointSm)
         {
-            return ResponsiveGridBreakpoint.Sm;
+            return Breakpoint.Sm;
         }
 
-        return ResponsiveGridBreakpoint.Xs;
+        return Breakpoint.Xs;
     }
 }

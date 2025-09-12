@@ -1,6 +1,6 @@
 namespace HappyCoding.AvaloniaCustomResponsiveControls.Controls;
 
-public enum ResponsiveGridBreakpoint
+public enum Breakpoint
 {
     /// <summary>
     /// X-Small

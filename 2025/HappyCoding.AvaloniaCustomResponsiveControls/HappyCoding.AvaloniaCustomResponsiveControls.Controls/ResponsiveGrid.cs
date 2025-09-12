@@ -301,16 +301,16 @@ public class ResponsiveGrid : BreakpointAwarePanel
         return result;
     }
     
-    private int GetColumnCount(Control child, ResponsiveGridBreakpoint breakpoint)
+    private int GetColumnCount(Control child, Breakpoint breakpoint)
     {
         var allBreakpoints = new[]
         {
-            ResponsiveGridBreakpoint.Xs,
-            ResponsiveGridBreakpoint.Sm,
-            ResponsiveGridBreakpoint.Md,
-            ResponsiveGridBreakpoint.Lg,
-            ResponsiveGridBreakpoint.Xl,
-            ResponsiveGridBreakpoint.Xxl
+            Breakpoint.Xs,
+            Breakpoint.Sm,
+            Breakpoint.Md,
+            Breakpoint.Lg,
+            Breakpoint.Xl,
+            Breakpoint.Xxl
         };
 
         var columnCount = 0;
@@ -333,15 +333,15 @@ public class ResponsiveGrid : BreakpointAwarePanel
         return columnCount;
     }
     
-    private int GetColumnCountForBreakpoint(Control child, ResponsiveGridBreakpoint breakpoint)
+    private int GetColumnCountForBreakpoint(Control child, Breakpoint breakpoint)
     {
         var result = breakpoint switch
         {
-            ResponsiveGridBreakpoint.Xxl => child.GetValue(ColumnsXxlProperty),
-            ResponsiveGridBreakpoint.Xl => child.GetValue(ColumnsXlProperty),
-            ResponsiveGridBreakpoint.Lg => child.GetValue(ColumnsLgProperty),
-            ResponsiveGridBreakpoint.Md => child.GetValue(ColumnsMdProperty),
-            ResponsiveGridBreakpoint.Sm => child.GetValue(ColumnsSmProperty),
+            Breakpoint.Xxl => child.GetValue(ColumnsXxlProperty),
+            Breakpoint.Xl => child.GetValue(ColumnsXlProperty),
+            Breakpoint.Lg => child.GetValue(ColumnsLgProperty),
+            Breakpoint.Md => child.GetValue(ColumnsMdProperty),
+            Breakpoint.Sm => child.GetValue(ColumnsSmProperty),
             _ => child.GetValue(ColumnsProperty),
         };
         
