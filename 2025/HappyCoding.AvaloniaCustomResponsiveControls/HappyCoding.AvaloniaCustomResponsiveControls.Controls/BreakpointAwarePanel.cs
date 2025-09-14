@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 
 namespace HappyCoding.AvaloniaCustomResponsiveControls.Controls;
 
@@ -60,6 +61,12 @@ public class BreakpointAwarePanel : Panel
         set => this.SetValue(BreakpointXxlProperty, value);
     }
     
+    public static readonly DirectProperty<BreakpointAwarePanel, Breakpoint> CurrentBreakpointProperty =
+        AvaloniaProperty.RegisterDirect<BreakpointAwarePanel, Breakpoint>(
+            nameof(CurrentBreakpoint),
+            o => o.CurrentBreakpoint,
+            defaultBindingMode: BindingMode.OneWayToSource);
+    
     private Breakpoint _currentBreakpoint = Breakpoint.Sm;
     
     // ReSharper disable once MemberCanBeProtected.Global
@@ -71,7 +78,6 @@ public class BreakpointAwarePanel : Panel
     protected override Size MeasureCore(Size availableSize)
     {
         _currentBreakpoint = CalculateBreakpoint(availableSize.Width);
-        
         return base.MeasureCore(availableSize);
     }
     
