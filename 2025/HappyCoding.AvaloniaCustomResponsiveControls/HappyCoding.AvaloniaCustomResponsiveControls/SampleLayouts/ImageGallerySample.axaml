@@ -18,6 +18,18 @@
             <Setter Property="ext:ResponsiveGrid.ColumnsMd" Value="4" />
             <Setter Property="ext:ResponsiveGrid.ColumnsLg" Value="3" />
         </Style>
+        <Style Selector="ext|ResponsiveGrid:breakpoint-xs Border.ImageBorder">
+            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style Selector="ext|ResponsiveGrid:breakpoint-sm Border.ImageBorder">
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+        <Style Selector="ext|ResponsiveGrid:breakpoint-md Border.ImageBorder">
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
     </UserControl.Styles>
     
     <ScrollViewer VerticalScrollBarVisibility="Visible"

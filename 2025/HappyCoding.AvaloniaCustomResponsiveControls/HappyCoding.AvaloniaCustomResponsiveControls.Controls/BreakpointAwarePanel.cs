@@ -74,11 +74,42 @@ public class BreakpointAwarePanel : Panel
     /// Gets the breakpoint calculated in the last measure pass.
     /// </summary>
     public Breakpoint CurrentBreakpoint => _currentBreakpoint;
+
+    public BreakpointAwarePanel()
+    {
+        this.PseudoClasses.Set(
+            GetPseudoClassByBreakpoint(_currentBreakpoint),
+            true);
+    }
     
     protected override Size MeasureCore(Size availableSize)
     {
+        var breakpointBefore = _currentBreakpoint;
         _currentBreakpoint = CalculateBreakpoint(availableSize.Width);
+        
+        if (_currentBreakpoint != breakpointBefore)
+        {
+            this.PseudoClasses.Set(
+                GetPseudoClassByBreakpoint(breakpointBefore), false);
+            this.PseudoClasses.Set(
+                GetPseudoClassByBreakpoint(_currentBreakpoint), true);
+        }
+        
         return base.MeasureCore(availableSize);
+    }
+
+    private static string GetPseudoClassByBreakpoint(Breakpoint breakpoint)
+    {
+        return breakpoint switch
+        {
+            Breakpoint.Xs => ":breakpoint-xs",
+            Breakpoint.Sm => ":breakpoint-sm",
+            Breakpoint.Md => ":breakpoint-md",
+            Breakpoint.Lg => ":breakpoint-lg",
+            Breakpoint.Xl => ":breakpoint-xl",
+            Breakpoint.Xxl => ":breakpoint-xxl",
+            _ => throw new ArgumentOutOfRangeException(nameof(breakpoint))
+        };
     }
     
     // ReSharper disable once MemberCanBePrivate.Global
