@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ext="https://github.com/RolandK.AvaloniaExtensions"
-        xmlns:local="clr-namespace:HappyCoding.AvaloniaImageViewer"
+        xmlns:local="HappyCoding.AvaloniaImageViewer"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HappyCoding.AvaloniaImageViewer.MainWindow"
         x:DataType="local:MainWindowViewModel"
@@ -11,7 +11,6 @@
         TransparencyLevelHint="AcrylicBlur"
         Title="HappyCoding.AvaloniaImageViewer"
         DataContext="{ext:CreateUsingDependencyInjection Type={x:Type local:MainWindowViewModel}}">
-    
     <ext:MainWindowFrame>
         
         <ext:MainWindowFrame.CustomTitleArea>
@@ -49,7 +48,7 @@
         </ext:MainWindowFrame.HeaderMenuArea>
         
         <ext:MainWindowFrame.MainContentArea>
-            <Panel>
+            <ext:BreakpointAwarePanel>
                 <TransitioningContentControl Content="{Binding Path=CurrentBitmap}">
                     <TransitioningContentControl.PageTransition>
                         <CrossFade Duration="0:00:00.300" />
@@ -62,14 +61,23 @@
                     </TransitioningContentControl.ContentTemplate>
                 </TransitioningContentControl>
                 
+                <TextBlock VerticalAlignment="Bottom" 
+                           HorizontalAlignment="Left"
+                           IsVisible="{Binding CurrentBitmap, Converter={x:Static ObjectConverters.IsNotNull}}"
+                           Margin="10">
+                    Width: <Run Text="{Binding CurrentBitmapWidth, StringFormat=F0}" /> px<LineBreak />
+                    Height: <Run Text="{Binding CurrentBitmapHeight, StringFormat=F0}" /> px
+                </TextBlock>
+                
                 <ProgressBar VerticalAlignment="Bottom"
-                             HorizontalAlignment="Stretch"
-                             Margin="10" Height="15"
+                             HorizontalAlignment="Center"
+                             Width="{Binding $parent.Bounds.Width, Converter={local:MultiplyDoubleConverter Multiplier=0.5}}"
+                             Height="10"
+                             Margin="10"
                              IsIndeterminate="True"
                              IsVisible="{Binding AsyncState.IsRunning}" />
-            </Panel>
+            </ext:BreakpointAwarePanel>
             
         </ext:MainWindowFrame.MainContentArea>
-        
     </ext:MainWindowFrame>
 </Window>

@@ -16,11 +16,16 @@ namespace HappyCoding.AvaloniaImageViewer;
 public partial class MainWindowViewModel : OwnViewModelBase
 {
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CurrentBitmapWidth), nameof(CurrentBitmapHeight))]
     private Bitmap? _currentBitmap;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Title))]
     private IStorageFile? _currentFile;
+    
+    public double CurrentBitmapWidth => this.CurrentBitmap?.Size.Width ?? 0;
+
+    public double CurrentBitmapHeight => this.CurrentBitmap?.Size.Height ?? 0;
     
     public string Title
     {
