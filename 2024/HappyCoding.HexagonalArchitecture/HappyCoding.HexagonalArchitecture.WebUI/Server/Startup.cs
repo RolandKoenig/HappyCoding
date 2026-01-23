@@ -1,6 +1,5 @@
-﻿using HappyCoding.HexagonalArchitecture.Application;
+﻿using HappyCoding.HexagonalArchitecture.Application.UseCases;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 

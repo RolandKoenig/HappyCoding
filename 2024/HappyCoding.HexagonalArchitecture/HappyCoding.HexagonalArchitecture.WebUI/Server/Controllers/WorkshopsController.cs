@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Application;
+using HappyCoding.HexagonalArchitecture.Application.UseCases;
 using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
 using HappyCoding.HexagonalArchitecture.WebUI.Server.Mapper;
 using MediatR;
@@ -116,7 +116,9 @@ public class WorkshopsController : ControllerBase
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        return Ok(await _mediator.Send(
-            new GetWorkshopQuery(workshopID)));
+        var resultModel = await _mediator.Send(
+            new GetWorkshopQuery(workshopID));
+        
+        return Ok(resultModel.WorkshopToDto());
     }
 }

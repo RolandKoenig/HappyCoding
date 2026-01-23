@@ -2,7 +2,7 @@ using HappyCoding.HexagonalArchitecture.Domain.Model;
 using HappyCoding.HexagonalArchitecture.Domain.Ports;
 using MediatR;
 
-namespace HappyCoding.HexagonalArchitecture.Application;
+namespace HappyCoding.HexagonalArchitecture.Application.UseCases;
 
 public class GetWorkshopQueryHandler : IRequestHandler<GetWorkshopQuery, Workshop>
 {

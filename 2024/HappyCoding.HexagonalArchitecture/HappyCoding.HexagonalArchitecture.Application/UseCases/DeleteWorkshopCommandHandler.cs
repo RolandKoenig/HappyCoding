@@ -1,7 +1,7 @@
 using HappyCoding.HexagonalArchitecture.Domain.Ports;
 using MediatR;
 
-namespace HappyCoding.HexagonalArchitecture.Application;
+namespace HappyCoding.HexagonalArchitecture.Application.UseCases;
 
 public class DeleteWorkshopCommandHandler : IRequestHandler<DeleteWorkshopCommand>
 {

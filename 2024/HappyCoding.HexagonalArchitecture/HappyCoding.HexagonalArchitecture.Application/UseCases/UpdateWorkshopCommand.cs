@@ -1,9 +1,10 @@
 using HappyCoding.HexagonalArchitecture.Domain.Model;
 using MediatR;
 
-namespace HappyCoding.HexagonalArchitecture.Application;
+namespace HappyCoding.HexagonalArchitecture.Application.UseCases;
 
-public record CreateWorkshopCommand(
+public record UpdateWorkshopCommand(
+    Guid ID, 
     string Project,
     string Title,
     DateTimeOffset StartTimestamp,
