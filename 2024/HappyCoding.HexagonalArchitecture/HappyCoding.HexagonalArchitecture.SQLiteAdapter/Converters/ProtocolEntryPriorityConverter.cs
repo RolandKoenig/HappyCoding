@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Domain.Model;
+using HappyCoding.HexagonalArchitecture.Application.Model;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HappyCoding.HexagonalArchitecture.SQLiteAdapter.Converters;

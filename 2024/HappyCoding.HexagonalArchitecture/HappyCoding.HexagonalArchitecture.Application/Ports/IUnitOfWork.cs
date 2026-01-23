@@ -1,4 +1,4 @@
-﻿namespace HappyCoding.HexagonalArchitecture.Domain.Ports;
+﻿namespace HappyCoding.HexagonalArchitecture.Application.Ports;
 
 public interface IUnitOfWork
 {

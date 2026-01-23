@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Domain.Ports;
+using HappyCoding.HexagonalArchitecture.Application.Ports;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter.Bootstrap;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter.Repositories;
 

@@ -1,4 +1,4 @@
-namespace HappyCoding.HexagonalArchitecture.Domain.Model;
+namespace HappyCoding.HexagonalArchitecture.Application.Model;
 
 public enum ProtocolEntryType : int
 {

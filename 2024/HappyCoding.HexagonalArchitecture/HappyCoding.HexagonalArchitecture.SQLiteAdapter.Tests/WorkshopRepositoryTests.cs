@@ -1,6 +1,6 @@
 using System.Data.Common;
-using HappyCoding.HexagonalArchitecture.Domain.Model;
-using HappyCoding.HexagonalArchitecture.Domain.Ports;
+using HappyCoding.HexagonalArchitecture.Application.Model;
+using HappyCoding.HexagonalArchitecture.Application.Ports;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Domain.Model;
+using HappyCoding.HexagonalArchitecture.Application.Model;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter.Converters;
 using Microsoft.EntityFrameworkCore;
 

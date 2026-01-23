@@ -1,4 +1,4 @@
-using HappyCoding.HexagonalArchitecture.Domain.Model.Projections;
+using HappyCoding.HexagonalArchitecture.Application.Model.Projections;
 using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application.UseCases;

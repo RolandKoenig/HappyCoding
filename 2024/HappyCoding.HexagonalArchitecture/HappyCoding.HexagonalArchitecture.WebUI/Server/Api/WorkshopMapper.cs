@@ -1,8 +1,8 @@
-using HappyCoding.HexagonalArchitecture.Domain.Model;
-using HappyCoding.HexagonalArchitecture.Domain.Model.Projections;
+using HappyCoding.HexagonalArchitecture.Application.Model;
+using HappyCoding.HexagonalArchitecture.Application.Model.Projections;
 using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
 
-namespace HappyCoding.HexagonalArchitecture.WebUI.Server.Mapper;
+namespace HappyCoding.HexagonalArchitecture.WebUI.Server.Api;
 
 internal static class WorkshopMapper
 {

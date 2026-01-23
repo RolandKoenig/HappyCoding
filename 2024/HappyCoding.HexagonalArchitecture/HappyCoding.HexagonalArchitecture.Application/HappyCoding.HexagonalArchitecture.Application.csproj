@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HappyCoding.HexagonalArchitecture.Domain\HappyCoding.HexagonalArchitecture.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Light.GuardClauses" Version="14.0.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 

@@ -1,11 +1,10 @@
 using HappyCoding.HexagonalArchitecture.Application.UseCases;
 using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
-using HappyCoding.HexagonalArchitecture.WebUI.Server.Mapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace HappyCoding.HexagonalArchitecture.WebUI.Server.Controllers;
+namespace HappyCoding.HexagonalArchitecture.WebUI.Server.Api;
 
 [ApiController]
 [Route("[controller]")]

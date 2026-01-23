@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
-using HappyCoding.HexagonalArchitecture.Domain.Model;
-using HappyCoding.HexagonalArchitecture.Domain.Model.Projections;
-using HappyCoding.HexagonalArchitecture.Domain.Ports;
+using HappyCoding.HexagonalArchitecture.Application.Model;
+using HappyCoding.HexagonalArchitecture.Application.Model.Projections;
+using HappyCoding.HexagonalArchitecture.Application.Ports;
 using Microsoft.EntityFrameworkCore;
 
 namespace HappyCoding.HexagonalArchitecture.SQLiteAdapter.Repositories;

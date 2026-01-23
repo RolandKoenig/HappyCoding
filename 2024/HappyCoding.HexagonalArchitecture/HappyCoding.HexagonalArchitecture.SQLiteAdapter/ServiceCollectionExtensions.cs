@@ -1,5 +1,5 @@
 using System.Data.Common;
-using HappyCoding.HexagonalArchitecture.Domain.Ports;
+using HappyCoding.HexagonalArchitecture.Application.Ports;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter.Bootstrap;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

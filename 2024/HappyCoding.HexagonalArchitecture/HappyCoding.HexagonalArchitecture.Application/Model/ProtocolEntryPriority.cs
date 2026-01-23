@@ -1,6 +1,7 @@
+using HappyCoding.HexagonalArchitecture.Domain;
 using Light.GuardClauses;
 
-namespace HappyCoding.HexagonalArchitecture.Domain.Model;
+namespace HappyCoding.HexagonalArchitecture.Application.Model;
 
 public readonly struct ProtocolEntryPriority : IEquatable<ProtocolEntryPriority>
 {

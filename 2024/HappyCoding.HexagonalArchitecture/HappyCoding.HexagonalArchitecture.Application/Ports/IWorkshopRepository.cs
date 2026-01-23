@@ -1,8 +1,8 @@
 using System.Collections.Immutable;
-using HappyCoding.HexagonalArchitecture.Domain.Model;
-using HappyCoding.HexagonalArchitecture.Domain.Model.Projections;
+using HappyCoding.HexagonalArchitecture.Application.Model;
+using HappyCoding.HexagonalArchitecture.Application.Model.Projections;
 
-namespace HappyCoding.HexagonalArchitecture.Domain.Ports;
+namespace HappyCoding.HexagonalArchitecture.Application.Ports;
 
 public interface IWorkshopRepository
 {

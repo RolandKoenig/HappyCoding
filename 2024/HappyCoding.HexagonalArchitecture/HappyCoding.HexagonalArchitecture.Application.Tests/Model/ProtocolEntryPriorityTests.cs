@@ -1,6 +1,6 @@
-using HappyCoding.HexagonalArchitecture.Domain.Model;
+using HappyCoding.HexagonalArchitecture.Application.Model;
 
-namespace HappyCoding.HexagonalArchitecture.Domain.Tests.Model;
+namespace HappyCoding.HexagonalArchitecture.Application.Tests.Model;
 
 public class ProtocolEntryPriorityTests
 {

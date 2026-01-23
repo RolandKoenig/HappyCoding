@@ -1,4 +1,4 @@
-namespace HappyCoding.HexagonalArchitecture.Domain.Model.Projections;
+namespace HappyCoding.HexagonalArchitecture.Application.Model.Projections;
 
 public record WorkshopShortInfo
 {
