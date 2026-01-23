@@ -1,5 +1,6 @@
 using HappyCoding.HexagonalArchitecture.Application;
-using HappyCoding.HexagonalArchitecture.Application.Dtos;
+using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
+using HappyCoding.HexagonalArchitecture.WebUI.Server.Mapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -29,8 +30,14 @@ public class WorkshopsController : ControllerBase
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        return Ok(await _mediator.Send(
-            new CreateWorkshopRequest(workshop)));
+        var createdWorkshop = await _mediator.Send(
+            new CreateWorkshopCommand(
+                workshop.Project,
+                workshop.Title,
+                workshop.StartTimestamp,
+                workshop.Protocol.Select(WorkshopMapper.ProtocolEntryDtoToModel)));
+        
+        return Ok(createdWorkshop.WorkshopToDto());
     }
 
     [HttpPut]
@@ -45,8 +52,15 @@ public class WorkshopsController : ControllerBase
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        return Ok(await _mediator.Send(
-            new UpdateWorkshopRequest(workshop)));
+        var updatedWorkshop = await _mediator.Send(
+            new UpdateWorkshopCommand(
+                workshop.ID,
+                workshop.Project,
+                workshop.Title,
+                workshop.StartTimestamp,
+                workshop.Protocol.Select(WorkshopMapper.ProtocolEntryDtoToModel)));
+        
+        return Ok(updatedWorkshop.WorkshopToDto());
     }
 
     [HttpDelete]
@@ -63,7 +77,7 @@ public class WorkshopsController : ControllerBase
         }
 
         await _mediator.Send(
-            new DeleteWorkshopRequest(workshopID));
+            new DeleteWorkshopCommand(workshopID));
         
         return Ok();
     }
@@ -80,11 +94,13 @@ public class WorkshopsController : ControllerBase
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        return Ok(await _mediator.Send(
-            new SearchWorkshopsRequest()
+        var queryResult = await _mediator.Send(
+            new SearchWorkshopsQuery()
             {
                 QueryString = query
-            }));
+            });
+        
+        return Ok(queryResult.Select(WorkshopMapper.WorkshopShortInfoDto));
     }
 
     [HttpGet]
@@ -101,6 +117,6 @@ public class WorkshopsController : ControllerBase
         }
 
         return Ok(await _mediator.Send(
-            new GetWorkshopRequest(workshopID)));
+            new GetWorkshopQuery(workshopID)));
     }
 }

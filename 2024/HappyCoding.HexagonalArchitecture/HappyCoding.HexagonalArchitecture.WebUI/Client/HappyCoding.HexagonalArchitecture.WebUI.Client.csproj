@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\HappyCoding.HexagonalArchitecture.Application.Dtos\HappyCoding.HexagonalArchitecture.Application.Dtos.csproj" />
+    <ProjectReference Include="..\Dtos\HappyCoding.HexagonalArchitecture.WebUI.Dtos.csproj" />
   </ItemGroup>
 
 </Project>

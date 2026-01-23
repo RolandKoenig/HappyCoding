@@ -27,7 +27,7 @@ public class Startup
                 Version = "v1"
             }));
         services.AddMediatR(
-            config => config.RegisterServicesFromAssembly(typeof(CreateWorkshopRequestHandler).Assembly));
+            config => config.RegisterServicesFromAssembly(typeof(CreateWorkshopCommandHandler).Assembly));
 
         services.AddSQLiteAdapter(
             this.Configuration.GetConnectionString("WorkshopDB"));

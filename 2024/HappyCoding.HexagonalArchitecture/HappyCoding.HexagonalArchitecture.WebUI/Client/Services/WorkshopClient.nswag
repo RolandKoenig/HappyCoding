@@ -44,7 +44,7 @@
       "className": "{controller}WorkshopClient",
       "operationGenerationMode": "MultipleClientsFromOperationId",
       "additionalNamespaceUsages": [
-        "HappyCoding.HexagonalArchitecture.Application.Dtos"
+        "HappyCoding.HexagonalArchitecture.WebUI.Dtos"
       ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": false,

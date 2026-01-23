@@ -2,5 +2,5 @@ using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application;
 
-public record DeleteWorkshopRequest(Guid WorkshopID) 
+public record DeleteWorkshopCommand(Guid WorkshopID) 
     : IRequest;

@@ -1,4 +1,4 @@
-﻿using HappyCoding.HexagonalArchitecture.Application.Dtos;
+﻿using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
 using HappyCoding.HexagonalArchitecture.WebUI.Client.Services;
 using Microsoft.AspNetCore.Components;
 

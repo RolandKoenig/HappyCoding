@@ -1,6 +1,6 @@
-﻿using HappyCoding.HexagonalArchitecture.Application.Dtos;
-using HappyCoding.HexagonalArchitecture.Domain.Model;
+﻿using HappyCoding.HexagonalArchitecture.Domain.Model;
 using HappyCoding.HexagonalArchitecture.Domain.Ports;
+using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
 
 namespace HappyCoding.HexagonalArchitecture.WebUI.Integration.Tests.Controller;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
-using HappyCoding.HexagonalArchitecture.Application.Dtos;
 using HappyCoding.HexagonalArchitecture.WebUI.Client.Services;
+using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
 using Microsoft.AspNetCore.Components;
 
 namespace HappyCoding.HexagonalArchitecture.WebUI.Client.Pages;
