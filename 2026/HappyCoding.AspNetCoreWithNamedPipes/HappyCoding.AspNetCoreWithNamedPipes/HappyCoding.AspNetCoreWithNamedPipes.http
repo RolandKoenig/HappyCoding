@@ -1,0 +1,6 @@
+@HappyCoding.AspNetCoreWithNamedPipes_HostAddress = http://localhost:5108
+
+GET {{HappyCoding.AspNetCoreWithNamedPipes_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
