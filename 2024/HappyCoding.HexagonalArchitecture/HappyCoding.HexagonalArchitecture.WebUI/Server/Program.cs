@@ -40,10 +40,10 @@ public class Program
         
         if (builder.Environment.IsDevelopment())
         {
-            app.UseSwagger();
+            app.UseSwagger(c => c.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0);
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hexagonal Architecture v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hexagonal Architecture 1.0");
             });
 
             app.UseWebAssemblyDebugging();

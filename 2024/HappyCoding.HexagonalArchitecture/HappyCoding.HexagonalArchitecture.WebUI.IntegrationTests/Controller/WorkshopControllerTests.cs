@@ -35,8 +35,8 @@ public class WorkshopControllerTests : IClassFixture<WebApplicationFixture>
                 }
             },
             StartTimestamp = DateTimeOffset.UtcNow
-        });
-        var responseObject = await httpResponse.Content.ReadFromJsonAsync<WorkshopDto>();
+        }, TestContext.Current.CancellationToken);
+        var responseObject = await httpResponse.Content.ReadFromJsonAsync<WorkshopDto>(TestContext.Current.CancellationToken);
 
         // Assert
         Assert.NotNull(responseObject);
@@ -44,7 +44,7 @@ public class WorkshopControllerTests : IClassFixture<WebApplicationFixture>
 
         using var assertScope = _application.Services.CreateScope();
         var assertUnitOfWork = assertScope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-        var objInDB = await assertUnitOfWork.Workshops.GetWorkshopAsync(responseObject.ID, CancellationToken.None);
+        var objInDB = await assertUnitOfWork.Workshops.GetWorkshopAsync(responseObject.ID, TestContext.Current.CancellationToken);
 
         Assert.Equal("Dummy Project", objInDB.Project);
         Assert.Equal("Dummy Workshop #1", objInDB.Title);
@@ -62,8 +62,8 @@ public class WorkshopControllerTests : IClassFixture<WebApplicationFixture>
         var arrangeWorkshop = Workshop.CreateNew(
             "Dummy Project", "Dummy Workshop #1", DateTimeOffset.UtcNow,
             Array.Empty<ProtocolEntry>());
-        await arrangeUnitOfWork.Workshops.AddWorkshopAsync(arrangeWorkshop, CancellationToken.None);
-        await arrangeUnitOfWork.SaveChangesAsync(CancellationToken.None);
+        await arrangeUnitOfWork.Workshops.AddWorkshopAsync(arrangeWorkshop, TestContext.Current.CancellationToken);
+        await arrangeUnitOfWork.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         // Act
         var httpResponse = await client.PutAsJsonAsync("Workshops", new WorkshopDto()
@@ -81,8 +81,8 @@ public class WorkshopControllerTests : IClassFixture<WebApplicationFixture>
                 }
             },
             StartTimestamp = DateTimeOffset.UtcNow
-        });
-        var responseObject = await httpResponse.Content.ReadFromJsonAsync<WorkshopDto>();
+        }, TestContext.Current.CancellationToken);
+        var responseObject = await httpResponse.Content.ReadFromJsonAsync<WorkshopDto>(TestContext.Current.CancellationToken);
 
         // Assert
         Assert.NotNull(responseObject);
@@ -90,7 +90,7 @@ public class WorkshopControllerTests : IClassFixture<WebApplicationFixture>
 
         using var assertScope = _application.Services.CreateScope();
         var assertUnitOfWork = assertScope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-        var objInDB = await assertUnitOfWork.Workshops.GetWorkshopAsync(responseObject.ID, CancellationToken.None);
+        var objInDB = await assertUnitOfWork.Workshops.GetWorkshopAsync(responseObject.ID, TestContext.Current.CancellationToken);
 
         Assert.Equal("Dummy Project (Modified name)", objInDB.Project);
         Assert.Equal("Dummy Workshop #1", objInDB.Title);
@@ -108,8 +108,8 @@ public class WorkshopControllerTests : IClassFixture<WebApplicationFixture>
         var arrangeWorkshop = Workshop.CreateNew(
             "Dummy Project", "Dummy Workshop #1", DateTimeOffset.UtcNow,
             Array.Empty<ProtocolEntry>());
-        await arrangeUnitOfWork.Workshops.AddWorkshopAsync(arrangeWorkshop, CancellationToken.None);
-        await arrangeUnitOfWork.SaveChangesAsync(CancellationToken.None);
+        await arrangeUnitOfWork.Workshops.AddWorkshopAsync(arrangeWorkshop, TestContext.Current.CancellationToken);
+        await arrangeUnitOfWork.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         // Act
         var httpResponse = await client.DeleteAsync($"Workshops/{arrangeWorkshop.ID}");
@@ -118,7 +118,7 @@ public class WorkshopControllerTests : IClassFixture<WebApplicationFixture>
         // Assert
         using var assertScope = _application.Services.CreateScope();
         var assertUnitOfWork = assertScope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-        var objInDB = await assertUnitOfWork.Workshops.TryGetWorkshopAsync(arrangeWorkshop.ID, CancellationToken.None);
+        var objInDB = await assertUnitOfWork.Workshops.TryGetWorkshopAsync(arrangeWorkshop.ID, TestContext.Current.CancellationToken);
 
         Assert.Null(objInDB);
     }

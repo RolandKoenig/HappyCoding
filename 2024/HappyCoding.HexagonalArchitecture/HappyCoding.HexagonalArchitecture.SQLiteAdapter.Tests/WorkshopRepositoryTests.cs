@@ -42,14 +42,14 @@ public class WorkshopRepositoryTests : IDisposable
             Array.Empty<ProtocolEntry>());
         await unitOfWork.Workshops.AddWorkshopAsync(
             createdWorkshop,
-            CancellationToken.None);
-        await unitOfWork.SaveChangesAsync(CancellationToken.None);
+            TestContext.Current.CancellationToken);
+        await unitOfWork.SaveChangesAsync(TestContext.Current.CancellationToken);
         
         // Assert
         await using var assertScope = _serviceProvider.CreateAsyncScope();
         var assertUnitOfWork = assertScope.ServiceProvider.GetRequiredService<IUnitOfWork>();
         var queriedWorkshop = await assertUnitOfWork.Workshops.GetWorkshopAsync(
             createdWorkshop.ID,
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
     }
 }
