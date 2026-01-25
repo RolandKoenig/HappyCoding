@@ -1,5 +1,6 @@
 ﻿using HappyCoding.HexagonalArchitecture.Application.UseCases;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter;
+using HappyCoding.HexagonalArchitecture.WebUI.Server.Middlewares;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
@@ -39,6 +40,8 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IHostEnvironment env)
     {
+        app.UseMiddleware<RequestLoggingMiddleware>();
+        
         if (env.IsDevelopment())
         {
             app.UseSwagger();
@@ -62,11 +65,10 @@ public class Startup
         
         app.UseEndpoints(endpoints =>
         {
-            // endpoints.MapRazorPages();
             endpoints.MapControllers();
             endpoints.MapRazorComponents<App>()
                 .AddInteractiveWebAssemblyRenderMode()
-                .AddAdditionalAssemblies(typeof(HappyCoding.HexagonalArchitecture.WebUI.Client._Imports).Assembly);
+                .AddAdditionalAssemblies(typeof(HappyCoding.HexagonalArchitecture.WebUI.Client.Program).Assembly);
         });
     }
 }
