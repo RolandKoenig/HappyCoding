@@ -1,3 +1,4 @@
+using HappyCoding.HexagonalArchitecture.Application;
 using HappyCoding.HexagonalArchitecture.Application.UseCases;
 using HappyCoding.HexagonalArchitecture.SQLiteAdapter;
 using HappyCoding.HexagonalArchitecture.WebUI.Server.Middlewares;
@@ -13,6 +14,8 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // ###### Configure services
+        builder.Services.AddApplicationServices();
+        
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddRazorComponents().AddInteractiveWebAssemblyComponents();
@@ -22,8 +25,6 @@ public class Program
                 Title = "Hexagonal Architecture",
                 Version = "v1"
             }));
-        builder.Services.AddMediatR(
-            config => config.RegisterServicesFromAssembly(typeof(CreateWorkshopCommandHandler).Assembly));
 
         builder.Services.AddSQLiteAdapter(
             builder.Configuration.GetConnectionString("WorkshopDB")!);

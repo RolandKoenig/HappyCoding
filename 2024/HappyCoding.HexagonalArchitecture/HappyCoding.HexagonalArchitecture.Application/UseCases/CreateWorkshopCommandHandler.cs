@@ -1,10 +1,9 @@
 using HappyCoding.HexagonalArchitecture.Application.Model;
 using HappyCoding.HexagonalArchitecture.Application.Ports;
-using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application.UseCases;
 
-public class CreateWorkshopCommandHandler : IRequestHandler<CreateWorkshopCommand, Workshop>
+public class CreateWorkshopCommandHandler
 {
     private readonly IUnitOfWork _unitOfWork;
     
@@ -14,7 +13,7 @@ public class CreateWorkshopCommandHandler : IRequestHandler<CreateWorkshopComman
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Workshop> Handle(CreateWorkshopCommand command, CancellationToken cancellationToken)
+    public async Task<Workshop> HandleAsync(CreateWorkshopCommand command, CancellationToken cancellationToken)
     {
         var newWorkshop = Workshop.CreateNew(
             command.Project,

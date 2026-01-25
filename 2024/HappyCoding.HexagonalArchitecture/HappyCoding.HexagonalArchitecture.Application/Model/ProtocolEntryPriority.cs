@@ -1,4 +1,3 @@
-using HappyCoding.HexagonalArchitecture.Domain;
 using Light.GuardClauses;
 
 namespace HappyCoding.HexagonalArchitecture.Application.Model;
@@ -23,7 +22,7 @@ public readonly struct ProtocolEntryPriority : IEquatable<ProtocolEntryPriority>
     public ProtocolEntryPriority(int priorityValue)
     {
         priorityValue.MustBeIn(new Range<int>(0, 2), nameof(priorityValue));
-
+        
         var test = 1..2;
 
         this.Priority = priorityValue;

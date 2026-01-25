@@ -1,9 +1,6 @@
-using HappyCoding.HexagonalArchitecture.Application.Model.Projections;
-using MediatR;
-
 namespace HappyCoding.HexagonalArchitecture.Application.UseCases;
 
-public record SearchWorkshopsQuery() : IRequest<IEnumerable<WorkshopShortInfo>>
+public record SearchWorkshopsQuery()
 {
     public string? QueryString { get; init; }
 }

@@ -1,10 +1,9 @@
 using HappyCoding.HexagonalArchitecture.Application.Model;
 using HappyCoding.HexagonalArchitecture.Application.Ports;
-using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application.UseCases;
 
-public class GetWorkshopQueryHandler : IRequestHandler<GetWorkshopQuery, Workshop>
+public class GetWorkshopQueryHandler
 {
     private readonly IUnitOfWork _unitOfWork;
     
@@ -13,7 +12,7 @@ public class GetWorkshopQueryHandler : IRequestHandler<GetWorkshopQuery, Worksho
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<Workshop> Handle(GetWorkshopQuery query, CancellationToken cancellationToken)
+    public async Task<Workshop> HandleAsync(GetWorkshopQuery query, CancellationToken cancellationToken)
     {
         return await _unitOfWork.Workshops.GetWorkshopAsync(query.ID, cancellationToken);
     }

@@ -1,6 +1,5 @@
 using HappyCoding.HexagonalArchitecture.Application.UseCases;
 using HappyCoding.HexagonalArchitecture.WebUI.Dtos;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -10,31 +9,27 @@ namespace HappyCoding.HexagonalArchitecture.WebUI.Server.Api;
 [Route("[controller]")]
 public class WorkshopsController : ControllerBase
 {
-    private readonly IMediator _mediator;
-    
-    public WorkshopsController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-    
     [HttpPost]
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
     [Produces("application/json")]
     public async Task<IActionResult> CreateWorkshop(
+        [FromServices] CreateWorkshopCommandHandler createWorkshopCommandHandler,
+        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions,
         WorkshopWithoutIDDto workshop,
-        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions)
+        CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        var createdWorkshop = await _mediator.Send(
+        var createdWorkshop = await createWorkshopCommandHandler.HandleAsync(
             new CreateWorkshopCommand(
                 workshop.Project,
                 workshop.Title,
                 workshop.StartTimestamp,
-                workshop.Protocol.Select(WorkshopMapper.ProtocolEntryDtoToModel)));
+                workshop.Protocol.Select(WorkshopMapper.ProtocolEntryDtoToModel)),
+            cancellationToken);
         
         return Ok(createdWorkshop.WorkshopToDto());
     }
@@ -43,21 +38,24 @@ public class WorkshopsController : ControllerBase
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
     [Produces("application/json")]
     public async Task<IActionResult> UpdateWorkshop(
+        [FromServices] UpdateWorkshopCommandHandler updateWorkshopCommandHandler,
+        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions,
         WorkshopDto workshop,
-        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions)
+        CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        var updatedWorkshop = await _mediator.Send(
+        var updatedWorkshop = await updateWorkshopCommandHandler.HandleAsync(
             new UpdateWorkshopCommand(
                 workshop.ID,
                 workshop.Project,
                 workshop.Title,
                 workshop.StartTimestamp,
-                workshop.Protocol.Select(WorkshopMapper.ProtocolEntryDtoToModel)));
+                workshop.Protocol.Select(WorkshopMapper.ProtocolEntryDtoToModel)),
+            cancellationToken);
         
         return Ok(updatedWorkshop.WorkshopToDto());
     }
@@ -67,16 +65,19 @@ public class WorkshopsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [Produces("application/json")]
     public async Task<IActionResult> DeleteWorkshop(
+        [FromServices] DeleteWorkshopCommandHandler deleteWorkshopCommandHandler,
+        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions,
         Guid workshopID,
-        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions)
+        CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        await _mediator.Send(
-            new DeleteWorkshopCommand(workshopID));
+        await deleteWorkshopCommandHandler.HandleAsync(
+            new DeleteWorkshopCommand(workshopID),
+            cancellationToken);
         
         return Ok();
     }
@@ -85,19 +86,22 @@ public class WorkshopsController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<WorkshopShortInfoDto>), StatusCodes.Status200OK)]
     [Produces("application/json")]
     public async Task<IActionResult> SearchWorkshops(
+        [FromServices] SearchWorkshopsQueryHandler searchWorkshopsQueryHandler,
+        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions,
         [FromQuery] string? query,
-        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions)
+        CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        var queryResult = await _mediator.Send(
+        var queryResult = await searchWorkshopsQueryHandler.HandleAsync(
             new SearchWorkshopsQuery()
             {
                 QueryString = query
-            });
+            },
+            cancellationToken);
         
         return Ok(queryResult.Select(WorkshopMapper.WorkshopShortInfoDto));
     }
@@ -107,16 +111,19 @@ public class WorkshopsController : ControllerBase
     [ProducesResponseType(typeof(WorkshopDto), StatusCodes.Status200OK)]
     [Produces("application/json")]
     public async Task<IActionResult> GetWorkshop(
+        [FromServices] GetWorkshopQueryHandler getWorkshopQueryHandler,
+        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions,
         Guid workshopID,
-        [FromServices] IOptions<ApiBehaviorOptions> apiBehaviorOptions)
+        CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
             return apiBehaviorOptions.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
 
-        var resultModel = await _mediator.Send(
-            new GetWorkshopQuery(workshopID));
+        var resultModel = await getWorkshopQueryHandler.HandleAsync(
+            new GetWorkshopQuery(workshopID),
+            cancellationToken);
         
         return Ok(resultModel.WorkshopToDto());
     }

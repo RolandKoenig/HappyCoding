@@ -1,4 +1,4 @@
-namespace HappyCoding.HexagonalArchitecture.Domain;
+namespace HappyCoding.HexagonalArchitecture.Application;
 
 public class DomainException : ApplicationException
 {

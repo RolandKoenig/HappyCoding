@@ -1,9 +1,8 @@
 using HappyCoding.HexagonalArchitecture.Application.Ports;
-using MediatR;
 
 namespace HappyCoding.HexagonalArchitecture.Application.UseCases;
 
-public class DeleteWorkshopCommandHandler : IRequestHandler<DeleteWorkshopCommand>
+public class DeleteWorkshopCommandHandler
 {
     private readonly IUnitOfWork _unitOfWork;
     
@@ -12,7 +11,7 @@ public class DeleteWorkshopCommandHandler : IRequestHandler<DeleteWorkshopComman
         _unitOfWork = unitOfWork;
     }
     
-    public async Task Handle(DeleteWorkshopCommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(DeleteWorkshopCommand command, CancellationToken cancellationToken)
     {
         await _unitOfWork.Workshops.DeleteWorkshopAsync(command.WorkshopID, cancellationToken);
  
