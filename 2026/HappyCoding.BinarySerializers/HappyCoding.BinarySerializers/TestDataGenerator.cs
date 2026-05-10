@@ -10,8 +10,8 @@ public class TestDataGenerator
 
         var categories = new[] { "Development", "Consulting", "Support", "Documentation" };
         var topics = new[] { "Backend", "Frontend", "DevOps", "Architecture" };
-        var dayTypes = new[] { "Workday", "Weekend", "Holiday" };
-        var lineTypes = new[] { "Billable", "Internal", "Meeting" };
+        var dayTypes = new[] { "AB", "CD", "EF" };
+        var lineTypes = new[] { "T", "W", "" };
 
         for (var loop = 0; loop < rowCount; loop++)
         {
