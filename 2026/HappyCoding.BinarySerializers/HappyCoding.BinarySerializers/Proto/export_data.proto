@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "HappyCoding.BinarySerializers.ProtobufModel";
+
+import "google/protobuf/timestamp.proto";
+
+message ExportDataMessage {
+  string version = 1;
+  google.protobuf.Timestamp export_zeitstempel = 2;
+  repeated ExportDataRowMessage rows = 3;
+}
+
+message ExportDataRowMessage {
+  string kategorie = 1;
+  string thema = 2;
+  string datum = 3;
+  string tag_typ = 4;
+  string zeilen_typ = 5;
+  double zeitaufwand = 6;
+  double abgerechnet = 7;
+  double billing_multiplier = 8;
+  string kommentar = 9;
+}
