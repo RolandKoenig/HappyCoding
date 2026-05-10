@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.BinarySerialize
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.BinarySerializers.Benchmarks", "HappyCoding.BinarySerializers.Benchmarks\HappyCoding.BinarySerializers.Benchmarks.csproj", "{3191D5D9-A3A6-45FF-892A-718EBAC4144E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyCoding.MemoryPackSerialization.CompatibleModificationsTests", "HappyCoding.MemoryPackSerialization.CompatibleModificationsTests\HappyCoding.MemoryPackSerialization.CompatibleModificationsTests.csproj", "{4A69DA69-F7FF-4702-AB77-B781B9A52467}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,18 @@ Global
 		{3191D5D9-A3A6-45FF-892A-718EBAC4144E}.Release|x64.Build.0 = Release|Any CPU
 		{3191D5D9-A3A6-45FF-892A-718EBAC4144E}.Release|x86.ActiveCfg = Release|Any CPU
 		{3191D5D9-A3A6-45FF-892A-718EBAC4144E}.Release|x86.Build.0 = Release|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Debug|x64.Build.0 = Debug|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Debug|x86.Build.0 = Debug|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Release|x64.ActiveCfg = Release|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Release|x64.Build.0 = Release|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Release|x86.ActiveCfg = Release|Any CPU
+		{4A69DA69-F7FF-4702-AB77-B781B9A52467}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
