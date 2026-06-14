@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="HappyCoding.AvaloniaWithWinForms.FormsControl/HappyCoding.AvaloniaWithWinForms.FormsControl.csproj" />
+  <Project Path="HappyCoding.AvaloniaWithWinForms/HappyCoding.AvaloniaWithWinForms.csproj" />
+</Solution>

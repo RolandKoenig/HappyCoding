@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="using:HappyCoding.AvaloniaWithWinForms"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaWithWinForms.MainWindow"
+        Title="HappyCoding.AvaloniaWithWinForms">
+    <DockPanel>
+         <StackPanel DockPanel.Dock="Top"
+                     Orientation="Horizontal"
+                     Margin="5"
+                     Spacing="5">
+             <TextBlock VerticalAlignment="Center" 
+                        Text="Selected dates: From" />
+             <DatePicker SelectedDate="{Binding #MonthCalendar.SelectedStartDate}" />
+             <TextBlock VerticalAlignment="Center" 
+                        Text="to" />
+             <DatePicker SelectedDate="{Binding #MonthCalendar.SelectedEndDate}" />
+         </StackPanel>
+
+		 <local:WinFormsMonthCalendarControlWrapper Name="MonthCalendar" 
+                                                    TitleText="MonthCalendar from WinForms" />
+    </DockPanel>
+   
+</Window>
