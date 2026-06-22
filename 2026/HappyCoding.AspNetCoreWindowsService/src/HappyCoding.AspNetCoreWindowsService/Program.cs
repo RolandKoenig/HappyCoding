@@ -1,4 +1,5 @@
 ﻿using HappyCoding.AspNetCoreWindowsService.Middleware;
+using Microsoft.Extensions.Hosting.WindowsServices;
 
 namespace HappyCoding.AspNetCoreWindowsService;
 
@@ -6,9 +7,14 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        // Set the current directory to the assembly location if running as a Windows Service
+        if (WindowsServiceHelpers.IsWindowsService())
+        {
+            Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+        }
 
         // Configure application
+        var builder = WebApplication.CreateBuilder(args);
         builder.Host.UseWindowsService(conf =>
         {
             conf.ServiceName = "HappyCoding.AspNetCoreWindowsService";

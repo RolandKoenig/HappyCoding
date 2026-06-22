@@ -4,11 +4,6 @@
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
-
-    <!-- Remove unnecessary files in build outputs -->
-    <PropertyGroup>
-        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
         <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
     </PropertyGroup>
 
