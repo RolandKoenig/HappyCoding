@@ -13,14 +13,12 @@
                      Spacing="5">
              <TextBlock VerticalAlignment="Center" 
                         Text="Selected dates: From" />
-             <DatePicker SelectedDate="{Binding #MonthCalendar.SelectedStartDate}" />
+             <CalendarDatePicker SelectedDate="{Binding #MonthCalendar.SelectionStart}" />
              <TextBlock VerticalAlignment="Center" 
                         Text="to" />
-             <DatePicker SelectedDate="{Binding #MonthCalendar.SelectedEndDate}" />
+             <CalendarDatePicker SelectedDate="{Binding #MonthCalendar.SelectionEnd}" />
          </StackPanel>
 
-		 <local:WinFormsMonthCalendarControlWrapper Name="MonthCalendar" 
-                                                    TitleText="MonthCalendar from WinForms" />
+		 <local:WinFormsMonthCalendar Name="MonthCalendar" />
     </DockPanel>
-   
 </Window>
