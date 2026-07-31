@@ -10,7 +10,7 @@ namespace HappyCoding.TemperatureViewer.Tests;
 public class MainWindowTests
 {
     [AvaloniaFact]
-    public void StartTemparatureMeasurement()
+    public void StartTemperatureMeasurement()
     {
         // Arrange
         var testData = new[]
@@ -25,14 +25,17 @@ public class MainWindowTests
         var mainWindow = new MainWindow();
         mainWindow.DataContext = new MainViewModel(mockedMeasurementService);
         mainWindow.Show();
+
+        var mainView = mainWindow.Content as MainView;
+        Assert.NotNull(mainView);
         
         // Act
-        var mnuStartMeasuring = mainWindow.GetControl<MenuItem>("MnuStartMeasuring");
+        var mnuStartMeasuring = mainView.GetControl<MenuItem>("MnuStartMeasuring");
 
         mnuStartMeasuring.SimulateClick();
         
         // Assert
-        var txtCurrentTemperature = mainWindow.GetControl<TextBlock>("TxtCurrentTemperature");
+        var txtCurrentTemperature = mainView.GetControl<TextBlock>("TxtCurrentTemperature");
         Assert.Equal("10.50°", txtCurrentTemperature.Text);
     }
 }

@@ -15,6 +15,8 @@ public static class TestApp
         var cultureEn = new CultureInfo("en");
         CultureInfo.CurrentCulture = cultureEn;
         CultureInfo.CurrentUICulture = cultureEn;
+        CultureInfo.DefaultThreadCurrentCulture = cultureEn;
+        CultureInfo.DefaultThreadCurrentUICulture = cultureEn;
         
         return Program.BuildAvaloniaApp()
             .UseHeadless(new AvaloniaHeadlessPlatformOptions());
