@@ -7,6 +7,9 @@ Sample for hosting an ASP.NET Core Application as Windows Service
 Sample for interproces communication using Named Pipes in ASP.NET Core
 
 ## Avalonia
+### [HappyCoding.AvaloniaGlobalExceptionHandling](HappyCoding.AvaloniaGlobalExceptionHandling)
+Sample for global exception handling in Avalonia
+
 ### [HappyCoding.AvaloniaWithWinForms](HappyCoding.AvaloniaWithWinForms)
 Sample for integration of Windows.Forms controls into an Avalonia application
 
