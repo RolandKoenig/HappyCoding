@@ -1,0 +1,46 @@
+<c:SlideDeck xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="local-application"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaSlideNavigation.Slides.RootSlideDeck">
+    
+    <c:Slide>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Slide 1, Click 0" />
+            <TextBlock Text="Slide 1, Click 1"
+                       c:Animations.OnClick="1" />
+            <TextBlock Text="Slide 1, Click 2"
+                       c:Animations.OnClick="2" />
+        </StackPanel>
+    </c:Slide>   
+    
+    <c:Slide>
+        <TextBlock Text="Slide 2" />
+    </c:Slide>  
+    
+    <c:Slide>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Slide 3, Click 0" />
+            <TextBlock Text="Slide 3, Click 1"
+                       c:Animations.OnClick="1" />
+            <TextBlock Text="Slide 3, Click 2"
+                       c:Animations.OnClick="2" />
+        </StackPanel>
+    </c:Slide>
+    
+    <c:SlideDeck>
+        <c:Slide>
+            <TextBlock Text="Slide 4" />
+        </c:Slide>  
+        <c:Slide>
+            <TextBlock Text="Slide 5" />
+        </c:Slide>
+    </c:SlideDeck>
+    
+    <c:Slide>
+        <TextBlock Text="Slide 6" />
+    </c:Slide>
+    
+</c:SlideDeck>

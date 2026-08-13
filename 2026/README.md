@@ -10,6 +10,9 @@ Sample for interproces communication using Named Pipes in ASP.NET Core
 ### [HappyCoding.AvaloniaGlobalExceptionHandling](HappyCoding.AvaloniaGlobalExceptionHandling)
 Sample for global exception handling in Avalonia
 
+### [HappyCoding.AvaloniaSlideNavigation](HappyCoding.AvaloniaSlideNavigation)
+A small experiment for slide based navigation (like in presentation tools)
+
 ### [HappyCoding.AvaloniaWithWinForms](HappyCoding.AvaloniaWithWinForms)
 Sample for integration of Windows.Forms controls into an Avalonia application
 
