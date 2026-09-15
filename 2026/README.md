@@ -13,6 +13,9 @@ Sample for global exception handling in Avalonia
 ### [HappyCoding.AvaloniaSlideNavigation](HappyCoding.AvaloniaSlideNavigation)
 A small experiment for slide based navigation (like in presentation tools)
 
+### [HappyCoding.AvaloniaStructuredList](HappyCoding.AvaloniaStructuredList)
+A custom layout control which organizes child controls as a hierarchical list with indents
+
 ### [HappyCoding.AvaloniaTemplatedControl](HappyCoding.AvaloniaTemplatedControl)
 A simple templates control, implemented like described in https://docs.avaloniaui.net/docs/custom-controls/templated-controls
 

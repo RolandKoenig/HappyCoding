@@ -1,0 +1,21 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:app="local-application"
+             x:Class="HappyCoding.AvaloniaStructuredList.App"
+             RequestedThemeVariant="Default">
+    <Application.Styles>
+        <FluentTheme />
+        
+        <Style Selector="app|StructuredListItem">
+            <Setter Property="BulletForeground" Value="DeepSkyBlue" />
+        </Style>
+    </Application.Styles>
+             
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="Controls/StructuredListItemTheme.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

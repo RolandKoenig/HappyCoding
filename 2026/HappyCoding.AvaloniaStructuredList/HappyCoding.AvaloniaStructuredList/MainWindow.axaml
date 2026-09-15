@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:app="local-application"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaStructuredList.MainWindow"
+        Title="HappyCoding.AvaloniaStructuredList">
+    <Border Padding="50">
+        <app:StructuredList IndentWidth="20" Spacing="3">
+            <app:StructuredListItem Name="CtrlTest"
+                                    Content="ABC 123 ADSsdfsdf" />
+            <app:StructuredListItem Content="ABC 123 with text wrapping"
+                                    TextWrapping="Wrap" />
+            <app:StructuredListItem />
+            
+            <app:StructuredListItem app:StructuredList.FixedIndent="Zero">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock>
+                        Width of first element: <LineBreak />
+                        <Run Text="{Binding ElementName=CtrlTest, Path=Bounds}" />
+                    </TextBlock>
+                    <Rectangle Width="50" Height="50"
+                               HorizontalAlignment="Left"
+                               Fill="Blue" />
+                </StackPanel>
+            </app:StructuredListItem>
+            <app:StructuredListItem app:StructuredList.FixedIndent="One" 
+                                    Content="ABC" />
+            <app:StructuredListItem app:StructuredList.ChangeIndent="Increase" 
+                                    Content="ABC"/>
+            <app:StructuredListItem Content="ABC" />
+            <Rectangle Width="100" Height="100" 
+                       Margin="0,0,5,5" 
+                       Fill="Yellow" />
+            <app:StructuredListItem Content="ABC 1234"/>
+            <app:StructuredListItem app:StructuredList.ChangeIndent="Decrease" 
+                                    Content="ABC" />
+        </app:StructuredList>
+    </Border>
+</Window>

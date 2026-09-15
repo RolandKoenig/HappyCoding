@@ -1,0 +1,92 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:app="local-application">
+    <Design.PreviewWith>
+        <Panel Width="150" Height="50">
+            <app:StructuredListItem IndentWidth="20"
+                                    TextWrapping="Wrap">
+                Teschterle abc Test
+            </app:StructuredListItem>
+        </Panel>
+    </Design.PreviewWith>
+    
+    <ControlTheme x:Key="{x:Type app:StructuredListItem}" 
+                  TargetType="app:StructuredListItem">
+        <Setter Property="BulletForeground" Value="{DynamicResource TextControlForeground}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}"
+                        ClipToBounds="{TemplateBinding ClipToBounds}">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Border Grid.Column="0"
+                                Opacity="{TemplateBinding Content, Converter={app:StructuredListItemOpacityCalculator}}"
+                                Width="{TemplateBinding IndentWidth}">
+                            <ContentPresenter Name="PART_BulletContentPresenter"
+                                              Content="{TemplateBinding BulletContent}"
+                                              Foreground="{TemplateBinding BulletForeground}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </Border>
+                        <ContentPresenter Grid.Column="1" 
+                                          Name="PART_ContentPresenter"
+                                          TextWrapping="{TemplateBinding TextWrapping}"
+                                          Content="{TemplateBinding Content}"
+                                          Foreground="{TemplateBinding Foreground}"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        
+        <Style Selector="^:indent-zero /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style Selector="^:indent-zero /template/ ContentPresenter#PART_BulletContentPresenter">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        
+        <Style Selector="^:indent-one /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        <Style Selector="^:indent-one /template/ ContentPresenter#PART_BulletContentPresenter">
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        
+        <Style Selector="^:indent-two /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style Selector="^:indent-two /template/ ContentPresenter#PART_BulletContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        
+        <Style Selector="^:indent-three /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style Selector="^:indent-three /template/ ContentPresenter#PART_BulletContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        
+        <Style Selector="^:indent-four /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style Selector="^:indent-four /template/ ContentPresenter#PART_BulletContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        
+        <Style Selector="^:indent-five /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style Selector="^:indent-five /template/ ContentPresenter#PART_BulletContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        
+        <Style Selector="^:indent-six /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style Selector="^:indent-six /template/ ContentPresenter#PART_BulletContentPresenter">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>
