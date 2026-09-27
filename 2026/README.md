@@ -37,3 +37,6 @@ Sample for integration of Windows.Forms controls into an Avalonia application
 ## Misc
 ### [HappyCoding.BinarySerializers](HappyCoding.BinarySerializers)
 Comparing different binary serialization libraries for .NET
+
+### [HappyCoding.ModernCliTools](HappyCoding.ModernCliTools)
+Some play around with cli frameworks for .NET
