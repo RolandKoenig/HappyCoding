@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:app="local-application"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HappyCoding.AvaloniaViewFirstNavigation.MainWindow"
+        Title="HappyCoding.AvaloniaViewFirstNavigation">
+    <Border Padding="20">
+        <app:NavigationControl>
+            <app:NavigationItem Header="Home"
+                                Source="Views/HomeView.axaml"/>
+            <app:NavigationItem Header="Settings"
+                                Source="Views/SettingsView.axaml"/>
+        </app:NavigationControl>
+    </Border>
+</Window>

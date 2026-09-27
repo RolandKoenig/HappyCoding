@@ -19,6 +19,9 @@ A custom layout control which organizes child controls as a hierarchical list wi
 ### [HappyCoding.AvaloniaTemplatedControl](HappyCoding.AvaloniaTemplatedControl)
 A simple templates control, implemented like described in https://docs.avaloniaui.net/docs/custom-controls/templated-controls
 
+### [HappyCoding.AvaloniaViewFirstNavigation](HappyCoding.AvaloniaViewFirstNavigation)
+An implementation of a navigation control which does view first navigation
+
 ### [HappyCoding.AvaloniaViewModelValidation](HappyCoding.AvaloniaViewModelValidation)
 A simple sample for validatin in the ViewModel using CommunityToolkit.Mvvm in Avalonia
 

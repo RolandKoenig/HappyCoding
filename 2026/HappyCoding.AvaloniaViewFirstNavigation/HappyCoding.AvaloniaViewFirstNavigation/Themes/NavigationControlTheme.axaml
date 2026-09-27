@@ -1,0 +1,31 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:app="local-application">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <app:NavigationControl Width="200">
+                <app:NavigationItem Header="Item 1" />
+                <app:NavigationItem Header="Item 2" />
+                <app:NavigationItem Header="Item 3" />
+            </app:NavigationControl>
+        </Border>
+    </Design.PreviewWith>
+    
+    <ControlTheme x:Key="{x:Type app:NavigationControl}" 
+                  TargetType="app:NavigationControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DockPanel>
+                    <ListBox DockPanel.Dock="Left" 
+                             ItemsSource="{TemplateBinding Items}"
+                             SelectedItem="{TemplateBinding SelectedItem, Mode=TwoWay}"
+                             x:DataType="app:NavigationItem"
+                             DisplayMemberBinding="{CompiledBinding Header}" />
+                    <ContentPresenter Name="PART_PagePresenter"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch" />
+                </DockPanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>
