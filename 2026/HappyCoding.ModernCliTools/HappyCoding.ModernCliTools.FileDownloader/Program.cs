@@ -1,13 +1,13 @@
 ﻿using System.CommandLine;
 using Spectre.Console;
 
+// ReSharper disable ShortLivedHttpClient
+
 namespace HappyCoding.ModernCliTools.FileDownloader;
 
-internal static class Program
+public static class Program
 {
-    private static readonly HttpClient s_httpClient = new();
-    
-    static async Task<int> Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         // Common options
         var verboseOption = new Option<bool>("--verbose")
@@ -15,8 +15,14 @@ internal static class Program
             Description = "Show verbose logging.",
             Recursive = true
         };
-        var urlArgument = new Argument<string>("url") { Description = "The URL of the file to download." };
-        var outputOption = new Option<string?>("--output") { Description = "The output path for the downloaded file." };
+        var urlArgument = new Argument<string>("url")
+        {
+            Description = "The URL of the file to download."
+        };
+        var outputArgument = new Argument<string?>("output")
+        {
+            Description = "The output path for the downloaded file.",
+        };
 
         // Root command
         var rootCommand = new RootCommand("A small CLI tool to download files or check their size.");
@@ -31,22 +37,22 @@ internal static class Program
             var verbose = parseResult.GetValue(verboseOption);
             
             if (url == null) return;
-            await HandleCheckSizeAsync(url, verbose);
+            await HandleCheckSizeAsync(url, verbose, cancellationToken);
         });
         rootCommand.Subcommands.Add(sizeCommand);
         
         // Define download command
         var downloadCommand = new Command("download", "Download a file from the internet.");
         downloadCommand.Arguments.Add(urlArgument);
-        downloadCommand.Options.Add(outputOption);
+        downloadCommand.Arguments.Add(outputArgument);
         downloadCommand.SetAction(async (parseResult, cancellationToken) =>
         {
             var url = parseResult.GetValue(urlArgument);
-            var output = parseResult.GetValue(outputOption);
+            var output = parseResult.GetValue(outputArgument);
             var verbose = parseResult.GetValue(verboseOption);
             
             if (url == null) return;
-            await HandleDownloadAsync(url, output, verbose);
+            await HandleDownloadAsync(url, output, verbose, cancellationToken);
         });
         rootCommand.Subcommands.Add(downloadCommand);
 
@@ -54,7 +60,7 @@ internal static class Program
         return await rootCommand.Parse(args).InvokeAsync();
     }
 
-    private static async Task HandleDownloadAsync(string url, string? outputPath, bool verbose)
+    private static async Task HandleDownloadAsync(string url, string? outputPath, bool verbose, CancellationToken cancellationToken)
     {
         if (verbose)
         {
@@ -63,7 +69,8 @@ internal static class Program
         
         try
         {
-            using var response = await s_httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            var httpClient = new HttpClient();
+            using var response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var totalBytes = response.Content.Headers.ContentLength;
@@ -85,15 +92,15 @@ internal static class Program
                     }
                     task.StartTask();
 
-                    using var contentStream = await response.Content.ReadAsStreamAsync();
-                    using var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+                    await using var contentStream = await response.Content.ReadAsStreamAsync(cancellationToken);
+                    await using var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
 
                     var buffer = new byte[100];
                     int bytesRead;
-                    while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                    while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
                     {
-                        await Task.Delay(100);
-                        await fileStream.WriteAsync(buffer, 0, bytesRead);
+                        await Task.Delay(100, cancellationToken);
+                        await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken);
                         task.Increment(bytesRead);
                     }
                     
@@ -104,11 +111,11 @@ internal static class Program
         }
         catch (Exception ex)
         {
-            AnsiConsole.WriteException(ex);
+            AnsiConsole.WriteLine($"[red]Unhandled exception of type {ex.GetType().Name}: {ex.Message}[/]");
         }
     }
 
-    private static async Task HandleCheckSizeAsync(string url, bool verbose)
+    private static async Task HandleCheckSizeAsync(string url, bool verbose, CancellationToken cancellationToken)
     {
         if (verbose)
         {
@@ -117,8 +124,9 @@ internal static class Program
 
         try
         {
+            var httpClient = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Head, url);
-            using var response = await s_httpClient.SendAsync(request);
+            using var response = await httpClient.SendAsync(request, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var totalBytes = response.Content.Headers.ContentLength;
@@ -135,7 +143,7 @@ internal static class Program
         }
         catch (Exception ex)
         {
-            AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
+            AnsiConsole.WriteLine($"[red]Unhandled exception of type {ex.GetType().Name}: {ex.Message}[/]");
         }
     }
 }

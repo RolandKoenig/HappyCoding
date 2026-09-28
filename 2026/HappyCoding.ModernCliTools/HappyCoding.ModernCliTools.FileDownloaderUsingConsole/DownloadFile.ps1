@@ -1,0 +1,1 @@
+dotnet run -- https://www.rolandk.de/wp/media/rolandk_logo_rgb_default.svg ./Download/rolandk_logo.svg
