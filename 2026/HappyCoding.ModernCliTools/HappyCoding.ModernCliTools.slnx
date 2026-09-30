@@ -1,8 +1,9 @@
 <Solution>
-  <Project Path="HappyCoding.ModernCliTool.SystemCommandLineSample/HappyCoding.ModernCliTool.SystemCommandLineSample.csproj" />
   <Project Path="HappyCoding.ModernCliTools.CliUiTool/HappyCoding.ModernCliTools.CliUiTool.csproj" />
   <Project Path="HappyCoding.ModernCliTools.FileDownloader/HappyCoding.ModernCliTools.FileDownloader.csproj" />
   <Project Path="HappyCoding.ModernCliTools.FileDownloaderUsingConsole/HappyCoding.ModernCliTools.FileDownloaderUsingConsole.csproj" />
   <Project Path="HappyCoding.ModernCliTools.GracefulShutdown/HappyCoding.ModernCliTools.GracefulShutdown.csproj" />
   <Project Path="HappyCoding.ModernCliTools.HelloWorld\HappyCoding.ModernCliTools.HelloWorld.csproj" />
+  <Project Path="HappyCoding.ModernCliTools.SpectreConsoleSample/HappyCoding.ModernCliTools.SpectreConsoleSample.csproj" />
+  <Project Path="HappyCoding.ModernCliTools.SystemCommandLineSample\HappyCoding.ModernCliTools.SystemCommandLineSample.csproj" />
 </Solution>

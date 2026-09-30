@@ -57,7 +57,25 @@ public static class Program
         rootCommand.Subcommands.Add(downloadCommand);
 
         // Execute the command
-        return await rootCommand.Parse(args).InvokeAsync();
+        try
+        {
+            var invocationConfig = new InvocationConfiguration();
+            invocationConfig.EnableDefaultExceptionHandler = false;
+
+            return await rootCommand.Parse(args).InvokeAsync(
+                configuration: invocationConfig,
+                cancellationToken: GracefulShutdownHelper.CreateCancellationToken());
+        }
+        catch (OperationCanceledException)
+        {
+            AnsiConsole.WriteLine("Canceled");
+            return 1;
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.MarkupLine($"[red]Unhandled exception of type {e.GetType().FullName}: {e.Message}[/]");
+            return 1;
+        }
     }
 
     private static async Task HandleDownloadAsync(string url, string? outputPath, bool verbose, CancellationToken cancellationToken)
@@ -67,52 +85,48 @@ public static class Program
             AnsiConsole.MarkupLine("[grey]LOG: Starting download from {0}[/]", url);
         }
         
-        try
+        var httpClient = new HttpClient();
+        using var response =
+            await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        response.EnsureSuccessStatusCode();
+
+        var totalBytes = response.Content.Headers.ContentLength;
+        var fileName = outputPath ?? Path.GetFileName(new Uri(url).LocalPath);
+        if (string.IsNullOrWhiteSpace(fileName)) fileName = "downloaded_file";
+
+        if (verbose)
         {
-            var httpClient = new HttpClient();
-            using var response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-            response.EnsureSuccessStatusCode();
+            AnsiConsole.MarkupLine("[grey]LOG: Saving to {0}[/]", fileName);
+        }
 
-            var totalBytes = response.Content.Headers.ContentLength;
-            var fileName = outputPath ?? Path.GetFileName(new Uri(url).LocalPath);
-            if (string.IsNullOrWhiteSpace(fileName)) fileName = "downloaded_file";
-
-            if (verbose)
+        await AnsiConsole.Progress()
+            .StartAsync(async ctx =>
             {
-                AnsiConsole.MarkupLine("[grey]LOG: Saving to {0}[/]", fileName);
-            }
-
-            await AnsiConsole.Progress()
-                .StartAsync(async ctx =>
+                var task = ctx.AddTask("[green]Downloading[/]", autoStart: false);
+                if (totalBytes.HasValue)
                 {
-                    var task = ctx.AddTask("[green]Downloading[/]", autoStart: false);
-                    if (totalBytes.HasValue)
-                    {
-                        task.MaxValue = totalBytes.Value;
-                    }
-                    task.StartTask();
+                    task.MaxValue = totalBytes.Value;
+                }
 
-                    await using var contentStream = await response.Content.ReadAsStreamAsync(cancellationToken);
-                    await using var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+                task.StartTask();
 
-                    var buffer = new byte[100];
-                    int bytesRead;
-                    while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
-                    {
-                        await Task.Delay(100, cancellationToken);
-                        await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken);
-                        task.Increment(bytesRead);
-                    }
-                    
-                    task.StopTask();
-                });
+                await using var contentStream = await response.Content.ReadAsStreamAsync(cancellationToken);
+                await using var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write,
+                    FileShare.None, 8192, true);
 
-            AnsiConsole.MarkupLine("[green]Download complete:[/] {0}", fileName);
-        }
-        catch (Exception ex)
-        {
-            AnsiConsole.WriteLine($"[red]Unhandled exception of type {ex.GetType().Name}: {ex.Message}[/]");
-        }
+                var buffer = new byte[100];
+                int bytesRead;
+                while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
+                {
+                    await Task.Delay(100, cancellationToken);
+                    await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken);
+                    task.Increment(bytesRead);
+                }
+
+                task.StopTask();
+            });
+
+        AnsiConsole.MarkupLine("[green]Download complete:[/] {0}", fileName);
     }
 
     private static async Task HandleCheckSizeAsync(string url, bool verbose, CancellationToken cancellationToken)
@@ -121,29 +135,22 @@ public static class Program
         {
             AnsiConsole.MarkupLine("[grey]LOG: Checking size for {0}[/]", url);
         }
+        
+        var httpClient = new HttpClient();
+        var request = new HttpRequestMessage(HttpMethod.Head, url);
+        using var response = await httpClient.SendAsync(request, cancellationToken);
+        response.EnsureSuccessStatusCode();
 
-        try
+        var totalBytes = response.Content.Headers.ContentLength;
+        if (totalBytes.HasValue)
         {
-            var httpClient = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Head, url);
-            using var response = await httpClient.SendAsync(request, cancellationToken);
-            response.EnsureSuccessStatusCode();
-
-            var totalBytes = response.Content.Headers.ContentLength;
-            if (totalBytes.HasValue)
-            {
-                AnsiConsole.MarkupLine("File size: [yellow]{0}[/] bytes ({1:N2} MB)", 
-                    totalBytes.Value, 
-                    totalBytes.Value / 1024.0 / 1024.0);
-            }
-            else
-            {
-                AnsiConsole.MarkupLine("[red]Could not determine file size.[/]");
-            }
+            AnsiConsole.MarkupLine("File size: [yellow]{0}[/] bytes ({1:N2} MB)", 
+                totalBytes.Value, 
+                totalBytes.Value / 1024.0 / 1024.0);
         }
-        catch (Exception ex)
+        else
         {
-            AnsiConsole.WriteLine($"[red]Unhandled exception of type {ex.GetType().Name}: {ex.Message}[/]");
+            AnsiConsole.MarkupLine("[red]Could not determine file size.[/]");
         }
     }
 }

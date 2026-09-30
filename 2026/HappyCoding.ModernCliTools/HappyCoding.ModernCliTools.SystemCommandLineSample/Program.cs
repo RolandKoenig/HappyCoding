@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
 
-namespace HappyCoding.ModernCliTool.SystemCommandLineSample;
+namespace HappyCoding.ModernCliTools.SystemCommandLineSample;
 
 public static class Program
 {

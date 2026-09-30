@@ -17,7 +17,6 @@ public class Program
             // Trigger gracefull shutdown
             Console.WriteLine("Trigger graceful shutdown");
             cancellationTokenSource.Cancel();
-            
         });
 
         // Simulate processing
