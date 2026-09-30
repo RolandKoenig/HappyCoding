@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="HappyCoding.ModernCliTool.SystemCommandLineSample/HappyCoding.ModernCliTool.SystemCommandLineSample.csproj" />
   <Project Path="HappyCoding.ModernCliTools.CliUiTool/HappyCoding.ModernCliTools.CliUiTool.csproj" />
   <Project Path="HappyCoding.ModernCliTools.FileDownloader/HappyCoding.ModernCliTools.FileDownloader.csproj" />
   <Project Path="HappyCoding.ModernCliTools.FileDownloaderUsingConsole/HappyCoding.ModernCliTools.FileDownloaderUsingConsole.csproj" />
