@@ -27,3 +27,10 @@ patterns, the v1→v2 corrections table, `Pos`/`Dim` layout, and common pitfalls
 ## Learn more
 - Getting started: https://tui-cs.github.io/Terminal.Gui/
 - Repository & samples: https://github.com/tui-cs/Terminal.Gui
+
+## Designer
+Start the designer using
+
+```bash
+TerminalGuiDesigner
+```
